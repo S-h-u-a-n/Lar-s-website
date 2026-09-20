@@ -1,0 +1,30 @@
+node_modules/
+dist/
+
+.DS_Store
+
+.env
+.env.*
+!.env.example
+
+.vscode/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+ai參考/
+# Ignore the local font library by default
+字體們/**
+
+# Keep only the fonts used by the website
+!字體們/中文1/
+字體們/中文1/**
+!字體們/中文1/ChironSungHK-VariableFont_wght.ttf
+
+!字體們/很多英文1/
+字體們/很多英文1/**
+!字體們/很多英文1/PlayfairDisplay-VariableFont_wght.ttf
+
+!字體們/基礎英文2/
+字體們/基礎英文2/**
+!字體們/基礎英文2/JuliusSansOne-Regular.ttf
