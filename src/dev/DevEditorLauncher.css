@@ -1,0 +1,23 @@
+.dev-editor-launcher {
+  position: fixed;
+  z-index: 310;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 6px;
+}
+
+.dev-editor-launcher button {
+  padding: 8px 12px;
+  border: 1px solid #59656a;
+  border-radius: 4px;
+  color: #edf3f2;
+  background: #20292d;
+  font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  cursor: pointer;
+}
+
+.dev-editor-launcher button.is-active {
+  color: #20292d;
+  background: #edf3f2;
+}

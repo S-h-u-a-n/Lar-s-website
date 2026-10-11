@@ -1,0 +1,15 @@
+.circular-reveal {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  will-change: clip-path;
+}
+
+@supports (height: 100dvh) {
+  .circular-reveal {
+    height: 100dvh;
+  }
+}

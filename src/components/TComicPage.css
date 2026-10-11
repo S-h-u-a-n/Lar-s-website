@@ -1,0 +1,92 @@
+.t-comic-page {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+  background: #fdf9ee;
+}
+
+.t-comic-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.t-comic-page .layout-editor-stage {
+  z-index: 1 !important;
+}
+
+.layout-editor-dialogue-group {
+  position: fixed;
+  transform-origin: center;
+  transition: none;
+}
+
+.layout-editor-dialogue-design-space {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+}
+
+.layout-editor-dialogue-design-space > .layout-editor-item {
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+}
+
+.t-comic-dialogue-text {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 80%;
+  min-height: 1em;
+  color: var(--ink);
+  font: 14px/1.2 var(--body);
+  writing-mode: vertical-rl;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+}
+
+.t-comic-dialogue-text[data-text-editor-active] {
+  pointer-events: auto;
+}
+
+.t-comic-page .layout-editor-item {
+  transition: none !important;
+}
+
+.t-comic-page .layout-editor-item[data-sequence-fading="true"],
+.layout-editor-dialogue-group[data-sequence-fading="true"] {
+  transition: opacity var(--t-comic-fade-duration, 560ms) ease !important;
+}
+
+.t-comic-page .layout-editor-dialogue-design-space > .layout-editor-item[data-sequence-fading="true"] {
+  transition: none !important;
+}
+/* Reuse the exact placeholder frame rules; the stage fits its inner bounds. */
+.t-comic-frame-heading { flex: 0 0 clamp(28px, 5vw, 64px); }
+.t-comic-frame-footer { flex: 0 0 48px; }
+.t-comic-frame { width: 100%; }
+
+/* Telescope only: symmetric inset, preserving the existing frame height. */
+.t-comic-frame {
+  position: relative;
+  width: 96%;
+  align-self: center;
+  overflow: visible;
+}
+.t-comic-fit {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: -10vh;
+  bottom: -2vh;
+  pointer-events: none;
+}

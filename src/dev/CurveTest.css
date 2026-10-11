@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#curve-test-root {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.curve-test-scene {
+  position: relative;
+  display: grid;
+  width: 100vw;
+  min-height: 100vh;
+  place-items: center;
+  transition: background-color 0.2s linear;
+}
+
+.curve-test-scene--0 {
+  color: #183c36;
+  background: #f3e8c8;
+}
+
+.curve-test-scene--1 {
+  color: #f7f0dc;
+  background: #285c76;
+}
+
+.curve-test-scene__label {
+  font-size: 14px;
+}
+
+.curve-test-replay {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 1;
+  min-width: 220px;
+  border: 0;
+  padding: 14px 20px;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.curve-test-scene--0 .curve-test-replay {
+  color: #fff;
+  background: #183c36;
+}
+
+.curve-test-scene--1 .curve-test-replay {
+  color: #183c36;
+  background: #f7f0dc;
+}
+
+.curve-test-replay:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}

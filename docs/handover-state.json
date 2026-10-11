@@ -1,0 +1,1614 @@
+{
+  "captured_at": "2026-10-11T04:53:35.287278+00:00",
+  "original": "/Users/remoanpu/Desktop/The Wizard's GENESIS",
+  "development": "/Users/remoanpu/Desktop/GENESIS-Codex-Edition",
+  "original_head": "b2222d2f4a47959cd8e507075b165d225ce867be",
+  "original_branch": "main",
+  "original_status": "D Art/Main-art/主視覺（加深）.png\n M src/App.jsx\n M src/components/CurveTransition.css\n M src/components/CurveTransition.jsx\n M src/components/ExploreCard.jsx\n M src/components/ExploreSection.jsx\n M src/components/Footer.jsx\n M src/components/Header.jsx\n M src/components/HeroSection.jsx\n M src/components/MainScene.jsx\n M src/components/Prelude.css\n M src/components/TComicPage.css\n M src/components/TComicPage.jsx\n M src/dev/LayoutEditor.css\n M src/dev/LayoutEditor.jsx\n M src/dev/devEditorStore.js\n?? Art/Big/Big-icon/icon-ball.PNG\n?? Art/Big/Big-icon/icon-book1.PNG\n?? Art/Big/Big-icon/icon-book2.PNG\n?? Art/Big/Big-icon/icon-globe.PNG\n?? Art/Big/Big-icon/icon-telescope.PNG\n?? Art/Main-art/Mainart.JPG\n?? Art/Main-art/main-1.jpg\n?? Art/Main-art/main-2.jpg\n?? curve-test.html\n?? docs/BallTest.md\n?? docs/BigTest-integration.md\n?? docs/BigTest.md\n?? docs/GlobeTest.md\n?? docs/HumanTest.md\n?? docs/Main-layout-verification.md\n?? docs/Main-reveal.md\n?? docs/NaturalTest.md\n?? docs/TelescopeTest.md\n?? docs/Test-pages-integration.md\n?? docs/portal-comics-verification.md\n?? docs/return-transition-telescope-frame.md\n?? docs/transition-palette-comic-fit-fix.md\n?? reference/Big-reference.PNG\n?? reference/Big-reference2.PNG\n?? reference/Big-reference3.jpg\n?? reference/Big-rereference.png\n?? reference/story-reference.JPG\n?? reference/telescope-reference.jpg\n?? src/components/main/MainArtworkReveal.css\n?? src/components/main/MainArtworkReveal.jsx\n?? src/components/main/Text.jsx\n?? src/components/main/revealConfig.js\n?? src/components/portalComics/ComicPages.css\n?? src/components/portalComics/ComicPages.jsx\n?? src/components/portalComics/config.js\n?? src/components/tComicLayout.json\n?? src/dev/CurveTest.css\n?? src/dev/CurveTest.jsx\n?? src/dev/CurveTransition.css\n?? src/dev/CurveTransition.jsx\n?? texture-comparison/earth-a-diffuse.jpg\n?? texture-comparison/earth-b-base-color.png\n?? unused-assets-report.md",
+  "original_refs": "refs/agents/82d55971-b25b-4fd6-9b3f-2a03e72704e1/checkpoints/turn/0 d5cec959adf7de8f041d5f52a5259556c90b17fd\nrefs/agents/82d55971-b25b-4fd6-9b3f-2a03e72704e1/checkpoints/turn/1 2e94b2f6ba9b1285ad6de592196b8de406896bc6\nrefs/agents/82d55971-b25b-4fd6-9b3f-2a03e72704e1/checkpoints/turn/2 bd1f581763b25b06864d5578734c92fa5d2506a1\nrefs/agents/82d55971-b25b-4fd6-9b3f-2a03e72704e1/checkpoints/turn/3 abfc57ffd92921853385a0831f601e577daa83b0\nrefs/agents/82d55971-b25b-4fd6-9b3f-2a03e72704e1/checkpoints/turn/4 e36713bd5c2f15188e735f665b47a62eab09ef82\nrefs/agents/82d55971-b25b-4fd6-9b3f-2a03e72704e1/checkpoints/turn/5 28eaa772b6f377fa1cbc5ce8666a3a4031f62f85\nrefs/agents/c34124bd-24f9-4906-af1a-3d32260d0d53/checkpoints/turn/0 ba44e69bb8c90a6aa41f35ec785deff6b3377c37\nrefs/agents/c34124bd-24f9-4906-af1a-3d32260d0d53/checkpoints/turn/1 38994f6bfc43167833295677b1ac4266c69ebbc2\nrefs/agents/e5013c0b-21ad-4b2b-87c2-d0e55b8a9bcf/checkpoints/turn/0 c8fd3cbc36d0abfb5ad144a1745b7cea2922fec5\nrefs/codex/turn-diffs/captures/1791694181678/d1b60116-6824-49d6-a53b-4857a3577c1d/base f034b92ac17187f4982fea8dbf8f69caaf640dea\nrefs/codex/turn-diffs/checkpoints/24a33ac6b977bb4a693b4cf2011e2a70/450e977136b7910cdaa15f69002de47f/1791112334048/bc217f44-e7e3-455e-a0e6-3dfe87b57b70 94dc0d7189087758b03c272ce15130f8e069069f\nrefs/codex/turn-diffs/checkpoints/9a375ab72396fb734b0cebcf5cdeb9c7/e34ed1b661e35b20fe8e8e2248b55c55/1791693483081/1ab28ed0-4d70-4a44-964a-c45582ae5152 f034b92ac17187f4982fea8dbf8f69caaf640dea\nrefs/codex/turn-diffs/checkpoints/e8b3b8db1d87c0ee56581db84ee9481c/9fbf6005084085598a263861c719814d/1791628494007/f2431cd2-76e7-4970-8369-b5c2ebd51c69 5f96fd3158b25e0226e635b54172918caaa8ba21\nrefs/heads/backup-before-cleanup ccd6ef436f5e6371e9b969ecb0a2b0299f46ea17\nrefs/heads/current-website-clean 17215c3178c1781f72686ee6892a13800d264f9c\nrefs/heads/main b2222d2f4a47959cd8e507075b165d225ce867be\nrefs/remotes/origin/HEAD c876f5c5a35990b2b81b9aa5a495dfe43acc7aa7\nrefs/remotes/origin/current-website-clean 17215c3178c1781f72686ee6892a13800d264f9c\nrefs/remotes/origin/main c876f5c5a35990b2b81b9aa5a495dfe43acc7aa7",
+  "original_remote": "origin\thttps://github.com/S-h-u-a-n/Lar-s-website.git (fetch)\norigin\thttps://github.com/S-h-u-a-n/Lar-s-website.git (push)",
+  "original_source_files": {
+    "index.html": {
+      "size": 361,
+      "mtime_ns": 1789895747416705881,
+      "sha256": "bf6460371ec2d15144a969d4bb76e4cb60239941332bbef664c6951808438490"
+    },
+    "vite.config.js": {
+      "size": 132,
+      "mtime_ns": 1789875981045636536,
+      "sha256": "7679dd2d1d73606860bf36d711ad385a18cda4412d6e105062570af4454d6b58"
+    },
+    "unused-assets-report.md": {
+      "size": 34680,
+      "mtime_ns": 1791618524226229055,
+      "sha256": "0f6470ad8bb7bc5986b99651af54cc70203e7cf42c1ba5306a42cd3594711860"
+    },
+    ".gitignore": {
+      "size": 491,
+      "mtime_ns": 1790855931656945081,
+      "sha256": "c7572bf6a148f28099c6aa45407833e561c331ee5817620fc5e3bbb99a029d86"
+    },
+    "package-lock.json": {
+      "size": 38473,
+      "mtime_ns": 1791104736282033218,
+      "sha256": "7c785eb33993c1d21157fd864fdbfac62a55cf133680bedd8563f8228639c20e"
+    },
+    "package.json": {
+      "size": 414,
+      "mtime_ns": 1791104736275866850,
+      "sha256": "09650ad88a042440c93b08aebbe175761cc51b3ea78b588ece2a8d3f228171d8"
+    },
+    "curve-test.html": {
+      "size": 382,
+      "mtime_ns": 1790905298289710489,
+      "sha256": "52b6550ebd80431c8b975d7cf2caaecc270890b37bb818efd9e9e788a794a815"
+    },
+    "THIRD_PARTY_LICENSES.md": {
+      "size": 1726,
+      "mtime_ns": 1790905298310475599,
+      "sha256": "9db4039f27c86a56599383428274dcb29c215db72ca76e51fc30e722bdfe6911"
+    },
+    "texture-comparison/earth-a-diffuse.jpg": {
+      "size": 22492705,
+      "mtime_ns": 1790846498496575273,
+      "sha256": "f756869160529f667bbaf1316ce436a355d29d0b4b8a418eb141f79fe56b4f4f"
+    },
+    "texture-comparison/earth-b-base-color.png": {
+      "size": 18842484,
+      "mtime_ns": 1790846498501927965,
+      "sha256": "64427c97e987715be18146f069aefee7b8e78c6a1161f7d405abb683e82c573f"
+    },
+    "Mode/globe.glb": {
+      "size": 24738928,
+      "mtime_ns": 1790401369040831303,
+      "sha256": "8df75cafe7aaca21335ed8099cd66d46b2e3970a9a8c2f2df0c38b395608d213"
+    },
+    "Mode/earth-me.glb": {
+      "size": 18983040,
+      "mtime_ns": 1790846724733376045,
+      "sha256": "e67827bc793ff4d45eb95c8a4bf65617706307464217d2032487eb4ad2ce3464"
+    },
+    "Mode/Big.glb": {
+      "size": 48872580,
+      "mtime_ns": 1790401662399370317,
+      "sha256": "765b361b52698ac4fe5c48029503de218021b002723015fe9b07323ff31fada5"
+    },
+    "Art/storybook/storysquare1.PNG": {
+      "size": 77804,
+      "mtime_ns": 1791448147000000000,
+      "sha256": "ded2bc019b1df245047f59b4be0e3319674e336753ccf3fb2152f22cfe06595a"
+    },
+    "Art/storybook/storysquare2.PNG": {
+      "size": 169887,
+      "mtime_ns": 1791448174000000000,
+      "sha256": "1fb7c7744dd5721ae24e1d68caea45fd5e45eff5407e8d785018a28bad2351aa"
+    },
+    "Art/storybook/storysquare3.PNG": {
+      "size": 128595,
+      "mtime_ns": 1791448195000000000,
+      "sha256": "b66dce082f23f355e24194ddc6a3456b7ffbbfe9182d70180b43a6ae764bc9e8"
+    },
+    "Art/storybook/storysquare4.PNG": {
+      "size": 133037,
+      "mtime_ns": 1791448223000000000,
+      "sha256": "6f67e173767461ab3bcea6a776c238ce7d80fc0b00596ceeec3bf60872cc378f"
+    },
+    "Art/storybook/book-anime.PNG": {
+      "size": 8735637,
+      "mtime_ns": 1791446542000000000,
+      "sha256": "1418dfc337707ad6513e9c9eaec1c365622639bc7527758780ab365a8ade4ecb"
+    },
+    "Art/storybook/storypage3-2.PNG": {
+      "size": 1251933,
+      "mtime_ns": 1791447968000000000,
+      "sha256": "8779bf05497736cb00f2741c25f8329160353b6b5e3754645a145aa2fb819abd"
+    },
+    "Art/storybook/storypage3-3.PNG": {
+      "size": 1059423,
+      "mtime_ns": 1791447992000000000,
+      "sha256": "0447654a90796fba85d5edd74d6a679623cd92319e893141415b22c7ae5f6adf"
+    },
+    "Art/storybook/storypage1-1.PNG": {
+      "size": 1050446,
+      "mtime_ns": 1791447767000000000,
+      "sha256": "a9dd9e172c080a486d3536d4438af32aeb0530315960fccc72a56098836378bb"
+    },
+    "Art/storybook/storypage1-3.PNG": {
+      "size": 332726,
+      "mtime_ns": 1791447829000000000,
+      "sha256": "e7eb232a99bb3049065cfdfe487fab8ec1bce00150c86f9329360aafc7fd525b"
+    },
+    "Art/storybook/storypage3-1.PNG": {
+      "size": 1446255,
+      "mtime_ns": 1791447947000000000,
+      "sha256": "a33db14cf8765551bdd0e2359cf9f82bf75051a4965e24bd6b709fcb1d08fcd9"
+    },
+    "Art/storybook/storypage1-2.PNG": {
+      "size": 1588854,
+      "mtime_ns": 1791447794000000000,
+      "sha256": "06a14d21dbf528d06b4973af130f2929f54552557d39434a2f827e06dda827c8"
+    },
+    "Art/storybook/story-hanging.PNG": {
+      "size": 485088,
+      "mtime_ns": 1791616683000000000,
+      "sha256": "8c72219eaefe8de6b92d200172981069aacff44db865387c1a72128396851100"
+    },
+    "Art/storybook/storypage4-1.PNG": {
+      "size": 1113571,
+      "mtime_ns": 1791448024000000000,
+      "sha256": "70ce7f666fe41e21bbc4deb632c5f58fb4cebfc612f7d0a39e0a13150ae97fb0"
+    },
+    "Art/storybook/openbook.PNG": {
+      "size": 985312,
+      "mtime_ns": 1791447729000000000,
+      "sha256": "7336653ec13da392d1b80ed39d0b619351b97980f5f62652d4c5c3f318f0add3"
+    },
+    "Art/storybook/storypage2-1.PNG": {
+      "size": 608273,
+      "mtime_ns": 1791447864000000000,
+      "sha256": "070468633dd109e89021a529a441bf25e1f38b8cd3ac4f771d1609a0854b184e"
+    },
+    "Art/storybook/storypage2-2.PNG": {
+      "size": 1808737,
+      "mtime_ns": 1791447891000000000,
+      "sha256": "feab2881f8a7293c609fc5ac8655e8b68382040943107be91c584bf5eeadf565"
+    },
+    "Art/storybook/storypage2-3.PNG": {
+      "size": 1065009,
+      "mtime_ns": 1791447919000000000,
+      "sha256": "035d94ab68f30202fa9863c1022ffb2e4ee3dab2c5f07616adc3f1297a985de6"
+    },
+    "Art/Big/Big-icon/icon-globe.PNG": {
+      "size": 455741,
+      "mtime_ns": 1791624100000000000,
+      "sha256": "338870659e1b158f3254a9eaba14750aee01d55eeaaed1ceed15be13d63c4818"
+    },
+    "Art/Big/Big-icon/icon-telescope.PNG": {
+      "size": 122505,
+      "mtime_ns": 1791624144000000000,
+      "sha256": "db52e614acd6d3ddc07e72bf629b6c547adc60e418d2622f68743273771d13e3"
+    },
+    "Art/Big/Big-icon/icon-ball.PNG": {
+      "size": 321019,
+      "mtime_ns": 1791624120000000000,
+      "sha256": "3cf7927d1f412a354715d503adf04d44956c110adc2e7e25176bfa6d873e8c30"
+    },
+    "Art/Big/Big-icon/icon-book2.PNG": {
+      "size": 330668,
+      "mtime_ns": 1791624293000000000,
+      "sha256": "21165e7426c2cc6fcae3ee93f5ce7092d23e96a3eb8d6a85f5d9eac05a8a2f00"
+    },
+    "Art/Big/Big-icon/icon-book1.PNG": {
+      "size": 295893,
+      "mtime_ns": 1791624313000000000,
+      "sha256": "0a242b1f338b3b7d0a1766e971241171a0c8c9aff2b3b3ac3aaa20e7e286823f"
+    },
+    "Art/Big/Big-leftside/Big-paper1.PNG": {
+      "size": 837221,
+      "mtime_ns": 1790760689000000000,
+      "sha256": "12effa3b144e2d565dc71518ce1e9adc19cffd10d27e8f16ccb2ef55e7dbd52d"
+    },
+    "Art/Big/Big-leftside/Big-blood.PNG": {
+      "size": 393631,
+      "mtime_ns": 1790760660000000000,
+      "sha256": "f768d78fce70902e80e978a75a6d4146da3bbfb0b1201eabef2c0ad7231b3a23"
+    },
+    "Art/Big/Big-leftside/Big-paper2.PNG": {
+      "size": 572448,
+      "mtime_ns": 1790760694000000000,
+      "sha256": "2046bf4e373b53f3f33514d01a249532a06912bd286cd8db305c50a59570daeb"
+    },
+    "Art/Big/Big-leftside/Big-note1.PNG": {
+      "size": 929478,
+      "mtime_ns": 1790760821000000000,
+      "sha256": "bbd1df8d96704f66412d7bf17251324c1352eda3171db97472f753290a3fd4fe"
+    },
+    "Art/Big/Big-leftside/Big-paper3.PNG": {
+      "size": 868394,
+      "mtime_ns": 1790760699000000000,
+      "sha256": "014d7d7be19d371b6809dbbafcc2a9d5497bf51077fe49d4e683abb93cca3250"
+    },
+    "Art/Big/Big-leftside/Big-letter2.PNG": {
+      "size": 587170,
+      "mtime_ns": 1790760590000000000,
+      "sha256": "7fb855bf46bc659c3f9acf8dd273f2bb0250cabf2028ccf194d2bf08fa48a495"
+    },
+    "Art/Big/Big-leftside/Big-letter3.PNG": {
+      "size": 588106,
+      "mtime_ns": 1790760585000000000,
+      "sha256": "bc69685377702bb006a3c93ac10d7d31657e9ccbc3553a9203fcbd9b917d5672"
+    },
+    "Art/Big/Big-leftside/Big-letter1.PNG": {
+      "size": 612632,
+      "mtime_ns": 1790760558000000000,
+      "sha256": "380fe0d2d3375b35c156e75258c1b870b0ea6b7f0f9a52c26e0076c2845e83e4"
+    },
+    "Art/Big/Big-leftside/Big-sticky1.PNG": {
+      "size": 703646,
+      "mtime_ns": 1790760742000000000,
+      "sha256": "01bc2c0e63fe9cd433f3710dd1b21f5054b813040c0050973ab048d11d4bf881"
+    },
+    "Art/Big/Big-leftside/Big-letteropen2.PNG": {
+      "size": 812526,
+      "mtime_ns": 1790760638000000000,
+      "sha256": "26bf705f3f8dd40cb196b60e58ae5c700f782ae725eeb0a7d96f6c91960c8527"
+    },
+    "Art/Big/Big-leftside/Big-sticky2.PNG": {
+      "size": 488255,
+      "mtime_ns": 1790760762000000000,
+      "sha256": "bd409c7760f6403451c75a66dff346bd108ae6c34406dcca66690679dac77677"
+    },
+    "Art/Big/Big-leftside/Big-sticky3.PNG": {
+      "size": 270346,
+      "mtime_ns": 1790760782000000000,
+      "sha256": "f4f294fe121e5ae8dc39f54ed2c2276f9a2aa6d8a6504bb589c043ef2bc64a2d"
+    },
+    "Art/Big/Big-leftside/Big-letteropen1.PNG": {
+      "size": 648432,
+      "mtime_ns": 1790760619000000000,
+      "sha256": "a6ba6bf59c4f442672354d5898ab288bea7fef08286a86a57803e023d9ff32fd"
+    },
+    "Art/Big/Big-leftside/Big-sticky.PNG": {
+      "size": 369388,
+      "mtime_ns": 1790760799000000000,
+      "sha256": "2cfddf80057b94f740e5eebf403437167c5aeb41264b6f92141bf898dc14358e"
+    },
+    "Art/Big/Big-leftside/Big-card1.PNG": {
+      "size": 429281,
+      "mtime_ns": 1790760725000000000,
+      "sha256": "f6b8eff7a7bf844f8f1c21486fb98ced94c510fe1da6f0036f24ac048a33d086"
+    },
+    "Art/Big/Big-decoration/Big-line.png": {
+      "size": 164599,
+      "mtime_ns": 1790755029000000000,
+      "sha256": "9e23a9d26d405fa1cd6ccdce49acd15eb39f6a1bbfd447a282e190291abd675e"
+    },
+    "Art/Big/Big-decoration/Big-hanging1.PNG": {
+      "size": 166970,
+      "mtime_ns": 1790673556000000000,
+      "sha256": "a71dd1c63166337850f3d16d1a516bb7982a18fd179643f204c53968d39574a9"
+    },
+    "Art/Big/Big-decoration/Big-hanging2.PNG": {
+      "size": 135706,
+      "mtime_ns": 1790673550000000000,
+      "sha256": "d8ed229bd9a68cabc1661f347de7d62cc7036b518984a32212efa93d92812d3d"
+    },
+    "Art/Big/Big-decoration/Big-circle2.PNG": {
+      "size": 148133,
+      "mtime_ns": 1790673536000000000,
+      "sha256": "bdc14388082032e351ccf5e6c3c8cfb3cb210ae10c7143e83a011078e59933ee"
+    },
+    "Art/Big/Big-decoration/Big-circle3.PNG": {
+      "size": 162500,
+      "mtime_ns": 1790673530000000000,
+      "sha256": "feb3b21af19e77f00789bcddae7a7ff1c8b8b10eedf49b7c0ee3e817c06b7f9d"
+    },
+    "Art/Big/Big-decoration/Big-circle4.PNG": {
+      "size": 269859,
+      "mtime_ns": 1790673524000000000,
+      "sha256": "12b7c42061c6e122a8e6b9881ed6e3b2e283638d68bff36f363354152e13d945"
+    },
+    "Art/Big/Big-decoration/Big-round1.PNG": {
+      "size": 167842,
+      "mtime_ns": 1790673568000000000,
+      "sha256": "0715a7a02a91d314732836f3a5b58ca193c96600c31696f1a68038ad3d313bac"
+    },
+    "Art/Big/Big-decoration/Big-gogo.PNG": {
+      "size": 158648,
+      "mtime_ns": 1790673575000000000,
+      "sha256": "671484ddc3eda1577fdf2e4e11b57d355bc5a999cc65b9d6e3d68fc6b5f26e2b"
+    },
+    "Art/Big/Big-decoration/Big-grid.png": {
+      "size": 302019,
+      "mtime_ns": 1791601741000000000,
+      "sha256": "f3d236b2440072da6c4f9f19099e0a0c9e8dc0a8921f18802ce09fcc6a8a1bb3"
+    },
+    "Art/Big/Big-decoration/Big-squares.PNG": {
+      "size": 96806,
+      "mtime_ns": 1790673561000000000,
+      "sha256": "c82e3522f9a42dfedd2e4994477cd03aea60f2ada315af56bbba4f85d300b2d5"
+    },
+    "Art/Big/Big-decoration/Big-square/Big-breen.JPG": {
+      "size": 19380,
+      "mtime_ns": 1790567414000000000,
+      "sha256": "0f12e0d5f197d6a182eb7e002c2300868e06abfb1bf1671f5b276bd3cc3b67f4"
+    },
+    "Art/Big/Big-decoration/Big-square/Big-wreen.JPG": {
+      "size": 19244,
+      "mtime_ns": 1790567135000000000,
+      "sha256": "71dd139862e01792b9d76d8eff9867b100d3c6cb390f4951a4e99149618a1eec"
+    },
+    "Art/Big/Big-decoration/Big-square/Big-red.JPG": {
+      "size": 19244,
+      "mtime_ns": 1790579626000000000,
+      "sha256": "2e93843caeb10393a2473fce6c8c92048648e09312a9ad0e61572c25b2a36d30"
+    },
+    "Art/Big/Big-decoration/Big-square/Big-yellow.JPG": {
+      "size": 19244,
+      "mtime_ns": 1790567130000000000,
+      "sha256": "05beffbf30121941b0c5abc01ae10f0078618825ae64da9651bf80fd146f8da3"
+    },
+    "Art/Big/Big-decoration/Big-square/Big-pig.JPG": {
+      "size": 19244,
+      "mtime_ns": 1790567125000000000,
+      "sha256": "bea616bcc86e7a0720c971bff1c902faeb5bda5e08b4eff6129cd35441e723d6"
+    },
+    "Art/Big/Big-decoration/Big-square/Big-orange.JPG": {
+      "size": 19312,
+      "mtime_ns": 1790567145000000000,
+      "sha256": "597b3f43336fe4cc1515210f201eea03184fc0bead5cb5a6d9fd7fc1afde0a43"
+    },
+    "Art/Big/Big-page/page-chair1.PNG": {
+      "size": 353378,
+      "mtime_ns": 1790674410000000000,
+      "sha256": "e50ca7e1809b68feb35f3aa963d650a8bcaa904ab8fa5a83f16a2b19fd7fa773"
+    },
+    "Art/Big/Big-page/page-potion.PNG": {
+      "size": 409905,
+      "mtime_ns": 1790673071000000000,
+      "sha256": "5904e33cd04c5f4259349df9c2eb343bdd7ab9905c7ec1f44ad90ee8723554ec"
+    },
+    "Art/Big/Big-page/page-chair2.PNG": {
+      "size": 353017,
+      "mtime_ns": 1790674403000000000,
+      "sha256": "3d584d28aa23b07bbe5ea7514589793f2e20f65646fef977bf607ea298ff2a5b"
+    },
+    "Art/Big/Big-page/page-catcup.PNG": {
+      "size": 395374,
+      "mtime_ns": 1790673024000000000,
+      "sha256": "4c73bbceee6f99df6e0e0b50ac5f0eaac2e89abc39719b9aa70c37069f0a9be2"
+    },
+    "Art/Big/Big-page/page-bookopen1.PNG": {
+      "size": 395393,
+      "mtime_ns": 1790673059000000000,
+      "sha256": "ece8b20a8e9ead986cac9d9f76f14342569534637521e4fd5c68737b263da870"
+    },
+    "Art/Big/Big-page/page-globe.PNG": {
+      "size": 517780,
+      "mtime_ns": 1790673003000000000,
+      "sha256": "d27fb7a70fd1b88a693d6cb15625c67383996dbd1569557f08e1d8ab2a0b71d3"
+    },
+    "Art/Big/Big-page/page-clock.PNG": {
+      "size": 366940,
+      "mtime_ns": 1790673051000000000,
+      "sha256": "2158f44fcc5d98b14d0ad5a9018b8c6a9e4e2f79a5b5ef986ee42c521294e734"
+    },
+    "Art/Big/Big-page/page-ball.PNG": {
+      "size": 423822,
+      "mtime_ns": 1790673010000000000,
+      "sha256": "0b6073266a184859fa9bf03b785ae9a981013eb361cb4c510cd2a9e4d9e5011a"
+    },
+    "Art/Big/Big-page/page-telescope.PNG": {
+      "size": 383999,
+      "mtime_ns": 1790673017000000000,
+      "sha256": "7713b9d1f2a01d7c4416685a7286d36b908491346e4536581fc8dd6aa5c82713"
+    },
+    "Art/Big/Big-page/page-hourglass.PNG": {
+      "size": 414118,
+      "mtime_ns": 1790673044000000000,
+      "sha256": "915719245f846dfb5d698b745be4e4cff6eac4a6551e55845eac56f4e7a7582f"
+    },
+    "Art/Big/Big-page/page-bookclose1.PNG": {
+      "size": 377111,
+      "mtime_ns": 1790673065000000000,
+      "sha256": "e0ddefafa5e08bed2c9e309fcedc94a82d645be19c576428594ee2c0b7a3e860"
+    },
+    "Art/Big/Big-page/page-magglass.PNG": {
+      "size": 377658,
+      "mtime_ns": 1790673039000000000,
+      "sha256": "9a52f29e6ead51eac3a151f07639ea1e3d99863f130ec4268c13981092205557"
+    },
+    "Art/Big/Big-page/page-mug.PNG": {
+      "size": 389005,
+      "mtime_ns": 1790673031000000000,
+      "sha256": "3d358e9a781e0414eaceedd392380f243b5a84a2752814d2317466e249614845"
+    },
+    "Art/Big/Big-ibo/ibo-clock.PNG": {
+      "size": 150084,
+      "mtime_ns": 1791551424000000000,
+      "sha256": "1c3a410c44f69b9598a35244e8e4c7f9ed772474996d3f71bffa50c384d7bc85"
+    },
+    "Art/Big/Big-ibo/ibo-hourglass.PNG": {
+      "size": 133832,
+      "mtime_ns": 1791551397000000000,
+      "sha256": "c4246f75c8ee58234b71f506c6c15bc65551518315ebe394a9143d7790d65398"
+    },
+    "Art/Big/Big-ibo/ibo-globe.PNG": {
+      "size": 188356,
+      "mtime_ns": 1791551200000000000,
+      "sha256": "c88e5eaaa9f71994f45902dc79a2139b5208e1912a2aed294c49693b7d34ff56"
+    },
+    "Art/Big/Big-ibo/ibo-telescope.PNG": {
+      "size": 115298,
+      "mtime_ns": 1791551251000000000,
+      "sha256": "16a2c390ddb317d3a04e5435aeff6afd82f2b7b7fb91d19b09eb6d941a5b8849"
+    },
+    "Art/Big/Big-ibo/ibo-mug.PNG": {
+      "size": 175799,
+      "mtime_ns": 1791551327000000000,
+      "sha256": "c38f4fabcbd34b777857e372f3f0a5bc7c32a2d8212d1e49dd21de626bbac126"
+    },
+    "Art/Big/Big-ibo/ibo-book1.PNG": {
+      "size": 148544,
+      "mtime_ns": 1791551468000000000,
+      "sha256": "95ecbf5104bc937d7f18f61a256acebc296f3b6962c5403abf1e5a1fb000b8d5"
+    },
+    "Art/Big/Big-ibo/ibo-catcup.PNG": {
+      "size": 157567,
+      "mtime_ns": 1791551278000000000,
+      "sha256": "8a7837f4753e652b2aa1d9f39fb692a8624d87908f4a14fd535a7ddab5567a82"
+    },
+    "Art/Big/Big-ibo/ibo-book2.PNG": {
+      "size": 159661,
+      "mtime_ns": 1791551444000000000,
+      "sha256": "6713568c26f1b602e12c3580d6219557dea8ebf0e6d0445b2affc90958c28b4c"
+    },
+    "Art/Big/Big-ibo/ibo-ball.PNG": {
+      "size": 148129,
+      "mtime_ns": 1791551230000000000,
+      "sha256": "1f5fc1b81448d87224542f6a9ac84b6721cc4fa1df75265c0bf672972253e7b6"
+    },
+    "Art/Big/Big-ibo/ibo-chair2.PNG": {
+      "size": 126308,
+      "mtime_ns": 1791551526000000000,
+      "sha256": "561ace640612110ad015eeb231c233846b2f9bfbdfd5852fc70f911c681dcc68"
+    },
+    "Art/Big/Big-ibo/ibo-magglass.PNG": {
+      "size": 142180,
+      "mtime_ns": 1791551374000000000,
+      "sha256": "0581474802230b63db8c96c1045367378518be28a23282c6615d6c094b6d0edf"
+    },
+    "Art/Big/Big-ibo/ibo-potion.PNG": {
+      "size": 157086,
+      "mtime_ns": 1791551504000000000,
+      "sha256": "0653ac936f7c8e1d8fcc683c23b9b939ba28f8afcaaff567e791d12555631dd5"
+    },
+    "Art/Big/Big-ibo/ibo-chair1.PNG": {
+      "size": 126620,
+      "mtime_ns": 1791551520000000000,
+      "sha256": "845bec9dba3378d543e91d9cce9e46db9d79983d3216fccb1c6587c24c5b85e6"
+    },
+    "Art/telescope/t-main/t-telescope.PNG": {
+      "size": 799429,
+      "mtime_ns": 1791092716000000000,
+      "sha256": "1225de75feec23606f881e531b90fbcf0567c98a8031167ef5d524e72a41d484"
+    },
+    "Art/telescope/t-main/t-dialog.PNG": {
+      "size": 169398,
+      "mtime_ns": 1791092797000000000,
+      "sha256": "2258e50b032d7f4224372e8066262972519ba609ac20e2822e7f90b6166bb567"
+    },
+    "Art/telescope/t-main/t-ribbon.PNG": {
+      "size": 75575,
+      "mtime_ns": 1791092817000000000,
+      "sha256": "f3e3147da4de6aa6b0ace735b2e6405442518a05bec6a166199e786a0ce54dcc"
+    },
+    "Art/telescope/t-main/t-background.PNG": {
+      "size": 214311,
+      "mtime_ns": 1791092508000000000,
+      "sha256": "7be93aa1d713420b212f79a4ac6e0dcf689dded1e53010bb9a877b1f61befed1"
+    },
+    "Art/telescope/t-main/t-button1.PNG": {
+      "size": 27654,
+      "mtime_ns": 1791092776000000000,
+      "sha256": "141b7b4c0e6aeb93f2320d57130fe7c80de0168950aa25a80509814ba023d4d9"
+    },
+    "Art/telescope/t-main/t-button2.PNG": {
+      "size": 29018,
+      "mtime_ns": 1791092750000000000,
+      "sha256": "389540260e4138c4cbd9e09f93f1dbb3014f048d05ea0e14d819116c225334d3"
+    },
+    "Art/telescope/t-main/t-bar.PNG": {
+      "size": 116088,
+      "mtime_ns": 1791092602000000000,
+      "sha256": "c6e1af926cdae52b297c846234f5e3567414df81d818c52a45e8ce793c05e826"
+    },
+    "Art/telescope/t-main/t-star.PNG": {
+      "size": 11831,
+      "mtime_ns": 1791092698000000000,
+      "sha256": "eefffc8a1613148ab3efd07deca965b750a1999b050f88e27db9c338ccb6fa77"
+    },
+    "Art/telescope/t-main/t-striped.PNG": {
+      "size": 222559,
+      "mtime_ns": 1791092730000000000,
+      "sha256": "819c78cb76797c1a39e882fd11e10e887222e997573dca567a3d85a086f2d2d0"
+    },
+    "Art/telescope/t-comic/t-dialog4.PNG": {
+      "size": 45403,
+      "mtime_ns": 1791083347000000000,
+      "sha256": "334c8517adb316326a90a88fef2280fb9a14759ba0f0cf7d040f49c24e0d2ec0"
+    },
+    "Art/telescope/t-comic/t-dialog5.PNG": {
+      "size": 199223,
+      "mtime_ns": 1791083366000000000,
+      "sha256": "332ff30fd617805e7ee16dd2d43faac0c2ad974555b6ba54c85df8cd1ae315a9"
+    },
+    "Art/telescope/t-comic/t-dialog7.PNG": {
+      "size": 62212,
+      "mtime_ns": 1791083405000000000,
+      "sha256": "3a19866342ec9d0be49d0fe3b0cccb2ab50ad7684d7f17a2106dfdbf8745bca0"
+    },
+    "Art/telescope/t-comic/t-dialog6.PNG": {
+      "size": 67862,
+      "mtime_ns": 1791083386000000000,
+      "sha256": "43bfdcc91de1cb30d4b50a513ed63520b5a6306b9aeb5e5b95af6b622c4eecc8"
+    },
+    "Art/telescope/t-comic/t-dialog2.PNG": {
+      "size": 133371,
+      "mtime_ns": 1791083302000000000,
+      "sha256": "02035b73bea41c28502c0aa1a7a96149b2fddd83074ca609178ac5fd8bb74b72"
+    },
+    "Art/telescope/t-comic/t-dialog3.PNG": {
+      "size": 111304,
+      "mtime_ns": 1791083325000000000,
+      "sha256": "ff557eab4eedda016543d016944056f04c08c3915af3ce92ddb80bc5a3316ee1"
+    },
+    "Art/telescope/t-comic/t-dialog1.PNG": {
+      "size": 155626,
+      "mtime_ns": 1791083280000000000,
+      "sha256": "7aa3e30d1ce2ebce9b1ed334a376bad8bc76ea956f8db109aabdc65ced078e7a"
+    },
+    "Art/telescope/t-comic/t-comic2.PNG": {
+      "size": 257937,
+      "mtime_ns": 1791083184000000000,
+      "sha256": "b1a7cb908c3605a3f7b9a89ae5eb808c170fbaa5945a10777a842c43fef73f93"
+    },
+    "Art/telescope/t-comic/t-comic3.PNG": {
+      "size": 1193038,
+      "mtime_ns": 1791083206000000000,
+      "sha256": "dbcd53c108aff79927dc4ab77a95710a8369ac919156e8d2fe7a4d06857a4fb1"
+    },
+    "Art/telescope/t-comic/t-comic1.PNG": {
+      "size": 998349,
+      "mtime_ns": 1791083164000000000,
+      "sha256": "2a2441ad5be9507e4f53674339da2aabfc39da381a2f84f06b29103f6b1f7b79"
+    },
+    "Art/telescope/t-comic/t-comic4.PNG": {
+      "size": 463852,
+      "mtime_ns": 1791083237000000000,
+      "sha256": "6ca38ed17f5aa324f274ad9c8401cd3d6ffe55eb852184fd62fef37b4edc6f09"
+    },
+    "Art/telescope/t-comic/t-comic5.PNG": {
+      "size": 675976,
+      "mtime_ns": 1791083259000000000,
+      "sha256": "fa71b34467c8f9b346d8355c547b5daf3f42006476cec5219f0e51c2efbaa877"
+    },
+    "Art/telescope/t-comic/t-dialog8.PNG": {
+      "size": 102665,
+      "mtime_ns": 1791083424000000000,
+      "sha256": "e0257b7e846173de1fcc0c15e58f2a27e994ceda758f13f34bde379fb362ef93"
+    },
+    "Art/telescope/t-comic/t-dialog9.PNG": {
+      "size": 136600,
+      "mtime_ns": 1791083447000000000,
+      "sha256": "cf6c8fd9ab0b32effc0d9da4a8f17763b7f25c9645ca7e551ece87e63a1b9027"
+    },
+    "Art/telescope/t-comic/t-dialog11.PNG": {
+      "size": 116896,
+      "mtime_ns": 1791083491000000000,
+      "sha256": "09df7f9efe9be8875c592e5b07494764967142430cfc172d06345a8d20da2fed"
+    },
+    "Art/telescope/t-comic/t-dialog10.PNG": {
+      "size": 129942,
+      "mtime_ns": 1791083466000000000,
+      "sha256": "ee5f56ad2b1600df560b56d05f35991594d43d55f33cfd66b3b988335ad60b4a"
+    },
+    "Art/IntroScreen/square/6s.PNG": {
+      "size": 79151,
+      "mtime_ns": 1789885650000000000,
+      "sha256": "79da5b4e333fbb1ab555d327ba8ef537881ec8fa17e8f71ab38181d183561f8e"
+    },
+    "Art/IntroScreen/square/7s.PNG": {
+      "size": 79150,
+      "mtime_ns": 1789885667000000000,
+      "sha256": "68903ce28387f137c0c38b0a921db1fe03fe2aa0644d4d02f73bfab18874b658"
+    },
+    "Art/IntroScreen/square/10s.PNG": {
+      "size": 79151,
+      "mtime_ns": 1789885700000000000,
+      "sha256": "f6b9c1fb258129c8fbfba38733a4ccee60e0421153d08c4e58cdb6dcb7405f0e"
+    },
+    "Art/IntroScreen/square/1s.PNG": {
+      "size": 79151,
+      "mtime_ns": 1789885594000000000,
+      "sha256": "6b6078f801a04247a5b19ffbb4720539470007e7f58578c559124e00fe04c0d2"
+    },
+    "Art/IntroScreen/square/11s.PNG": {
+      "size": 79151,
+      "mtime_ns": 1789885707000000000,
+      "sha256": "8e4c72cca59f99284f0ef72e34d1987695421cc87df16bbb3e88c35ffbb9565a"
+    },
+    "Art/IntroScreen/square/2s.PNG": {
+      "size": 79150,
+      "mtime_ns": 1789885605000000000,
+      "sha256": "2315bfb33aa4ad14ee4d842f2695d39cc58a0302cf605fd3a1855d1cbea5e514"
+    },
+    "Art/IntroScreen/square/12s.PNG": {
+      "size": 79151,
+      "mtime_ns": 1789885721000000000,
+      "sha256": "e287ba5dd515ae92b07e6c3e7ec70bec50204e4697ffb887ef57df2b78ecd430"
+    },
+    "Art/IntroScreen/square/13s.PNG": {
+      "size": 79151,
+      "mtime_ns": 1789885740000000000,
+      "sha256": "4d3e1c33cb3e96056be7d5226d33889827dec1640fbb8ec637829ba9edfbb640"
+    },
+    "Art/IntroScreen/square/3s.PNG": {
+      "size": 79150,
+      "mtime_ns": 1789885619000000000,
+      "sha256": "579ca2b13c5dd85acdce6f1fb5ab86044417ab96df88d34be96c478b6774fedd"
+    },
+    "Art/IntroScreen/square/4s.PNG": {
+      "size": 79151,
+      "mtime_ns": 1789885634000000000,
+      "sha256": "b9f07e845b96b64d758d9c2b4767bf817b177e0a115f0c2a1d3463b58513adc7"
+    },
+    "Art/IntroScreen/square/8s.PNG": {
+      "size": 79150,
+      "mtime_ns": 1789885683000000000,
+      "sha256": "08e796c6e9fd3c39e6aa9e74913f9e6046faa502e5bcf6a56ff1d921b09f243a"
+    },
+    "Art/IntroScreen/square/9s.PNG": {
+      "size": 79151,
+      "mtime_ns": 1789885692000000000,
+      "sha256": "bdd47d790bca76fcdcb95e32b9f4bd6cbf82e824fb36323d46cbc9d21bb74867"
+    },
+    "Art/IntroScreen/square/5s.PNG": {
+      "size": 79151,
+      "mtime_ns": 1789885641000000000,
+      "sha256": "427c3ee66abc06446ad130195aa19e328a4134e85481888cd5306974f1812fdc"
+    },
+    "Art/IntroScreen/text-image/06-i.PNG": {
+      "size": 190316,
+      "mtime_ns": 1789885553000000000,
+      "sha256": "b44cc17276d814e3732e03f497f3a9574c4c8d77d591c230fde38b8dfd38016f"
+    },
+    "Art/IntroScreen/text-image/03-n.PNG": {
+      "size": 262655,
+      "mtime_ns": 1789885526000000000,
+      "sha256": "6ce5d0d51178feca834f02f79c7d630cedefd0e722737038bb493516ca5ae4b8"
+    },
+    "Art/IntroScreen/text-image/07-s.PNG": {
+      "size": 263828,
+      "mtime_ns": 1789885562000000000,
+      "sha256": "1b771000e1bef629d8d03b744fd5e128073b10aa5cef39cb35e2727d0b9be27d"
+    },
+    "Art/IntroScreen/text-image/05-s.PNG": {
+      "size": 268693,
+      "mtime_ns": 1789885545000000000,
+      "sha256": "8c4b1261403aaeefa9edbeedb5b85ad42604bead162b087cbcb4a8a5c65182b6"
+    },
+    "Art/IntroScreen/text-image/01-g.PNG": {
+      "size": 198209,
+      "mtime_ns": 1789885508000000000,
+      "sha256": "502dbb116f08a0c5802220e1b77fd3d8bd972ba065be9a0e30c06878b6b47de6"
+    },
+    "Art/IntroScreen/text-image/04-e.PNG": {
+      "size": 331256,
+      "mtime_ns": 1789885537000000000,
+      "sha256": "29132d7803be3ff46b4b1d9018784145aeaf994b02fdc0e68be7758b76c0b67b"
+    },
+    "Art/IntroScreen/text-image/02-e.PNG": {
+      "size": 187068,
+      "mtime_ns": 1789885518000000000,
+      "sha256": "cdc59cce34083ffd7a0a84e2b820add2aeae1ed92e66d09df4cc3a3a15a4ee26"
+    },
+    "Art/Main-art/Mainart.JPG": {
+      "size": 8039941,
+      "mtime_ns": 1791621133000000000,
+      "sha256": "85fb440c27cefcbdfed53d137198edd3d8dbe95a73166b4780fc4932d199c6e8"
+    },
+    "Art/Main-art/main-2.jpg": {
+      "size": 8029820,
+      "mtime_ns": 1791683465000000000,
+      "sha256": "46a3d000662ee76bb4dcb311b2c096faef18581e3ede5e5f3814c8c215610f96"
+    },
+    "Art/Main-art/main-1.jpg": {
+      "size": 8029520,
+      "mtime_ns": 1791683452000000000,
+      "sha256": "d7f0ee918ce77443c80593113df89637e65c356d89a224b35aa9890e79417c26"
+    },
+    "docs/Main-reveal.md": {
+      "size": 5200,
+      "mtime_ns": 1791687468534654173,
+      "sha256": "5a8b797c9b86ac097b1d958081e1a36b28db3200ccadd7eb113ebd3514568267"
+    },
+    "docs/BallTest.md": {
+      "size": 3147,
+      "mtime_ns": 1791616461836197382,
+      "sha256": "a1de89f96448aaf614b2aa62613f40e96be4687abc0bb0521ada9cb6ceeee921"
+    },
+    "docs/return-transition-telescope-frame.md": {
+      "size": 3185,
+      "mtime_ns": 1791626146756329021,
+      "sha256": "1e076f7abd4af894152a1d7f3b7dfedf1c3c0d4bb906b9cdde4df2efe5284380"
+    },
+    "docs/TelescopeTest.md": {
+      "size": 4337,
+      "mtime_ns": 1791612995601742328,
+      "sha256": "8ac948ed6516e99a6dcd5024a7a882ca64fe2f2852df483a1be421d779c8dea8"
+    },
+    "docs/BigTest-integration.md": {
+      "size": 4297,
+      "mtime_ns": 1791618625807452524,
+      "sha256": "b1109c3ae50fb062cd314e06ab8a593f990b53538d7db8084e9e1f3709a81102"
+    },
+    "docs/NaturalTest.md": {
+      "size": 5437,
+      "mtime_ns": 1791614467574137765,
+      "sha256": "64f23fa57377a663b394338b61674e1daa4b20dd265ad4d2923b044a9a76bab8"
+    },
+    "docs/Test-pages-integration.md": {
+      "size": 3706,
+      "mtime_ns": 1791619490300634003,
+      "sha256": "317e4f7bd206483cd3cf14d00dbe7d52d60c9596a5f364522bfa6e67d2cd0e10"
+    },
+    "docs/BigTest.md": {
+      "size": 16961,
+      "mtime_ns": 1791608631836474256,
+      "sha256": "e5032b388169d7a99e45cb05198013a3ed8575e65b0f1e097ef9f8f09ff9e111"
+    },
+    "docs/Main-layout-verification.md": {
+      "size": 5102,
+      "mtime_ns": 1791623693598872776,
+      "sha256": "eb96a0fff96cda7ee731ed046e6d277517c34b8f0bc8c9105371d699872a3321"
+    },
+    "docs/portal-comics-verification.md": {
+      "size": 3920,
+      "mtime_ns": 1791625539162475876,
+      "sha256": "5f97fee12ee4a6d8d61dcc8b6f3bca9a2702940be31588e93b05911142f002a9"
+    },
+    "docs/GlobeTest.md": {
+      "size": 7569,
+      "mtime_ns": 1791611975766887078,
+      "sha256": "4ef86fd4a7a65848ca7079ba25ce9689a47df3a17e76f10ec301fec39005a8b3"
+    },
+    "docs/GENESIS-interaction.md": {
+      "size": 2354,
+      "mtime_ns": 1790056847372697571,
+      "sha256": "f5c0eeecb2ea1d0ab47acf569b8a4adeacdfe1a3479fe731149d7426de723ce9"
+    },
+    "docs/transition-palette-comic-fit-fix.md": {
+      "size": 4066,
+      "mtime_ns": 1791626768867836053,
+      "sha256": "962e853aa669b89e5fbc7efc51b2dce1165b290e0ee7e14749f5bc22e06f75e3"
+    },
+    "docs/HumanTest.md": {
+      "size": 2856,
+      "mtime_ns": 1791615336024607155,
+      "sha256": "69fe6021358b8120080f10cb2f4c889b098d0aad1a0d66ada020bd9ba486df13"
+    },
+    "public/licenses/boknows-text-image-MIT.txt": {
+      "size": 1066,
+      "mtime_ns": 1789886653404438106,
+      "sha256": "965a54dd1217a9dfd217fb5d61e829a39d4f21a25b877fccd0751359be8a1308"
+    },
+    "public/assets/earth.glb": {
+      "size": 22669004,
+      "mtime_ns": 1789890456176981199,
+      "sha256": "d16a9e05c6d8b8d66cf66edc560bd8f012e6480b2873a30f06086d0e13b689fa"
+    },
+    "Font/En-2/OFL.txt": {
+      "size": 4488,
+      "mtime_ns": 1789868026000000000,
+      "sha256": "e99a23e4a54452e68085a835ce8679c662939b0a73155d1b3de42c8539bd3f59"
+    },
+    "Font/En-2/JuliusSansOne-Regular.ttf": {
+      "size": 41676,
+      "mtime_ns": 1758066370000000000,
+      "sha256": "bc40713f722a7585a7df2541eb12ee1cdaf10c3fb60e74e89718b6d31c3bc818"
+    },
+    "Font/Ch-1/ChironSungHK-Italic-VariableFont_wght.ttf": {
+      "size": 50928256,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "a4ee154753a30e281c680274f75e1478e90caa87b16b368c9e91bef31a85535b"
+    },
+    "Font/Ch-1/ChironSungHK-VariableFont_wght.ttf": {
+      "size": 49667452,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "f0bfb0faa8fea0a2421cd440cae1712e14e9e52e9cd42a717f3277a665233ae4"
+    },
+    "Font/Ch-1/OFL.txt": {
+      "size": 4497,
+      "mtime_ns": 1789868158000000000,
+      "sha256": "ae03b8a51cc310fb6910c6f7ff957edbdef183cf0887b1c884abde2758663077"
+    },
+    "Font/Ch-1/README.txt": {
+      "size": 2677,
+      "mtime_ns": 1789868158000000000,
+      "sha256": "f578dc38458fd022b1f050e39f994b06caeb3a2f52be2a887ee28b396fa74e95"
+    },
+    "Font/Ch-1/static/ChironSungHK-Italic.ttf": {
+      "size": 30400172,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "59154b7cfd902315ec20ba151835a892f18bb763c8aaaf91379adc2c50901f3e"
+    },
+    "Font/Ch-1/static/ChironSungHK-ExtraBold.ttf": {
+      "size": 29456800,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "31bdde0516d6e333ee2f79e002c900b1181c6aee0594e44fc8432db6500ba556"
+    },
+    "Font/Ch-1/static/ChironSungHK-Light.ttf": {
+      "size": 29449656,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "4414151425f9e8b7a7eda090ca56ce2d7a71f37ffac436c03406ad96a329d67e"
+    },
+    "Font/Ch-1/static/ChironSungHK-Regular.ttf": {
+      "size": 29453104,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "f7d0ca401c4d04cd68a4799de449008e3b9be1f98e5a5df35c1288c9c0565a5e"
+    },
+    "Font/Ch-1/static/ChironSungHK-LightItalic.ttf": {
+      "size": 30399608,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "e47831f0e70159474bb3a524d7dce50dd33367f5224d7f57ef8ee57a2b545def"
+    },
+    "Font/Ch-1/static/ChironSungHK-SemiBold.ttf": {
+      "size": 29463168,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "2752b4b06214d8c9fbc1225aff58d80c2ceeaa6707676782e4f622ec4fb25748"
+    },
+    "Font/Ch-1/static/ChironSungHK-MediumItalic.ttf": {
+      "size": 30403248,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "866d17527948e72516cd23cc526526b18c9c88977e48698b6b709e0d40560591"
+    },
+    "Font/Ch-1/static/ChironSungHK-ExtraBoldItalic.ttf": {
+      "size": 30396356,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "78de55d01df018f2f558f26eb16936bbabc5e99d3fc491a5b79788e0952cb432"
+    },
+    "Font/Ch-1/static/ChironSungHK-Black.ttf": {
+      "size": 29454696,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "b768ae340c6eefbee213728c58258275b86a82e380c30a72e2d0a8dc18d7aee8"
+    },
+    "Font/Ch-1/static/ChironSungHK-ExtraLightItalic.ttf": {
+      "size": 30398184,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "a77a20ee7348c634bbe6608537df9dd0fcb27bea917ee2ec0483837519115cf2"
+    },
+    "Font/Ch-1/static/ChironSungHK-SemiBoldItalic.ttf": {
+      "size": 30398296,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "19d70882b263b9e78f8994e5ef52a8a5f3f9622e83da1fde2cdc4f376f43e870"
+    },
+    "Font/Ch-1/static/ChironSungHK-BoldItalic.ttf": {
+      "size": 30397752,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "34adc1e2cbfde5d72e3bb07215d267577ac950730b8bac34c19304e12896b429"
+    },
+    "Font/Ch-1/static/ChironSungHK-BlackItalic.ttf": {
+      "size": 30396708,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "0dd58e021f310fe5afd8864117ad3e2eb3697a16333e0c7a50ee58c6e8f48573"
+    },
+    "Font/Ch-1/static/ChironSungHK-Bold.ttf": {
+      "size": 29459884,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "3fa373e28f05b27f5b7f0c6e2ae5153b39406056d26b0571ee2d4ba9a7601d05"
+    },
+    "Font/Ch-1/static/ChironSungHK-ExtraLight.ttf": {
+      "size": 29439320,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "18f5fd0820eca614742ac299a2ea2f395751f4ec822caf6e872dcf080321c392"
+    },
+    "Font/Ch-1/static/ChironSungHK-Medium.ttf": {
+      "size": 29463684,
+      "mtime_ns": 1784767494000000000,
+      "sha256": "430ba7208486f358de8572d8992f3f448ba4d482f83e91b594a856d7b9459942"
+    },
+    "Font/En-1/PlayfairDisplay-VariableFont_wght.ttf": {
+      "size": 301576,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "7b756032127781da7f7cc4410ec3cac50fa34b50c4e8408c5f6bf47dfd5eed83"
+    },
+    "Font/En-1/OFL.txt": {
+      "size": 4543,
+      "mtime_ns": 1789868026000000000,
+      "sha256": "4e6be9d19455d7cb092412984ebf3c55d26b19dd8f8452962bf432ec0a9c9dcb"
+    },
+    "Font/En-1/README.txt": {
+      "size": 2817,
+      "mtime_ns": 1789868026000000000,
+      "sha256": "08fb6c6fc98e923e31b36fd5dc5a38648cbf8e55f62f175fb8c0b8a2684a4561"
+    },
+    "Font/En-1/PlayfairDisplay-Italic-VariableFont_wght.ttf": {
+      "size": 280660,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "e32edc03421ea13490f7956d6386c10d38074ced33ba61922144bc22a7c70a9e"
+    },
+    "Font/En-1/static/PlayfairDisplay-Bold.ttf": {
+      "size": 193720,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "4f3b87b5aa297eed5e5a48dbd9941356ca0313d4725b02c29a298cb042b7b31b"
+    },
+    "Font/En-1/static/PlayfairDisplay-SemiBold.ttf": {
+      "size": 193832,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "0f8ae66ea018739838dac8fc0a70f9dd6fe8806bf4f63bb35b3c643480221d31"
+    },
+    "Font/En-1/static/PlayfairDisplay-Medium.ttf": {
+      "size": 193784,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "1801fe542af37361b26d3c042a9a57794a58a4e9a1e3948a7fa0ec26b89b43f3"
+    },
+    "Font/En-1/static/PlayfairDisplay-BoldItalic.ttf": {
+      "size": 178436,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "db5737059ff617317aca97e9e35730f8933a2e187c75bbe2deaf45c4d72f5b1d"
+    },
+    "Font/En-1/static/PlayfairDisplay-ExtraBoldItalic.ttf": {
+      "size": 178460,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "65f753e06921f90290f2e12218cb3771a5ad09f7bfd86e976f0cb57889bca45f"
+    },
+    "Font/En-1/static/PlayfairDisplay-Italic.ttf": {
+      "size": 177972,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "40a6afa92220254c2c426ccef129d3615dd19e4c591fbfa997e5f28ebba8302c"
+    },
+    "Font/En-1/static/PlayfairDisplay-Regular.ttf": {
+      "size": 193380,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "861f838d481d28cbbd4793e45dc02f01d04c81e06ed98ab2779ca152ace9f27b"
+    },
+    "Font/En-1/static/PlayfairDisplay-Black.ttf": {
+      "size": 193608,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "33951b6bbeddb44347f1dbf0fe4e4d30f759a0048c7d5a5d900c5e1c90565ce0"
+    },
+    "Font/En-1/static/PlayfairDisplay-SemiBoldItalic.ttf": {
+      "size": 178528,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "20fc46693b21b25f042b8542d41a1e5a86bdfdeb363e1878be05fdd7c8ad8166"
+    },
+    "Font/En-1/static/PlayfairDisplay-MediumItalic.ttf": {
+      "size": 178452,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "d9e34324aef7e5ba5fa8ab8f10af7acedd167f79e8be1ebf88eab812e9756736"
+    },
+    "Font/En-1/static/PlayfairDisplay-BlackItalic.ttf": {
+      "size": 177924,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "792ebee4b381acc5bce78c46ba38c491cba4e4808313c1ad6bfbe6aeead5f7f1"
+    },
+    "Font/En-1/static/PlayfairDisplay-ExtraBold.ttf": {
+      "size": 193688,
+      "mtime_ns": 1757609064000000000,
+      "sha256": "eba64eefaeabbb7f65986c59eae2d6c0ba28fdb4e8ab6e578390af0bf1fcbbbf"
+    },
+    "reference/Big-reference2.PNG": {
+      "size": 1163157,
+      "mtime_ns": 1790673105000000000,
+      "sha256": "24982c3e5a3e15eea9946c41c3949de314f1357cee270afa5b2af6bcc9d0350e"
+    },
+    "reference/Big-reference3.jpg": {
+      "size": 570427,
+      "mtime_ns": 1790676543000000000,
+      "sha256": "58d82f1fb0d7ab8a8b04d0d31d21e70360a069c42335ad3887c2116026111b0d"
+    },
+    "reference/story-reference.JPG": {
+      "size": 1130298,
+      "mtime_ns": 1791616663000000000,
+      "sha256": "893fde2c6390537cc179094255e7d1c289c2a51bc8ad023390f42d85ff2a1f10"
+    },
+    "reference/Big-reference.PNG": {
+      "size": 1001943,
+      "mtime_ns": 1790673513000000000,
+      "sha256": "fa1a5d716d2cbe47b48d32eb68f6c3b809ac7ba4d950e4f25e54296617d85bb6"
+    },
+    "reference/telescope-reference.jpg": {
+      "size": 304104,
+      "mtime_ns": 1791612280626698965,
+      "sha256": "a13dc09540b2f3625a5059f9b515c0a68efe1e6b4f400fbecc78c39fea94b0a7"
+    },
+    "reference/Big-rereference.png": {
+      "size": 780965,
+      "mtime_ns": 1791602046000000000,
+      "sha256": "d2165fcd0239c84c04c54f39e63b559c1e1adaea5a87430d76cc5a04bb79ff03"
+    },
+    "reference/Big-leftside-reference.png": {
+      "size": 664520,
+      "mtime_ns": 1790758757000000000,
+      "sha256": "20c5ccb0e615dbeeb4f417d995cd8a1941bce1940b9467fe59f33cd09863f45f"
+    },
+    "src/styles.css": {
+      "size": 13094,
+      "mtime_ns": 1791097560464445375,
+      "sha256": "d14c344ca98ead999530db8b311095945643015d8981dd6f809ef4996cf583c1"
+    },
+    "src/main.jsx": {
+      "size": 225,
+      "mtime_ns": 1789875981045641161,
+      "sha256": "83d78f48c7bb4283cc75213f26a1e6e819689a5befafb05fe6701f3b30966b9f"
+    },
+    "src/App.jsx": {
+      "size": 15842,
+      "mtime_ns": 1791628303400992406,
+      "sha256": "952606e46ead84e957f603b80687e9f7ada6c09c92fa8f98aa3460c97a0551e8"
+    },
+    "src/components/Header.jsx": {
+      "size": 1308,
+      "mtime_ns": 1791623293292768437,
+      "sha256": "fd190b7b2247b5a7592fc936712b680b898b3acb5a621e04dd0c4d2c5f996be5"
+    },
+    "src/components/IntroScreen.css": {
+      "size": 5697,
+      "mtime_ns": 1791097560489865998,
+      "sha256": "2315d2f7d8f29dd12d6e214138701963fa4625b03e5b4b7f50042652ecb54767"
+    },
+    "src/components/HeroSection.jsx": {
+      "size": 3780,
+      "mtime_ns": 1791684011271178846,
+      "sha256": "75d6353ecf8138f287fbbea98777ad31854d3e206e9dee6d89a0839722fc5dbd"
+    },
+    "src/components/TComicPage.css": {
+      "size": 1955,
+      "mtime_ns": 1791627555059365563,
+      "sha256": "8b20de883d5e3f633ea1b8c5bf609f8217194be1278f1413cd93e60e8509314a"
+    },
+    "src/components/BigIntroductionStack.jsx": {
+      "size": 1490,
+      "mtime_ns": 1790937354477768009,
+      "sha256": "fe866aef64f4efa17e9c6d7d2e5b2e414df24d0352298c69425ec5d0eb4b0739"
+    },
+    "src/components/Prelude.css": {
+      "size": 5242,
+      "mtime_ns": 1791623335972120652,
+      "sha256": "6e5a9316e0441cacc8ebaca9edb04ebb54bb09f419ff44976c6920c19fe4bc07"
+    },
+    "src/components/GlobePage.jsx": {
+      "size": 463,
+      "mtime_ns": 1790410455261809790,
+      "sha256": "ee9b9fdab67708c5aec15a7a7546d55f07724c3357fabfb4454ff6cf4d3c4c96"
+    },
+    "src/components/TelescopePage.css": {
+      "size": 2204,
+      "mtime_ns": 1791266731454824419,
+      "sha256": "83e1348c4df417f17e52a9c17bfe749e16f4999eccb4da000cf2023a074c3bc7"
+    },
+    "src/components/ExploreCard.jsx": {
+      "size": 781,
+      "mtime_ns": 1791623293293285570,
+      "sha256": "17e52e19bac19c155c7b4c8580007f690206d7ecb09248a10d924947c1a6fbb1"
+    },
+    "src/components/MainScene.jsx": {
+      "size": 35164,
+      "mtime_ns": 1791625276586300182,
+      "sha256": "12965d8a34cd4d9fb5a553cb5fdb714a140462c914c71877170048d6b36e23b4"
+    },
+    "src/components/GlobeViewer.jsx": {
+      "size": 14225,
+      "mtime_ns": 1791611365118123854,
+      "sha256": "4950516acce8b7bdfc843aeb9a7b6e879996f1c93505305e9564961f5e52a3a2"
+    },
+    "src/components/portalDestinations.js": {
+      "size": 281,
+      "mtime_ns": 1790410455284985494,
+      "sha256": "9925f28500144e5cd5525f8e4359b3ce77134af86b187ac46eeb2b340e96a1f0"
+    },
+    "src/components/Footer.jsx": {
+      "size": 465,
+      "mtime_ns": 1791623293293028649,
+      "sha256": "16458c23dbf1edc12dc80fa6347d9ff98f5d4dffc21611d50ce913db33701481"
+    },
+    "src/components/bigIntroductionPages.js": {
+      "size": 1199,
+      "mtime_ns": 1790933972781130767,
+      "sha256": "3f30d2ccc04d4de86e9f7b2638095d99dbdbbc824c5008caf7af8f8a0aa49c79"
+    },
+    "src/components/PortalPlaceholderPage.jsx": {
+      "size": 288,
+      "mtime_ns": 1790410455292714535,
+      "sha256": "eb7ad24fdbc470adaa0ffc61ba61cbc457c03912c3fe8c6bae5331e1560ea29a"
+    },
+    "src/components/BigHanging.jsx": {
+      "size": 2528,
+      "mtime_ns": 1790767610505103779,
+      "sha256": "88b7c95b799591172933200575e7bb5cd4e82023e79f77563902d480db09b9b1"
+    },
+    "src/components/IntroSquares.jsx": {
+      "size": 11012,
+      "mtime_ns": 1790056847372405155,
+      "sha256": "41576b9acf323c08651c338a0169822c26370ccce93a38ee0f1df5b124560dc2"
+    },
+    "src/components/CircularReveal.css": {
+      "size": 225,
+      "mtime_ns": 1791527878816531740,
+      "sha256": "5530172e68565f00b8d4ee410094fab28ee6e513196cddd14378f1646e26b158"
+    },
+    "src/components/CurveTransition.css": {
+      "size": 379,
+      "mtime_ns": 1791628356188580308,
+      "sha256": "d764510f90f0dade960092023e3d68a3543f39252c2585665dc2e738d22e5fa2"
+    },
+    "src/components/GenesisLetters.jsx": {
+      "size": 5808,
+      "mtime_ns": 1790056847361054710,
+      "sha256": "f0d392ed1cf103154772734dbbe3904dc7b2f727cc2cd136d1173576abf1362e"
+    },
+    "src/components/ComicIntro.css": {
+      "size": 4778,
+      "mtime_ns": 1791617238983832436,
+      "sha256": "937c4218bc4153f468a716c0e9543a5fb33f8a9534b04f267f7ee9b5d59b03ea"
+    },
+    "src/components/IntroEarth.css": {
+      "size": 152,
+      "mtime_ns": 1790844363188872537,
+      "sha256": "276124b0f4763b4aa9b202c9ad766627b058c1c23b8e3daaee8321d12e88b90f"
+    },
+    "src/components/BigCircles.jsx": {
+      "size": 4432,
+      "mtime_ns": 1790756026744129900,
+      "sha256": "5866315ce180503b98056af729bfcffa2371a893ec07b693312047515f46f774"
+    },
+    "src/components/bigHoverIcons.js": {
+      "size": 1144,
+      "mtime_ns": 1790766500888455066,
+      "sha256": "8ceea00095c7f092a79ba9310c7514871cabffbbbba1cc0e5fa71e23b5616270"
+    },
+    "src/components/modelMaterialPresets.js": {
+      "size": 15315,
+      "mtime_ns": 1790937633680483084,
+      "sha256": "1c686220902a79084ae715a824781c5956637d74c8015b9ba122b212e765014e"
+    },
+    "src/components/BigSquareField.jsx": {
+      "size": 11175,
+      "mtime_ns": 1790757743035308862,
+      "sha256": "047cbba8b3f2d978fcbdf19c99584cd03b2f0a2486652f400ceba8028ccec48d"
+    },
+    "src/components/ComicIntro.jsx": {
+      "size": 17339,
+      "mtime_ns": 1791617454342950382,
+      "sha256": "1afa4b00fe0c938e80c6e628b86561a6d62cd3bf6e8f23c9ed921b5f299cb97e"
+    },
+    "src/components/cosmosBillboard.js": {
+      "size": 1604,
+      "mtime_ns": 1790402086811115903,
+      "sha256": "04ec6b8601de74ab29e46bacaa7840e3b6de087c0a79a70a4b297b4b10ec8285"
+    },
+    "src/components/IntroEarth.jsx": {
+      "size": 14226,
+      "mtime_ns": 1790850846681736398,
+      "sha256": "d5ea1c33e74e60ea367cfcfd9b271a2a1bd842df34f0866eab9deef17953a03a"
+    },
+    "src/components/CircularReveal.jsx": {
+      "size": 1814,
+      "mtime_ns": 1791527876483794530,
+      "sha256": "a407bdd7ccf728e2441fac9b5b7883c0c4cd9c73612aee4849fae5964250f665"
+    },
+    "src/components/IntroSquares.css": {
+      "size": 463,
+      "mtime_ns": 1789887827473310678,
+      "sha256": "236df184ee42bdc6b667bf2c106863ac2873e0d5d315152c25ad561843aac836"
+    },
+    "src/components/bigInteractionRegistry.js": {
+      "size": 2488,
+      "mtime_ns": 1790767138007562240,
+      "sha256": "a8ad609f21d384b1b8bd7d290e667a0dd7c6f6f274933a18dd410650d8e4cb48"
+    },
+    "src/components/CurveTransition.jsx": {
+      "size": 3530,
+      "mtime_ns": 1791628356188413432,
+      "sha256": "ded8c3b3f41b1c68e3cb926a4fd8ed9aa9b807cc54768eb2225eb589e697b969"
+    },
+    "src/components/tComicLayout.json": {
+      "size": 1919,
+      "mtime_ns": 1791628031305541553,
+      "sha256": "7c5efb4890b61f0edaa341de188011125444454cabfa43163d153ec78cbd85bb"
+    },
+    "src/components/GlobePage.css": {
+      "size": 702,
+      "mtime_ns": 1790844144501505685,
+      "sha256": "735358ada7d3ec05e5840f8952784973609f47c45a41d26a2b0e6952027f38a3"
+    },
+    "src/components/ExploreSection.jsx": {
+      "size": 1804,
+      "mtime_ns": 1791623293293144068,
+      "sha256": "3c25573b64dcf7e650d0619a8264c5500e58eac68fe8bd404798eb52a9495df4"
+    },
+    "src/components/IntroScreen.jsx": {
+      "size": 1968,
+      "mtime_ns": 1789898461572652050,
+      "sha256": "0d03b97bf79dc2bfb1253b5a66548138c633e405628c2714306ec943cafb0fad"
+    },
+    "src/components/BigLeftside.jsx": {
+      "size": 7119,
+      "mtime_ns": 1790937985424013535,
+      "sha256": "9ef108d6da56bd4580a7a9d2b204536a32abc7a7eba82bdc2172aeaef56ca4bc"
+    },
+    "src/components/BigIntroductionStack.css": {
+      "size": 1162,
+      "mtime_ns": 1791097124542173831,
+      "sha256": "4cbd4725a7062823d3d24708f03444245322d57392736c0c0ce43d774b809340"
+    },
+    "src/components/TComicPage.jsx": {
+      "size": 12833,
+      "mtime_ns": 1791628031305779972,
+      "sha256": "8f9591732dce746a61bf8f73a7a731b25c0db795b18b92fc46f72b7560c01164"
+    },
+    "src/components/PortalBackButton.jsx": {
+      "size": 301,
+      "mtime_ns": 1790410715745429793,
+      "sha256": "6b87bcfc21d59857df213e6e15c25f91aefa2a350c3dda7898a9e08211b73fc4"
+    },
+    "src/components/BigSquares.jsx": {
+      "size": 1647,
+      "mtime_ns": 1790756141075363308,
+      "sha256": "fb81300495a79638cf25100622eecef0258ddd9bb5efdad4e8ba3ef41bd9e8cb"
+    },
+    "src/components/TelescopePage.jsx": {
+      "size": 10903,
+      "mtime_ns": 1791612862748727501,
+      "sha256": "47cc27a9362223afe0eb95567bb9d58a9539232bae3399ad283c55e16e5c563a"
+    },
+    "src/components/MainScene.css": {
+      "size": 6546,
+      "mtime_ns": 1790768541270477671,
+      "sha256": "c62ee033bfb391e1cc2b9a44f9bdc221092560172a8a99e00d7fc2c4ea549006"
+    },
+    "src/components/naturalTest/NaturalTest.jsx": {
+      "size": 5174,
+      "mtime_ns": 1791615068241158470,
+      "sha256": "0462a534fb271ad0ca7633cbdb5aa7fd169271dcb938f8f3507df4efedaad38d"
+    },
+    "src/components/naturalTest/Text.jsx": {
+      "size": 486,
+      "mtime_ns": 1791618912786425053,
+      "sha256": "73c6b65978e1bc980966da43b203a5da54d30dd1d3c012d55ef73f075ddc9dcb"
+    },
+    "src/components/naturalTest/useResearchCamera.js": {
+      "size": 6803,
+      "mtime_ns": 1791615068240913514,
+      "sha256": "ce2d2003626c8576a9b97bf521b7a031f7d4626637f31b148afcb5b4360829be"
+    },
+    "src/components/naturalTest/ResearchCanvas.jsx": {
+      "size": 2711,
+      "mtime_ns": 1791613642818792978,
+      "sha256": "d43754d01117755d6229e5759c5d815be3cbc874b720ed7ee6279cb185b76561"
+    },
+    "src/components/naturalTest/NaturalTest.css": {
+      "size": 8632,
+      "mtime_ns": 1791613783098014635,
+      "sha256": "f38e0bd4c9f42d6aaf744acf26731c23319becbcb90e7859f90a0721701ea3e5"
+    },
+    "src/components/naturalTest/ReadingPanel.jsx": {
+      "size": 1513,
+      "mtime_ns": 1791613570107092609,
+      "sha256": "26aaecfe77ed1d2ee789acaa6b102d22884d3e28107096b5848d093ee2e713a1"
+    },
+    "src/components/naturalTest/data.js": {
+      "size": 5162,
+      "mtime_ns": 1791613642818299308,
+      "sha256": "8f3454806334c27c5652245f6dd4b7eef9b3b41882eddff0d60deb3a1b019435"
+    },
+    "src/components/bigTest/EditableText.jsx": {
+      "size": 368,
+      "mtime_ns": 1791617832428166299,
+      "sha256": "d73c678de3cd21a9db28242f44b9d78c6b679dc490af785b9b927a0b404550f1"
+    },
+    "src/components/bigTest/Documents.jsx": {
+      "size": 3501,
+      "mtime_ns": 1791606155589129558,
+      "sha256": "205abd89c4c019642e0b30f84060b8565074c0a71901e654cc4fcfdf47b87d5f"
+    },
+    "src/components/bigTest/BigTest.jsx": {
+      "size": 2255,
+      "mtime_ns": 1791617827756026666,
+      "sha256": "67cc78f3e7a066dd5ecd8568d2860820d1b66c0bdce2b045ac148ce5d1b1314c"
+    },
+    "src/components/bigTest/config.js": {
+      "size": 5080,
+      "mtime_ns": 1791608571037302947,
+      "sha256": "45c495295f7fc8583a5529072d8076c2a0316b45219582870ba358d7e5dc6239"
+    },
+    "src/components/bigTest/AssetCrop.jsx": {
+      "size": 727,
+      "mtime_ns": 1791603034476980378,
+      "sha256": "c9c937b294f90ba870d27f692d7d390e3c5b1b35510fb1e75ddce02be494d7ee"
+    },
+    "src/components/bigTest/Maintenance.jsx": {
+      "size": 3064,
+      "mtime_ns": 1791608571037050328,
+      "sha256": "74db3d37121da021af5cb6bbddd32f22a004b055379a6d115d567aee8d683bb6"
+    },
+    "src/components/bigTest/BigTest.css": {
+      "size": 8625,
+      "mtime_ns": 1791608238890887569,
+      "sha256": "5c8969f1dffd8a98e0385fa680227f76753b5d9d67bf019745cf3e2a991dbb52"
+    },
+    "src/components/bigTest/FloatingSquares.jsx": {
+      "size": 751,
+      "mtime_ns": 1791608238890668616,
+      "sha256": "673b723683669e8f374292cb7e1ca2b392f8e95acd2dc703603e84b3bdb5f274"
+    },
+    "src/components/bigTest/viewportFraming.js": {
+      "size": 461,
+      "mtime_ns": 1791605081669874490,
+      "sha256": "7d0ac0bf0ace1db8d15f6eac532478b8e2b79d0c1ffbd5c24868dd97b66a459e"
+    },
+    "src/components/bigTest/Background.jsx": {
+      "size": 2612,
+      "mtime_ns": 1791608571037126743,
+      "sha256": "8ef63efa089be220c944bf56f948ffbf7027e3f224ef4514ceb78217f19be5db"
+    },
+    "src/components/ballTest/WorkDialog.jsx": {
+      "size": 2490,
+      "mtime_ns": 1791616218775883999,
+      "sha256": "1f2b6b528208ed18289ead253a913a2b356d868683c5659638ae051499751e85"
+    },
+    "src/components/ballTest/Text.jsx": {
+      "size": 480,
+      "mtime_ns": 1791618912786705264,
+      "sha256": "609240016584f0ad396403bff418038ac22e3e874f1fc3c60614b531f3a279a6"
+    },
+    "src/components/ballTest/BallTest.css": {
+      "size": 7219,
+      "mtime_ns": 1791616461833105508,
+      "sha256": "1f195a43486da8c8fa9e7fad8a2d84ede0748b0097f57ea9a1e64fc10df071ae"
+    },
+    "src/components/ballTest/BallTest.jsx": {
+      "size": 3343,
+      "mtime_ns": 1791616364865238717,
+      "sha256": "1cee5c6d8b5f2acddbee6b13e1dcd2d5a6bbf05b7649accc55f6c964fe647261"
+    },
+    "src/components/ballTest/data.js": {
+      "size": 2776,
+      "mtime_ns": 1791616136318194109,
+      "sha256": "2dd18ebaf48de2f4ee3633f6ada296e97fa3f754efcd83e0e826bfa782b9af4f"
+    },
+    "src/components/ballTest/WorkSelector.jsx": {
+      "size": 2865,
+      "mtime_ns": 1791616364865096675,
+      "sha256": "92ab691568ef0a2ba37c237a4167a31ebc2112599634ed81472794bc84488a89"
+    },
+    "src/components/ballTest/Live2DSlot.jsx": {
+      "size": 835,
+      "mtime_ns": 1791616136319728188,
+      "sha256": "6ff8fcb50431b839088a5bfdf953651f8b24558752d9c51c1d2f40d0ae7978b6"
+    },
+    "src/components/telescopeTest/TelescopeTest.css": {
+      "size": 6603,
+      "mtime_ns": 1791612629381585563,
+      "sha256": "f2741563d915e4215b9318b0e0cd2829ff481e62880ee0dba1dbd33676157cf8"
+    },
+    "src/components/telescopeTest/Text.jsx": {
+      "size": 490,
+      "mtime_ns": 1791618912786277010,
+      "sha256": "a84987812ef66ba2fe32358d9ce6137c1b6a3e475918dad72b0df2e3127b6449"
+    },
+    "src/components/telescopeTest/data.js": {
+      "size": 1539,
+      "mtime_ns": 1791612587435514793,
+      "sha256": "1df204f9b6b000859663728cf1089126d85c50de01d714fe574a2ff6546a9c2c"
+    },
+    "src/components/telescopeTest/TelescopeTest.jsx": {
+      "size": 8160,
+      "mtime_ns": 1791612587437811060,
+      "sha256": "3d4a8d229f03aa27cf8ce80ba7540a934e4760b768b4886ce6f2ded3c94d8218"
+    },
+    "src/components/globeTest/celestialData.js": {
+      "size": 1103,
+      "mtime_ns": 1791611813044628072,
+      "sha256": "937aeee3b2aad220c69f3694a09a315d929b1c41484edb835a9bad81ce4c3b75"
+    },
+    "src/components/globeTest/stories.js": {
+      "size": 1069,
+      "mtime_ns": 1791611813044838073,
+      "sha256": "ebe847d98bf93a617cbcf562b74ce63c0f523cd98d0fa4d27f487d825c03268f"
+    },
+    "src/components/globeTest/GlobeTest.jsx": {
+      "size": 3108,
+      "mtime_ns": 1791611486909096061,
+      "sha256": "b705c834f6e685f80eafe540e9a1d524161dd0ad4783ead02786722ee6df7787"
+    },
+    "src/components/globeTest/Text.jsx": {
+      "size": 482,
+      "mtime_ns": 1791618912786196384,
+      "sha256": "05dfbde59e78e070ed401140a9ea89e10e751c452127633021a4819b74f4d49e"
+    },
+    "src/components/globeTest/config.js": {
+      "size": 516,
+      "mtime_ns": 1791611813044506113,
+      "sha256": "12bfff97ec19778d1e346fc530ae8a07020b1dc2057ff41dcf15d27abb1f97c1"
+    },
+    "src/components/globeTest/GlobeTest.css": {
+      "size": 6873,
+      "mtime_ns": 1791611702158319443,
+      "sha256": "42c285a188f15a4fad5b6ee79cf7bc30328ef1153977cced9161f4d143fb28bf"
+    },
+    "src/components/globeTest/ResearchNotes.jsx": {
+      "size": 2447,
+      "mtime_ns": 1791611587319057169,
+      "sha256": "70945eb0d034014328b51c97234e2453066f6f06add763c461036b7105701bec"
+    },
+    "src/components/globeTest/data.js": {
+      "size": 172,
+      "mtime_ns": 1791611813044938032,
+      "sha256": "9b9650d49ecdecba5c6cace191f0586b41de2b82407647a7768ec0a060e2f5cc"
+    },
+    "src/components/globeTest/StoryDialog.jsx": {
+      "size": 2719,
+      "mtime_ns": 1791611702158568570,
+      "sha256": "b56354906936ea9078aa6bd0be7731e2b70746d3376db8a08546e12df3aad9d7"
+    },
+    "src/components/humanTest/HumanTest.jsx": {
+      "size": 564,
+      "mtime_ns": 1791615068241437842,
+      "sha256": "d676fa75c986af2f629c07a7fc7ba8a4ee5f5855f471e8b195dc86753551a2af"
+    },
+    "src/components/humanTest/Text.jsx": {
+      "size": 482,
+      "mtime_ns": 1791618912786535221,
+      "sha256": "aa5cf23a9caca3455bfe89898b93d2cb7a11b7b7b954788435740005ec25c18c"
+    },
+    "src/components/humanTest/HumanCanvas.jsx": {
+      "size": 2520,
+      "mtime_ns": 1791614890203141511,
+      "sha256": "9b6939bdeb2764766d0ee3787ed6f29d7bcf0e7a49aa8b61034f0795c9f305be"
+    },
+    "src/components/humanTest/data.js": {
+      "size": 5058,
+      "mtime_ns": 1791614890198429103,
+      "sha256": "7ad08f42e20c0940d401c552c78fefe55d17075caa15b94213e6fb9cca318db0"
+    },
+    "src/components/humanTest/HumanReadingPanel.jsx": {
+      "size": 3161,
+      "mtime_ns": 1791615336021681329,
+      "sha256": "a72fd9e66cf237a026aa3a3f6f7f6736f5cfd26ebbfebccd1061ba55557e416a"
+    },
+    "src/components/humanTest/HumanTest.css": {
+      "size": 3147,
+      "mtime_ns": 1791615336021340039,
+      "sha256": "44bd615892db5494139ee21d518856724ff2a63982db8d80f8ed952d9348ba05"
+    },
+    "src/components/main/MainArtworkReveal.css": {
+      "size": 1592,
+      "mtime_ns": 1791687019697592061,
+      "sha256": "86f6a204a4092cd39b04779fddc343d3aa0e237e922dd78bdc2427121b972525"
+    },
+    "src/components/main/Text.jsx": {
+      "size": 721,
+      "mtime_ns": 1791623293252035364,
+      "sha256": "30835d4ac4117d5b9777d45db4cf29695a082c87c1f45c113367c5ba228c7752"
+    },
+    "src/components/main/MainArtworkReveal.jsx": {
+      "size": 13962,
+      "mtime_ns": 1791687402501623734,
+      "sha256": "df165a36901d17d27ad7cfc9cd08c1b8b4dbb4bfe6c6789414a978cd3c33c90e"
+    },
+    "src/components/main/revealConfig.js": {
+      "size": 6041,
+      "mtime_ns": 1791687167905461527,
+      "sha256": "7df00290277c07b0d989a3cb7d3a4d47f3ced87fb3bdcac5576cf5860fea005a"
+    },
+    "src/components/portalComics/ComicPages.jsx": {
+      "size": 1974,
+      "mtime_ns": 1791625539155054923,
+      "sha256": "05c7566424c5b0f42c0ad0e5838e850d1b724a03e8d8e675fac0bdd31bd8e53f"
+    },
+    "src/components/portalComics/config.js": {
+      "size": 1745,
+      "mtime_ns": 1791626938475538408,
+      "sha256": "95e496a74401967140cd05366738b6f55a0c83bcb2baaf6d26d072e599323823"
+    },
+    "src/components/portalComics/ComicPages.css": {
+      "size": 978,
+      "mtime_ns": 1791625972670335586,
+      "sha256": "f34f2434680a1a89119307bb9aef615c77853ff3cf03b3775fefcea3f02506f0"
+    },
+    "src/dev/earthMaterialEditor.js": {
+      "size": 2114,
+      "mtime_ns": 1790848841130176420,
+      "sha256": "3dff56ae37bc08188d05e217af43f0949cf1cbfe02af264954727b849b6394cf"
+    },
+    "src/dev/useEditableText.js": {
+      "size": 1610,
+      "mtime_ns": 1791617827755796083,
+      "sha256": "b55280b13180bd4bb72a1c4df8b3999089a68bd23b2a43c991ce946c3fddab91"
+    },
+    "src/dev/DevEditorLauncher.css": {
+      "size": 434,
+      "mtime_ns": 1790937972103333664,
+      "sha256": "bf0f99736522cc4dece4b99a1c4e7a9360a3cfe9d7f4fd15f3040271ad65863e"
+    },
+    "src/dev/LayoutEditor.jsx": {
+      "size": 21899,
+      "mtime_ns": 1791626578391338137,
+      "sha256": "2907355e3c07d410dd6682db62bf307144142b7cbd2debdac8002421dd5df2c4"
+    },
+    "src/dev/TextEditor.jsx": {
+      "size": 12155,
+      "mtime_ns": 1791092819647501773,
+      "sha256": "53f794064f107edeae5d2aab62b0e0fc048eeabb5e05fc763146bc6906051447"
+    },
+    "src/dev/textEditorStore.js": {
+      "size": 8511,
+      "mtime_ns": 1791618625645294541,
+      "sha256": "a751245e45a22806de6b157519decf056488767784053c1983daa38cee451df5"
+    },
+    "src/dev/modelMaterialEditorShader.js": {
+      "size": 6893,
+      "mtime_ns": 1790852403484770697,
+      "sha256": "c6c5b2e089d8946ff6c72ab419dfac57c1f9c94ee1cc26e4ff759513c03c86cb"
+    },
+    "src/dev/CurveTransition.css": {
+      "size": 404,
+      "mtime_ns": 1790905617058517590,
+      "sha256": "3fa7bc069ca0fda1a1557d35396c77d7f01aa798093f8de2f9e398fd5e398837"
+    },
+    "src/dev/ModelMaterialEditor.jsx": {
+      "size": 34048,
+      "mtime_ns": 1790937985469389611,
+      "sha256": "552a2588119235d9ac8819d5ed70a4db9ae89bf0824f528da061d75184bb1608"
+    },
+    "src/dev/CurveTest.jsx": {
+      "size": 1607,
+      "mtime_ns": 1790905669825603187,
+      "sha256": "4942df45e1b132faa0bb60a9e8e03ad16feed262dd69aa4f47f2685a44d152fd"
+    },
+    "src/dev/TextEditor.css": {
+      "size": 2750,
+      "mtime_ns": 1791089253116893303,
+      "sha256": "dc73a964c4273ca7d185619bffaecbe96710edae68a0bf11c36e8c637bd875fe"
+    },
+    "src/dev/CurveTest.css": {
+      "size": 1014,
+      "mtime_ns": 1790905617066977085,
+      "sha256": "58fc41c0997406e731ad96cb599a903dbd099491ae9e251d0b6f46b9ba30a8cf"
+    },
+    "src/dev/ModelMaterialEditor.css": {
+      "size": 4993,
+      "mtime_ns": 1791097560489914416,
+      "sha256": "0ec8ff35dbc91f0bf787d69325b2d486e477a9fc40c33f2f5a2fc156b8303837"
+    },
+    "src/dev/CurveTransition.jsx": {
+      "size": 2582,
+      "mtime_ns": 1790905617058059257,
+      "sha256": "f8f8fc3ebd0b1494d86f78c3e80a69a3a0678ee902345b6ede8d1016be83e819"
+    },
+    "src/dev/devEditorStore.js": {
+      "size": 1509,
+      "mtime_ns": 1791621714338749827,
+      "sha256": "a243588a0a74f49ce49c1b69dc5070a041eaa56128916637d8944f3750ed502a"
+    },
+    "src/dev/TextDraftLayer.jsx": {
+      "size": 1097,
+      "mtime_ns": 1791618625620856590,
+      "sha256": "1c83b44f977efc5c00737359fe369db989b7a163f89c1f8dc9e9446b876393fc"
+    },
+    "src/dev/DevEditorLauncher.jsx": {
+      "size": 878,
+      "mtime_ns": 1790938247279907844,
+      "sha256": "60ead92b627458f5c936ffdd3d7b253f3ca12a34d9ac99906888a4098b0c4afe"
+    },
+    "src/dev/LayoutEditor.css": {
+      "size": 2327,
+      "mtime_ns": 1791622314151062501,
+      "sha256": "9b9908bbb6a3560377311469bd227f136a622811feb3c1ff5561a751940022ca"
+    }
+  },
+  "asset_comparison": {
+    "checked": 132,
+    "missing": [],
+    "changed": []
+  },
+  "edition_git_repository": false,
+  "remote_main_observed": "c876f5c5a35990b2b81b9aa5a495dfe43acc7aa7",
+  "local_and_remote_have_common_ancestor": false,
+  "git_integration": "awaiting-user-confirmation",
+  "final_verification": {
+    "checked_at": "2026-10-11T04:56:08.825761+00:00",
+    "source_files_checked": 316,
+    "changed_files": [],
+    "head_unchanged": true,
+    "status_unchanged": true,
+    "refs_unchanged": true,
+    "remote_unchanged": true,
+    "build_passed": true,
+    "git_integrated": false,
+    "pushed": false,
+    "deployed": false
+  }
+}

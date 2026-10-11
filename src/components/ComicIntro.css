@@ -1,0 +1,215 @@
+.comic-intro {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  overflow: hidden;
+  min-height: 100dvh;
+  background: #fdf9ee;
+  cursor: pointer;
+}
+
+.comic-intro[aria-disabled="true"] {
+  cursor: default;
+}
+
+.story-narration {
+  position: absolute;
+  z-index: 130;
+  top: clamp(28px, 9%, 112px);
+  left: 50%;
+  width: min(calc(100% - 56px), 880px);
+  transform: translateX(-50%);
+  pointer-events: none;
+  color: #293e46;
+  font-family: var(--body);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.8;
+  letter-spacing: 0;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.story-narration-line {
+  margin: 0;
+  opacity: 0;
+  transition: opacity 240ms ease-in-out;
+}
+
+.story-narration-line[data-visible="true"] {
+  opacity: 1;
+}
+
+@media (max-height: 540px), (max-width: 600px) {
+  .story-narration {
+    top: 16px;
+    width: min(calc(100% - 48px), 720px);
+    font-size: 18px;
+    line-height: 1.65;
+  }
+}
+
+.story-stage [id^="storypage"].layout-editor-item,
+.story-stage #story-hanging .story-hanging-image,
+.story-stage #storysquare1.layout-editor-item,
+.story-stage #storysquare2.layout-editor-item,
+.story-stage #storysquare3.layout-editor-item,
+.story-stage #storysquare4.layout-editor-item,
+.story-stage #openbook.layout-editor-item {
+  transition: opacity 300ms ease-out;
+}
+
+.comic-intro[data-story-phase="fading"] .story-stage [id^="storypage"].layout-editor-item {
+  transition-duration: 260ms;
+}
+
+.story-stage #book-anime .story-book-animation {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+.comic-intro-decorations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.comic-intro-decorations img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.comic-intro-hanging {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  height: auto;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.comic-intro-book {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.comic-intro-book img {
+  display: block;
+  width: min(92vw, 1480px);
+  max-height: 70dvh;
+  object-fit: contain;
+}
+
+@keyframes story-square-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 var(--story-float-y); }
+}
+
+.story-stage #story-hanging.layout-editor-item .story-hanging-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  transform-origin: 50% 0%;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+
+.story-stage #storysquare1.layout-editor-item,
+.story-stage #storysquare2.layout-editor-item,
+.story-stage #storysquare3.layout-editor-item,
+.story-stage #storysquare4.layout-editor-item {
+  animation-name: story-square-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.story-stage #storysquare1.layout-editor-item {
+  --story-float-y: -8px;
+  animation-duration: 3.4s;
+  animation-delay: -0.2s;
+}
+
+.story-stage #storysquare2.layout-editor-item {
+  --story-float-y: -11px;
+  animation-duration: 4.1s;
+  animation-delay: -1.1s;
+}
+
+.story-stage #storysquare3.layout-editor-item {
+  --story-float-y: -7px;
+  animation-duration: 3.7s;
+  animation-delay: -1.8s;
+}
+
+.story-stage #storysquare4.layout-editor-item {
+  --story-float-y: -10px;
+  animation-duration: 4.6s;
+  animation-delay: -2.8s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-stage #storysquare1.layout-editor-item,
+  .story-stage #storysquare2.layout-editor-item,
+  .story-stage #storysquare3.layout-editor-item,
+  .story-stage #storysquare4.layout-editor-item {
+    animation: none;
+  }
+}
+
+.storybook-page-selector {
+  position: fixed;
+  z-index: 150;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  gap: 6px;
+}
+
+.storybook-page-selector button {
+  min-height: 34px;
+  padding: 7px 11px;
+  border: 1px solid #59656a;
+  border-radius: 4px;
+  color: #edf3f2;
+  background: #20292d;
+  font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  cursor: pointer;
+}
+
+.storybook-page-selector button[aria-pressed="true"] {
+  color: #20292d;
+  background: #edf3f2;
+}
+
+/* Reference artboard: narration on the left, illustrations and book on the right. */
+.story-reference-circle {
+  position: absolute;
+  left: calc(50% - 1920px * .44 * var(--story-scale));
+  top: calc(50% - 1080px * .32 * var(--story-scale));
+  width: calc(1920px * .42 * var(--story-scale));
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #fffef8;
+  pointer-events: none;
+  animation: home-arrive 900ms both;
+}
+
+.comic-intro .story-narration {
+  left: calc(50% - 1920px * .23 * var(--story-scale));
+  top: calc(50% - 1080px * .04 * var(--story-scale));
+  width: calc(1920px * .34 * var(--story-scale));
+  max-width: calc(1920px * .38 * var(--story-scale));
+}

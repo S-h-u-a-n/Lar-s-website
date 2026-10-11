@@ -1,0 +1,20 @@
+.curve-transition-overlay {
+  position: fixed;
+  z-index: 2147483647;
+  inset: 0;
+  pointer-events: none;
+}
+
+.curve-transition-overlay svg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh + 600px);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.curve-transition-overlay .curve-transition-shape {
+  fill: var(--curve-background, #FDF9EE) !important;
+}

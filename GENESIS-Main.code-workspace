@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "name": "The Wizard’s GENESIS — 主開發版本",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/dist": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "versions": true
+    }
+  }
+}

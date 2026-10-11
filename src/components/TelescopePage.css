@@ -1,0 +1,95 @@
+.telescope-page {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  overflow: hidden;
+  background: var(--ivory);
+}
+
+.telescope-page .layout-editor-stage {
+  z-index: 1 !important;
+}
+
+.telescope-page .layout-editor-item[data-layout-id="t-background"] {
+  object-fit: cover;
+}
+
+.telescope-page .layout-editor-item-with-overlay {
+  container-type: inline-size;
+}
+
+.telescope-page .layout-editor-item-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.telescope-page .layout-editor-item-overlay {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.telescope-mode-label {
+  position: absolute;
+  color: #fff;
+  font-size: 15cqw;
+  font-weight: 700;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.telescope-mode-label--map {
+  left: 49.24%;
+  top: 53.19%;
+}
+
+.telescope-mode-label--view {
+  left: 51.39%;
+  top: 44.26%;
+}
+
+/* Fills its layout item; x/y/width/z-index come from the LayoutEditor like every other item. */
+.telescope-map {
+  position: absolute;
+  inset: 0;
+}
+
+/* Transparent PNG pixels otherwise intercept map gestures too. */
+.telescope-page .layout-editor-stage:not(.is-open) .layout-editor-item {
+  pointer-events: none;
+}
+
+.telescope-page .layout-editor-stage:not(.is-open) .layout-editor-item[data-layout-id="map"] {
+  pointer-events: auto;
+  cursor: auto;
+}
+
+.telescope-page .layout-editor-stage:not(.is-open) .layout-editor-item[data-layout-id="t-button1"],
+.telescope-page .layout-editor-stage:not(.is-open) .layout-editor-item[data-layout-id="t-button2"] {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* While editing, the item wrapper receives drags instead of MapLibre. */
+.telescope-page .layout-editor-stage.is-open .telescope-map,
+.telescope-page .layout-editor-stage.is-open .telescope-map * {
+  pointer-events: none !important;
+}
+
+/* Native bottom-left control corner, shared by both modes above the PNG stack. */
+.telescope-attribution {
+  position: absolute;
+  z-index: 2;
+  left: 16px;
+  right: 80px; /* Leave room for the existing development editor launcher. */
+  bottom: 8px;
+  font: 12px/1.4 Helvetica, Arial, sans-serif;
+}
+
+.telescope-attribution:empty {
+  display: none;
+}

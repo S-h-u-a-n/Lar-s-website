@@ -1,0 +1,43 @@
+.globe-page {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  background: var(--ivory);
+}
+
+.globe-viewer-region {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.globe-viewer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.globe-viewer canvas { touch-action: none; }
+
+.globe-empty-region { display: none; }
+
+.globe-back {
+  position: absolute;
+  z-index: 2;
+  top: 28px;
+  left: 28px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: rgba(244, 240, 229, 0.86);
+  font: 20px var(--sans);
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+}
