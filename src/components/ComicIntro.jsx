@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './ComicIntro.css'
+import { alignBookAnimation, BOOK_ANIMATION_ORIGIN } from './storybookBookLayout'
 import { MOTION } from '../edition/config'
 import LayoutEditor from '../dev/LayoutEditor'
 import { useDevEditorState } from '../dev/devEditorStore'
-import { useEditableText } from '../dev/useEditableText'
-import { buildTextStyle } from '../dev/textEditorStore'
+import { usePersistedEditableText } from '../dev/useEditableText'
+import { buildTextStyle, enablePageTextPersistence, selectText } from '../dev/textEditorStore'
+import publishedTextConfigs from './storybookTextConfig.json'
 import openbook from '../../Art/storybook/openbook.PNG'
 import bookAnime from '../../Art/storybook/book-anime.PNG'
 import storyHanging from '../../Art/storybook/story-hanging.PNG'
@@ -116,18 +118,53 @@ function createStorybookItems() {
   })
 }
 
-function ComicIntro({ onContinue }) {
+function PublishedStoryLabel({ sourceTextId, config }) {
+  const defaults = useMemo(() => Object.fromEntries(Object.entries(config)
+    .filter(([key, value]) => value !== null && !['selector', 'coordinateSpace'].includes(key))), [config])
+  const editable = usePersistedEditableText({ id: `story-published-20261025-label-${sourceTextId}`,
+    label: `Storybook / Page label / ${sourceTextId}`, defaultValues: defaults })
+  const style = buildTextStyle({ type: 'registered', defaults, values: defaults, sourceDefaultKeys: Object.keys(defaults) })
+  return <span ref={editable.ref} {...editable.props} style={{ ...style, ...editable.props.style, whiteSpace: 'pre-wrap' }}>{editable.text ?? defaults.text}</span>
+}
+
+function ComicIntro({ onContinue, onReady }) {
   const storyHangingRef = useRef(null)
   const clickLockedRef = useRef(true)
   const bookBlobRef = useRef(null)
   const bookTimerRef = useRef(null)
   const { active } = useDevEditorState()
-  const storyText = useEditableText({ id: 'story-text', label: 'Storybook / story-text', defaultValues: STORY_TEXT_DEFAULTS })
+  useEffect(() => {
+    if (!import.meta.env.DEV) return enablePageTextPersistence('comic', 'story', { readOnly: true })
+  }, [])
   const [visibleStoryPage, setVisibleStoryPage] = useState(1)
   const [phase, setPhase] = useState('loading')
+  // Optional entry handoff; standalone/story navigation keeps its original flow.
+  useEffect(() => {
+    if (phase === 'entering' || phase === 'error') onReady?.()
+  }, [phase, onReady])
   const [revealedCount, setRevealedCount] = useState(0)
   const [entranceRevealedCount, setEntranceRevealedCount] = useState(0)
   const [narrationIndex, setNarrationIndex] = useState(0)
+  const sourceTextId = visibleStoryPage === 1 && narrationIndex === 0
+    ? 'story-text' : `story-text-page-${visibleStoryPage}-sentence-${narrationIndex + 1}`
+  const publishedSnapshot = publishedTextConfigs.find(config => config.registered[sourceTextId])
+  // Versioned runtime IDs preserve old browser drafts without letting them
+  // override this published revision. Future edits use the existing store.
+  const storyTextId = `story-published-20261025-${sourceTextId}`
+  const sentenceDefaults = useMemo(() => Object.fromEntries(Object.entries(
+    publishedSnapshot.registered[sourceTextId],
+  ).filter(([, value]) => value !== null)), [publishedSnapshot, sourceTextId])
+  const sentenceStyle = buildTextStyle({ type: 'registered', defaults: sentenceDefaults,
+    values: sentenceDefaults, sourceDefaultKeys: Object.keys(sentenceDefaults) })
+  const labelConfig = Object.entries(publishedSnapshot.registered).find(([id]) => id.startsWith('codex-comic-dom-'))[1]
+  const storyText = usePersistedEditableText({
+    id: storyTextId,
+    label: `Storybook / Page ${visibleStoryPage} / Sentence ${narrationIndex + 1}`,
+    defaultValues: sentenceDefaults,
+  })
+  useEffect(() => {
+    if (import.meta.env.DEV && active?.kind === 'text') selectText(storyTextId)
+  }, [storyTextId, active?.kind])
   const [bookPlaybackUrl, setBookPlaybackUrl] = useState(null)
   const [textScale, setTextScale] = useState(() => Math.min(window.innerWidth / STORYBOOK_STAGE.width, window.innerHeight / STORYBOOK_STAGE.height))
   const [initialItems] = useState(createStorybookItems)
@@ -278,12 +315,13 @@ function ComicIntro({ onContinue }) {
     }
   }, [])
 
+  const openbookLayout = items.find(item => item.id === 'openbook')
   const visibleItems = items.map(item => {
     const entranceIndex = STORY_ENTRANCE_ITEMS.indexOf(item.id)
     if (entranceIndex !== -1) return { ...item, opacity: entranceIndex < entranceRevealedCount ? 1 : 0 }
     const pageMatch = item.id.match(/^storypage(\d+)-(\d+)$/)
     if (pageMatch) return { ...item, opacity: visibleStoryPage === Number(pageMatch[1]) && Number(pageMatch[2]) <= revealedCount && phase !== 'fading' && phase !== 'turning' ? 1 : 0 }
-    if (item.id === 'book-anime') return { ...item, isNode: true }
+    if (item.id === 'book-anime') return { ...alignBookAnimation(item, openbookLayout, STORYBOOK_STAGE), isNode: true }
     return item
   })
   const canSelectItem = item => {
@@ -325,6 +363,7 @@ function ComicIntro({ onContinue }) {
   }
 
   function handleKeyDown(event) {
+    if (active?.kind === 'text' || event.target.closest('input, textarea, [contenteditable="true"], .text-editor-panel')) return
     if (event.target.closest('.layout-editor-panel, .storybook-page-selector') || document.querySelector('.layout-editor-stage.is-open')) return
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
@@ -335,6 +374,7 @@ function ComicIntro({ onContinue }) {
   return (
     <section
       className="comic-intro"
+      style={{ '--book-animation-origin': BOOK_ANIMATION_ORIGIN }}
       aria-label="Storybook introduction"
       aria-disabled={!canAdvance || clickLockedRef.current}
       aria-busy={!['ready', 'finished', 'error'].includes(phase)}
@@ -365,14 +405,15 @@ function ComicIntro({ onContinue }) {
           return null
         }}
       />
-      <div className="edition-story-page-label" aria-label={`故事第 ${visibleStoryPage} 頁，共 4 頁`}><span>THE GENESIS / 0{visibleStoryPage}</span><div>{[1,2,3,4].map(page=><i key={page} className={page===visibleStoryPage?'is-current':''}/>)}</div></div>
-      <div id="story-text" ref={storyText.ref} {...storyText.props} style={{ "--story-scale": textScale, ...STORY_TEXT_STYLE, ...storyText.props.style, fontSize: `calc(${storyText.props.style?.fontSize ?? STORY_TEXT_STYLE.fontSize} * ${textScale})` }} className="story-narration" aria-live="polite" aria-atomic="true">
+      <div className="edition-story-page-label" aria-label={`故事第 ${visibleStoryPage} 頁，共 4 頁`}><PublishedStoryLabel key={sourceTextId} sourceTextId={sourceTextId} config={labelConfig} /><div>{[1,2,3,4].map(page=><i key={page} className={page===visibleStoryPage?'is-current':''}/>)}</div></div>
+      <div id="story-text" ref={storyText.ref} {...storyText.props} style={{ "--story-scale": textScale, ...sentenceStyle, ...storyText.props.style, fontSize: `calc(${storyText.props.style?.fontSize ?? sentenceStyle.fontSize} * ${textScale})` }} className="story-narration" aria-live="polite" aria-atomic="true">
         <p
           className="story-narration-line"
           data-visible={isNarrationVisible}
           aria-hidden={!isNarrationVisible}
           onTransitionEnd={handleNarrationTransitionEnd}
-        >{narration[narrationIndex]}</p>
+          style={{ whiteSpace: 'pre-wrap' }}
+        >{storyText.text ?? sentenceDefaults.text}</p>
       </div>
       {import.meta.env.DEV && active?.kind === 'img' && <div className="storybook-page-selector" role="group" aria-label="Storybook page visibility" onClick={event => event.stopPropagation()}>
         {[1, 2, 3, 4].map(page => <button key={page} type="button" aria-pressed={visibleStoryPage === page} disabled={!['ready', 'finished'].includes(phase)} onClick={() => previewPage(page)}>Page {page}</button>)}

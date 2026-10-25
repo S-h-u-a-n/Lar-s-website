@@ -1,5 +1,7 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import './LayoutEditor.css'
+import { createPortal } from 'react-dom'
+import { localDragDelta, isEditorTargetVisible } from './editorCoordinates'
 import { useIsDevEditorActive, useRegisterDevEditor } from './devEditorStore'
 
 const HANDLE_CORNERS = ['nw', 'ne', 'sw', 'se']
@@ -9,8 +11,10 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value))
 const notifyEditing = active => window.dispatchEvent(new CustomEvent('layout-editor-editing', { detail: { active } }))
 const normalizeRotation = value => ((value + 180) % 360 + 360) % 360 - 180
 
-function LayoutEditor({ items, initialItems = items, onChange, referenceImage, draftKey, layoutId = 'layout', hoverEnabled = false, defaultHoverOffsetX = 56, onItemActivate, interactiveWhenClosed = false, renderGroupContent, renderItemOverlay, stage, renderNode, containerRef, stageBoundsRef, editorEnabled = true, canSelectItem = ALWAYS_SELECTABLE, migrateDraft = IDENTITY_DRAFT_MIGRATION }) {
+function LayoutEditor({ pageId, externalElements, items, initialItems = items, onChange, referenceImage, draftKey, layoutId = 'layout', hoverEnabled = false, defaultHoverOffsetX = 56, onItemActivate, interactiveWhenClosed = false, renderGroupContent, renderItemOverlay, stage, renderNode, containerRef, stageBoundsRef, editorEnabled = true, canSelectItem = ALWAYS_SELECTABLE, migrateDraft = IDENTITY_DRAFT_MIGRATION }) {
   const editorId = useId()
+  const draftDirty = useRef(false)
+  const [, refreshBounds] = useState(0)
   const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth)
   const [viewportHeight, setViewportHeight] = useState(() => window.innerHeight)
   // With `stage`, x/width are % of stage.width and y is % of stage.height; the whole stage is uniformly scaled to fit and centered.
@@ -20,6 +24,7 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
   useEffect(() => {
     if (!stageBoundsRef?.current) return
     const update = () => {
+      if (!stageBoundsRef.current) return
       const rect = stageBoundsRef.current.getBoundingClientRect()
       const padding = 24
       setStageBounds({ left: rect.left + padding, top: rect.top + padding, width: Math.max(1, rect.width - padding * 2), height: Math.max(1, rect.height - padding * 2) })
@@ -70,6 +75,10 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
     return () => { resize.disconnect(); mutations.disconnect() }
   }, [stageBoundsRef, stage?.width, stage?.height, items])
   const itemPosition = item => {
+    if (externalElements) {
+      const rect = externalElements.current.get(item.id)?.getBoundingClientRect()
+      return { left: rect?.left || 0, top: rect?.top || 0, width: rect?.width || 0 }
+    }
     if (containerRef) return { left: `${item.x}%`, top: `${item.y}%`, width: `${item.width}%` }
     if (!stage) return { left: `${item.x}vw`, top: `${item.y}vh`, width: `${item.width}vw` }
     if (item.coordinateSpace === 'viewport') return {
@@ -80,6 +89,7 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
     return { left: px(item.x, unitW, 'vw'), top: px(item.y, unitH, 'vh'), width: px(item.width, unitW, 'vw') }
   }
   const itemHeight = item => {
+    if (externalElements) return `${externalElements.current.get(item.id)?.getBoundingClientRect().height || 0}px`
     if (containerRef) {
       if (typeof item.height === 'number') return `${item.height}%`
       const width = item.width / 100 * (containerRect()?.width ?? 0)
@@ -94,6 +104,16 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
   }
   useRegisterDevEditor('img', editorId, editorEnabled)
   const isOpen = useIsDevEditorActive(editorId)
+  useEffect(() => {
+    if (!externalElements || !isOpen) return
+    let frame, last = 0
+    const refresh = now => {
+      if (now - last > 32) { last = now; refreshBounds(value => value + 1) }
+      frame = requestAnimationFrame(refresh)
+    }
+    frame = requestAnimationFrame(refresh)
+    return () => cancelAnimationFrame(frame)
+  }, [externalElements, isOpen])
   const [selectedId, setSelectedId] = useState(items[0]?.id)
   const [referenceVisible, setReferenceVisible] = useState(Boolean(referenceImage))
   const [referenceOpacity, setReferenceOpacity] = useState(0.3)
@@ -105,7 +125,7 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
   const itemRefs = useRef({})
   const panelRef = useRef(null)
   const panelDragRef = useRef(null)
-  const selectableItems = items.filter(canSelectItem)
+  const selectableItems = items.filter(canSelectItem).filter(item => !externalElements || isEditorTargetVisible(externalElements.current.get(item.id)))
   const selected = selectableItems.find(item => item.id === selectedId) || selectableItems[0]
 
   useEffect(() => {
@@ -119,7 +139,6 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
       try {
         const parsedItems = JSON.parse(draft)
         const savedItems = migrateDraft(parsedItems)
-        if (savedItems !== parsedItems) localStorage.setItem(`layout-editor:${draftKey}`, JSON.stringify(savedItems))
         const layoutFields = ['x', 'y', 'width', 'height', 'borderRadius', 'rotation', 'zIndex']
         const savedById = new Map(savedItems.map(item => [item.id, item]))
         onChange(items.map(item => {
@@ -130,19 +149,24 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
             return next
           }, { ...item })
         }))
-      } catch { localStorage.removeItem(`layout-editor:${draftKey}`) }
+      } catch (error) { console.warn(`[LayoutEditor] Draft preserved: ${draftKey}`, error) }
     }
     return undefined
   }, [draftKey, migrateDraft, onChange])
 
   useEffect(() => {
-    if (!import.meta.env.DEV || !draftKey || !isOpen) return
-    localStorage.setItem(`layout-editor:${draftKey}`, JSON.stringify(items.map(({ id, x, y, width, height, borderRadius, rotation, zIndex }) => ({
-      id, x, y, width,
-      ...(typeof height === 'number' ? { height } : {}),
-      ...(typeof borderRadius === 'number' ? { borderRadius } : {}),
-      rotation, zIndex,
-    }))))
+    if (!import.meta.env.DEV || !draftKey || !isOpen || !draftDirty.current) return
+    try {
+      const saved = JSON.parse(localStorage.getItem(`layout-editor:${draftKey}`) || '[]')
+      if (!Array.isArray(saved)) throw new Error('Unknown draft format')
+      const byId = new Map(saved.map(item => [item.id, item]))
+      for (const { id, x, y, width, height, borderRadius, rotation, zIndex } of items) byId.set(id, {
+        ...byId.get(id), id, x, y, width, rotation, zIndex,
+        ...(typeof height === 'number' ? {height} : {}), ...(typeof borderRadius === 'number' ? {borderRadius} : {}),
+      })
+      localStorage.setItem(`layout-editor:${draftKey}`, JSON.stringify([...byId.values()]))
+      draftDirty.current = false
+    } catch (error) { console.warn(`[LayoutEditor] Cannot save ${draftKey}; old draft preserved`, error) }
   }, [draftKey, isOpen, items])
 
   useEffect(() => () => notifyEditing(false), [])
@@ -159,7 +183,7 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
 
   const showEditor = import.meta.env.DEV && editorEnabled && isOpen
 
-  const updateSelected = patch => onChange(items.map(item => item.id === selectedId ? { ...item, ...patch } : item))
+  const updateSelected = patch => { draftDirty.current = true; onChange(items.map(item => item.id === selectedId ? { ...item, ...patch } : item)) }
   const beginPanelDrag = event => {
     if (event.target.closest('select, button, input, textarea')) return
     const rect = panelRef.current.getBoundingClientRect()
@@ -205,7 +229,10 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
     setDebug(current => ({ ...current, x: event.clientX, y: event.clientY }))
     const dx = event.clientX - interaction.start.x
     const dy = event.clientY - interaction.start.y
-    if (interaction.type === 'move') {
+    if (interaction.type === 'move' && externalElements) {
+      const delta = localDragDelta(externalElements.current.get(interaction.item.id), dx, dy)
+      updateSelected({ x: interaction.item.x + delta.x, y: interaction.item.y + delta.y })
+    } else if (interaction.type === 'move') {
       const viewportPositioned = stage && interaction.item.coordinateSpace === 'viewport'
       const bounds = containerRect()
       updateSelected({
@@ -217,7 +244,7 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
       const angle = Math.atan2(event.clientY - interaction.center.y, event.clientX - interaction.center.x)
       updateSelected({ rotation: interaction.item.rotation + (angle - interaction.angle) * 180 / Math.PI })
     } else {
-      updateSelected({ width: clamp(interaction.item.width * Math.max(0.2, Math.hypot(event.clientX - interaction.center.x, event.clientY - interaction.center.y) / Math.max(20, interaction.distance)), 4, 300) })
+      updateSelected({ width: clamp(interaction.item.width * Math.max(0.2, Math.hypot(event.clientX - interaction.center.x, event.clientY - interaction.center.y) / Math.max(20, interaction.distance)), 4, externalElements ? 4000 : 300) })
     }
   }
   const end = event => {
@@ -247,7 +274,7 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
     updateSelected(resetValues)
   }
   const copyConfig = async () => {
-    const config = JSON.stringify(items.map(({ id, x, y, width, rotation, zIndex }) => ({ id, x: Number(x.toFixed(2)), y: Number(y.toFixed(2)), width: Number(width.toFixed(2)), rotation: Number(rotation.toFixed(2)), zIndex })), null, 2)
+    const config = JSON.stringify((externalElements ? items.filter(item => item.width > 0 && item.height > 0) : items).map(({ id, selector, coordinateSpace: itemCoordinateSpace, x, y, width, height, borderRadius, rotation, zIndex }) => ({ id, ...(externalElements ? { changedFields: ['x','y','width','height','rotation','zIndex'].filter(field => ({x,y,width,height,rotation,zIndex})[field] !== initialItems.find(item => item.id === id)?.[field]) } : {}), pageId: pageId || document.querySelector('[data-edition-page]')?.dataset.editionPage, ...(selector ? { selector } : {}), ...(typeof height === 'number' ? { height } : {}), ...(typeof borderRadius === 'number' ? { borderRadius } : {}), layoutId, coordinateSpace: externalElements ? 'local-css-px-offset' : itemCoordinateSpace === 'viewport' ? 'viewport-percent' : stage ? 'stage-percent' : containerRef ? 'container-percent' : 'viewport-percent', x: Number(x.toFixed(2)), y: Number(y.toFixed(2)), width: Number(width.toFixed(2)), rotation: Number(rotation.toFixed(2)), zIndex })), null, 2)
     setCopiedConfig(config)
     try { await navigator.clipboard.writeText(config) } catch { /* textarea remains available */ }
   }
@@ -256,15 +283,15 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
   return (
     <>
       {showEditor && referenceImage && <img className="layout-editor-reference" src={referenceImage} alt="" style={{ opacity: referenceVisible ? referenceOpacity : 0 }} />}
-      <div className={`layout-editor-stage${containerRef ? ' layout-editor-stage--contained' : ''}${showEditor ? ' is-open' : ''}${hoverEnabled ? ' has-hover' : ''}${interactiveWhenClosed ? ' interactive-closed' : ''}`}>
+      <div className={`layout-editor-stage${externalElements ? ' layout-editor-stage--external' : ''}${containerRef ? ' layout-editor-stage--contained' : ''}${showEditor ? ' is-open' : ''}${hoverEnabled ? ' has-hover' : ''}${interactiveWhenClosed ? ' interactive-closed' : ''}`}>
         <div ref={stageBoxRef} className={`layout-editor-stage-box${stage?.className ? ` ${stage.className}` : ''}`} style={stage ? { visibility: stageBoundsRef && !stageBounds ? 'hidden' : undefined, position: 'absolute', left: 0, top: 0, width: `${stage.width}px`, height: `${stage.height}px`, transformOrigin: '0 0', transform: `translate(${stageOffsetX}px, ${stageOffsetY}px) scale(${stageScale})` } : { display: 'contents' }}>
-        {items.map(item => {
+        {(externalElements ? showEditor ? selectableItems : [] : items).map(item => {
           const selectable = canSelectItem(item)
           const isHovered = hoverEnabled && !showEditor && hoveredId === item.id
           const hoverOffsetX = item.hoverOffsetX ?? defaultHoverOffsetX
           const hoverRotation = clamp(normalizeRotation(item.rotation) * -0.08, -8, 8)
           const position = itemPosition(item)
-          if (item.isNode) return <div key={item.id} id={item.id} ref={element => { itemRefs.current[item.id] = element }} className={`layout-editor-item${showEditor && item.id === selectedId ? ' is-selected' : ''}`} data-layout-id={item.id} onPointerDown={showEditor && selectable ? event => { setSelectedId(item.id); beginDrag(event, 'move', item) } : undefined} style={{ ...position, height: typeof item.height === 'number' ? itemHeight(item) : 'auto', zIndex: item.zIndex, aspectRatio: item.ratio, borderRadius: typeof item.borderRadius === 'number' ? `${item.borderRadius}%` : undefined, pointerEvents: selectable ? undefined : 'none', transform: `rotate(${item.rotation}deg)` }}>{renderNode?.(item)}</div>
+          if (item.isNode) return <div key={item.id} id={item.id} ref={element => { itemRefs.current[item.id] = element }} className={`layout-editor-item${showEditor && item.id === selectedId ? ' is-selected' : ''}`} data-layout-id={item.id} onPointerDown={showEditor && selectable ? event => { setSelectedId(item.id); beginDrag(event, 'move', item) } : undefined} style={{ ...position, height: externalElements || typeof item.height === 'number' ? itemHeight(item) : 'auto', zIndex: item.zIndex, aspectRatio: item.ratio, borderRadius: typeof item.borderRadius === 'number' ? `${item.borderRadius}%` : undefined, pointerEvents: selectable ? undefined : 'none', transform: externalElements ? 'none' : `rotate(${item.rotation}deg)` }}>{renderNode?.(item)}</div>
           const itemProps = { id: item.id, ref: element => { itemRefs.current[item.id] = element }, className: `layout-editor-item${showEditor && item.id === selectedId ? ' is-selected' : ''}${isHovered ? ' is-hovered' : ''}`, 'data-layout-id': item.id, 'data-sequence-item-id': item.id, 'data-sequence-fading': item.sequenceFading && !item.groupId ? 'true' : undefined, onPointerEnter: selectable && hoverEnabled && !showEditor ? () => setHoveredId(item.id) : undefined, onPointerLeave: selectable && hoverEnabled && !showEditor ? () => setHoveredId(current => current === item.id ? null : current) : undefined, onClick: selectable && !showEditor && onItemActivate ? event => { event.stopPropagation(); onItemActivate(item.id) } : undefined, onPointerDown: showEditor && selectable ? event => { setSelectedId(item.id); beginDrag(event, 'move', item) } : undefined, style: { ...position, height: item.groupId ? '100%' : 'auto', zIndex: isHovered ? item.zIndex + 100 : item.zIndex, aspectRatio: item.ratio, opacity: item.groupId ? 1 : item.opacity ?? 1, pointerEvents: selectable ? undefined : 'none', transform: item.groupId ? 'none' : `translateX(${isHovered ? hoverOffsetX : 0}px) rotate(${isHovered ? item.rotation + hoverRotation : item.rotation}deg)` } }
           const overlay = renderItemOverlay?.(item)
           const image = overlay
@@ -281,11 +308,11 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
             })()
             : image
         })}
-        {showEditor && selected && <div className="layout-editor-selection" style={{ position: stage || containerRef ? 'absolute' : 'fixed', ...itemPosition(selected), height: itemHeight(selected), zIndex: 110, transform: `rotate(${selected.rotation}deg)` }}>{HANDLE_CORNERS.map(corner => <button key={corner} className={`layout-editor-handle handle-${corner}`} aria-label={`Resize ${corner}`} onPointerDown={event => beginDrag(event, `resize-${corner}`)} />)}<button className="layout-editor-rotate" aria-label="Rotate selected item" onPointerDown={event => beginDrag(event, 'rotate')} /><button className="layout-editor-handle" aria-label="Move selected item" style={{ top: '50%', left: '50%', cursor: 'move', borderRadius: '50%' }} onPointerDown={event => beginDrag(event, 'move')} /></div>}
+        {showEditor && selected && <div className="layout-editor-selection" style={{ position: stage || containerRef ? 'absolute' : 'fixed', ...itemPosition(selected), height: itemHeight(selected), zIndex: 110, transform: externalElements ? 'none' : `rotate(${selected.rotation}deg)` }}>{HANDLE_CORNERS.map(corner => <button key={corner} className={`layout-editor-handle handle-${corner}`} aria-label={`Resize ${corner}`} onPointerDown={event => beginDrag(event, `resize-${corner}`)} />)}<button className="layout-editor-rotate" aria-label="Rotate selected item" onPointerDown={event => beginDrag(event, 'rotate')} /><button className="layout-editor-handle" aria-label="Move selected item" style={{ top: '50%', left: '50%', cursor: 'move', borderRadius: '50%' }} onPointerDown={event => beginDrag(event, 'move')} /></div>}
         </div>
       </div>
       {showEditor && <>
-        <aside ref={panelRef} className="layout-editor-panel" style={panelPosition ? { left: panelPosition.left, top: panelPosition.top, right: 'auto' } : undefined}>
+        {createPortal(<aside ref={panelRef} className="layout-editor-panel" style={panelPosition ? { left: panelPosition.left, top: panelPosition.top, right: 'auto' } : undefined}>
           <header
             className="layout-editor-panel-header"
             onPointerDown={beginPanelDrag}
@@ -294,18 +321,18 @@ function LayoutEditor({ items, initialItems = items, onChange, referenceImage, d
             onPointerCancel={endPanelDrag}
             style={{ cursor: 'grab', touchAction: 'none', userSelect: 'none' }}
           >
-            <strong>Layout Editor</strong>
+            <strong>Layout Editor{externalElements ? ' · DOM' : ''}</strong>
           </header>
-          <div>Layout: {layoutId}</div>
+          <div>Layout: {layoutId}{externalElements ? ' · local px offsets' : ''}</div>
           <div className="layout-editor-debug">Editor: {showEditor ? 'ON' : 'OFF'}<br />Selected: {selected?.id || 'none'}<br />Action: {debug.action}<br />Pointer: {Math.round(debug.x)}, {Math.round(debug.y)}<br />Pointer captured: {debug.captured ? 'yes' : 'no'}</div>
-          <label>Selected<select value={selected?.id ?? ''} onChange={event => setSelectedId(event.target.value)}>{selectableItems.map(item => <option key={item.id}>{item.id}</option>)}</select></label>
+          <label>Selected<select value={selected?.id ?? ''} onChange={event => setSelectedId(event.target.value)}>{selectableItems.map(item => <option key={item.id} value={item.id}>{item.label || item.id}</option>)}</select></label>
           {[['X', 'x'], ['Y', 'y'], ['Width', 'width'], ...(typeof selected?.height === 'number' ? [['Height', 'height']] : []), ...(typeof selected?.borderRadius === 'number' ? [['Border Radius (%)', 'borderRadius']] : []), ['Rotation', 'rotation'], ['Z-index', 'zIndex']].map(([label, key]) => <label key={key}>{label}<input type="number" step={key === 'zIndex' ? 1 : 0.1} value={selected?.[key] ?? 0} onChange={event => updateSelected({ [key]: key === 'zIndex' ? Math.round(Number(event.target.value)) : Number(event.target.value) })} /></label>)}
           <div className="layout-editor-actions"><button onClick={() => updateSelected({ zIndex: selected.zIndex + 1 })}>Bring Forward</button><button onClick={() => updateSelected({ zIndex: Math.max(stage ? -99 : 1, selected.zIndex - 1) })}>Send Backward</button></div>
           <div className="layout-editor-actions"><button onClick={resetSelected}>Reset Selected</button><button onClick={copyConfig}>Copy Config</button></div>
           {referenceImage && <><label className="layout-editor-check"><input type="checkbox" checked={referenceVisible} onChange={event => setReferenceVisible(event.target.checked)} /> Reference ON / OFF</label><label>Reference opacity<input type="range" min="0" max="1" step="0.01" value={referenceOpacity} onChange={event => setReferenceOpacity(Number(event.target.value))} /></label></>}
-          <button onClick={clearDraft}>Clear Draft</button>
+          {draftKey && <button onClick={clearDraft}>Clear Draft</button>}
           {copiedConfig && <textarea readOnly value={copiedConfig} aria-label="Copied layout config" />}
-        </aside>
+        </aside>, document.body)}
       </>}
     </>
   )

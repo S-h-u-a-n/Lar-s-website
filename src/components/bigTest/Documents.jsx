@@ -20,7 +20,7 @@ function DocumentPanel({ document, active, onClose }) {
     return () => { window.removeEventListener('keydown', keydown); previousFocus.current?.focus?.({ preventScroll: true }) }
   }, [active, onClose])
   const crop = SQUARES.find(square => square.document === document.id)
-  return <section className={`big-test-document-overlay${active ? ' is-open' : ''}`} inert={!active} aria-hidden={!active}>
+  return <section data-dev-scope={import.meta.env.DEV ? `document-${document.id}` : undefined} className={`big-test-document-overlay${active ? ' is-open' : ''}`} inert={!active} aria-hidden={!active}>
     <div className="big-test-document-scrim" onClick={onClose} />
     <div className="big-test-document-panel" role="dialog" aria-modal="true" aria-labelledby={`big-test-document-title-${document.id}`}>
       <div className="big-test-document-cover"><AssetCrop src={squares} crop={crop} /><div className="big-test-document-dots" style={patternStyle(PANEL_PATTERN)} /></div>
@@ -46,7 +46,7 @@ export default function Documents({ onOpen }) {
       {DOCUMENT_ENTRANCES.map((entrance, index) => {
         const shape = GEOMETRY.find(item => item.id === entrance.shapeId)
         const document = DOCUMENTS.find(item => item.id === entrance.document)
-        return <button key={shape.id} type="button" className="big-test-square" data-document-entrance={document.id} style={{ left: `${shape.x / 20.48}%`, top: `${shape.y / 11.7}%`, width: `${shape.width / 20.48}%`, aspectRatio: '1 / 1', '--bt-rotation': `${shape.rotation ?? 0}deg`, zIndex: shape.z ?? 1 }} onClick={() => { onOpen?.(); setActiveId(document.id) }}>
+        return <button key={shape.id} type="button" className="big-test-square" data-dev-scope={import.meta.env.DEV ? `document-entrance-${document.id}` : undefined} data-document-entrance={document.id} style={{ left: `${shape.x / 20.48}%`, top: `${shape.y / 11.7}%`, width: `${shape.width / 20.48}%`, aspectRatio: '1 / 1', '--bt-rotation': `${shape.rotation ?? 0}deg`, zIndex: shape.z ?? 1 }} onClick={() => { onOpen?.(); setActiveId(document.id) }}>
           <span className="big-test-label-animation big-test-float" style={documentFloatingStyle(index)}><span className="big-test-square-label"><EditableText id={entrance.textId}>{document.name}</EditableText></span></span>
         </button>
       })}

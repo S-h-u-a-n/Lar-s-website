@@ -12,7 +12,7 @@ const INTERACTION_DEFINITIONS = [
   { id: 'hourglass', type: 'object', match: { kind: 'exact', value: 'hourglass' } },
   { id: 'magglass', type: 'object', match: { kind: 'exact', value: 'magglass' } },
   { id: 'mug', type: 'object', match: { kind: 'exact', value: 'mug' } },
-  { id: 'potion', type: 'object', match: { kind: 'prefix', value: 'potion-' } },
+  { id: 'potion', type: 'portal', destination: 'bottled-weather', match: { kind: 'prefix', value: 'potion-' } },
 ]
 
 function matchesDefinition(object, definition) {

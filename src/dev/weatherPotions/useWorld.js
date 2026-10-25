@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { RULES } from './config.js'
-import { createWorld, setInput, snapshotWorld, stepWorld, stopInput, WORLD_VERSION } from './simulation.js'
+import { paintStroke } from './fallingSand/brush.js'
+import { RULES } from './fallingSand/config.js'
+import { createWorld, setInput, snapshotWorld, stepWorld, stopInput, WORLD_VERSION } from './fallingSand/simulation.js'
 
 export default function useWorld() {
   const model = useRef(null)
@@ -49,6 +50,7 @@ export default function useWorld() {
     if (previous !== model.current.input?.type) setSnapshot(snapshotWorld(model.current))
     run()
   }, [run])
+  const paint = useCallback((type,from,to,strength,tap=false,size=RULES.defaultBrush) => { paintStroke(model.current,type,from,to,strength,tap,size);run() }, [run])
   const stop = useCallback(() => { stopInput(model.current); setSnapshot(snapshotWorld(model.current)) }, [])
   const reset = useCallback(() => {
     stopInput(model.current)
@@ -58,5 +60,5 @@ export default function useWorld() {
     renderer.current?.()
     run()
   }, [run])
-  return { model, snapshot, renderer, start, stop, reset }
+  return { model, snapshot, renderer, start, paint, stop, reset }
 }

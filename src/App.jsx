@@ -1,6 +1,6 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import ComicIntro from './components/ComicIntro'
-import IntroScreen from './components/IntroScreen'
+import HistoryEntrance from './dev/history/HistoryTest'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import ExploreSection from './components/ExploreSection'
@@ -14,8 +14,7 @@ import EditionChrome from './edition/EditionChrome'
 import useParallax from './edition/useParallax'
 import { TOOLS } from './edition/config'
 import { PIGMENTS, PAGE_PIGMENTS } from './edition/palette'
-import DevEditorLauncher from './dev/DevEditorLauncher'
-import TextEditor from './dev/TextEditor'
+const PageEditors = import.meta.env.DEV ? lazy(() => import('./dev/PageEditors')) : null
 import TextDraftLayer from './dev/TextDraftLayer'
 import { BIG_INTRODUCTION_PAGES } from './components/bigIntroductionPages'
 import { getPortalDestination, PORTAL_DESTINATIONS } from './components/portalDestinations'
@@ -24,7 +23,7 @@ import { pickReturnTransition, PORTAL_COMICS } from './components/portalComics/c
 import { COMIC_PAGES, PortalPageArrival } from './components/portalComics/ComicPages'
 
 const HOME_FADE_ANIMATION = 'home-page-arrive'
-const getTextPageId = screen => screen === 'scene' ? 'big-test' : screen === PORTAL_DESTINATIONS.globe ? 'globe-test' : screen === PORTAL_DESTINATIONS.telescope ? 'telescope-test' : screen
+const getTextPageId = screen => screen === 'transitioning' ? 'intro' : screen === 'scene' ? 'big-test' : screen === PORTAL_DESTINATIONS.globe ? 'globe-test' : screen === PORTAL_DESTINATIONS.telescope ? 'telescope-test' : screen
 const BallTest = lazy(() => import('./components/ballTest/BallTest'))
 const isBallTestSession = import.meta.env.DEV && new URLSearchParams(window.location.search).get('dev') === 'ball-test'
 const HumanTest = lazy(() => import('./components/humanTest/HumanTest'))
@@ -35,16 +34,21 @@ const TelescopeTest = lazy(() => import('./components/telescopeTest/TelescopeTes
 const isTelescopeTestSession = import.meta.env.DEV && new URLSearchParams(window.location.search).get('dev') === 'telescope-test'
 const GlobeTest = lazy(() => import('./components/globeTest/GlobeTest'))
 const isGlobeTestSession = import.meta.env.DEV && new URLSearchParams(window.location.search).get('dev') === 'globe-test'
+const loadWeatherPage = () => import('./components/weather/WeatherPage')
+const WeatherPage = lazy(loadWeatherPage)
 const BigTest = lazy(() => import('./components/bigTest/BigTest'))
 const isBigTestSession = import.meta.env.DEV && new URLSearchParams(window.location.search).get('dev') === 'big-test'
 
-const EDITION_ROUTES = { main: 'home', lab: 'scene', globe: 'globe', telescope: 'telescope', natural: 'natural-test', human: 'human-test', favorites: 'ball-test', story: 'comic', 't-comic': 't-comic' }
+const EDITION_ROUTES = { weather: 'bottled-weather', 'bottled-weather': 'bottled-weather', main: 'home', lab: 'scene', globe: 'globe', telescope: 'telescope', natural: 'natural-test', human: 'human-test', favorites: 'ball-test', story: 'comic', 't-comic': 't-comic' }
 
 function App() {
   useParallax()
+  useEffect(() => { loadWeatherPage().catch(error => console.error('Bottled Weather preload failed', error)) }, [])
   const [homeRevealed, setHomeRevealed] = useState(false)
   const [indexSignal, setIndexSignal] = useState(0)
   const [sceneReady,setSceneReady] = useState(false)
+  const sceneSettledRef = useRef(false)
+  const portalArrivalReady = useRef(false)
   const pendingScreen = useRef('home')
   const visitedRef = useRef([])
   const [screenState, setScreenState] = useState(() => (
@@ -70,17 +74,28 @@ function App() {
   useEffect(() => () => window.clearTimeout(transitionTimer.current), [])
 
   useEffect(() => {
-    const config = Object.values(PORTAL_COMICS).find(item => item.screen === (portalReveal?.destination || screenState))
+    const config = Object.values(PORTAL_COMICS).find(item => item.screen === (portalReveal?.destination || screenState) || item.destination === (portalReveal?.destination || screenState))
     if (config) { const image = new Image(); image.src = config.icon }
   }, [portalReveal?.destination, screenState])
+
+  const [introDeparting, setIntroDeparting] = useState(false)
 
   function beginComicTransition() {
     if (screenState !== 'intro') return
     setScreenState('transitioning')
+  }
+
+  // Keep the panorama opaque until ComicIntro has decoded its existing artwork.
+  // Reuse the App-owned 900ms entry transition, then release the old screen.
+  const handleIntroDestinationReady = useCallback(() => {
+    if (screenState !== 'transitioning') return
+    setIntroDeparting(true)
+    window.clearTimeout(transitionTimer.current)
     transitionTimer.current = window.setTimeout(() => {
       setScreenState('comic')
+      setIntroDeparting(false)
     }, 900)
-  }
+  }, [screenState])
 
   function beginComicHomeTransition() {
     if (screenState !== 'comic' || comicHomeLocked.current) return
@@ -152,16 +167,17 @@ function App() {
   const isPortalComicScreen = Boolean(COMIC_PAGES[screenState])
   const devPageId = getTextPageId(screenState)
   const isSceneVisible = screenState === 'scene' || screenState === 'big-test'
-  useEffect(()=>{if(!isSceneVisible)setSceneReady(false)},[isSceneVisible])
+  useEffect(()=>{if(!isSceneVisible){sceneSettledRef.current=false;setSceneReady(false)}},[isSceneVisible])
   const isGlobeVisible = screenState === PORTAL_DESTINATIONS.globe
   const isTelescopeVisible = screenState === PORTAL_DESTINATIONS.telescope
-  const isPortalPlaceholderVisible = Object.values(PORTAL_DESTINATIONS).includes(screenState) && !isGlobeVisible && !isTelescopeVisible
+  const isWeatherVisible = screenState === PORTAL_DESTINATIONS.potion
+  const isPortalPlaceholderVisible = Object.values(PORTAL_DESTINATIONS).includes(screenState) && !isGlobeVisible && !isTelescopeVisible && !isWeatherVisible
   const isGlobeTestVisible = screenState === 'globe-test'
   const isTelescopeTestVisible = screenState === 'telescope-test'
   const isBallTestVisible = screenState === 'ball-test'
   const isHumanTestVisible = screenState === 'human-test'
   const isNaturalTestVisible = screenState === 'natural-test'
-  const isPortalPageVisible = isBallTestVisible || isHumanTestVisible || isNaturalTestVisible || isTelescopeTestVisible || isGlobeTestVisible || isGlobeVisible || isTelescopeVisible || isPortalPlaceholderVisible
+  const isPortalPageVisible = isWeatherVisible || isBallTestVisible || isHumanTestVisible || isNaturalTestVisible || isTelescopeTestVisible || isGlobeTestVisible || isGlobeVisible || isTelescopeVisible || isPortalPlaceholderVisible
   const activePortalRevealDestination = portalReveal?.destination || (isTComicScreen || isPortalComicScreen ? screenState : null)
 
   function enterMainScene(event) {
@@ -169,25 +185,31 @@ function App() {
     setScreenState(isBigTestSession ? 'big-test' : 'scene')
   }
 
-  function openPortal(portalId, revealOrigin) {
+  async function openPortal(portalId, revealOrigin) {
     const comic = PORTAL_COMICS[portalId]
     const destination = comic && (comic.panels?.length === 0 || visitedRef.current.includes(portalId)) ? comic.destination : comic?.screen || getPortalDestination(portalId)
     if (!destination || portalRevealLocked.current || portalCurveRef.current || comicHomePhaseRef.current !== 'idle') return
     portalRevealLocked.current = true
+    // Resolve this lazy page and its CSS before starting the existing reveal.
+    if (portalId === 'potion') {
+      try { await loadWeatherPage() } catch (error) { portalRevealLocked.current = false; console.error(error); return }
+    }
     setReturnedFromEntrance(null)
     setActivePortalInteractionId(portalId)
     setIsBigIntroductionOpen(false)
     setPortalReveal({
       destination,
       origin: revealOrigin || getViewportCenter(),
+      ready: portalId !== 'potion',
     })
   }
 
   function returnFromPortal(portalId) {
-    if (portalCurveRef.current) return
+    if (portalCurveRef.current || comicHomePhaseRef.current !== 'idle' || (portalReveal && screenState !== portalReveal.destination)) return
     if ((isPortalPageVisible || isTComicScreen || isPortalComicScreen) && PORTAL_COMICS[portalId]) {
       const next = { portalId, phase: 'covering', returning: true, markVisited: isPortalPageVisible, theme: pickReturnTransition(portalId) }
       portalCurveRef.current = next
+      portalArrivalReady.current = false
       setPortalCurve(next)
       portalRevealLocked.current = true
       return
@@ -196,6 +218,8 @@ function App() {
   }
 
   function completePortalReturn(portalId, markVisited = true) {
+    sceneSettledRef.current = false
+    setSceneReady(false)
     portalRevealLocked.current = false
     setPortalReveal(null)
     setReturnedFromEntrance(portalId)
@@ -255,6 +279,7 @@ function App() {
     if (portalCurveRef.current || screenState !== PORTAL_COMICS[portalId]?.screen) return
     const next = { portalId, phase: 'covering' }
     portalCurveRef.current = next
+    portalArrivalReady.current = false
     setPortalCurve(next)
   }
 
@@ -264,6 +289,7 @@ function App() {
     if (phase === 'covering') {
       const next = { ...current, phase: 'covered' }
       portalCurveRef.current = next
+      portalArrivalReady.current = false
       setPortalCurve(next)
       setPortalReveal(null)
       if (current.returning) completePortalReturn(current.portalId, current.markVisited)
@@ -276,8 +302,14 @@ function App() {
   }
 
   function revealPortalDestination() {
+    portalArrivalReady.current = true
+    tryRevealPortalDestination()
+  }
+
+  function tryRevealPortalDestination() {
     const current = portalCurveRef.current
-    if (current?.phase !== 'covered') return
+    // The shared paper curtain stays shut for both arrival animation and GLB.
+    if (current?.phase !== 'covered' || !portalArrivalReady.current || (current.returning && !sceneSettledRef.current)) return
     const next = { ...current, phase: 'revealing' }
     portalCurveRef.current = next
     setPortalCurve(next)
@@ -293,14 +325,25 @@ function App() {
   }
 
   function handlePortalRevealComplete() {
-    if (!portalRevealLocked.current || !portalReveal) return
+    if (!portalRevealLocked.current || !portalReveal || !portalReveal.ready || portalCurveRef.current) return
     setScreenState(portalReveal.destination)
   }
 
+  function handleWeatherReady() {
+    setPortalReveal(current => current?.destination === PORTAL_DESTINATIONS.potion && !current.ready ? {...current,ready:true} : current)
+  }
+
+  function handleSceneResourceStatus(status) {
+    sceneSettledRef.current = status === 'ready' || status === 'error'
+    setSceneReady(status === 'ready')
+    if(sceneSettledRef.current)tryRevealPortalDestination()
+  }
+
   function renderPortalDestination(destination) {
+    if (destination === PORTAL_DESTINATIONS.potion) return <WeatherPage onReady={handleWeatherReady} onBack={() => returnFromPortal('potion')} onHome={() => editionNavigate('home')} />
     if (destination === 'ball-test') return <BallTest onBack={() => returnFromPortal('ball')} />
-    if (destination === 'human-test') return <HumanTest onBack={() => returnFromPortal('book-close1')} />
-    if (destination === 'natural-test') return <NaturalTest onBack={() => returnFromPortal('book-open1')} />
+    if (destination === 'human-test') return <HumanTest entranceReady={!portalCurve && (!portalReveal || screenState === portalReveal.destination)} onBack={() => returnFromPortal('book-close1')} />
+    if (destination === 'natural-test') return <NaturalTest entranceReady={!portalCurve && (!portalReveal || screenState === portalReveal.destination)} onBack={() => returnFromPortal('book-open1')} />
     const ComicPage = COMIC_PAGES[destination]
     if (ComicPage) {
       const portalId = Object.keys(PORTAL_COMICS).find(id => PORTAL_COMICS[id].screen === destination)
@@ -316,7 +359,9 @@ function App() {
     return <PortalPlaceholderPage onBack={() => returnFromPortal(destination)} />
   }
 
-  function renderPageEditors() { return null }
+  function renderPageEditors(pageId) {
+    return <Suspense fallback={null}><PageEditors pageId={pageId} busy={comicHomePhase !== 'idle' || Boolean(portalCurve) || Boolean(portalReveal && screenState !== portalReveal.destination)} /></Suspense>
+  }
 
   function returnToMainPage() { editionNavigate('home') }
 
@@ -328,19 +373,19 @@ function App() {
         <CircularReveal
           origin={portalReveal?.origin}
           isRevealing={Boolean(portalReveal) && screenState !== portalReveal.destination}
+          ready={portalReveal?.ready !== false}
           onRevealComplete={handlePortalRevealComplete}
         >
           <Suspense fallback={null}>{renderPortalDestination(activePortalRevealDestination)}</Suspense>
-          {import.meta.env.DEV && renderPageEditors(getTextPageId(activePortalRevealDestination))}
           {!import.meta.env.DEV && activePortalRevealDestination !== 't-comic' && <TextDraftLayer pageId={getTextPageId(activePortalRevealDestination)} />}
         </CircularReveal>
       )}
-      {(screenState === 'intro' || screenState === 'transitioning') && <IntroScreen onEnter={beginComicTransition} onExplore={() => editionNavigate('scene')} />}
-      {screenState === 'comic' && <ComicIntro onContinue={beginComicHomeTransition} />}
+      {(screenState === 'intro' || screenState === 'transitioning') && <HistoryEntrance onEnter={beginComicTransition} disabled={screenState === 'transitioning'} leaving={introDeparting} />}
+      {(screenState === 'comic' || screenState === 'transitioning') && <div inert={screenState === 'transitioning' ? true : undefined}><ComicIntro onContinue={beginComicHomeTransition} onReady={handleIntroDestinationReady} /></div>}
           {!portalReveal && isPortalPageVisible && <Suspense fallback={null}>
             <PortalPageArrival animate={Boolean(portalCurve) && portalCurve.phase !== 'covering'} onReady={revealPortalDestination}>{renderPortalDestination(screenState === 'globe-test' ? 'globe' : screenState === 'telescope-test' ? 'telescope' : screenState)}</PortalPageArrival>
           </Suspense>}
-          {isSceneVisible && <Suspense fallback={null}><PortalPageArrival animate={Boolean(portalCurve) && portalCurve.phase !== 'covering'} onReady={revealPortalDestination}><BigTest onResourceStatus={status=>setSceneReady(status==='ready')} onBack={returnToMainPage} returnedFromEntrance={returnedFromEntrance} onPortalSelect={openPortal} onOpenIntroduction={openBigIntroduction} onCloseIntroduction={closeBigIntroduction} visitedBigPortals={visitedBigPortals} hasBigIntroduction={hasBigIntroduction} /></PortalPageArrival></Suspense>}
+          {isSceneVisible && <Suspense fallback={null}><PortalPageArrival animate={Boolean(portalCurve) && portalCurve.phase !== 'covering'} onReady={revealPortalDestination}><BigTest onResourceStatus={handleSceneResourceStatus} onBack={returnToMainPage} returnedFromEntrance={returnedFromEntrance} onPortalSelect={openPortal} onOpenIntroduction={openBigIntroduction} onCloseIntroduction={closeBigIntroduction} visitedBigPortals={visitedBigPortals} hasBigIntroduction={hasBigIntroduction} /></PortalPageArrival></Suspense>}
       {!isSceneVisible && !isPortalPageVisible && !isTComicScreen && !isPortalComicScreen && <>
         <Header onHome={() => { setHomeRevealed(true); window.scrollTo({top:0,behavior:'smooth'}) }} onExplore={() => editionNavigate('scene')} onStory={() => editionNavigate('comic')} onIndex={() => {setHomeRevealed(true);setIndexSignal(v=>v+1)}} />
         <main
@@ -375,6 +420,7 @@ function App() {
       />
       <CurveTransition phase={portalCurve?.phase || 'idle'} theme={portalCurve ? portalCurve.theme || PORTAL_COMICS[portalCurve.portalId] : undefined} onAnimationComplete={handlePortalCurveComplete} />
       {!import.meta.env.DEV && !portalReveal && isPortalPageVisible && <TextDraftLayer pageId={devPageId} />}
+      {import.meta.env.DEV && renderPageEditors(getTextPageId(activePortalRevealDestination || screenState))}
       <EditionChrome sceneReady={sceneReady} screen={screenState} onNavigate={editionNavigate} onTool={editionTool} visited={visitedBigPortals} openSignal={indexSignal} paperOpen={isBigIntroductionOpen && isSceneVisible} onClosePaper={() => {closeBigIntroduction(); window.dispatchEvent(new CustomEvent('edition-reset-view'))}} busy={comicHomePhase !== 'idle' || Boolean(portalCurve) || Boolean(portalReveal && screenState !== portalReveal.destination)} />
     </>
   )

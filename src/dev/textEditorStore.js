@@ -4,6 +4,9 @@ import { useSyncExternalStore } from 'react'
 let state = { mounted: [], selectedId: null, data: {} }
 const elements = new Map()
 const listeners = new Set()
+let editVersion = 0
+const edits = new Map()
+const markEdited = ids => { editVersion += 1; ids.forEach(id => edits.set(id, { version: editVersion, entry: state.data[id] })) }
 
 const setState = next => {
   state = next
@@ -16,6 +19,7 @@ const subscribe = listener => {
 const getState = () => state
 
 export const useTextEditorState = () => useSyncExternalStore(subscribe, getState)
+export const getTextEntry = id => state.data[id]
 export const getTextElement = id => elements.get(id)
 export const getTextCoordinateSpace = id => state.data[id]?.coordinateSpace
 
@@ -58,6 +62,8 @@ function captureDefaults(element) {
   }
 }
 
+const inferPageId = id => id.startsWith('t-dialog-') ? 't-comic' : ['big-test','globe-test','telescope-test','natural-test','human-test','ball-test','t-comic','intro','home'].find(page => id.startsWith(`${page}-`)) || (id.startsWith('main-') || id.startsWith('home-') ? 'home' : id.startsWith('story') ? 'comic' : undefined)
+
 export function registerText(id, label, element, type = 'registered', options = {}) {
   if (!element) return
   elements.set(id, element)
@@ -67,14 +73,16 @@ export function registerText(id, label, element, type = 'registered', options = 
   setState({
     mounted: state.mounted.includes(id) ? state.mounted : [...state.mounted, id],
     selectedId: state.selectedId ?? id,
-    data: { ...state.data, [id]: { ...existing, type: existing?.type ?? type, label, coordinateSpace: existing?.coordinateSpace ?? options.coordinateSpace, sourceDefaultKeys, defaults, values: existing?.values ?? { ...defaults } } },
+    data: { ...state.data, [id]: { ...existing, type: existing?.type ?? type, label, selector: options.selector ?? existing?.selector, pageId: options.pageId ?? existing?.pageId ?? inferPageId(id), coordinateSpace: existing?.coordinateSpace ?? options.coordinateSpace, sourceDefaultKeys, defaults, values: existing?.values ?? { ...defaults } } },
   })
 }
 
 export function unregisterText(id) {
   elements.delete(id)
   const mounted = state.mounted.filter(mountedId => mountedId !== id)
-  setState({ ...state, mounted, selectedId: state.selectedId === id ? mounted[0] ?? null : state.selectedId })
+  // StrictMode briefly unregisters new draft nodes; preserve the selection
+  // until they remount. TextEditor already falls back for an absent element.
+  setState({ ...state, mounted, selectedId: state.selectedId })
 }
 
 export const selectText = id => setState({ ...state, selectedId: id })
@@ -82,10 +90,12 @@ export const selectText = id => setState({ ...state, selectedId: id })
 export function updateText(id, patch) {
   const entry = state.data[id]
   if (!entry) return
+  markEdited([id])
   setState({ ...state, data: { ...state.data, [id]: { ...entry, values: { ...entry.values, ...patch } } } })
 }
 
 export function resetTexts(ids) {
+  markEdited(ids)
   const data = { ...state.data }
   ids.forEach(id => { if (data[id]) data[id] = { ...data[id], values: { ...data[id].defaults } } })
   setState({ ...state, data })
@@ -95,38 +105,61 @@ export const getMountedTextIds = () => state.mounted
 export const getTextValues = id => state.data[id]?.values
 
 // Page-scoped persistence. Production defaults to restoring without storage writes.
-export function enablePageTextPersistence(pageId, prefix, { readOnly = true } = {}) {
+export function enablePageTextPersistence(pageId, prefix, { readOnly = !import.meta.env.DEV } = {}) {
   const storageKey = `genesis:text-editor:${pageId}:v1`
-  const belongs = (id, entry) => id.startsWith(prefix) || (entry.type === 'draft' && entry.pageId === pageId)
+  const prefixes = [prefix, ...(pageId === 'home' ? ['home-','main-'] : pageId === 't-comic' ? ['t-dialog-'] : [])]
+  const belongs = (id, entry) => prefixes.some(value => id.startsWith(value)) || (entry?.type === 'draft' && entry.pageId === pageId)
   try {
     const saved = JSON.parse(localStorage.getItem(storageKey) || '{}')
     const data = { ...state.data }
     Object.entries(saved).forEach(([id, entry]) => {
       if (!entry || !belongs(id, entry) || !entry.values || !entry.defaults) return
-      data[id] = data[id] ? { ...data[id], values: { ...data[id].defaults, ...entry.values } } : entry
-      if (entry.type === 'draft') draftCounter = Math.max(draftCounter, Number(id.replace('draft-text-', '')) || 0)
+      // Legacy IDs were global counters. Namespace them in memory so opening
+      // another page cannot replace a draft with the same historical ID.
+      const runtimeId = entry.type === 'draft' && /^draft-text-\d+$/.test(id) ? `draft-text-${pageId}-legacy-${id.slice(11)}` : id
+      const restored = runtimeId === id ? entry : { ...entry, originalId: id }
+      data[runtimeId] = data[runtimeId] ? { ...data[runtimeId], values: { ...data[runtimeId].defaults, ...entry.values } } : restored
+      if (entry.type === 'draft') draftCounter = Math.max(draftCounter, Number(id.match(/(\d+)$/)?.[1]) || 0)
     })
     setState({ ...state, data })
   } catch (error) { console.warn(`[TextEditor] Could not restore ${pageId}`, error) }
   if (readOnly) return () => {}
+  let lastSavedVersion = editVersion
   const save = () => {
-    try { localStorage.setItem(storageKey, JSON.stringify(Object.fromEntries(Object.entries(state.data).filter(([id, entry]) => belongs(id, entry))))) }
+    const changed = [...edits].some(([id, edit]) => edit.version > lastSavedVersion && belongs(id, edit.entry))
+    if (!changed) return
+    lastSavedVersion = editVersion
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '{}')
+      if (!saved || typeof saved !== 'object' || Array.isArray(saved)) throw new Error('Unknown draft format')
+      const current = Object.fromEntries(Object.entries(state.data).filter(([id, entry]) => belongs(id, entry)).map(([id, entry]) => [entry.originalId || id, entry]))
+      for (const [id, entry] of Object.entries(saved)) if (entry?.type === 'draft' && belongs(id, entry) && !state.data[id]) delete saved[id]
+      localStorage.setItem(storageKey, JSON.stringify({ ...saved, ...current }))
+    }
     catch (error) { console.warn(`[TextEditor] Could not save ${pageId}`, error) }
   }
-  save()
+  // Write only after a store change; mounting a page never replaces its saved draft.
   return subscribe(save)
 }
+
+export const textBelongsToPage = (id, pageId) => {
+  const entry = state.data[id]
+  if (entry?.pageId) return entry.pageId === pageId
+  if (entry?.type === 'draft') return false
+  return id.startsWith(`${pageId}-`) || (pageId === 'home' && id.startsWith('main-')) || (pageId === 'comic' && id.startsWith('story'))
+}
+export const getPageTextIds = pageId => state.mounted.filter(id => textBelongsToPage(id, pageId))
 
 export const getTextConfig = pageId => ({
   pageId,
   draftOrigin: 'draft x/y are px offsets of the element top-left from the viewport center (left: 50%, top: 50%)',
-  registered: Object.fromEntries(state.mounted.filter(id => state.data[id].type === 'registered').map(id => {
+  registered: Object.fromEntries(getPageTextIds(pageId).filter(id => state.data[id].type === 'registered').map(id => {
     const entry = state.data[id]
-    return [id, entry.coordinateSpace ? { ...entry.values, coordinateSpace: entry.coordinateSpace } : entry.values]
+    return [id, { ...entry.values, ...(entry.coordinateSpace ? { coordinateSpace: entry.coordinateSpace } : {}), ...(entry.selector ? { selector: entry.selector } : {}) }]
   })),
   draft: Object.entries(state.data)
     .filter(([, entry]) => entry.type === 'draft' && entry.pageId === pageId)
-    .map(([id, entry]) => ({ id, ...entry.values })),
+    .map(([id, entry]) => ({ id, ...(entry.originalId ? { originalId: entry.originalId } : {}), ...entry.values })),
 })
 
 let draftCounter = 0
@@ -134,7 +167,7 @@ let draftCounter = 0
 // Draft texts live only in this store; x/y are offsets from the viewport center.
 export function addDraft(pageId, source) {
   draftCounter += 1
-  const id = `draft-text-${draftCounter}`
+  const id = `draft-text-${pageId}-${draftCounter}`
   const bodyStyle = getComputedStyle(document.body)
   const values = source ? { ...source, x: source.x + 20, y: source.y + 20 } : {
     text: 'New Text',
@@ -156,6 +189,8 @@ export function addDraft(pageId, source) {
     opacity: 1,
     color: toHex(bodyStyle.color),
   }
+  markEdited([id])
+  edits.set(id, {version: editVersion, entry: {type: 'draft', pageId}})
   setState({
     ...state,
     selectedId: id,
@@ -165,6 +200,7 @@ export function addDraft(pageId, source) {
 
 export function deleteDraft(id) {
   if (state.data[id]?.type !== 'draft') return
+  markEdited([id])
   const data = { ...state.data }
   delete data[id]
   setState({ ...state, data, selectedId: state.selectedId === id ? null : state.selectedId })

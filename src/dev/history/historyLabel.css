@@ -1,0 +1,7 @@
+.history-label { position:fixed; left:0; top:0; z-index:120; pointer-events:none; }
+.history-viewport .history-label-paper { box-sizing:border-box; width:max-content; max-width:calc(100vw - 32px); padding:10px 14px; border:1px solid #8b70534d; border-radius:12px 0 12px 0; background:#fefdf9; color:#62432f; font-family:var(--body, 'Songti SC', serif); font-weight:400; line-height:1.5; opacity:0; transform:translateY(5px); pointer-events:none; }
+.history-viewport .history-label-paper { box-shadow:0 4px 14px rgba(90,70,55,.12); }
+.history-label-name, .history-label-date { display:block; white-space:nowrap; }
+.history-label-name { font-size:14px; }
+.history-label-date { margin-top:2px; font-size:12px; color:#79624d; }
+@media(max-width:340px) { .history-label-name{font-size:12px}.history-label-date{font-size:10px}.history-viewport .history-label-paper{padding:8px 10px} }

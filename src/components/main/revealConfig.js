@@ -1,6 +1,6 @@
 // All durations are milliseconds. Face coordinates refer to the original JPEG.
 export const MAIN_REVEAL = {
-  baseColor: '#A2D8DE', activeColor: '#F6F0A9', hoverColor: '#F691A6', gapColor: '#FDF9EE',
+  baseColor: '#A2D8DE', activeColor: '#55c0d7', hoverColor: '#F691A6', gapColor: '#FDF9EE',
   cornerRadiusRatio: .22, tileGap: 3, seamOverlap: .25,
   tileSize: { min: 88, viewportRatio: .09, max: 126, facePadding: 1.04 },
   palette: [

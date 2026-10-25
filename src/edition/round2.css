@@ -1,6 +1,7 @@
 /* Round 2 pigment system: paper grounds, coloured instruments, untouched artwork.
    Every new decorative animation is finite and never intercepts pointer events. */
 :root {
+ --edition-nav-banner:#c8e9e7;
  --edition-paper:#FDF9EE; --edition-white:#FFFEF8; --edition-ink:#34465A;
  --edition-rose:#F691A6; --edition-peach:#FFDBCA; --edition-yellow:#F6F0A9;
  --edition-sky:#7FB9EC; --edition-mint:#A2D8DE; --edition-lavender:#E5DDF5;
@@ -14,7 +15,10 @@ body .intro-screen .intro-enter,.edition-enter {background:var(--edition-yellow)
 body .intro-screen .intro-enter:hover,.edition-enter:hover {background:#FFF6CC;color:var(--edition-ink);box-shadow:5px 5px 0 var(--edition-peach)}
 .edition-intro-orbit {background:radial-gradient(circle,#FFFEF8 0 51%,#A2D8DE55 52%,transparent 69%);border-color:#7FB9EC80}
 .edition-intro-orbit:before {border-color:#7FB9EC80}.edition-intro-orbit:after {border-color:#F691A6A0}
-.edition-header {background:linear-gradient(90deg,#FDF9EE,#FFF0E6 70%,#E6F5F3)!important}
+.edition-header {background:linear-gradient(90deg,var(--edition-nav-banner),#ccebe9 70%,#c4e6e4)!important}
+/* Navigation strips only: preserve page grounds, controls and artwork pigments.
+   Natural/Human share nt-header; Weather shares edition-header. */
+body .big-test-banner, body .nt-header, body .ball-header, body .tt-header {background:var(--edition-nav-banner)!important}
 .edition-header nav button:hover {color:#8B3E56}
 .edition-cover-stamp {color:#653549;background:var(--edition-rose);border-color:#8B3E5670}
 .edition-cover-art {box-shadow:12px 16px 0 #A2D8DE55}

@@ -1,0 +1,287 @@
+{
+  "totalFileBytes": 88803283,
+  "totalDecodedRGBABytes": 1397494872,
+  "note": "Decoded memory is a pixel-count estimate, not measured GPU/process memory. All 35 originals verified via Pillow load and verify.",
+  "files": [
+    {
+      "id": "layer-1",
+      "width": 11166,
+      "height": 2620,
+      "fileBytes": 6321181,
+      "decodedRGBABytes": 117019680,
+      "sha256": "d4c94b78cae5c4f0e5a465dcfd8d6bd39c45a80bfdeb7591c0edee80801dc02e"
+    },
+    {
+      "id": "layer-2",
+      "width": 11166,
+      "height": 2620,
+      "fileBytes": 4414717,
+      "decodedRGBABytes": 117019680,
+      "sha256": "5c0492bf7da116825b6424d360116bf4def1a56df005d27c8939d4e405e82751"
+    },
+    {
+      "id": "layer-3",
+      "width": 11166,
+      "height": 2620,
+      "fileBytes": 2762314,
+      "decodedRGBABytes": 117019680,
+      "sha256": "ea183c5d5ec65451c9778849307ab77c4fe3a6cccf9167614003bf79e80e0ac6"
+    },
+    {
+      "id": "map-1",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 3822419,
+      "decodedRGBABytes": 42380100,
+      "sha256": "d4ef19eedb063eb4e732b73523ea1701605fc2b6fc14a2609f9897ca06823aba"
+    },
+    {
+      "id": "map-10",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 3863059,
+      "decodedRGBABytes": 42380100,
+      "sha256": "fd20068992c09d8ee6d8648ef5c8297e9af7fa363bcd92e5a64cc3d014da4b7b"
+    },
+    {
+      "id": "map-11",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 4069301,
+      "decodedRGBABytes": 42380100,
+      "sha256": "40809fd659a1b07495a84f5c81b77fd39b545b8419600c6b33e4a93c5076fab2"
+    },
+    {
+      "id": "map-12",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 4145050,
+      "decodedRGBABytes": 42380100,
+      "sha256": "05e3968f85990e81d8409d4c988e96df89b5a0cd7af7a2efbc6465b1df5f976c"
+    },
+    {
+      "id": "map-13",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 4242875,
+      "decodedRGBABytes": 42380100,
+      "sha256": "142e78ef170a8a3cc44ffd72b24bf736b63f0789d4e9688425ed60884785ed1f"
+    },
+    {
+      "id": "map-14",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 4158875,
+      "decodedRGBABytes": 42380100,
+      "sha256": "98c405c6fc5669453cf23f0cb5ddde603503c9d70203635958ee9b695129d9ba"
+    },
+    {
+      "id": "map-2",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 3638443,
+      "decodedRGBABytes": 42380100,
+      "sha256": "162a02476d427db54f04b5cc7aec03eafafc30042fd8606a1c59a1f0ef353f10"
+    },
+    {
+      "id": "map-3",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 3677043,
+      "decodedRGBABytes": 42380100,
+      "sha256": "3e5b850cf6b52543cb3722d4fa3403d5d8072e1710c6a668f967ab58d6a60620"
+    },
+    {
+      "id": "map-4",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 3638800,
+      "decodedRGBABytes": 42380100,
+      "sha256": "080505740b82c32e1f3856385020e36471e187beb7008c1981296130e0a4dd36"
+    },
+    {
+      "id": "map-5",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 3431763,
+      "decodedRGBABytes": 42380100,
+      "sha256": "80262ac23c618c0ef9e92171f690034e8376e416d27150635cc3a96346df526f"
+    },
+    {
+      "id": "map-6",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 3309489,
+      "decodedRGBABytes": 42380100,
+      "sha256": "058f2f02ea912e7157e0595c439a0805afc64d7b55d516aebc3c4e2a9ea42b7a"
+    },
+    {
+      "id": "map-7",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 3045614,
+      "decodedRGBABytes": 42380100,
+      "sha256": "0133f32c4b1d23870ff75144c8237f8e60f5e10cb4c5d210c8af4d1c4f66f63b"
+    },
+    {
+      "id": "map-8",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 3279413,
+      "decodedRGBABytes": 42380100,
+      "sha256": "7b07325c56905a093a5caa8443b6de929c5ee6b46843e7b747370b4801888ac6"
+    },
+    {
+      "id": "map-9",
+      "width": 3255,
+      "height": 3255,
+      "fileBytes": 3616388,
+      "decodedRGBABytes": 42380100,
+      "sha256": "45014ea373290e0ec592a6172f893885a1649e8fac81f38b6f64a86e0cb74d2b"
+    },
+    {
+      "id": "people-1",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 950275,
+      "decodedRGBABytes": 25173024,
+      "sha256": "cee8f838697a26e1bb5e0e4df26dbd491b128940459fa3e401c3a7e92050b5e4"
+    },
+    {
+      "id": "people-10",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1462541,
+      "decodedRGBABytes": 25173024,
+      "sha256": "f3d4d52f548b6ee63d0e2efd13ccce40f5865d5521748ebe9e3f423a21802ad0"
+    },
+    {
+      "id": "people-11",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1524249,
+      "decodedRGBABytes": 25173024,
+      "sha256": "d99d6c7676c34a552352bcfd1f2ba283ce9485af06e305d2a552595e0dceb9c9"
+    },
+    {
+      "id": "people-12",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1522379,
+      "decodedRGBABytes": 25173024,
+      "sha256": "a1d6e05a2518aa1c76345150e4634573394e5d570073184aa864bb2bce3a3e15"
+    },
+    {
+      "id": "people-13",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1385603,
+      "decodedRGBABytes": 25173024,
+      "sha256": "e24a45ba6465d8fcd08966e9aea73cb1dbecc4b5db5a0ea769ade87fca59f455"
+    },
+    {
+      "id": "people-14",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1158340,
+      "decodedRGBABytes": 25173024,
+      "sha256": "79ed770ee8f51927a33e11acbc00a733cf0d3543c2cf3c008c870bba8a37e815"
+    },
+    {
+      "id": "people-15",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1344789,
+      "decodedRGBABytes": 25173024,
+      "sha256": "d3e8a5629481cbb31bebe0800fabb94347064e2ec18bc8afcaf6c96a52e01d73"
+    },
+    {
+      "id": "people-16",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1436586,
+      "decodedRGBABytes": 25173024,
+      "sha256": "60cb378a671226e69d5bdafe73a92fe1cbed4a07b5cd2a402df42d8ff1cea52c"
+    },
+    {
+      "id": "people-17",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1301999,
+      "decodedRGBABytes": 25173024,
+      "sha256": "d89db9f3f9a30245235d823164703346cb9f7f6dcf529ea20276a6d3903758fc"
+    },
+    {
+      "id": "people-18",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1291829,
+      "decodedRGBABytes": 25173024,
+      "sha256": "b0113e16538854dc71263b0ffef4f415ed4bb1b2ad43d4c09a3bce5a16127ac8"
+    },
+    {
+      "id": "people-2",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1452393,
+      "decodedRGBABytes": 25173024,
+      "sha256": "9d6116f6b2e0b8e4216075c6962d8eb2dcfac5c5640be3e3e47d932263f3139e"
+    },
+    {
+      "id": "people-3",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1339250,
+      "decodedRGBABytes": 25173024,
+      "sha256": "7a7ba9549d7f140a9db3479a6eec2c882d5716b5803d34af87fd4c506dfae1c8"
+    },
+    {
+      "id": "people-4",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1471766,
+      "decodedRGBABytes": 25173024,
+      "sha256": "466cee696bca663b9ee9a2b1b252910ee5ba01ff296ba3e73a7c30f313177339"
+    },
+    {
+      "id": "people-5",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 927897,
+      "decodedRGBABytes": 25173024,
+      "sha256": "034b9a65f1303819ba303f9de36074eb7b5fe63337462b0727f2574150e6d848"
+    },
+    {
+      "id": "people-6",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1110610,
+      "decodedRGBABytes": 25173024,
+      "sha256": "55d4e2b5097ef21e4f208706f96c4f85b3d2d4a65534a24579869f6a6a8d1e33"
+    },
+    {
+      "id": "people-7",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1244175,
+      "decodedRGBABytes": 25173024,
+      "sha256": "01e39d9e0a1bd2b3d5902331071ddd33651159f4bb498dcd6936cb8261bad9ef"
+    },
+    {
+      "id": "people-8",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1251046,
+      "decodedRGBABytes": 25173024,
+      "sha256": "733ffaad7223e154ad20a493fc81c34af774688f072cb482cc6a8c92aeb8f044"
+    },
+    {
+      "id": "people-9",
+      "width": 2109,
+      "height": 2984,
+      "fileBytes": 1190812,
+      "decodedRGBABytes": 25173024,
+      "sha256": "1bcea1670342baa8e73ab185499b01d147300cc5756a76761db7b2a0cc5c8494"
+    }
+  ]
+}

@@ -63,6 +63,8 @@
   transition-duration: 260ms;
 }
 
+.story-stage #book-anime { transform-origin: var(--book-animation-origin); }
+
 .story-stage #book-anime .story-book-animation {
   display: block;
   width: 100%;

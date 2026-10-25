@@ -109,10 +109,10 @@ export function TelescopeMap({ mode, attributionHostRef, onReady, onStatus, onOb
     let loadingStyle = true
     let pendingLocation = null
     const flyToPendingLocation = () => {
-      if (!pendingLocation || loadingStyle) return
+      if (!pendingLocation || loadingStyle || activeMode !== requestedModeRef.current) return
       const location = pendingLocation
       pendingLocation = null
-      map.flyTo({ center: [location.longitude, location.latitude], zoom: location.zoom ?? 12, bearing: location.bearing ?? 0, essential: false })
+      map.flyTo({ center: [location.longitude, location.latitude], zoom: location.zoom ?? 12, bearing: location.bearing ?? 0, pitch: location.pitch ?? pitches[activeMode], roll: location.roll ?? 0, essential: false })
     }
 
     const switchMode = () => {
@@ -138,15 +138,17 @@ export function TelescopeMap({ mode, attributionHostRef, onReady, onStatus, onOb
       }
       loadingStyle = false
       switchMode()
+      flyToPendingLocation()
     })
 
-    const report = () => callbacks.current.onObservation?.({ longitude: map.getCenter().lng, latitude: map.getCenter().lat, bearing: map.getBearing(), zoom: map.getZoom(), mode: activeMode })
+    const capture = () => ({ longitude: map.getCenter().wrap().lng, latitude: map.getCenter().lat, bearing: map.getBearing(), pitch: map.getPitch(), roll: map.getRoll(), zoom: map.getZoom(), mode: activeMode })
+    const report = () => callbacks.current.onObservation?.(capture())
     map.on('moveend', report)
     map.on('rotate', report)
     map.on('idle', () => { flyToPendingLocation(); if (!loadingStyle && requestedModeRef.current === activeMode) callbacks.current.onStatus?.('ready'); report() })
     map.on('error', () => callbacks.current.onStatus?.('error'))
     callbacks.current.onStatus?.('loading')
-    callbacks.current.onReady?.({ goTo: location => { pendingLocation = location; requestedModeRef.current = location.mode === 'satellite' ? 'satellite' : 'globe'; switchMode(); flyToPendingLocation() }, getLocation: () => ({ longitude: map.getCenter().lng, latitude: map.getCenter().lat, zoom: map.getZoom(), bearing: map.getBearing(), mode: requestedModeRef.current }) })
+    callbacks.current.onReady?.({ goTo: location => { pendingLocation = location; requestedModeRef.current = location.mode === 'satellite' ? 'satellite' : 'globe'; switchMode(); flyToPendingLocation() }, getLocation: () => loadingStyle || map.isMoving() || activeMode !== requestedModeRef.current ? null : capture() })
     const stageElement = containerRef.current.closest('.layout-editor-stage-box')
     let resolutionFrame = null
     const syncRenderingResolution = () => {

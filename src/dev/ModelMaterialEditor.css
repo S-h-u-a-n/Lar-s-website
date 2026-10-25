@@ -217,4 +217,7 @@
   .model-editor-selection > label,
   .model-editor-color,
   .model-editor-range { grid-template-columns: 83px minmax(0, 1fr); }
-}
+}.model-editor-transform-row { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+.model-editor-transform-row>span { grid-column:1/-1; }
+.model-editor-transform-row label { display:grid; gap:3px; }
+.model-editor-transform-row input { width:100%; min-width:0; color:inherit; background:#20292d; border:1px solid #59656a; padding:5px; }

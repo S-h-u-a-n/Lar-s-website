@@ -1,6 +1,8 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
+import { createPortal } from 'react-dom'
 import './ModelMaterialEditor.css'
+import ModelTransformEditor from './ModelTransformEditor'
 import { closeDevEditor, useIsDevEditorActive, useRegisterDevEditor } from './devEditorStore'
 import { attachFinalColorControls, setFinalColorValue, transformBatchColor } from './modelMaterialEditorShader'
 
@@ -175,7 +177,7 @@ function ColorControl({ label, value, onChange }) {
   )
 }
 
-function ModelMaterialEditor({ models: registeredModels, model, modelName, extensions, batchDefaults, batchColorMode, shaderDefaults }) {
+function ModelMaterialEditor({ pageId = 'model', models: registeredModels, model, modelName, extensions, batchDefaults, batchColorMode, shaderDefaults }) {
   const models = useMemo(() => registeredModels ?? (model ? [{
     id: model.uuid || 'model',
     name: modelName || model.name || model.type || 'Model',
@@ -187,7 +189,7 @@ function ModelMaterialEditor({ models: registeredModels, model, modelName, exten
   }] : EMPTY_MODELS), [registeredModels, model, modelName, extensions, batchDefaults, batchColorMode, shaderDefaults])
   const entries = useMemo(() => collectMaterials(models), [models])
   const editorId = useId()
-  useRegisterDevEditor('3d', editorId)
+  useRegisterDevEditor('3d', editorId, models.length > 0)
   const open = useIsDevEditorActive(editorId)
   const [collapsed, setCollapsed] = useState(false)
   const [modelId, setModelId] = useState('')
@@ -197,7 +199,9 @@ function ModelMaterialEditor({ models: registeredModels, model, modelName, exten
   const [batchByModel, setBatchByModel] = useState({})
   const [extensionValues, setExtensionValues] = useState({})
   const [output, setOutput] = useState('')
-  const [, setRevision] = useState(0)
+  const [revision, setRevision] = useState(0)
+  const transformConfig = useRef({})
+  const materialDraftDirty = useRef(false)
   const snapshots = useRef(new WeakMap())
   const extensionInitials = useRef(new Map())
   const shaderStates = useRef(new Map())
@@ -297,9 +301,49 @@ function ModelMaterialEditor({ models: registeredModels, model, modelName, exten
     }
   }, [entries])
 
+  useEffect(() => {
+    for (const item of models) {
+      const key = `genesis:model-editor:${pageId}:${item.name}:material-v1`
+      try {
+        const saved = JSON.parse(localStorage.getItem(key) || 'null')
+        if (!saved) continue
+        if (typeof saved !== 'object' || Array.isArray(saved)) throw new Error('Unknown draft format')
+        for (const entry of entries.filter(entry => entry.model.id === item.id)) {
+          const materialKey = `${entry.mesh.name || 'Unnamed Mesh'} / ${materialName(entry.material, entry.materialIndex)}`
+          const value = saved.materials?.[materialKey]
+          if (!value) continue
+          for (const field of ['opacity','roughness','metalness','emissiveIntensity']) if (Number.isFinite(value[field]) && field in entry.material) entry.material[field] = value[field]
+          if (Number.isFinite(value.opacity)) entry.material.transparent = value.opacity < 1 || Boolean(snapshots.current.get(entry.material)?.transparent)
+          for (const field of ['color','emissive']) if (/^#[0-9a-f]{6}$/i.test(value[field]) && entry.material[field]?.isColor) entry.material[field].set(value[field])
+          if (value.texture?.enabled === false && 'map' in entry.material) entry.material.map = null
+          const shader = shaderStates.current.get(entry.material)
+          if (shader) for (const [field, value] of Object.entries(saved.shader?.[materialKey]?.finalColor || {})) setFinalColorValue(shader, field, value)
+          for (const control of getExtensionControls(entry)) {
+            const value = saved.shader?.[materialKey]?.extensions?.[control.extensionId]?.[control.id]
+            if (value !== undefined) { control.setValue(value); setExtensionValues(current => ({...current, [control.stateKey]: value})) }
+          }
+          entry.material.needsUpdate = true
+        }
+        if (saved.batch) { setSelectionScope(saved.batch.scope || 'currentMaterial'); setBatchByModel(current => ({...current, [item.id]: saved.batch})) }
+      } catch (error) { console.warn('[3D Editor] Material draft preserved', error) }
+    }
+  }, [entries, pageId])
+  useEffect(() => {
+    if (!materialDraftDirty.current || !selectedModel) return
+    try {
+      const key = `genesis:model-editor:${pageId}:${selectedModel.name}:material-v1`
+      const saved = JSON.parse(localStorage.getItem(key) || '{}')
+      if (!saved || typeof saved !== 'object' || Array.isArray(saved)) throw new Error('Unknown draft format')
+      const config = createConfiguration()
+      localStorage.setItem(key, JSON.stringify({ ...saved, ...config, materials: {...saved.materials, ...config.materials}, shader: {...saved.shader, ...config.shader} }))
+    } catch (error) { console.warn('[3D Editor] Cannot save material draft', error) }
+    materialDraftDirty.current = false
+  }, [revision])
+
   if (!import.meta.env.DEV || models.length === 0) return null
 
   function refresh() {
+    materialDraftDirty.current = true
     setRevision(value => value + 1)
   }
 
@@ -488,6 +532,9 @@ function ModelMaterialEditor({ models: registeredModels, model, modelName, exten
       }
     }
     return {
+      pageId,
+      coordinateSpace: 'model-local',
+      transforms: transformConfig.current,
       model: models.find(model => model.id === modelId)?.name || models.map(model => model.name),
       materials,
       batch: { scope: selectionScope, ...batchValues },
@@ -524,7 +571,8 @@ function ModelMaterialEditor({ models: registeredModels, model, modelName, exten
 
   return (
     <>
-      {open && <aside ref={panelRef} className="model-editor-panel" style={panelStyle}>
+      <ModelTransformEditor key={selectedModel?.id} model={selectedModel} pageId={pageId} open={open} panelRef={panelRef} onPick={mesh => setMeshUuid(mesh.uuid)} onConfig={value => { transformConfig.current = value }} />
+      {open && createPortal(<aside ref={panelRef} className="model-editor-panel" style={panelStyle}>
         <header className="model-editor-header" onPointerDown={beginDrag} onPointerMove={movePanel} onPointerUp={() => { dragRef.current = null }} onPointerCancel={() => { dragRef.current = null }}>
           <div><strong>3D Model Material Editor</strong><small>Development tool</small></div>
           <div className="model-editor-header-actions">
@@ -549,6 +597,7 @@ function ModelMaterialEditor({ models: registeredModels, model, modelName, exten
             </div>}
           </section>
 
+          <div className="model-editor-transform-host" />
           {selectedMaterial && <>
             <section className="model-editor-section">
               <h3>Batch Adjustments · {batchTargets.length} target{batchTargets.length === 1 ? '' : 's'}</h3>
@@ -631,13 +680,13 @@ function ModelMaterialEditor({ models: registeredModels, model, modelName, exten
             {output && <textarea className="model-editor-output" aria-label="Copied editor values" readOnly value={output} onFocus={event => event.target.select()} />}
           </>}
         </div>}
-      </aside>}
+      </aside>, document.body)}
     </>
   )
 }
 
 function formatValues(configuration) {
-  const lines = [`Model: ${Array.isArray(configuration.model) ? configuration.model.join(', ') : configuration.model}`, '', 'Materials:']
+  const lines = [`Page: ${configuration.pageId}`, `Coordinates: ${configuration.coordinateSpace}`, 'Transforms:', JSON.stringify(configuration.transforms, null, 2), `Model: ${Array.isArray(configuration.model) ? configuration.model.join(', ') : configuration.model}`, '', 'Materials:']
   for (const [key, value] of Object.entries(configuration.materials)) {
     lines.push(`- ${key}`)
     for (const [property, setting] of Object.entries(value)) {
@@ -648,4 +697,4 @@ function formatValues(configuration) {
   return lines.join('\n')
 }
 
-export default ModelMaterialEditor
+export default import.meta.env.DEV ? ModelMaterialEditor : () => null

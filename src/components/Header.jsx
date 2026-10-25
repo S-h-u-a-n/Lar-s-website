@@ -1,4 +1,5 @@
+import HomeText from './main/HomePublishedText'
 function Header({onHome,onExplore,onStory,onIndex}) {
-  return <header className="site-header edition-header"><button className="edition-wordmark" onClick={onHome}><span>✧</span><span>The Wizard's<br/><b>GENESIS</b></span></button><p>CODEX EDITION <i>／</i> 研究手冊</p><nav aria-label="Main navigation"><button onClick={onHome}>世界封面</button><button onClick={onStory}>創世故事</button><button onClick={onExplore}>進入研究室 ↗</button><button onClick={onIndex}>探索工具 ＋</button></nav></header>
+  return <header className="site-header edition-header"><button className="edition-wordmark" onClick={onHome}><HomeText configId="codex-home-dom-span-1ispmjd" /><HomeText configId="codex-home-dom-span-10r4hy5" after={<b>GENESIS</b>} /></button><HomeText as="p" configId="codex-home-dom-p-2s1if7" /><nav aria-label="Main navigation"><HomeText as="button" configId="codex-home-dom-button-nkof4m" onClick={onHome} /><HomeText as="button" configId="codex-home-dom-button-1q7hept" onClick={onStory} /><HomeText as="button" configId="codex-home-dom-button-ku24z3" onClick={onExplore} /><HomeText as="button" configId="codex-home-dom-button-p81wet" onClick={onIndex} /></nav></header>
 }
 export default Header

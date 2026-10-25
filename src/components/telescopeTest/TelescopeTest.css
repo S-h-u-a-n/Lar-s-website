@@ -7,3 +7,14 @@
 @media(max-height:650px){.telescope-test{padding-top:8px}.tt-header{height:58px}.tt-layout{height:calc(100% - 58px);padding-top:14px;gap:2vw}.tt-window{width:min(100%,calc(100dvh - 190px))}.tt-dialogue{min-height:120px;padding:12px}.tt-dialogue p{font-size:12px;margin:7px 0}.tt-mentor{gap:10px}.tt-character-shape{width:50px;height:50px}.tt-character-shape:after{display:none}.tt-modes{margin-top:10px}.tt-modes button{padding:9px 14px}.tt-character{gap:12px}.tt-compass svg{width:32px}}
 @media(max-width:850px){.tt-layout{grid-template-columns:minmax(0,1.4fr) minmax(220px,1fr);gap:18px}.tt-header{gap:10px}.tt-modes{gap:12px}.tt-modes button{min-width:95px}.tt-compass{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.telescope-test *{transition:none!important}}
+.tt-window-anchor{position:relative;width:min(100%,calc(100dvh - 255px));aspect-ratio:1;flex-shrink:0}
+body .telescope-test .tt-window-anchor .tt-window{width:100%;height:100%}
+.tt-observation-tools{position:absolute;right:-8px;top:4%;display:flex;flex-direction:column;gap:28px;z-index:3}
+.telescope-test .tt-observation-dot{position:relative;width:32px;height:32px;padding:0;border-radius:50%;border:1px solid #34465a66;background:#faf7ec;color:var(--tt-ink);display:grid;place-items:center;box-shadow:0 2px 6px #34465a12;font-size:19px}
+.tt-observation-dot small{position:absolute;top:39px;left:50%;transform:translateX(-50%);font-size:9px;line-height:1.2;white-space:nowrap;background:var(--tt-cream);padding:2px 3px;border-radius:3px}
+.tt-observation-dot:hover,.tt-observation-dot[aria-expanded=true]{background:var(--tt-yellow)}
+.tt-observation-notice{font-size:11px;line-height:1.5;min-height:16px;margin:5px 0;text-align:center;max-width:90%}
+.tt-tabs{flex-wrap:wrap}.tt-tabs button{min-width:100px}
+.tt-log-layer.is-open.is-observation-tool{pointer-events:none}
+.tt-log-layer.is-observation-tool .tt-drawer{pointer-events:auto}
+@media(max-height:680px){.tt-window-anchor{width:min(100%,calc(100dvh - 225px))}}

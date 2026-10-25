@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import ModelMaterialEditor from '../dev/ModelMaterialEditor'
+import { setModelEditorViewport } from '../dev/ModelTransformEditor'
 import { createEarthMaterialEditorExtension, createEarthShaderEditorState } from '../dev/earthMaterialEditor'
 import { applyModelMaterialPreset, MODEL_MATERIAL_PRESETS } from './modelMaterialPresets'
 import './IntroEarth.css'
@@ -199,7 +200,7 @@ function IntroEarth() {
         stage = 'render'
         const delta = previous ? Math.min((now - previous) / 1000, .1) : 0
         previous = now
-        if (!reduced.matches) earthGroup.rotation.y += EARTH_ROTATION_SPEED * delta
+        if (!reduced.matches && (!import.meta.env.DEV || document.body.dataset.devEditing !== '3d')) earthGroup.rotation.y += EARTH_ROTATION_SPEED * delta
         renderer.render(scene, camera)
         host.dataset.status = 'rendered'
         if (!reported && import.meta.env.DEV) {
@@ -287,7 +288,7 @@ function IntroEarth() {
         })
         applyModelMaterialPreset(earthRoot, EARTH_PRESET)
         earthGroup.add(earthRoot)
-        if (import.meta.env.DEV) setEditorModel(earthRoot)
+        if (import.meta.env.DEV) { setModelEditorViewport(earthRoot, { camera, scene, canvas, orbit: null, render: () => renderer.render(scene, camera) }); setEditorModel(earthRoot) }
         if (import.meta.env.DEV) {
           let meshes = 0, textured = 0
           earthRoot.traverse(object => { if (object.isMesh) { meshes++; if (object.material.map) textured++ } })
@@ -301,7 +302,7 @@ function IntroEarth() {
 
   return <>
     <div ref={hostRef} className="intro-earth" aria-hidden="true" />
-    {import.meta.env.DEV && <ModelMaterialEditor models={editorModels} />}
+    {import.meta.env.DEV && <ModelMaterialEditor pageId="intro" models={editorModels} />}
   </>
 }
 

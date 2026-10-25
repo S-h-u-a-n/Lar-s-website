@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import './TextEditor.css'
+import { localDragDelta, isEditorTargetVisible } from './editorCoordinates'
 import { useDevEditorState } from './devEditorStore'
 import {
   addDraft,
   deleteDraft,
   getMountedTextIds,
+  getPageTextIds,
   getTextConfig,
   getTextCoordinateSpace,
   getTextElement,
@@ -15,7 +17,7 @@ import {
   useTextEditorState,
 } from './textEditorStore'
 
-const UI_SELECTOR = '.text-editor-panel, .dev-editor-launcher'
+const UI_SELECTOR = '.text-editor-panel, .layout-editor-panel, .model-editor-panel, .dev-editor-launcher'
 const ALIGNMENTS = ['left', 'center', 'right']
 const WRITING_MODES = [
   { value: 'horizontal-tb', label: 'Horizontal' },
@@ -51,7 +53,8 @@ function NumberField({ label, value, onChange, step = 1, min, max, nullable = fa
 }
 
 function TextEditorPanel({ selectedId, pageId }) {
-  const { mounted, data } = useTextEditorState()
+  const { data } = useTextEditorState()
+  const mounted = getPageTextIds(pageId)
   const entry = data[selectedId]
   const [position, setPosition] = useState(null)
   const [output, setOutput] = useState('')
@@ -157,7 +160,7 @@ function TextEditorPanel({ selectedId, pageId }) {
         {entry && <button type="button" onClick={() => resetTexts([selectedId])}>Reset Selected</button>}
         {isDraft && <button type="button" onClick={() => addDraft(pageId, values)}>Duplicate</button>}
         {isDraft && <button type="button" onClick={() => deleteDraft(selectedId)}>Delete Draft</button>}
-        {entry && <button type="button" onClick={() => resetTexts(getMountedTextIds())}>Reset Page</button>}
+        {entry && <button type="button" onClick={() => resetTexts(getPageTextIds(pageId))}>Reset Page</button>}
         <button type="button" onClick={copyConfig}>Copy Config</button>
       </div>
       {output && <textarea className="text-editor-output" readOnly rows={8} value={output} onFocus={event => event.target.select()} />}
@@ -167,7 +170,8 @@ function TextEditorPanel({ selectedId, pageId }) {
 
 function TextEditor({ pageId }) {
   const { active } = useDevEditorState()
-  const { mounted, selectedId } = useTextEditorState()
+  const { selectedId } = useTextEditorState()
+  const mounted = getPageTextIds(pageId)
   const isActive = active?.kind === 'text'
   const currentId = mounted.includes(selectedId) ? selectedId : mounted[0]
 
@@ -179,9 +183,9 @@ function TextEditor({ pageId }) {
     const hitTest = event => {
       let best = null
       let bestArea = Infinity
-      getMountedTextIds().forEach(id => {
+      getPageTextIds(pageId).forEach(id => {
         const rect = getTextElement(id)?.getBoundingClientRect()
-        if (!rect || event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) return
+        if (!isEditorTargetVisible(getTextElement(id)) || !rect || event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) return
         const area = rect.width * rect.height
         if (area < bestArea) {
           best = id
@@ -193,7 +197,10 @@ function TextEditor({ pageId }) {
     const handleDown = event => {
       if (event.button !== 0 || isUi(event.target)) return
       const id = hitTest(event)
-      if (!id) return
+      if (!id) {
+        if (event.target instanceof Element && event.target.closest('canvas')) { event.preventDefault(); event.stopPropagation() }
+        return
+      }
       event.preventDefault()
       event.stopPropagation()
       selectText(id)
@@ -204,18 +211,8 @@ function TextEditor({ pageId }) {
       if (!drag) return
       event.stopPropagation()
       const element = getTextElement(drag.id)
-      let localToScreen = new DOMMatrixReadOnly()
-      if (getTextCoordinateSpace(drag.id) === 'dialogue-group' && element?.parentElement) {
-        for (let ancestor = element.parentElement; ancestor; ancestor = ancestor.parentElement) {
-          const transform = getComputedStyle(ancestor).transform
-          if (transform !== 'none') localToScreen = new DOMMatrixReadOnly(transform).multiply(localToScreen)
-        }
-      }
-      const inverse = localToScreen.isIdentity ? null : localToScreen.inverse()
-      const deltaX = event.clientX - drag.startX
-      const deltaY = event.clientY - drag.startY
-      const localDeltaX = inverse ? inverse.a * deltaX + inverse.c * deltaY : deltaX
-      const localDeltaY = inverse ? inverse.b * deltaX + inverse.d * deltaY : deltaY
+      const delta = localDragDelta(element, event.clientX - drag.startX, event.clientY - drag.startY)
+      const localDeltaX = delta.x, localDeltaY = delta.y
       updateText(drag.id, {
         x: Math.round(drag.originX + localDeltaX),
         y: Math.round(drag.originY + localDeltaY),
@@ -244,7 +241,7 @@ function TextEditor({ pageId }) {
       window.removeEventListener('pointercancel', handleUp, options)
       window.removeEventListener('click', handleClick, options)
     }
-  }, [isActive])
+  }, [isActive, pageId])
 
   useEffect(() => {
     if (!isActive) return undefined

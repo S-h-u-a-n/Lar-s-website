@@ -5,6 +5,7 @@ import ResourceStatus from '../edition/ResourceStatus'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { createCosmosBillboard } from './cosmosBillboard'
 import ModelMaterialEditor from '../dev/ModelMaterialEditor'
+import { setModelEditorViewport } from '../dev/ModelTransformEditor'
 import { attachFinalColorControls } from '../dev/modelMaterialEditorShader'
 import { applyModelMaterialPreset, MODEL_MATERIAL_PRESETS } from './modelMaterialPresets'
 
@@ -255,7 +256,7 @@ function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, 
           }
         }
       })
-      if (import.meta.env.DEV) setEditorModel(root)
+      if (import.meta.env.DEV) { setModelEditorViewport(root, { camera, scene, canvas, orbit: controls, render: () => renderer.render(scene, camera) }); setEditorModel(root) }
       const bounds = new THREE.Box3().setFromObject(root)
       const center = bounds.getCenter(new THREE.Vector3())
       const sphere = bounds.getBoundingSphere(new THREE.Sphere())
@@ -324,7 +325,7 @@ function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, 
   return <>
     <div ref={hostRef} className="globe-viewer" aria-label="Interactive globe model" />
     <ResourceStatus status={resourceStatus} label="天體模型" onRetry={()=>setRetry(v=>v+1)} />
-    {import.meta.env.DEV && editorModel && <ModelMaterialEditor model={editorModel} modelName="globe.glb" batchDefaults={MODEL_MATERIAL_PRESETS['globe.glb'].batch} batchColorMode="finalColor" shaderDefaults={MODEL_MATERIAL_PRESETS['globe.glb'].shaderDefaults} />}
+    {import.meta.env.DEV && editorModel && <ModelMaterialEditor pageId="globe-test" model={editorModel} modelName="globe.glb" batchDefaults={MODEL_MATERIAL_PRESETS['globe.glb'].batch} batchColorMode="finalColor" shaderDefaults={MODEL_MATERIAL_PRESETS['globe.glb'].shaderDefaults} />}
   </>
 }
 

@@ -1,0 +1,14 @@
+/* DEV surfaces sit above circular portals, below the shared transition curtain. */
+body .dev-editor-launcher { z-index:2147483646!important; right:16px; bottom:76px; }
+body .text-editor-panel, body .layout-editor-panel, body .model-editor-panel { z-index:2147483646!important; }
+body .layout-editor-panel { max-height:calc(100dvh - 80px); overflow:auto; }
+body .layout-editor-stage.is-open { z-index:10050!important; }
+body .layout-editor-stage--external { z-index:10050!important; }
+body .layout-editor-stage--external .layout-editor-item { background:transparent; outline:1px dashed #1677ff66; }
+body .layout-editor-stage--external .layout-editor-item.is-selected { outline:2px solid #1677ff; }
+.dev-editor-launcher button:disabled { opacity:.5; cursor:default; }
+body .dev-editor-launcher { display:flex!important; }
+body .text-editor-panel, body .layout-editor-panel, body .model-editor-panel {
+  z-index:2147483645!important;
+  max-height:calc(100dvh - 144px)!important;
+}

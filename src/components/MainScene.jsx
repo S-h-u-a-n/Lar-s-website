@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import ResourceStatus from '../edition/ResourceStatus'
-import { TOOLS, TOOL_REACTION } from '../edition/config'
+import { TOOL_REACTION } from '../edition/config'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import ModelMaterialEditor from '../dev/ModelMaterialEditor'
+import { setModelEditorViewport } from '../dev/ModelTransformEditor'
 import './MainScene.css'
 import { createCosmosBillboard } from './cosmosBillboard'
 import { createBigInteractionRegistry } from './bigInteractionRegistry'
@@ -313,7 +314,6 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
     hoverIconImage.alt = ''
     hoverIconImage.draggable = false
     hoverIcon.appendChild(hoverIconImage)
-    const hoverCaption=document.createElement('span');hoverCaption.className='edition-hover-caption';hoverIcon.appendChild(hoverCaption)
     document.body.appendChild(hoverIcon)
 
     const scene = new THREE.Scene()
@@ -649,9 +649,6 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       const interactionId = entry?.id || null
       if (interactionId !== hoveredInteractionId) {
         hoveredInteractionId = interactionId
-        const tool=TOOLS.find(tool=>tool.id===interactionId)
-        const names={catcup:'貓咪杯',chair1:'研究椅',chair2:'研究椅',clock:'時鐘',hourglass:'沙漏',magglass:'放大鏡',mug:'杯子',potion:'魔藥',bookink:'墨水與筆記'}
-        hoverCaption.textContent=tool?`${tool.name} / 點一下開始觀測`:`${names[interactionId] || ''} / 點一下閱讀`
         canvas.style.cursor = entry ? 'pointer' : ''
       }
       const hoverTarget = resolveHoverIconTarget(intersections)
@@ -675,7 +672,17 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       showHoverIcon(hoverTarget, event)
     }
 
+    const handleEditorTransform = event => {
+      const object = event.detail?.object
+      for (const reaction of toolReactions) if (reaction.root === object) {
+        reaction.y = object.position.y
+        reaction.amount = 0
+        reaction.z = object.rotation.z
+      }
+    }
+    if (import.meta.env.DEV) window.addEventListener('model-editor-transform-change', handleEditorTransform)
     const handlePointerDown = event => {
+      if (import.meta.env.DEV && document.body.dataset.devEditing === '3d') return
       pointerIsDown = true
       hoveredIconTargetId = resolveHoverIconTarget(getRaycastIntersections(event))?.id || null
       suppressedHoverTargetId = hoveredIconTargetId
@@ -684,6 +691,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
     }
 
     const handlePointerUp = event => {
+      if (import.meta.env.DEV && document.body.dataset.devEditing === '3d') { pointerDown = null; return }
       const intersections = getRaycastIntersections(event)
       const releaseHoverTarget = resolveHoverIconTarget(intersections)
       pointerIsDown = false
@@ -697,8 +705,8 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       if (distance <= 6 && duration <= 500) {
         const entry = resolveInteractionHit(intersections)
         if (entry?.type === 'portal') {
-          if (['book-open1', 'book-close1', 'ball', 'globe', 'telescope'].includes(entry.id)) {
-            // All five entrances begin their comic flow, including repeat visits.
+          if (['book-open1', 'book-close1', 'ball', 'globe', 'telescope', 'potion'].includes(entry.id)) {
+            // Registered instruments use the same portal flow on every visit.
             onPortalSelect?.(entry.id, getInteractionScreenCenter(entry))
           } else if (visitedBigPortals.includes(entry.id) && hasBigIntroduction?.(entry.id)) {
             focusSmallObject(entry)
@@ -740,6 +748,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       previousTime = now
       // Only complete tool roots react. The table and multipart globe stay anchored.
       for(const reaction of toolReactions){
+        if (import.meta.env.DEV && document.body.dataset.devEditing === '3d') continue
         const target=!reducedMotion&&!pointerIsDown&&!focusedInteractionId&&hoveredInteractionId===reaction.id?1:0
         reaction.amount += (target-reaction.amount)*(1-Math.exp(-TOOL_REACTION.damping*delta))
         if(reducedMotion||pointerIsDown||focusedInteractionId)reaction.amount=0
@@ -825,7 +834,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       }
       softenCrystalballGlass(modelRoot)
       applyModelMaterialPreset(modelRoot, MODEL_MATERIAL_PRESETS['Big.glb'])
-      if (import.meta.env.DEV) setEditorModel(modelRoot)
+      if (import.meta.env.DEV) { setModelEditorViewport(modelRoot, { camera, scene, canvas, orbit: controls, render: () => renderer.render(scene, camera) }); setEditorModel(modelRoot) }
       if (ENABLE_MINI_COSMOS) {
         miniCosmos = createMiniCosmos()
         const miniCosmosAnchor = modelRoot.getObjectByName('MiniCosmosAnchor')
@@ -867,6 +876,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       window.removeEventListener('edition-inspect-object',handleEditionInspect)
       canvas.removeEventListener('pointerleave', handlePointerLeave)
       window.removeEventListener('layout-editor-editing', handleLeftsideEditing)
+      if (import.meta.env.DEV) window.removeEventListener('model-editor-transform-change', handleEditorTransform)
       window.removeEventListener('expanded-document-open', handleExpandedDocument)
       host.querySelectorAll('[data-focus-retreat]').forEach(element => {
         focusUiAnimations.get(element)?.cancel()
@@ -917,7 +927,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
           Enter
         </button>
       )}</>}
-      {import.meta.env.DEV && editorModel && <ModelMaterialEditor model={editorModel} modelName="Big.glb" batchDefaults={MODEL_MATERIAL_PRESETS['Big.glb'].batch} />}
+      {import.meta.env.DEV && editorModel && <ModelMaterialEditor pageId="big-test" model={editorModel} modelName="Big.glb" batchDefaults={MODEL_MATERIAL_PRESETS['Big.glb'].batch} />}
     </main>
   )
 }

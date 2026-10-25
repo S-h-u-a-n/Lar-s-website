@@ -6,7 +6,7 @@ import './CircularReveal.css'
 const REVEAL_DURATION_SECONDS = 0.95
 const REVEAL_EASING = [0.22, 1, 0.36, 1]
 
-function CircularReveal({ origin, isRevealing, onRevealComplete, children }) {
+function CircularReveal({ origin, isRevealing, ready = true, onRevealComplete, children }) {
   const reduced=useReducedMotion()
   const [viewport, setViewport] = useState(() => ({
     width: window.innerWidth,
@@ -40,13 +40,20 @@ function CircularReveal({ origin, isRevealing, onRevealComplete, children }) {
   return createPortal(
     <motion.div
       className="circular-reveal"
+      inert={isRevealing || undefined}
+      data-reveal-phase={isRevealing ? (ready ? 'revealing' : 'preparing') : 'idle'}
       initial={isRevealing ? { clipPath: closedClip } : false}
-      animate={{ clipPath: openClip }}
+      variants={{ closed: { clipPath: closedClip }, open: { clipPath: openClip } }}
+      animate={ready ? 'open' : 'closed'}
       transition={{
         duration: isRevealing && !reduced ? REVEAL_DURATION_SECONDS : 0,
         ease: REVEAL_EASING,
       }}
-      onAnimationComplete={isRevealing ? onRevealComplete : undefined}
+      // Preparing the destination also completes a (closed) animation. Only
+      // the shared opening animation may commit the destination screen.
+      onAnimationComplete={definition => {
+        if (definition === 'open' && isRevealing && ready) onRevealComplete?.()
+      }}
     >
       {children}
     </motion.div>,

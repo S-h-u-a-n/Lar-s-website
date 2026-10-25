@@ -224,7 +224,7 @@ export default function MainArtworkReveal({ enabled, onComplete }) {
     <img className="main-reveal-expression" src={wink} alt="" aria-hidden="true" style={{ opacity: expression === 'wink' ? 1 : 0 }} />
     {enabled && geometry && createPortal(
       <div ref={mask} className="main-artwork-reveal" data-phase={phase} data-expression={expression} style={{ top: geometry.top, width: geometry.width, height: geometry.height, zIndex: config.layer.zIndex }} aria-busy={busy} aria-label="Main 頁互動揭幕">
-        <div className="edition-reveal-note"><small>THE WORLD IS WAITING</small><strong>{busy ? '正在翻開世界…' : `尋找奶油黃的一格。 ${step + 1} / 5`}</strong><span>滑過染色，點一下揭開。</span></div>
+        <div className="edition-reveal-note"><small>THE WORLD IS WAITING</small><strong>{Math.min(step + 1, config.manualRevealCount)} / {config.manualRevealCount}</strong><span>抓住逃跑的REMO</span></div>
         <div ref={scene} className="main-reveal-scene">
           {renderTiles.filter(tile => !removed.includes(tile.id)).map(tile => {
             const active = tile.id === activeId && step < config.manualRevealCount

@@ -52,6 +52,17 @@
 .wp-bottle-art { display:block; width:100%; height:auto; max-width:76px; margin:auto; }
 .wp-potions strong { display:block; font:400 12px var(--body); margin-top:9px; letter-spacing:.12em; }
 .wp-potion-remark { display:flex; align-items:flex-start; gap:7px; font:10px/1.8 var(--body); margin:15px 0 12px; animation:wp-note-arrive .3s var(--edition-ease) both; }.wp-potion-remark span { width:7px; height:7px; flex:none; margin-top:6px; border:1px solid var(--edition-line); }
+.wp-brush-size { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:14px 0; font:10px var(--body); }
+.wp-brush-size>span { opacity:.65; }
+.wp-brush-nodes { display:flex; position:relative; gap:20px; }
+.wp-brush-nodes::before { content:''; position:absolute; top:10px; left:13px; right:13px; border-top:1px solid var(--edition-line); }
+.wp-brush-nodes>button { position:relative; display:grid; place-items:center; gap:5px; padding:0 5px; border:0; background:transparent; font:10px var(--body); }
+.wp-brush-nodes i { display:block; width:20px; height:20px; border:1px solid var(--edition-line); border-radius:50%; background:var(--edition-white); }
+.wp-brush-nodes i::after { content:''; display:block; width:4px; height:4px; border-radius:50%; background:#687982; margin:7px; }
+.wp-brush-nodes>button:nth-child(2) i::after { width:7px; height:7px; margin:5.5px; }
+.wp-brush-nodes>button:nth-child(3) i::after { width:10px; height:10px; margin:4px; }
+.wp-brush-nodes>button[aria-checked="true"] i { background:var(--edition-yellow); border-color:var(--edition-ink); }
+.wp-brush-nodes>button:focus-visible { outline:1px solid var(--edition-ink); outline-offset:4px; }
 .wp-dose-instruction { display:flex; gap:12px; align-items:center; border-top:1px solid var(--edition-line); padding-top:12px; }
 .wp-dose-instruction>span { font:28px var(--display); color:#92704b; }.wp-dose-instruction p { font:10px/1.7 var(--body); margin:0; }.wp-dose-instruction small { display:block; font-size:9px; opacity:.55; }
 .wp-notebook { position:relative; background:var(--edition-white); border:1px solid var(--edition-line); border-top:5px solid var(--edition-mint); border-radius:0 28px 0 0; padding:18px 19px 0; box-shadow:4px 5px 0 #A2D8DE33; overflow:hidden; }
@@ -107,3 +118,11 @@
   .wp-ending-paper>small { font-size:8px; }
 }
 @media(prefers-reduced-motion:reduce) { .wp-page *, .wp-page *::before, .wp-page *::after { animation:none!important; transition:none!important; }.wp-orbit { transform:none; }.wp-rewind-magic { display:none; } }
+
+/* Formal portal destinations own their scroll surface inside CircularReveal. */
+.wp-page.is-integrated { position:fixed; inset:0; z-index:40; overflow-x:hidden; overflow-y:auto; overscroll-behavior:contain; }
+.wp-page.is-integrated .wp-footer { margin-bottom:80px; }
+.codex-edition .wp-page.is-integrated .wp-header { visibility:visible; pointer-events:auto; }
+.wp-page.is-painting,.wp-world-canvas { user-select:none; -webkit-user-select:none; }
+.wp-header nav button { font:12px var(--body); padding:6px 0; border:0; border-bottom:1px solid var(--edition-line); background:transparent; }
+@media(max-width:590px) { .wp-header nav button { font-size:10px; } }

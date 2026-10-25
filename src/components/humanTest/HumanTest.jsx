@@ -4,6 +4,6 @@ import Text from './Text'
 import HumanCanvas from './HumanCanvas'
 import HumanReadingPanel from './HumanReadingPanel'
 import './HumanTest.css'
-export default function HumanTest({ onBack }) {
-  return <NaturalTest onBack={onBack} categories={CATEGORIES} TextComponent={Text} CanvasComponent={HumanCanvas} PanelComponent={HumanReadingPanel} pageId="human-test" title="HUMAN WORLD" tagline="Civilizations, collected with curiosity" className="human-test" minimumScale={.06}/>
+export default function HumanTest({ onBack, entranceReady = true }) {
+  return <NaturalTest entranceReady={entranceReady} onBack={onBack} categories={CATEGORIES} TextComponent={Text} CanvasComponent={HumanCanvas} PanelComponent={HumanReadingPanel} pageId="human-test" title="HUMAN WORLD" tagline="Civilizations, collected with curiosity" className="human-test" minimumScale={.06}/>
 }

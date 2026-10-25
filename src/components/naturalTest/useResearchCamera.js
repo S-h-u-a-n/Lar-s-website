@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { CAMERA, STYLE } from './data'
 const clampScale = (value, minimum) => Math.min(CAMERA.maxScale, Math.max(minimum, value))
 // Same cubic-bezier curve as BigTest, evaluated for the requestAnimationFrame camera.
@@ -20,48 +20,56 @@ export default function useResearchCamera(bounds, minimumScale = CAMERA.minScale
   const [level, setLevel] = useState('overview')
   const levelRef = useRef('overview')
   const boundsRef = useRef(bounds); boundsRef.current = bounds
+  const minimum = useCallback(() => {
+    const b = boundsRef.current, s = size.current
+    return Math.min(minimumScale, Math.max(.02, Math.min((s.width - CAMERA.padding * 2) / b.width, (s.height - CAMERA.padding * 2) / b.height)))
+  }, [minimumScale])
   const paint = useCallback(next => {
     view.current = next
     viewportRef.current?.style.setProperty('--camera-scale',next.scale)
     if (worldRef.current) worldRef.current.style.transform = `translate3d(${next.x}px,${next.y}px,0) scale(${next.scale})`
-    const tier = next.scale < CAMERA.normalThreshold ? 'overview' : next.scale < CAMERA.detailThreshold ? 'normal' : 'detail'
+    const normalThreshold = Math.min(CAMERA.normalThreshold, CAMERA.normalThreshold * size.current.height / 600, CAMERA.normalThreshold * size.current.width / 1000)
+    const tier = next.scale < normalThreshold ? 'overview' : next.scale < CAMERA.detailThreshold ? 'normal' : 'detail'
     if (tier !== levelRef.current) { levelRef.current = tier; setLevel(tier) }
   }, [])
   const stop = useCallback(() => { if (frame.current !== null) cancelAnimationFrame(frame.current); frame.current = null; target.current = view.current }, [])
-  const move = useCallback((next, animate = true) => {
+  const move = useCallback((next, animate = true, options = {}) => {
     stop()
-    next = { ...next, scale: clampScale(next.scale, minimumScale) }
+    next = { ...next, scale: clampScale(next.scale, minimum()) }
     target.current = next
     const from = { ...view.current }, started = performance.now()
-    if (!animate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { paint(next); return }
+    if (!animate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { paint(next); options.onComplete?.(); return }
     const tick = now => {
-      const progress = Math.min(1, (now - started) / STYLE.motion.duration), amount = easing(progress)
+      const progress = Math.min(1, (now - started) / (options.duration ?? STYLE.motion.duration)), amount = easing(progress)
       paint({ x: from.x + (next.x - from.x) * amount, y: from.y + (next.y - from.y) * amount, scale: from.scale + (next.scale - from.scale) * amount })
       if (progress < 1) frame.current = requestAnimationFrame(tick)
-      else frame.current = null
+      else { frame.current = null; options.onComplete?.() }
     }
     frame.current = requestAnimationFrame(tick)
-  }, [paint, stop, minimumScale])
-  const center = useCallback((point, scale, fraction = .5, animate = true) => {
-    scale = clampScale(scale, minimumScale)
-    move({ x: size.current.width * fraction - point.x * scale, y: size.current.height / 2 - point.y * scale, scale }, animate)
-  }, [move, minimumScale])
+  }, [paint, stop, minimum])
+  const center = useCallback((point, scale, fraction = .5, animate = true, options) => {
+    scale = clampScale(scale, minimum())
+    move({ x: size.current.width * fraction - point.x * scale, y: size.current.height / 2 - point.y * scale, scale }, animate, options)
+  }, [move, minimum])
   const overview = useCallback((animate = true) => {
     intent.current = { type: 'overview' }
     const b = boundsRef.current, s = size.current
     const scale = Math.min((s.width - CAMERA.padding * 2) / b.width, (s.height - CAMERA.padding * 2) / b.height)
     center({ x: b.x + b.width / 2, y: b.y + b.height / 2 }, scale, .5, animate)
   }, [center])
-  const locate = useCallback((point, scale, fraction = .5) => { intent.current = { type: 'point', point, scale, fraction }; center(point, scale, fraction) }, [center])
+  const locate = useCallback((point, scale, fraction = .5, options) => { intent.current = { type: 'point', point, scale, fraction }; center(point, scale, fraction, true, options) }, [center])
+  const interrupt = useCallback(() => { stop(); intent.current = { type: 'free' } }, [stop])
   const snapshot = useCallback(() => { const v = view.current; return { x: (size.current.width / 2 - v.x) / v.scale, y: (size.current.height / 2 - v.y) / v.scale, scale: v.scale, intent: intent.current } }, [])
   const restore = useCallback(saved => { intent.current = saved.intent; center(saved, saved.scale) }, [center])
   const zoom = useCallback((factor, anchor) => {
     intent.current = { type: 'free' }
-    const base = target.current, a = anchor || { x: size.current.width / 2, y: size.current.height / 2 }, scale = clampScale(base.scale * factor, minimumScale)
+    const base = target.current, a = anchor || { x: size.current.width / 2, y: size.current.height / 2 }, scale = clampScale(base.scale * factor, minimum())
     move({ x: a.x - (a.x - base.x) / base.scale * scale, y: a.y - (a.y - base.y) / base.scale * scale, scale })
-  }, [move, minimumScale])
-  useEffect(() => {
+  }, [move, minimum])
+  useLayoutEffect(() => {
     const element = viewportRef.current
+    size.current = { width: element.clientWidth, height: element.clientHeight }
+    overview(false)
     const observer = new ResizeObserver(() => {
       const old = size.current, next = { width: element.clientWidth, height: element.clientHeight }, v = view.current
       size.current = next
@@ -106,5 +114,5 @@ export default function useResearchCamera(bounds, minimumScale = CAMERA.minScale
     onPointerCancel() { drag.current = null; suppressClick.current = true; viewportRef.current.classList.remove('is-dragging') },
     onClickCapture(event) { if (suppressClick.current) { event.preventDefault(); event.stopPropagation(); suppressClick.current = false } },
   }
-  return { viewportRef, worldRef, level, overview, locate, snapshot, restore, zoom, handlers }
+  return { viewportRef, worldRef, level, overview, locate, snapshot, restore, zoom, interrupt, handlers }
 }

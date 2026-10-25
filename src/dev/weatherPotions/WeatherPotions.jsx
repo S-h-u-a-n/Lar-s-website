@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import useParallax from '../../edition/useParallax'
-import { POTIONS, RULES, WORLD } from './config'
-import { ENDINGS } from './endings'
-import { pickWorld } from './terrain'
+import { BRUSH_SIZES, POTIONS, RULES, WORLD } from './fallingSand/config'
+import { ENDINGS } from './fallingSand/endings'
+import { pickWorld } from './fallingSand/terrain'
 import { Bottle, WeatherOrbit } from './LineArt'
 import EndingCard from './EndingCard'
 import useWorld from './useWorld'
 import WorldCanvas from './WorldCanvas'
 
-export default function WeatherPotions() {
+export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
   useParallax()
-  const { model, snapshot: world, renderer, start, stop, reset } = useWorld()
+  const { model, snapshot: world, renderer, start, paint, stop, reset } = useWorld()
   const [selected, setSelected] = useState('rain')
   const [strength, setStrength] = useState(RULES.defaultStrength)
-  const [tiles, setTiles] = useState({ loaded: 0, total: 14, errors: [] })
+  const [brushSize, setBrushSize] = useState(RULES.defaultBrush)
   const [drag, setDrag] = useState(null), pointer = useRef(null), keyboard = useRef(false)
   const [hints, setHints] = useState(false), [rewinding, setRewinding] = useState(false)
   const canvas = useRef(null), replayButton = useRef(null), rewindTimer = useRef(null), endingKeyHeld = useRef(false)
@@ -32,20 +32,31 @@ export default function WeatherPotions() {
     event.currentTarget.setPointerCapture(event.pointerId)
     const spot = location(event)
     setSelected(type)
-    pointer.current = { id: event.pointerId, source, type }
+    pointer.current = { id: event.pointerId, source, type, last: spot, brushSize, strength }
     if (source === 'bottle') setDrag({ type, x: event.clientX, y: event.clientY, over: Boolean(spot) })
-    if (spot) start(type, spot, strength)
+    if (spot) { paint(type,null,spot,strength,true,brushSize);start(type,{...spot,mode:'brush',brushSize},strength) }
   }
   function movePointer(event) {
     const active = pointer.current
     if (active?.id !== event.pointerId) return
-    const spot = location(event)
-    if (spot) start(active.type, spot, strength)
-    else stop()
-    if (active.source === 'bottle') setDrag({ type: active.type, x: event.clientX, y: event.clientY, over: Boolean(spot) })
+    event.preventDefault()
+    const samples=event.nativeEvent?.getCoalescedEvents?.() || []
+    for(const sample of samples.length?samples:[event]) {
+      const spot=location(sample)
+      if(spot) {
+        paint(active.type,active.last,spot,active.strength,!active.last,active.brushSize)
+        start(active.type,{...spot,mode:'brush',brushSize:active.brushSize},active.strength)
+      } else if(active.last) stop()
+      active.last=spot
+    }
+    if(active.source==='bottle')setDrag({type:active.type,x:event.clientX,y:event.clientY,over:Boolean(active.last)})
   }
   function release(event) {
     if (event?.pointerId !== undefined && pointer.current?.id !== event.pointerId) return
+    if(event?.type==='pointerup' && pointer.current) {
+      const spot=location(event),active=pointer.current
+      if(spot && (!active.last || Math.hypot(spot.x-active.last.x,spot.y-active.last.y)>=1))paint(active.type,active.last,spot,active.strength,!active.last,active.brushSize)
+    }
     pointer.current = null; keyboard.current = false; setDrag(null); stop()
   }
   function rewind() {
@@ -81,11 +92,11 @@ export default function WeatherPotions() {
   }, [world.ending])
 
   const status = world.input ? `${POTIONS.find(p => p.id === world.input).name}正在倒入` : world.ending ? '本輪實驗已結束' : '瓶口已關上'
-  return <main className="wp-page">
+  return <main className={`wp-page ${onBack ? 'is-integrated' : ''} ${world.input ? 'is-painting' : ''}`} aria-label="Bottled Weather 魔法天氣藥水">
     <header className="edition-header wp-header">
-      <a className="edition-wordmark" href="/?edition=main"><span>✧</span><span>The Wizard’s<br /><b>GENESIS</b></span></a>
+      <a className="edition-wordmark" href="/?edition=main" onClick={event => { if(onHome){event.preventDefault();release();onHome()} }}><span>✧</span><span>The Wizard’s<br /><b>GENESIS</b></span></a>
       <p>CODEX EDITION <i>／</i> 研究手冊</p>
-      <nav aria-label="天氣研究頁導覽"><span>06 / 魔法天氣藥水</span><a href="/?edition=main">世界封面 ↗</a></nav>
+      <nav aria-label="天氣研究頁導覽"><span>06 / 魔法天氣藥水</span>{onBack ? <button type="button" onClick={() => {release();onBack()}}>↙ 回到研究室</button> : <a href="/?edition=main">世界封面 ↗</a>}</nav>
     </header>
     <section className="wp-layout">
       <aside className="wp-introduction">
@@ -104,9 +115,9 @@ export default function WeatherPotions() {
           <div className="wp-map-grid" aria-hidden="true" />
           <div className={`wp-world-stage ${ending ? 'has-ending' : ''}`}>
           <div className="wp-world-background" inert={Boolean(ending) || rewinding}>
-          <WorldCanvas ref={canvas} model={model} renderer={renderer} onTilesReady={setTiles} onPointerDown={event => beginPointer(event, 'world')} onPointerMove={movePointer} onPointerUp={release} onPointerCancel={release} onLostPointerCapture={release}
+          <WorldCanvas ref={canvas} model={model} renderer={renderer} onReady={onReady} onDragStart={event => event.preventDefault()} onPointerDown={event => beginPointer(event, 'world')} onPointerMove={movePointer} onPointerUp={release} onPointerCancel={release} onLostPointerCapture={release}
             onKeyDown={event => {
-              if ((event.key === ' ' || event.key === 'Enter') && !event.repeat && !keyboard.current && !world.ending && !rewinding) { event.preventDefault(); keyboard.current = true; start(selected, { x: WORLD.size / 2, y: WORLD.size / 2 }, strength) }
+              if ((event.key === ' ' || event.key === 'Enter') && !event.repeat && !keyboard.current && !world.ending && !rewinding) { event.preventDefault(); keyboard.current = true; start(selected, { x: WORLD.columns / 2, y: WORLD.rows * .28, brushSize }, strength) }
               else if (event.key === ' ' || event.key === 'Enter') event.preventDefault()
             }} onKeyUp={event => { if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); release() } }} onBlur={() => { if (keyboard.current) release() }} />
           </div>
@@ -114,10 +125,10 @@ export default function WeatherPotions() {
           {rewinding && <div className="wp-rewind-magic" aria-hidden="true"><i /><i /><i /><span>↶</span><small>REWINDING THE WORLD</small></div>}
           </div>
           <div className="wp-compass" aria-hidden="true"><span>N</span><i>✧</i></div>
-          <figcaption><span>一座島。七種天氣。先玩一會兒。</span><span>{WORLD.size} × {WORLD.size} / TILE LANDSCAPE</span></figcaption>
+          <figcaption><span>一座島。七種天氣。先玩一會兒。</span><span>{WORLD.columns} × {WORLD.rows} / PARTICLE WORLD</span></figcaption>
         </figure>
         <div className="wp-world-readings" aria-label="即時世界狀態"><span><small>氣溫</small><b>{world.temperature.toFixed(0)}°</b></span><span><small>陸地留存</small><b>{Math.round((1 - world.metrics.lostLand) * 100)}<i>%</i></b></span><span><small>世界穩定度</small><b>{Math.round((1 - world.metrics.damage) * 100)}<i>%</i></b></span></div>
-        <p className="wp-world-instruction"><span>選一瓶天氣 → 按住世界倒入 → 放開就停。</span><small>也可以把瓶子拖到世界裡，按住倒入。</small></p>
+        <p className="wp-world-instruction"><span>點一下，或按住拖曳，沿途改變天氣。</span><small>放開就停。也可以把瓶子拖進世界，持續倒入。</small></p>
       </div>
 
       <aside className="wp-research">
@@ -129,6 +140,13 @@ export default function WeatherPotions() {
             <small>{p.number}</small><Bottle potion={p} /><strong>{p.name}</strong>
           </button>)}</div>
           <p className="wp-potion-remark" key={selected}><span style={{ background: potion.color }} />{potion.note}</p>
+          <div className="wp-brush-size" role="radiogroup" aria-label="筆刷大小"><span>筆刷大小</span><div className="wp-brush-nodes">{BRUSH_SIZES.map((size,index) => <button key={size.id} type="button" role="radio" aria-label={`${size.label}筆刷`} aria-checked={brushSize===size.id} tabIndex={brushSize===size.id?0:-1} disabled={Boolean(ending) || rewinding} onClick={() => {release();setBrushSize(size.id)}} onKeyDown={event => {
+            if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return
+            event.preventDefault()
+            const next=event.key==='Home'?0:event.key==='End'?2:(index+(event.key==='ArrowRight'?1:2))%3
+            release();setBrushSize(BRUSH_SIZES[next].id)
+            event.currentTarget.parentElement.querySelectorAll('button')[next]?.focus()
+          }}><i aria-hidden="true" /><span>{size.label}</span></button>)}</div></div>
           <div className="wp-strength" role="group" aria-label="倒入份量"><span>倒入份量</span>{[[RULES.defaultStrength, '一小口'],[1, '放手一倒']].map(([value,label]) => <button key={value} type="button" disabled={Boolean(ending) || rewinding} aria-pressed={strength===value} onClick={() => setStrength(value)}>{label}</button>)}</div>
           <div className="wp-dose-instruction"><span>∞</span><p>藥水不限量，世界不一定。<small>聚焦世界後，可按住空白鍵施法。</small></p></div>
         </section>
@@ -143,7 +161,7 @@ export default function WeatherPotions() {
         <button type="button" className="wp-rewind-link" disabled={rewinding} onClick={rewind}>↶ 回溯這個世界<span>重新開始</span></button>
       </aside>
     </section>
-    <footer className="wp-footer"><span>MADE BETWEEN WORLDS</span><p>以好奇心為指南，偶爾也以後悔為指南。</p><details className="wp-debug"><summary>開發觀測 ＋</summary><dl><div><dt>輸入</dt><dd>{world.input || '已停止'}</dd></div><div><dt>雨滴總數</dt><dd>{world.rainAdded}</dd></div><div><dt>雪粒總數</dt><dd>{world.snowAdded}</dd></div><div><dt>活動粒子</dt><dd>{world.particles}</dd></div><div><dt>海面高度</dt><dd>{world.seaLevel.toFixed(1)}</dd></div><div><dt>海面上升速率</dt><dd>{world.riseRate.toFixed(2)}</dd></div><div><dt>乾燥程度</dt><dd>{((1 - world.metrics.moisture) * 100).toFixed(0)}%</dd></div><div><dt>平均侵蝕</dt><dd>{world.metrics.erosion.toFixed(2)}</dd></div><div><dt>海面結冰</dt><dd>{(world.metrics.ice * 100).toFixed(0)}%</dd></div><div><dt>陸地霜雪</dt><dd>{(world.metrics.snow * 100).toFixed(0)}%</dd></div><div><dt>沙漠化</dt><dd>{(world.metrics.desert * 100).toFixed(0)}%</dd></div><div><dt>風勢</dt><dd>{(world.wind*100).toFixed(0)}%</dd></div><div><dt>雲量</dt><dd>{(world.cloudiness*100).toFixed(0)}%</dd></div><div><dt>暴風雨</dt><dd>{(world.storm*100).toFixed(0)}%</dd></div><div><dt>彩虹</dt><dd>{(world.rainbow*100).toFixed(0)}%</dd></div><div><dt>岩漿粒數</dt><dd>{world.lavaAdded}</dd></div><div><dt>蒸氣生成</dt><dd>{world.steamCreated}</dd></div><div><dt>冷卻岩石</dt><dd>{world.basaltCreated.toFixed(1)}</dd></div><div><dt>PNG 圖塊</dt><dd>{tiles.loaded} / {tiles.total}{tiles.errors.length ? '（載入失敗）' : ''}</dd></div></dl></details></footer>
+    <footer className="wp-footer"><span>MADE BETWEEN WORLDS</span><p>以好奇心為指南，偶爾也以後悔為指南。</p><details className="wp-debug"><summary>開發觀測 ＋</summary><dl><div><dt>模擬秒數</dt><dd>{world.time.toFixed(1)}</dd></div><div><dt>光照</dt><dd>{world.light.toFixed(0)}%</dd></div><div><dt>蒸發轉換</dt><dd>{world.evaporated}</dd></div><div><dt>輸入</dt><dd>{world.input || '已停止'}</dd></div><div><dt>藥水雨滴</dt><dd>{world.rainAdded}</dd></div><div><dt>藥水雪粒</dt><dd>{world.snowAdded}</dd></div><div><dt>流體與雪粒</dt><dd>{world.particles}</dd></div><div><dt>海面高度 %</dt><dd>{world.seaLevel.toFixed(1)}</dd></div><div><dt>海面上升速率</dt><dd>{world.riseRate.toFixed(2)}</dd></div><div><dt>乾燥程度</dt><dd>{((1 - world.metrics.moisture) * 100).toFixed(0)}%</dd></div><div><dt>地層侵蝕</dt><dd>{(world.metrics.erosion*100).toFixed(0)}%</dd></div><div><dt>水體結冰</dt><dd>{(world.metrics.ice * 100).toFixed(0)}%</dd></div><div><dt>地表雪覆</dt><dd>{(world.metrics.snow * 100).toFixed(0)}%</dd></div><div><dt>沙漠化</dt><dd>{(world.metrics.desert * 100).toFixed(0)}%</dd></div><div><dt>風勢</dt><dd>{(world.wind*100).toFixed(0)}%</dd></div><div><dt>雲量</dt><dd>{(world.cloudiness*100).toFixed(0)}%</dd></div><div><dt>暴風雨</dt><dd>{(world.storm*100).toFixed(0)}%</dd></div><div><dt>彩虹</dt><dd>{(world.rainbow*100).toFixed(0)}%</dd></div><div><dt>岩漿粒數</dt><dd>{world.lavaAdded}</dd></div><div><dt>岩漿蒸氣</dt><dd>{world.steamCreated}</dd></div><div><dt>冷卻岩石</dt><dd>{world.basaltCreated.toFixed(1)}</dd></div><div><dt>水／冰／雪</dt><dd>{world.counts[3]} / {world.counts[5]} / {world.counts[4]}</dd></div><div><dt>蒸氣／雲</dt><dd>{world.counts[7]} / {world.counts[8]}</dd></div><div><dt>凝結／自然降水</dt><dd>{world.condensed} / {world.naturalRain}</dd></div></dl></details></footer>
 
     {drag && <div className={`wp-drag-bottle ${drag.over ? 'is-pouring' : ''}`} style={{ left: drag.x, top: drag.y }} aria-hidden="true"><Bottle potion={POTIONS.find(p => p.id === drag.type)} pouring={drag.over} /></div>}
   </main>

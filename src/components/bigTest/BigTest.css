@@ -21,6 +21,7 @@ body:has(.main-scene--big-test) .big-hover-icon-image { width: clamp(64px, min(5
 .main-scene--big-test:has([data-document-entrance="notes"]:is(:hover, :focus-visible)) [data-document-geometry="notes"] { transform: rotate(var(--bt-rotation)) scale(1.05); background-color: var(--bt-hover-color); }
 .big-test-title { position: absolute; left: 5.15%; top: 4px; width: 80%; color: #fffef8; }
 .big-test-title h1 { margin: 0; font: 400 clamp(20px, 2.5cqw, 52px)/1.2 var(--display); }
+.big-test-title-home { display: block; padding: 0; border: 0; border-radius: 0; background: none; color: inherit; font: inherit; text-align: inherit; pointer-events: auto; cursor: pointer; }
 .big-test-maintenance { --bt-maintenance-shift: 11.5cqw; position: absolute; right: 1.5%; top: calc(max(13.2%, calc(32px + 4.2cqw)) + var(--bt-maintenance-extra-top, 0px)); width: 16%; pointer-events: none; color: #56525a; }
 .big-test-maintenance-heading { position: absolute; right: 24%; bottom: 100%; width: 100%; text-align: right; padding-bottom: 1cqw; }
 .big-test-maintenance-heading h2 { margin: 0; font: 400 1.15cqw/1.2 var(--sans); }

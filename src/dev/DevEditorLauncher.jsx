@@ -7,7 +7,7 @@ const EDITOR_BUTTONS = [
   { kind: 'text', label: 'TEXT' },
 ]
 
-function DevEditorLauncher() {
+function DevEditorLauncher({ disabled = false }) {
   const { editors, active } = useDevEditorState()
   const buttons = EDITOR_BUTTONS.filter(button => editors.some(editor => editor.kind === button.kind))
   if (!import.meta.env.DEV || buttons.length === 0) return null
@@ -18,6 +18,7 @@ function DevEditorLauncher() {
         <button
           key={button.kind}
           type="button"
+          disabled={disabled}
           className={active?.kind === button.kind ? 'is-active' : undefined}
           onClick={() => toggleDevEditor(button.kind)}
         >

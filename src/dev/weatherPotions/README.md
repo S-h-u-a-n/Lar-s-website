@@ -1,3 +1,5 @@
+> **目前版本已改為 2D Falling Sand。** 新版說明、參數、測試與還原方式見 [fallingSand/README.md](./fallingSand/README.md)。下方為已保存的舊版 Tileset 實作紀錄；PNG 地形與偽 3D 引擎已停用，檔案保留供還原。
+
 # Bottled Weather / 魔法天氣藥水
 
 新版主專案：`GENESIS-Codex-Edition`。執行 `npm run dev`，開啟 http://127.0.0.1:5186/weather-potions.html 。獨立 DEV 入口，沒有接入 Big、正式導覽或正式建置。
