@@ -20,4 +20,4 @@ export function pageName(screen) {
 
 export const DESK_OBJECTS = [['catcup','貓咪杯'],['mug','杯子'],['clock','時鐘'],['hourglass','沙漏'],['magglass','放大鏡'],['chair1','研究椅 / 01'],['chair2','研究椅 / 02']]
 
-export const TOOL_REACTION = {ids:['ball','telescope','book-open1','book-close1'],liftRatio:.045,tiltRadians:.009,damping:14}
+export const TOOL_REACTION = {ids:['ball','telescope','book-open1','book-close1','potion'],liftRatio:.045,tiltRadians:.009,damping:14}

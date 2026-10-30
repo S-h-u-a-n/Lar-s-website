@@ -21,7 +21,7 @@ export function HomePublishedTextPersistence() {
 // leave existing browser drafts intact without overriding published defaults.
 export default function HomePublishedText({ as: Tag = 'span', configId, children, before, after, style, ...props }) {
   const record = records[configId]
-  const editable = usePersistedEditableText({ id: `home-published-20261025-${configId}`,
+  const editable = usePersistedEditableText({ id: `home-published-20261027-${configId}`,
     label: `Home / ${configId}`, defaultValues: record.defaults })
   return <Tag {...props} ref={editable.ref} {...editable.props} data-home-config-id={configId}
     style={{ ...style, ...record.style, ...editable.props.style, whiteSpace: 'pre-wrap' }}>

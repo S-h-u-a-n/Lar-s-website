@@ -17,13 +17,14 @@ export default function GlobeTest({ onBack }) {
   const commands = useRef(null)
   useEffect(() => enablePageTextPersistence('globe-test','globe-test-'), [])
   const onReady = useCallback(api => { commands.current = api; setReady(Boolean(api)) }, [])
-  const select = useCallback(id => { setSelected(id); setContinent(null) }, [])
+  const select = useCallback(id => { setSelected(id); setContinent(null); setChapterId(null); setLine(0) }, [])
+  const selectContinent = useCallback(id => { setSelected('earth'); setContinent(id); setChapterId(null); setLine(0) }, [])
   const closeStory = useCallback(() => setChapterId(null), [])
   const reset = () => commands.current?.reset()
   const chapter = ALL_CHAPTERS.find(c => c.id === chapterId)
   return <main className="gt-page" style={{ ...Object.fromEntries(Object.entries(PALETTE).map(([key,value]) => [`--gt-${key}`,value])), '--gt-panel-duration': `${MOTION_SETTINGS.panel}ms`, '--gt-dots-delay': `${MOTION_SETTINGS.dotsDelay}ms`, '--gt-text-delay': `${MOTION_SETTINGS.textDelay}ms`, '--gt-easing': MOTION_SETTINGS.easing, '--gt-story-duration': `${MOTION_SETTINGS.story}ms` }}>
     <div className="gt-decor" aria-hidden="true"><i className="gt-disc" /><i className="gt-stripes" /><i className="gt-grid" /><i className="gt-pink-square" /><i className="gt-yellow-square" /></div>
-    <section className="gt-model" aria-label="Celestial model"><GlobeViewer transparent onReady={onReady} onSelectionChange={select} interactionDisabled={Boolean(chapterId)} /></section>
+    <section className="gt-model" aria-label="Celestial model"><GlobeViewer transparent onReady={onReady} onSelectionChange={select} onContinentSelect={selectContinent} interactionDisabled={Boolean(chapterId)} /></section>
     <header className="gt-header"><button onClick={onBack}><Text id="back">Back to the laboratory</Text></button><Text id="title" as="h1">Celestial Field Notes</Text><Text id="subtitle" as="p">A student observatory</Text></header>
     <nav className="gt-body-picker" aria-label="Celestial selection">
       <Text id="picker-label">Observe</Text>
@@ -40,7 +41,7 @@ export default function GlobeTest({ onBack }) {
       <p>拖曳模型，看看另一面。<br/>點選天體，展開它的觀測筆記。</p>
       <div>{[['earth','地球'],['moon','月球'],['sun','太陽']].map(([id,name])=><button key={id} disabled={!ready} onClick={()=>commands.current?.select(id)}>{name} ↗</button>)}</div>
     </aside>}
-    <ResearchNotes selected={selected} continent={continent} onContinent={setContinent} onChapter={id => { setLine(0); setChapterId(id) }} onReset={reset} />
+    <ResearchNotes selected={selected} continent={continent} onContinent={selectContinent} onChapter={id => { setLine(0); setChapterId(id) }} onReset={reset} />
     <StoryDialog chapterId={chapterId} line={line} onNext={() => setLine(current => Math.min(current + 1,(chapter?.dialogue.length ?? 1)-1))} onClose={closeStory} />
   </main>
 }

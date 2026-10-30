@@ -52,7 +52,7 @@ test('full grid, invalid input and ended rounds remain bounded', () => {
   w.ending='noah';const revision=w.paintRevision;paintStroke(w,'sun',null,{x:100,y:30},1,true);assert.equal(w.paintRevision,revision)
 })
 
-test('all seven sizes change radius and effective strength; material flow follows footprint area', () => {
+test('all nine sizes change radius and effective strength; material flow follows footprint area', () => {
   assert.equal(RULES.defaultBrush,'medium')
   for(const potion of POTIONS){
     const [small,medium,large]=BRUSH_SIZES.map(s=>brushSettings(potion.id,.45,s.id))

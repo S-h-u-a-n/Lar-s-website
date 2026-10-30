@@ -17,6 +17,7 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
   const [drag, setDrag] = useState(null), pointer = useRef(null), keyboard = useRef(false)
   const [hints, setHints] = useState(false), [rewinding, setRewinding] = useState(false)
   const canvas = useRef(null), replayButton = useRef(null), rewindTimer = useRef(null), endingKeyHeld = useRef(false)
+  const debugPanel = useRef(null)
   const potion = POTIONS.find(p => p.id === selected)
   const ending = ENDINGS.find(e => e.id === world.ending)
 
@@ -91,6 +92,21 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
     return () => { window.removeEventListener('keydown', trap, true); window.removeEventListener('keyup', releaseKey, true) }
   }, [world.ending])
 
+  useEffect(() => {
+    const closeOutside = event => {
+      const panel = debugPanel.current
+      if (panel?.open && !panel.contains(event.target)) panel.open = false
+    }
+    // Capture observes outside actions before a canvas/button captures the
+    // pointer. Never cancel the event: the clicked control still operates.
+    document.addEventListener('pointerdown', closeOutside, true)
+    document.addEventListener('click', closeOutside, true)
+    return () => {
+      document.removeEventListener('pointerdown', closeOutside, true)
+      document.removeEventListener('click', closeOutside, true)
+    }
+  }, [])
+
   const status = world.input ? `${POTIONS.find(p => p.id === world.input).name}正在倒入` : world.ending ? '本輪實驗已結束' : '瓶口已關上'
   return <main className={`wp-page ${onBack ? 'is-integrated' : ''} ${world.input ? 'is-painting' : ''}`} aria-label="Bottled Weather 魔法天氣藥水">
     <header className="edition-header wp-header">
@@ -125,7 +141,7 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
           {rewinding && <div className="wp-rewind-magic" aria-hidden="true"><i /><i /><i /><span>↶</span><small>REWINDING THE WORLD</small></div>}
           </div>
           <div className="wp-compass" aria-hidden="true"><span>N</span><i>✧</i></div>
-          <figcaption><span>一座島。七種天氣。先玩一會兒。</span><span>{WORLD.columns} × {WORLD.rows} / PARTICLE WORLD</span></figcaption>
+          <figcaption><span>一座島。九種藥水。先玩一會兒。</span><span>{WORLD.columns} × {WORLD.rows} / PARTICLE WORLD</span></figcaption>
         </figure>
         <div className="wp-world-readings" aria-label="即時世界狀態"><span><small>氣溫</small><b>{world.temperature.toFixed(0)}°</b></span><span><small>陸地留存</small><b>{Math.round((1 - world.metrics.lostLand) * 100)}<i>%</i></b></span><span><small>世界穩定度</small><b>{Math.round((1 - world.metrics.damage) * 100)}<i>%</i></b></span></div>
         <p className="wp-world-instruction"><span>點一下，或按住拖曳，沿途改變天氣。</span><small>放開就停。也可以把瓶子拖進世界，持續倒入。</small></p>
@@ -151,17 +167,20 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
           <div className="wp-dose-instruction"><span>∞</span><p>藥水不限量，世界不一定。<small>聚焦世界後，可按住空白鍵施法。</small></p></div>
         </section>
 
-        <section className="wp-notebook" aria-labelledby="wp-notebook-title">
-          <div className="wp-paper-heading"><span className="edition-kicker">02 / FIELD NOTES</span><span>✎</span></div><h2 id="wp-notebook-title">觀察筆記</h2>
-          <div className="wp-note-dots" aria-hidden="true" />
-          <div className="wp-observations" aria-live="polite">{world.observations.length ? world.observations.slice(0, 3).map(note => <article key={note.id}><span>↳</span><div><h3>{note.title}</h3><p>{note.text}</p></div></article>) : <div className="wp-empty-note"><span>一切正常。</span><p>通常，這是事故發生前的最後一句。</p><i>— 研究室的前輩</i></div>}</div>
+        <div className="wp-lower-controls">
+          <button type="button" className="wp-rewind-link" disabled={rewinding} onClick={rewind}>↶ 回溯這個世界<span>重新開始</span></button>
           <button type="button" className="wp-possibilities" aria-expanded={hints} aria-controls="wp-ending-hints" onClick={() => setHints(!hints)}>偶爾會發生的小事故<span>{hints ? '−' : '＋'}</span></button>
           {hints && <div className="wp-ending-hints" id="wp-ending-hints">{ENDINGS.map(e => <p key={e.id}><b>{e.number} / {e.title}</b><span>{e.cause}</span></p>)}</div>}
-        </section>
-        <button type="button" className="wp-rewind-link" disabled={rewinding} onClick={rewind}>↶ 回溯這個世界<span>重新開始</span></button>
+        </div>
       </aside>
     </section>
-    <footer className="wp-footer"><span>MADE BETWEEN WORLDS</span><p>以好奇心為指南，偶爾也以後悔為指南。</p><details className="wp-debug"><summary>開發觀測 ＋</summary><dl><div><dt>模擬秒數</dt><dd>{world.time.toFixed(1)}</dd></div><div><dt>光照</dt><dd>{world.light.toFixed(0)}%</dd></div><div><dt>蒸發轉換</dt><dd>{world.evaporated}</dd></div><div><dt>輸入</dt><dd>{world.input || '已停止'}</dd></div><div><dt>藥水雨滴</dt><dd>{world.rainAdded}</dd></div><div><dt>藥水雪粒</dt><dd>{world.snowAdded}</dd></div><div><dt>流體與雪粒</dt><dd>{world.particles}</dd></div><div><dt>海面高度 %</dt><dd>{world.seaLevel.toFixed(1)}</dd></div><div><dt>海面上升速率</dt><dd>{world.riseRate.toFixed(2)}</dd></div><div><dt>乾燥程度</dt><dd>{((1 - world.metrics.moisture) * 100).toFixed(0)}%</dd></div><div><dt>地層侵蝕</dt><dd>{(world.metrics.erosion*100).toFixed(0)}%</dd></div><div><dt>水體結冰</dt><dd>{(world.metrics.ice * 100).toFixed(0)}%</dd></div><div><dt>地表雪覆</dt><dd>{(world.metrics.snow * 100).toFixed(0)}%</dd></div><div><dt>沙漠化</dt><dd>{(world.metrics.desert * 100).toFixed(0)}%</dd></div><div><dt>風勢</dt><dd>{(world.wind*100).toFixed(0)}%</dd></div><div><dt>雲量</dt><dd>{(world.cloudiness*100).toFixed(0)}%</dd></div><div><dt>暴風雨</dt><dd>{(world.storm*100).toFixed(0)}%</dd></div><div><dt>彩虹</dt><dd>{(world.rainbow*100).toFixed(0)}%</dd></div><div><dt>岩漿粒數</dt><dd>{world.lavaAdded}</dd></div><div><dt>岩漿蒸氣</dt><dd>{world.steamCreated}</dd></div><div><dt>冷卻岩石</dt><dd>{world.basaltCreated.toFixed(1)}</dd></div><div><dt>水／冰／雪</dt><dd>{world.counts[3]} / {world.counts[5]} / {world.counts[4]}</dd></div><div><dt>蒸氣／雲</dt><dd>{world.counts[7]} / {world.counts[8]}</dd></div><div><dt>凝結／自然降水</dt><dd>{world.condensed} / {world.naturalRain}</dd></div></dl></details></footer>
+    <footer className="wp-footer"><span>MADE BETWEEN WORLDS</span><p>以好奇心為指南，偶爾也以後悔為指南。</p><details className="wp-debug" ref={debugPanel}><summary>開發觀測 ＋</summary><dl><div><dt>模擬秒數</dt><dd>{world.time.toFixed(1)}</dd></div><div><dt>光照</dt><dd>{world.light.toFixed(0)}%</dd></div><div><dt>蒸發轉換</dt><dd>{world.evaporated}</dd></div><div><dt>輸入</dt><dd>{world.input || '已停止'}</dd></div><div><dt>藥水雨滴</dt><dd>{world.rainAdded}</dd></div><div><dt>藥水雪粒</dt><dd>{world.snowAdded}</dd></div><div><dt>流體與雪粒</dt><dd>{world.particles}</dd></div><div><dt>海面高度 %</dt><dd>{world.seaLevel.toFixed(1)}</dd></div><div><dt>海面上升速率</dt><dd>{world.riseRate.toFixed(2)}</dd></div><div><dt>乾燥程度</dt><dd>{((1 - world.metrics.moisture) * 100).toFixed(0)}%</dd></div><div><dt>地層侵蝕</dt><dd>{(world.metrics.erosion*100).toFixed(0)}%</dd></div><div><dt>水體結冰</dt><dd>{(world.metrics.ice * 100).toFixed(0)}%</dd></div><div><dt>地表雪覆</dt><dd>{(world.metrics.snow * 100).toFixed(0)}%</dd></div><div><dt>沙漠化</dt><dd>{(world.metrics.desert * 100).toFixed(0)}%</dd></div><div><dt>風勢</dt><dd>{(world.wind*100).toFixed(0)}%</dd></div><div><dt>雲量</dt><dd>{(world.cloudiness*100).toFixed(0)}%</dd></div><div><dt>暴風雨</dt><dd>{(world.storm*100).toFixed(0)}%</dd></div><div><dt>彩虹</dt><dd>{(world.rainbow*100).toFixed(0)}%</dd></div><div><dt>岩漿粒數</dt><dd>{world.lavaAdded}</dd></div><div><dt>岩漿蒸氣</dt><dd>{world.steamCreated}</dd></div><div><dt>冷卻岩石</dt><dd>{world.basaltCreated.toFixed(1)}</dd></div><div><dt>生長粒子／遇水消耗</dt><dd>{world.counts[11]} / {world.growthConsumed}</dd></div><div><dt>砂粒／植物</dt><dd>{world.counts[9]} / {world.counts[10]}</dd></div><div><dt>投入砂粒／培育植物</dt><dd>{world.sandAdded} / {world.plantsSeeded}</dd></div><div><dt>植物生長／枯萎</dt><dd>{world.plantsGrown} / {world.plantsWilted}</dd></div><div><dt>水／冰／雪</dt><dd>{world.counts[3]} / {world.counts[5]} / {world.counts[4]}</dd></div><div><dt>蒸氣／雲</dt><dd>{world.counts[7]} / {world.counts[8]}</dd></div><div><dt>凝結／自然降水</dt><dd>{world.condensed} / {world.naturalRain}</dd></div></dl></details>
+      <section className="wp-technical-references" aria-labelledby="wp-technical-references-title">
+        <h2 id="wp-technical-references-title">技術參考 / TECHNICAL REFERENCES</h2>
+        <p>Falling Sand 模擬機制參考 Sandspiel<br />Created by Max Bittker · MIT License · © 2018</p>
+        <p>GitHub: <a href="https://github.com/MaxBittker/sandspiel" target="_blank" rel="noopener noreferrer">https://github.com/MaxBittker/sandspiel</a></p>
+      </section>
+    </footer>
 
     {drag && <div className={`wp-drag-bottle ${drag.over ? 'is-pouring' : ''}`} style={{ left: drag.x, top: drag.y }} aria-hidden="true"><Bottle potion={POTIONS.find(p => p.id === drag.type)} pouring={drag.over} /></div>}
   </main>

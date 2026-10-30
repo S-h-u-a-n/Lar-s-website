@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import BilingualTitle from '../components/research/BilingualTitle'
 // Screen-space labels track the actual camera; text never shrinks to illegibility.
 export default function AtlasLabels({camera,categories,onChoose}) {
   const ref=useRef(null)
@@ -16,5 +17,5 @@ export default function AtlasLabels({camera,categories,onChoose}) {
     const observer=new MutationObserver(update);observer.observe(world,{attributes:true,attributeFilter:['style']});update()
     return()=>observer.disconnect()
   },[camera.worldRef,camera.viewportRef,categories])
-  return <div ref={ref} className={`edition-atlas-labels ${camera.level==='overview'?'is-overview':''}`} aria-hidden={camera.level!=='overview'} inert={camera.level!=='overview'}>{categories.map((category,index)=><button key={category.id} data-atlas-label style={{'--category-color':category.color}} onClick={()=>onChoose(category)}><small>0{index+1} / {category.entries.length} FIELD NOTES</small><strong>{category.name}</strong><span>打開研究區 ↗</span></button>)}</div>
+  return <div ref={ref} className={`edition-atlas-labels ${camera.level==='overview'?'is-overview':''}`} aria-hidden={camera.level!=='overview'} inert={camera.level!=='overview'}>{categories.map((category,index)=><button key={category.id} data-atlas-label style={{'--category-color':category.color}} onClick={()=>onChoose(category)}><small>0{index+1} / {category.entries.length} FIELD NOTES</small><strong><BilingualTitle chinese={category.chineseName} english={category.name}/></strong><span>打開研究區 ↗</span></button>)}</div>
 }

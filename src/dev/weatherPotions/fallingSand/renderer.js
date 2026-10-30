@@ -1,4 +1,4 @@
-import { MATERIAL as M, PALETTE as P, POTIONS, WORLD } from './config.js'
+import { MATERIAL as M, PALETTE as P, POTIONS, RULES as R, WORLD } from './config.js'
 import { brushSettings } from './brushSettings.js'
 
 export function createRenderer() {
@@ -20,9 +20,19 @@ export function createRenderer() {
           const moisture=world.moisture[i],base=moisture<.6?P.drySoil:P.wetSoil
           const mix=moisture<.6?1-moisture/.6:(moisture-.6)/.4
           r=P.soil[0]*(1-mix)+base[0]*mix+noise;g=P.soil[1]*(1-mix)+base[1]*mix+noise;b=P.soil[2]*(1-mix)+base[2]*mix+noise
-          if(y>0 && [M.AIR,M.SNOW].includes(mat[i-w]) && moisture>.25){r-=17;g+=9;b+=2}
+          if(y>0 && [M.AIR,M.SNOW].includes(mat[i-w]) && moisture>.25){r-=10;g+=6;b+=2}
+        } else if(kind===M.GROWTH) {
+          r=P.growth[0]+noise;g=P.growth[1]+noise;b=P.growth[2]+noise
+        } else if(kind===M.SAND) {
+          const shade=noise*.8-world.moisture[i]*24
+          r=P.sand[0]+shade;g=P.sand[1]+shade;b=P.sand[2]+shade
+        } else if(kind===M.PLANT) {
+          const stress=Math.min(1,world.plantStress[i]/R.plantStressLimit),base=P.plant,dry=P.wilted
+          r=base[0]*(1-stress)+dry[0]*stress+noise
+          g=base[1]*(1-stress)+dry[1]*stress+noise
+          b=base[2]*(1-stress)+dry[2]*stress+noise
         } else if(kind===M.ROCK) {
-          const shade=noise*.65+(Math.floor(y/8)%3===0?-5:2)+(world.origin[i]===0?-20:0)
+          const shade=noise*.65+(Math.floor(y/8)%3===0?-5:2)+(world.origin[i]===0?-14:0)
           r=P.rock[0]+shade;g=P.rock[1]+shade;b=P.rock[2]+shade
         } else if(kind===M.WATER) {
           const depth=Math.max(0,y/h-(1-world.seaLevel/100))*22
@@ -36,7 +46,8 @@ export function createRenderer() {
           r=P.lava[0]+glow+noise*.5;g=P.lava[1]+glow;b=P.lava[2]+glow*.2
         } else if(kind===M.STEAM || kind===M.CLOUD) {
           const base=kind===M.STEAM?P.steam:P.cloud,opacity=kind===M.STEAM?.70:.92
-          r=r*(1-opacity)+(base[0]+noise*.4)*opacity;g=g*(1-opacity)+(base[1]+noise*.4)*opacity;b=b*(1-opacity)+(base[2]+noise*.4)*opacity
+          const shade=kind===M.CLOUD && y+1<h && mat[i+w]!==M.CLOUD?-10:0
+          r=r*(1-opacity)+(base[0]+noise*.4+shade)*opacity;g=g*(1-opacity)+(base[1]+noise*.4+shade)*opacity;b=b*(1-opacity)+(base[2]+noise*.4+shade)*opacity
         }
         data[offset]=r;data[offset+1]=g;data[offset+2]=b;data[offset+3]=255
       }
@@ -46,10 +57,10 @@ export function createRenderer() {
     ctx.drawImage(layer,0,0,WORLD.width,WORLD.height)
     if(world.light>55) {
       ctx.globalAlpha=Math.min(.65,(world.light-55)/45)*(1-world.cloudiness)
-      ctx.fillStyle='#f1dea2';ctx.beginPath();ctx.arc(WORLD.width*.85,WORLD.height*.15,23,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1
+      ctx.fillStyle=P.sunshine;ctx.beginPath();ctx.arc(WORLD.width*.85,WORLD.height*.15,23,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1
     }
     if(world.rainbow>.01) {
-      const colours=['#e3a2ad','#ebbe9e','#e7d78f','#aac3a0','#92bfd2','#a6b2d3','#c3b0d0']
+      const colours=P.rainbow
       ctx.globalAlpha=world.rainbow*.65
       for(let band=0;band<7;band++) {
         ctx.strokeStyle=colours[band];ctx.lineWidth=5

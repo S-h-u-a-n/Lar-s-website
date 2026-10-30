@@ -1,0 +1,48 @@
+/* Scale the existing framed illustration, caption and sticker as one group.
+   Individual scale preserves the existing transform-based tilt/parallax. */
+.home-content .edition-hero .edition-cover-art {
+  scale: 1.06;
+  z-index: 1;
+}
+
+
+/* Independently editable native geometry; no screenshot-derived assets. */
+.site-shell[data-edition-page="home"] .home-content { position: relative; isolation: isolate; }
+.home-geometry { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.home-geometry-curve { display: block; width: 100%; height: 100%; overflow: visible; }
+.site-shell[data-edition-page="home"] .edition-hero,
+.site-shell[data-edition-page="home"] .edition-explore { position: relative; z-index: 1; background: transparent; }
+.home-content .edition-hero { isolation: isolate; }
+.home-geometry-dots, .home-geometry-stripes, .home-geometry-grid, .home-geometry-swatches { position: absolute; pointer-events: none; z-index: -1; }
+.home-geometry-dots {
+  right: 0; top: 2%; width: 37%; height: 68%;
+  background: radial-gradient(circle, #b98f994f 3.5px, transparent 4px) 0 0 / 31px 31px;
+  mask-image: linear-gradient(90deg, transparent, #000 32%, #000 80%, transparent), linear-gradient(#000, transparent);
+  mask-composite: intersect;
+}
+.home-geometry-stripes {
+  left: 57%; top: 15%; width: 18%; height: 26%;
+  background: repeating-linear-gradient(132deg, #d89eab55 0 1.5px, transparent 1.5px 9px);
+  mask-image: radial-gradient(ellipse, #000 15%, transparent 70%);
+}
+.home-geometry-grid {
+  left: 30%; bottom: 3%; width: 18%; height: 34%;
+  background: linear-gradient(#dcb6bf66 1px, transparent 1px), linear-gradient(90deg, #dcb6bf66 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse, #000 30%, transparent 73%);
+}
+.home-geometry-swatches { display: flex; gap: 13px; left: 4.7%; top: 7.5%; }
+.home-geometry-swatches i { display: block; width: clamp(19px, 2.05vw, 32px); aspect-ratio: 1; border-radius: 48% 52% 46% 54%; }
+@media (max-width: 1100px) {
+  .home-content .edition-hero .edition-cover-art { scale: 1.035; }
+  .home-geometry-swatches { gap: 9px; top: 4%; }
+  .home-geometry-curve { opacity: .7; }
+}
+@media (max-width: 850px) {
+  .home-content .edition-hero .edition-cover-art { scale: 1.015; }
+  .home-geometry-swatches { gap: 7px; }
+  .home-geometry-curve { opacity: .45; }
+}
+
+/* Let the same Home path pass behind footer text and exit the document edge. */
+.site-shell[data-edition-page="home"]:has(.home-geometry) > .site-footer { background: transparent; position: relative; }

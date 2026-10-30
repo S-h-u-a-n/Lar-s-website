@@ -1,9 +1,141 @@
-export const BODIES = ['earth','moon','jupiter','mars','mercury','neptune','pluto','saturn','uranus','venus','sun'].map(id => ({
-  id, name: id[0].toUpperCase() + id.slice(1), subtitle: id === 'earth' ? 'Six places to begin a journey' : 'An entry in our celestial notebook',
-  introduction: `Our class built this ${id} model to explore the sky together. This notebook will hold our observations.`,
-  research: 'Research in progress. Add measurements, comparisons and field sketches here.',
-  annotation: 'Student note: Every good question deserves another look.', illustration: null,
-}))
-export const CONTINENTS = [ ['asia','Asia'], ['europe','Europe'], ['africa','Africa'], ['north-america','North America'], ['south-america','South America'], ['oceania','Oceania'] ].map(([id,name]) => ({ id, name, introduction: `A student field notebook for ${name}. Future geography, observations and illustrations belong here.`, marker: null }))
-// marker: null is intentional. Future markers need validated model-local positions,
-// surface normals and the earth mesh transform; never guessed screen coordinates.
+// Science text: independently rewritten/translated from the linked Wikipedia
+// articles. CC BY-SA 4.0 applies to this explanatory prose, not site artwork/code.
+// Keep English `name` values stable: existing story titles also use them.
+export const SCIENCE_REVIEWED_AT = '2026-10-30'
+export const SCIENCE_LICENSE_URL = 'https://creativecommons.org/licenses/by-sa/4.0/'
+const source = (title, slug = title.replaceAll(' ', '_')) => [{
+  title, url: `https://en.wikipedia.org/wiki/${slug}`,
+  accessedAt: SCIENCE_REVIEWED_AT, author: '維基百科貢獻者',
+}]
+
+export const BODIES = [
+  {
+    id: 'earth', name: 'Earth', displayName: '地球 Earth', subtitle: '海洋、岩石與生命共同塑造的世界',
+    introduction: "地球是太陽系第三顆行星，擁有廣闊海洋、活躍地質與目前唯一已知的生命。",
+    facts: [{"label": "平均直徑", "value": "約 12,742 公里"}, {"label": "質量", "value": "約 5.97 × 10²⁴ 公斤"}, {"label": "日距（軌道半長軸）", "value": "約 1.496 億公里"}, {"label": "公轉／恆星自轉", "value": "約 365.26 日／23 小時 56 分"}, {"label": "形成時間", "value": "約 45.4 億年前"}],
+    sections: [{"heading": "位置與構造", "text": "地球位於金星與火星之間，是具有金屬核心、地函與岩石地殼的類地行星。月球是它唯一的天然衛星；自轉帶來晝夜，自轉軸傾斜使日照隨季節改變。"}, {"heading": "海洋、大氣與地質", "text": "海洋覆蓋約 71% 地表；乾燥大氣約含 78% 氮與 21% 氧。水循環、洋流與大氣環流共同影響氣候。岩石圈分成移動的板塊，碰撞與分離塑造山脈、海盆、火山及地震帶。"}, {"heading": "生命與人類", "text": "液態水、能量與多樣環境支持豐富生態。人類依賴水、土壤與生物資源，也透過土地利用、污染與溫室氣體排放改變環境。認識地球，需要同時看自然系統與人類活動。"}],
+    sources: [...source('Earth'), ...source("Plate tectonics")],
+  },
+  {
+    id: 'moon', name: 'Moon', displayName: '月球 Moon', subtitle: '以引力與月相陪伴地球的天然衛星',
+    introduction: "月球是地球唯一的天然衛星，表面保留撞擊坑、古老熔岩平原與人類探索的足跡。",
+    facts: [{"label": "平均直徑", "value": "約 3,475 公里"}, {"label": "質量", "value": "約 7.35 × 10²² 公斤"}, {"label": "繞地軌道半長軸", "value": "約 38.44 萬公里"}, {"label": "公轉／自轉（恆星週期）", "value": "皆約 27.3 日"}, {"label": "月相週期", "value": "約 29.5 日"}],
+    sections: [{"heading": "表面與環境", "text": "月球具有岩石地殼、地函與小型核心，幾乎沒有能調節溫度的大氣。深色「月海」不是海洋，而是玄武岩熔岩平原；明亮高地則密布撞擊坑。表面重力約為地球的六分之一。"}, {"heading": "月相與潮汐鎖定", "text": "月球因潮汐鎖定，大致以同一面朝向地球。月相來自日照區域與觀察角度改變，不是地球影子造成；地球影子遮住月球時才是月食。背面也會經歷白天，並非永遠黑暗。"}, {"heading": "觀測與探索", "text": "1969 年阿波羅 11 號首次載人登月，帶回的樣本幫助研究月球形成與撞擊歷史。軌道探測與無人著陸則持續研究地形、極區及水冰線索。"}],
+    sources: [...source('Moon'), ...source("Lunar phase")],
+  },
+  {
+    id: 'jupiter', name: 'Jupiter', displayName: '木星 Jupiter', subtitle: '太陽系最大的行星',
+    introduction: "木星是太陽系最大行星，以氫和氦為主，擁有快速自轉、強磁場與活躍雲帶。",
+    facts: [{"label": "平均直徑", "value": "約 14 萬公里"}, {"label": "質量", "value": "約為地球的 318 倍"}, {"label": "日距（軌道半長軸）", "value": "約 7.785 億公里"}, {"label": "公轉週期", "value": "約 11.86 個地球年"}, {"label": "自轉週期", "value": "約 10 小時"}],
+    sections: [{"heading": "構造與大氣", "text": "木星是氣體巨行星，沒有明確可站立的固體表面。越往深處，壓力與溫度越高；內部的金屬氫與強磁場有關。快速旋轉使赤道鼓起，大氣流動形成明暗相間的雲帶。"}, {"heading": "風暴與衛星", "text": "大紅斑是長期存在、大小會變化的反氣旋。木衛一的火山、木衛二的冰殼與地下海洋線索，以及木衛三、木衛四的不同表面，使木星系統成為重要研究對象。"}, {"heading": "觀測與探索", "text": "1610 年伽利略觀測到四顆大型衛星，提供天體不全繞地球運動的證據。伽利略號與朱諾號則近距離研究木星大氣、內部與磁場。"}],
+    sources: [...source('Jupiter'), ...source("Great Red Spot")],
+  },
+  {
+    id: 'mars', name: 'Mars', displayName: '火星 Mars', subtitle: '留下古老水跡的紅色岩石行星',
+    introduction: "火星是太陽系第四顆行星，紅色塵土、古河道與巨大火山記錄了不同於今日的環境。",
+    facts: [{"label": "平均直徑", "value": "約 6,779 公里"}, {"label": "質量", "value": "約 6.42 × 10²³ 公斤"}, {"label": "日距（軌道半長軸）", "value": "約 2.279 億公里"}, {"label": "公轉週期", "value": "約 687 個地球日"}, {"label": "太陽日", "value": "約 24 小時 39 分"}, {"label": "表面重力", "value": "約為地球的 38%"}],
+    sections: [{"heading": "地表與氣候", "text": "火星是有岩石地殼、地函與核心的類地行星，稀薄大氣主要為二氧化碳。氧化鐵塵土帶來紅橙外觀，極冠、沙丘、峽谷與火山則構成多樣地形；它也有季節與大規模沙塵暴。"}, {"heading": "水與生命線索", "text": "古河道、三角洲及含水礦物支持過去曾有液態水活動。今天大部分地表的低壓、低溫環境不利液態水長期存在；曾經有水，並不等於已發現生命。"}, {"heading": "探索與地形", "text": "軌道器、著陸器與探測車共同研究火星。奧林帕斯山是寬廣的盾狀火山，相對基準面高約 21 公里，展示了火星長期火山活動的規模。"}],
+    sources: [...source('Mars'), ...source("Olympus Mons")],
+  },
+  {
+    id: 'mercury', name: 'Mercury', displayName: '水星 Mercury', subtitle: '最靠近太陽，也最小的行星',
+    introduction: "水星是最靠近太陽、也是最小的行星，具有大型金屬核心與密布撞擊坑的岩石表面。",
+    facts: [{"label": "平均直徑", "value": "約 4,879 公里"}, {"label": "質量", "value": "約 3.30 × 10²³ 公斤"}, {"label": "日距（軌道半長軸）", "value": "約 5,791 萬公里"}, {"label": "公轉週期", "value": "約 88 個地球日"}, {"label": "恆星自轉／太陽日", "value": "約 58.6／176 個地球日"}],
+    sections: [{"heading": "構造與環境", "text": "水星的金屬核心佔行星很大比例，外層是岩石地函與地殼。外氣層非常稀薄，不能有效搬運熱量，赤道日夜溫度約可從 −170°C 到 420°C；極區永久陰影坑卻能保存水冰。"}, {"heading": "特殊的日夜", "text": "水星每公轉兩圈自轉三圈，稱為 3：2 共振。因此自轉一次不等於日出到下一次日出的時間；在這裡，一個太陽日比一年還長。"}, {"heading": "探索歷史", "text": "水手 10 號曾飛越水星；信使號於 2011 年首次進入水星軌道，研究地形、成分及磁場，任務在 2015 年結束。"}],
+    sources: [...source('Mercury (planet)', 'Mercury_(planet)'), ...source("MESSENGER")],
+  },
+  {
+    id: 'neptune', name: 'Neptune', displayName: '海王星 Neptune', subtitle: '八大行星中距離太陽最遠的一顆',
+    introduction: "海王星是八大行星中距太陽最遠的一顆，具有活躍風暴、強風與冰巨行星的高壓內部。",
+    facts: [{"label": "平均直徑", "value": "約 49,244 公里"}, {"label": "質量", "value": "約為地球的 17 倍"}, {"label": "日距（軌道半長軸）", "value": "約 45.0 億公里"}, {"label": "公轉週期", "value": "約 164.8 個地球年"}, {"label": "自轉週期", "value": "約 16 小時"}],
+    sections: [{"heading": "構造與天氣", "text": "海王星外層以氫、氦和少量甲烷為主，內部包含高壓流體與岩石成分，沒有地球式固體表面。雲系、暗斑與強風持續變化，說明遙遠寒冷的行星也有活躍天氣。"}, {"heading": "衛星與環", "text": "海王星有暗環，最大的衛星海衛一逆著行星自轉方向公轉，支持它可能是被捕獲天體的推論。航海家 2 號還觀察到海衛一的噴發羽流。"}, {"heading": "發現與探索", "text": "1846 年，研究者依天王星軌道偏差推算未知行星，再以望遠鏡確認海王星。1989 年航海家 2 號飛越，是研究其大氣、環與衛星的重要近距離觀測。"}],
+    sources: [...source('Neptune'), ...source("Triton (moon)")],
+  },
+  {
+    id: 'pluto', name: 'Pluto', displayName: '冥王星 Pluto', subtitle: '古柏帶中的冰岩世界',
+    introduction: "冥王星是古柏帶中的矮行星，由冰與岩石組成，擁有複雜地形及與卡戎相伴的系統。",
+    facts: [{"label": "平均直徑", "value": "約 2,377 公里"}, {"label": "質量", "value": "約 1.30 × 10²² 公斤"}, {"label": "日距（軌道半長軸）", "value": "約 59.06 億公里"}, {"label": "公轉週期", "value": "約 248 個地球年"}, {"label": "自轉週期", "value": "約 6.39 個地球日，逆行"}],
+    sections: [{"heading": "位置與分類", "text": "冥王星軌道橢圓且傾斜，位於海王星外的古柏帶。2006 年國際天文聯合會的分類將它列為矮行星，因其未清除軌道鄰域；這是動力學分類，不代表缺乏研究價值。"}, {"heading": "地表與衛星", "text": "地表有氮冰平原、水冰山地與稀薄大氣。最大衛星卡戎與冥王星互相潮汐鎖定；兩者共同繞系統質心運動。冥王星與海王星的公轉共振有助避免近距離碰撞。"}, {"heading": "發現與探索", "text": "湯博於 1930 年發現冥王星。2015 年新視野號高速飛越，揭示心形區域、冰原與多樣地形；它沒有進入冥王星軌道，而是繼續探索古柏帶。"}],
+    sources: [...source('Pluto'), ...source("New Horizons")],
+  },
+  {
+    id: 'saturn', name: 'Saturn', displayName: '土星 Saturn', subtitle: '被無數冰粒環繞的氣體巨行星',
+    introduction: "土星是太陽系第二大行星，最醒目的環由大量獨立繞行的冰粒與碎屑組成。",
+    facts: [{"label": "平均直徑", "value": "約 116,464 公里"}, {"label": "質量", "value": "約為地球的 95 倍"}, {"label": "日距（軌道半長軸）", "value": "約 14.34 億公里"}, {"label": "公轉週期", "value": "約 29.45 個地球年"}, {"label": "自轉週期", "value": "約 10.7 小時，依測量方式而異"}, {"label": "平均密度", "value": "約 0.69 g/cm³"}],
+    sections: [{"heading": "構造與行星環", "text": "土星主要由氫與氦組成，沒有清楚固體表面。環不是硬盤，而是以水冰為主的粒子系統；衛星引力與軌道共振塑造環縫、波紋等結構。環的視角隨地球與土星位置改變。"}, {"heading": "衛星與環境", "text": "土衛六擁有濃厚大氣及液態甲烷、乙烷參與的地表循環；土衛二的冰粒噴流提供研究地下海洋的線索。這些環境與地球不同，卻同樣能用物理與化學理解。"}, {"heading": "觀測與探索", "text": "伽利略在 1610 年看見土星兩側結構，後續觀測才釐清環的形狀。卡西尼號長期觀察土星系統，惠更斯號則在土衛六著陸。"}],
+    sources: [...source('Saturn'), ...source("Rings of Saturn")],
+  },
+  {
+    id: 'uranus', name: 'Uranus', displayName: '天王星 Uranus', subtitle: '自轉軸大幅傾斜的冰巨行星',
+    introduction: "天王星是太陽系第七顆行星，自轉軸大幅傾斜，是具有暗環與多顆衛星的冰巨行星。",
+    facts: [{"label": "平均直徑", "value": "約 50,724 公里"}, {"label": "質量", "value": "約為地球的 14.5 倍"}, {"label": "日距（軌道半長軸）", "value": "約 28.71 億公里"}, {"label": "公轉週期", "value": "約 84 個地球年"}, {"label": "自轉週期", "value": "約 17 小時，逆行"}, {"label": "自轉軸傾角", "value": "約 98°"}],
+    sections: [{"heading": "構造與環境", "text": "外層大氣以氫、氦為主，甲烷吸收部分紅光，影響青色外觀。「冰巨行星」指成分分類，不表示內部都是普通冰塊；深處的水、氨、甲烷等物質處於高壓狀態。"}, {"heading": "極端季節與環", "text": "近乎側躺的自轉軸，讓兩極經歷漫長的日照與黑暗。狹窄、暗淡的環遠不如土星環醒目，1977 年恆星掩星時出現的多次變暗，揭露了環的存在。"}, {"heading": "發現與探索", "text": "赫歇爾於 1781 年辨認出天王星。航海家 2 號在 1986 年飛越，提供近距離資料；內部結構與長期季節變化仍有待更多觀測。"}],
+    sources: [...source('Uranus'), ...source("Rings of Uranus")],
+  },
+  {
+    id: 'venus', name: 'Venus', displayName: '金星 Venus', subtitle: '大小近似地球，環境卻截然不同',
+    introduction: "金星是太陽系第二顆行星，大小接近地球，卻因濃厚大氣與強烈溫室效應而極度炎熱。",
+    facts: [{"label": "平均直徑", "value": "約 12,104 公里"}, {"label": "質量", "value": "約 4.87 × 10²⁴ 公斤"}, {"label": "日距（軌道半長軸）", "value": "約 1.082 億公里"}, {"label": "公轉週期", "value": "約 224.7 個地球日"}, {"label": "恆星自轉", "value": "約 243 個地球日，逆行"}, {"label": "地表平均溫度", "value": "約 464°C"}],
+    sections: [{"heading": "大氣與地表", "text": "大氣約 96.5% 為二氧化碳，包覆硫酸雲層，地表氣壓約為地球海平面的 92 倍。強烈溫室效應使它比更靠近太陽的水星還熱。雷達觀測揭示廣闊火山平原與山地。"}, {"heading": "自轉與觀察", "text": "金星逆行且轉得很慢，但太陽日約 116.75 個地球日，不能與 243 日的恆星自轉混用。它反射陽光，在地球天空常以晨星或昏星出現，兩個名稱其實指同一天體。"}, {"heading": "探索歷史", "text": "金星號系列曾在高溫高壓地表著陸並傳回資料；麥哲倫號利用雷達穿透雲層，繪製地表地形。"}],
+    sources: [...source('Venus'), ...source("Atmosphere of Venus")],
+  },
+  {
+    id: 'sun', name: 'Sun', displayName: '太陽 Sun', subtitle: '以核融合供應能量的恆星',
+    introduction: "太陽是太陽系中心的恆星，以核心核融合釋放能量，其引力主導行星與其他天體的運動。",
+    facts: [{"label": "直徑", "value": "約 139 萬公里"}, {"label": "質量", "value": "約 1.99 × 10³⁰ 公斤"}, {"label": "年齡", "value": "約 46 億年"}, {"label": "光球溫度", "value": "約 5,800 K"}, {"label": "赤道自轉", "value": "約 25 日；高緯度較慢"}, {"label": "日地光行時間", "value": "約 8 分 19 秒"}],
+    sections: [{"heading": "構造與能源", "text": "太陽主要由氫與氦組成。核心核融合將氫轉成氦，釋放能量，經內部傳遞後由光球等區域放出；它不是依靠氧氣燃燒的火球。光球之外還有色球與高溫日冕。"}, {"heading": "磁活動與地球", "text": "黑子是強磁場影響下、較周圍低溫的區域。黑子數量大致有 11 年週期；閃焰與日冕物質拋射可能影響地球磁場、通訊及衛星，並與極光活動有關。"}, {"heading": "觀測與安全", "text": "長期觀測與太空探測幫助研究太陽內部及太陽風。觀察太陽必須使用合適的太陽觀測設備，不能直接用肉眼或一般望遠鏡直視。"}],
+    sources: [...source('Sun'), ...source("Solar cycle")],
+  },
+]
+
+export const CONTINENTS = [
+  {
+    id: 'asia', name: 'Asia', displayName: '亞洲 Asia', subtitle: '從極地到熱帶的廣闊陸地',
+    introduction: "亞洲是面積與人口最多的洲，從北極延伸至赤道附近，包含多樣地形、文明與生活方式。",
+    facts: [{"label": "面積", "value": "約 4,458 萬平方公里"}, {"label": "人口", "value": "約 46.95 億人（2021 年，條目所列聯合國估計）"}, {"label": "位置", "value": "歐亞大陸東部，面向北冰洋、太平洋與印度洋"}, {"label": "常見分區", "value": "東亞、東南亞、南亞、中亞、西亞、北亞"}, {"label": "代表地形", "value": "青藏高原、喜馬拉雅山、廣大平原與群島"}],
+    sections: [{"heading": "位置與分區", "text": "亞洲與歐洲相連，洲界部分依歷史慣例劃定。東亞包括中國、日本、朝鮮半島等；東南亞包括中南半島與島嶼地區；南亞以印度次大陸為主，中亞多為內陸，西亞連接地中海與阿拉伯半島，北亞主要為西伯利亞。分區邊界因分類而異。"}, {"heading": "氣候與自然環境", "text": "北方有苔原與針葉林，內陸有草原、沙漠與高山，南方則有季風區及熱帶雨林。長江、恆河等河流支持農業與聚落；高山、海陸分布與季風共同影響降水。"}, {"heading": "人口、文化與歷史", "text": "人口集中於東亞、南亞與東南亞的平原、河谷及城市。漢語、印度—歐洲語系與南島語系等語言並存，佛教、印度教、伊斯蘭教等傳統影響深遠。古代河谷文明與陸海貿易促進交流，今日各地的飲食、宗教與都市生活仍差異鮮明。"}],
+    sources: [...source('Asia'), ...source("Himalayas")], marker: null,
+  },
+  {
+    id: 'europe', name: 'Europe', displayName: '歐洲 Europe', subtitle: '歐亞大陸西側的半島與平原',
+    introduction: "歐洲位於歐亞大陸西部，海岸曲折、平原與山地交錯，具有多語言與長期交流的文化環境。",
+    facts: [{"label": "面積", "value": "約 1,019 萬平方公里"}, {"label": "人口", "value": "約 7.42 億人（2023 年，條目所列聯合國估計）"}, {"label": "位置", "value": "北臨北冰洋、西臨大西洋、南臨地中海"}, {"label": "常見分區", "value": "北歐、西歐、南歐、東歐；亦常另列中歐"}, {"label": "代表地形", "value": "歐洲平原、阿爾卑斯山、斯堪地那維亞半島"}],
+    sections: [{"heading": "範圍與主要地區", "text": "歐亞洲界常沿烏拉山、烏拉河及高加索一帶劃分，但細節有不同慣例。北歐包含斯堪地那維亞等地，南歐圍繞地中海，西歐與中歐連結大西洋沿岸及內陸，東歐則有廣大平原。歐洲不是歐盟，兩者範圍不同。"}, {"heading": "氣候與自然環境", "text": "西部受大西洋與西風影響，海洋性氣候較明顯；內陸季節溫差較大。南部多地中海型氣候，北部有寒帶環境，高山另有垂直氣候差異。河流、平原與山口影響交通和農業。"}, {"heading": "人口、文化與歷史", "text": "日耳曼、羅曼、斯拉夫等語言群廣泛分布，亦有多種其他語言。古希臘羅馬、基督宗教、文藝復興與工業化深刻影響歷史；移民與跨境交流持續豐富城市文化。各地並非共享單一宗教或生活方式。"}],
+    sources: [...source('Europe'), ...source("Alps")], marker: null,
+  },
+  {
+    id: 'africa', name: 'Africa', displayName: '非洲 Africa', subtitle: '跨越赤道的高原、沙漠與裂谷',
+    introduction: "非洲跨越赤道，是面積與人口第二大的洲，擁有高原、沙漠、雨林及多樣語言文化。",
+    facts: [{"label": "面積", "value": "約 3,037 萬平方公里"}, {"label": "人口", "value": "約 13.94 億人（2021 年，條目所列聯合國估計）"}, {"label": "位置", "value": "西臨大西洋、東臨印度洋、北隔地中海與歐洲相望"}, {"label": "常見分區", "value": "北非、西非、中非、東非、南部非洲"}, {"label": "代表地形", "value": "撒哈拉沙漠、剛果盆地、東非裂谷與高原"}],
+    sections: [{"heading": "範圍與主要地區", "text": "非洲經蘇伊士地峽與亞洲相連，通常包括馬達加斯加等周邊島嶼。北非多臨地中海與撒哈拉；西非面向大西洋，中非包括剛果盆地，東非有裂谷、高原與非洲之角，南部非洲則有高原與多樣海岸。"}, {"heading": "氣候與自然環境", "text": "赤道附近有熱帶雨林，向兩側逐漸出現稀樹草原、乾燥區及沙漠，南北端部分沿海有地中海型氣候。尼羅河、剛果河及大湖系統支持生態與生活；不能把整洲簡化為炎熱草原。"}, {"heading": "人口、文化與歷史", "text": "非洲是現代人類起源的重要地區，也有古埃及、西非王國與斯瓦希里海岸等歷史。阿拉伯語、斯瓦希里語及眾多地方語言並存，宗教與藝術傳統多元。殖民與獨立運動影響今日國界，城市生活與農牧社會也持續變化。"}],
+    sources: [...source('Africa'), ...source("East African Rift")], marker: null,
+  },
+  {
+    id: 'north-america', name: 'North America', displayName: '北美洲 North America', subtitle: '從北極冰原延伸至熱帶地區',
+    introduction: "北美洲從北極延伸至熱帶，包含加拿大、美國、墨西哥、中美洲與加勒比海地區。",
+    facts: [{"label": "面積", "value": "約 2,471 萬平方公里"}, {"label": "人口", "value": "約 5.92 億人（2021 年，條目估計）"}, {"label": "位置", "value": "太平洋與大西洋之間，北接北冰洋"}, {"label": "本文範圍", "value": "採包含中美洲、加勒比海及格陵蘭的廣義北美洲"}, {"label": "代表地形", "value": "洛磯山脈、大平原、五大湖、阿帕拉契山脈"}],
+    sections: [{"heading": "地理分區", "text": "加拿大、美國與墨西哥構成主要大陸區域，向南經中美洲地峽連接南美洲，加勒比海有大小安地列斯等群島。統計上的「北部美洲」不等於整個北美洲，閱讀數字時需要先確認範圍。"}, {"heading": "氣候與自然環境", "text": "西部山系、中部平原與東部古老山地構成主要地形。北方有冰蓋、苔原及針葉林，內陸有草原與沙漠，南方及島嶼有熱帶環境。冰川塑造五大湖等地形，山脈也影響降水分布。"}, {"heading": "人口、文化與歷史", "text": "原住民族文化早於歐洲殖民存在，之後的殖民、非洲人口被迫遷移與全球移民共同塑造社會。英語、西班牙語、法語及原住民族語言並存；美國加拿大都市、墨西哥與中美洲、加勒比海各有不同歷史與生活文化。"}],
+    sources: [...source('North America'), ...source("Great Lakes")], marker: null,
+  },
+  {
+    id: 'south-america', name: 'South America', displayName: '南美洲 South America', subtitle: '安地斯山脈與亞馬遜流域所在的洲',
+    introduction: "南美洲主要位於南半球，西側是安地斯山脈，東部有亞馬遜流域、高原與廣大草原。",
+    facts: [{"label": "面積", "value": "約 1,784 萬平方公里"}, {"label": "人口", "value": "約 4.34 億人（2021 年，條目所列聯合國估計）"}, {"label": "位置", "value": "西臨太平洋、東臨大西洋，北部跨赤道"}, {"label": "常見地理區域", "value": "安地斯地區、亞馬遜流域、圭亞那及巴西高地、南錐地區"}, {"label": "代表環境", "value": "熱帶雨林、阿塔卡馬沙漠、彭巴草原、巴塔哥尼亞"}],
+    sections: [{"heading": "範圍與地形", "text": "西北經巴拿馬地峽連接北美洲。安地斯山脈沿西岸延伸，內陸河網匯入亞馬遜與拉普拉塔等流域；東部有巴西與圭亞那高地。這些是方便認識自然地理的區域，不是唯一政治分區。"}, {"heading": "氣候與自然環境", "text": "赤道附近廣布熱帶雨林，高山有明顯垂直氣候；西岸局部極乾燥，南方則有溫帶草原與寒冷環境。緯度、洋流與安地斯山的阻擋共同影響降雨，不能用單一熱帶氣候代表整洲。"}, {"heading": "人口、文化與歷史", "text": "人口多集中沿海、城市與部分高地，巴西主要使用葡萄牙語，多數其他國家以西班牙語為主，也有克丘亞語等原住民族語言。印加等文明、歐洲殖民、非洲裔社群與後續移民共同形成多元飲食、音樂及宗教生活。"}],
+    sources: [...source('South America'), ...source("Amazon River")], marker: null,
+  },
+  {
+    id: 'oceania', name: 'Oceania', displayName: '大洋洲 Oceania', subtitle: '由大陸、群島與海洋連結的地理區域',
+    introduction: "大洋洲以澳洲及太平洋群島為主，包含大陸、火山島與珊瑚島，海洋是各地生活的重要連結。",
+    facts: [{"label": "面積", "value": "約 853 萬平方公里（採條目資訊框範圍）"}, {"label": "人口", "value": "約 4,449 萬人（2021 年，條目所列聯合國估計）"}, {"label": "位置", "value": "以太平洋為中心，跨東西及南北半球"}, {"label": "常見分區", "value": "澳洲與紐西蘭、美拉尼西亞、密克羅尼西亞、玻里尼西亞"}, {"label": "範圍說明", "value": "採澳洲、紐西蘭與太平洋島嶼的常用統計；廣義洲界另有不同定義"}],
+    sections: [{"heading": "主要地區與島嶼", "text": "澳洲是最大陸塊，紐西蘭位於其東南；美拉尼西亞包括新幾內亞、索羅門群島等，密克羅尼西亞與玻里尼西亞分布於更廣大海域。地理、文化與統計分區不完全重合，不能只用澳洲代表整區。"}, {"heading": "氣候與自然環境", "text": "澳洲內陸乾燥，東北有熱帶環境；紐西蘭多溫帶海洋性氣候，太平洋島嶼多為熱帶。大陸島、火山島與珊瑚島的形成方式不同；珊瑚礁、特有動植物與海平面變化都是重要研究主題。"}, {"heading": "人口、文化與歷史", "text": "人口集中於澳洲、紐西蘭及巴布亞紐幾內亞等地。澳洲原住民族、毛利與太平洋島民擁有不同語言、土地觀及航海傳統；歐洲殖民與後續移民也影響今日社會，海洋不只是距離，也是交通與文化交流的空間。"}],
+    sources: [...source('Oceania'), ...source("Great Barrier Reef")], marker: null,
+  },
+  {
+    id: 'antarctica', name: 'Antarctica', displayName: '南極洲 Antarctica', subtitle: '被厚重冰蓋覆蓋的南方大陸',
+    introduction: "南極洲是環繞地理南極的大陸，大部分被厚冰蓋覆蓋，以極寒乾燥環境與國際科研活動著稱。",
+    facts: [{"label": "面積", "value": "約 1,420 萬平方公里"}, {"label": "常住人口", "value": "無原住或永久定居人口；研究人員隨季節變動"}, {"label": "位置", "value": "主要位於南極圈內，周圍為南冰洋"}, {"label": "主要分區", "value": "東南極、西南極與南極半島"}, {"label": "平均冰蓋厚度", "value": "約 1.9 公里"}],
+    sections: [{"heading": "範圍與環境", "text": "南極洲是冰下有陸地的大陸，與以海洋為中心的北極不同。橫貫南極山脈分隔東、西南極主要區域，南極半島向南美洲方向伸出。內陸高、冷且乾燥，海岸與半島通常較溫和。"}, {"heading": "氣候與生態", "text": "內陸降水極少，屬於極地沙漠。冰流與冰棚會移動，冰芯保存過去氣候線索。陸上植被稀少，海岸及周邊海洋卻有企鵝、海豹與磷蝦支持的食物網；南極洲並不是完全沒有生命。"}, {"heading": "人類活動與合作", "text": "研究站而非一般城市是主要人類據點，人口隨季節改變。1959 年簽署、1961 年生效的南極條約強調和平利用與科學研究自由；研究者共同觀察氣候、冰蓋、地質及生態。"}],
+    sources: [...source('Antarctica'), ...source("Antarctic Treaty System")], marker: null,
+  },
+]

@@ -1,6 +1,6 @@
 import { POTIONS, RULES as R } from './config.js'
 import { clamp } from './terrain.js'
-import { random, spawnAt } from './weather.js'
+import { random, spawnAt, applyLocalTemperature } from './weather.js'
 import { brushSettings } from './brushSettings.js'
 
 // Arc-length interpolation: pointer event frequency cannot leave gaps.
@@ -30,14 +30,6 @@ export function paintStroke(world,type,from,to,strength=R.defaultStrength,tap=fa
   let created=0
   for(const point of strokePoints(from,to,spacing)) {
     if(point.x<0 || point.y<0 || point.x>=world.columns || point.y>=world.rows)continue
-    if(['rain','cold','cloud','lava'].includes(type)) {
-      // Always mark the centre, then fill a small physical footprint.
-      if(deposit(point.x,point.y))created++
-      for(let i=0;i<dabs;i++) {
-        const angle=random(world)*Math.PI*2,distance=Math.sqrt(random(world))*radius
-        if(deposit(point.x+Math.cos(angle)*distance,point.y+Math.sin(angle)*distance))created++
-      }
-    }
     if(type==='sun' || type==='cold') {
       for(let dy=-Math.ceil(radius);dy<=radius;dy++)for(let dx=-Math.ceil(radius);dx<=radius;dx++) {
         if(dx*dx+dy*dy>radius*radius)continue
@@ -46,7 +38,17 @@ export function paintStroke(world,type,from,to,strength=R.defaultStrength,tap=fa
         const i=y*world.columns+x
         if(world.brushThermalVisited.has(i))continue
         world.brushThermalVisited.add(i)
+        const before=world.temperatureGrid[i]
         world.temperatureGrid[i]=type==='sun'?Math.max(world.temperatureGrid[i],Math.min(90,world.temperatureGrid[i]+(90-world.temperatureGrid[i])*.15*strength*power)):Math.max(-55,world.temperatureGrid[i]-8*strength*power)
+        applyLocalTemperature(world,i,world.temperatureGrid[i]-before)
+      }
+    }
+    if(['rain','cold','cloud','lava','sand','growth'].includes(type)) {
+      // Always mark the centre, then fill a small physical footprint.
+      if(deposit(point.x,point.y))created++
+      for(let i=0;i<dabs;i++) {
+        const angle=random(world)*Math.PI*2,distance=Math.sqrt(random(world))*radius
+        if(deposit(point.x+Math.cos(angle)*distance,point.y+Math.sin(angle)*distance))created++
       }
     }
   }

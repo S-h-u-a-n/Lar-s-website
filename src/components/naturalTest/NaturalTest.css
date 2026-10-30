@@ -23,3 +23,22 @@ body .nt-level-overview .is-entrance-target .nt-entry{visibility:visible;pointer
 @keyframes nt-pigment-spread{0%{transform:scale(.035) rotate(-8deg);border-radius:61% 39% 38% 62% / 56% 65% 35% 44%}65%{transform:scale(.94) rotate(3deg);border-radius:37% 63% 58% 42% / 65% 39% 61% 35%}100%{transform:scale(1.08) rotate(-2deg);border-radius:48% 52% 36% 64% / 42% 60% 40% 58%}}
 @keyframes nt-pigment-fade{0%{opacity:0}22%{opacity:.3}62%{opacity:.28}100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.nt-entrance-wash{display:none}}
+.nt-article-body h3{font:400 19px/1.4 var(--display);margin:28px 0 10px}
+.nt-article-sources{margin-top:28px;font:10px/1.7 var(--sans);opacity:.8;overflow-wrap:anywhere}
+.nt-article-sources h3{font:inherit;letter-spacing:.08em}
+.nt-article-sources a{color:inherit;text-underline-offset:2px}
+/* Edition's generic card rule is relative; atlas coordinates are category-local. */
+.natural-test .nt-category > .nt-entry{position:absolute}
+/* Bilingual names use existing Chinese/English fields without changing content. */
+.natural-test .nt-title-zh,.natural-test .nt-title-en{display:block;overflow-wrap:anywhere}
+.natural-test .nt-title-zh{font:inherit;color:inherit}
+.natural-test .nt-title-en{font-family:var(--sans);font-weight:400;letter-spacing:.03em;line-height:1.4;opacity:.68;color:inherit}
+.natural-test .nt-category-title .nt-title-en{font-size:26px;margin-top:12px}
+.natural-test .nt-entry .nt-title-en{font-size:14px;margin-top:8px}
+.natural-test .nt-entry-copy{min-width:0}
+.natural-test .nt-category-menu .nt-title-zh{font-size:14px;line-height:1.5}
+.natural-test .nt-category-menu .nt-title-en{font-size:10px;margin-top:4px}
+.natural-test .nt-category-menu{max-height:calc(100dvh - 170px);overflow-y:auto;overscroll-behavior:contain}
+.natural-test .edition-atlas-labels strong .nt-title-en{font-size:11px;margin-top:6px}
+.natural-test .nt-reading h2[lang="zh-Hant"]{line-height:1.35;overflow-wrap:anywhere}
+.natural-test .nt-reading .nt-subtitle[lang="en"]{opacity:.68;line-height:1.5;overflow-wrap:anywhere}

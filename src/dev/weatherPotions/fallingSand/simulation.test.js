@@ -8,9 +8,9 @@ const run=(world,seconds)=>{for(let i=0;i<Math.ceil(seconds*RULES.fps)&&!world.e
 const pour=(world,type,seconds,point,strength=1)=>{setInput(world,type,point,strength);run(world,seconds);stopInput(world);return world}
 const waterMass=w=>[M.WATER,M.SNOW,M.ICE,M.STEAM,M.CLOUD].reduce((sum,kind)=>sum+w.counts[kind],0)
 function valid(w) {
-  const counts=new Uint32Array(9)
+  const counts=new Uint32Array(Object.keys(M).length)
   for(let i=0;i<w.material.length;i++) {
-    assert.ok(w.material[i]<=M.CLOUD)
+    assert.ok(w.material[i]<=M.GROWTH)
     counts[w.material[i]]++
     assert.ok(Number.isFinite(w.temperatureGrid[i]))
     assert.ok(w.moisture[i]>=0 && w.moisture[i]<=1)
@@ -47,11 +47,11 @@ test('snow accumulates, water freezes progressively and heating returns real liq
   const w=createWorld(),mass=waterMass(w)
   pour(w,'cold',8)
   assert.ok(w.counts[M.ICE]>0 && w.counts[M.WATER]>0 && w.counts[M.SNOW]>0)
-  assert.equal(waterMass(w),mass+w.snowAdded)
+  assert.equal(waterMass(w),mass+w.snowAdded+w.rainAdded)
   const ice=w.counts[M.ICE],snow=w.counts[M.SNOW]
   pour(w,'sun',20)
   assert.ok(w.counts[M.ICE]<ice && w.counts[M.SNOW]<snow)
-  assert.ok(w.melted>0 && w.observed.has('melt'));valid(w)
+  assert.ok(w.melted>0);valid(w)
 })
 test('lava contacts water: neither is painted over; water becomes rising steam and lava rock',()=>{
   const w=empty();put(w,10,16,M.WATER);put(w,10,15,M.LAVA,520)
@@ -64,7 +64,7 @@ test('lava contacts water: neither is painted over; water becomes rising steam a
 test('lava injection follows pointer and moves along terrain before cooling',()=>{
   const w=createWorld();pour(w,'lava',6,{x:165,y:116})
   assert.ok(w.lavaAdded>0 && w.steamCreated>0 && w.basaltCreated>0)
-  assert.ok(w.observed.has('steam') && w.observed.has('basalt'))
+  assert.ok(w.steamCreated>0 && w.basaltCreated>0)
   const land=pour(createWorld(),'lava',3,{x:55,y:45}),lava=land.counts[M.LAVA]
   assert.ok(lava>0);run(land,40);assert.ok(land.counts[M.LAVA]<lava);assert.ok(land.basaltCreated>0);valid(land);valid(w)
 })
@@ -75,21 +75,21 @@ test('evaporation, condensation and cloud rain transfer the same water cells',()
   assert.equal(waterMass(w),mass)
   pour(w,'cold',7);run(w,18)
   assert.ok(w.condensed>0);assert.ok(w.naturalRain>0)
-  assert.equal(waterMass(w),mass+w.snowAdded)
-  assert.ok(w.observed.has('condense')&&w.observed.has('precipitate'));valid(w)
+  assert.equal(waterMass(w),mass+w.snowAdded+w.rainAdded)
+  valid(w)
 })
 test('clouds shade sun, wind advects actual cells and wet storms move the sea',()=>{
   const clear=createWorld(),cloudy=createWorld()
   pour(clear,'sun',6);pour(cloudy,'cloud',6);pour(cloudy,'sun',6)
   assert.ok(cloudy.light<clear.light && cloudy.temperature<clear.temperature)
   const w=createWorld();pour(w,'rain',7);pour(w,'cloud',3);pour(w,'wind',8)
-  assert.ok(w.windMoves>20 && w.storm>.25 && w.observed.has('storm'));valid(w)
+  assert.ok(w.windMoves>20 && w.storm>.25);valid(w)
 })
 test('rain then sun reveals a rainbow; the dedicated bottle also works',()=>{
   const w=createWorld();pour(w,'rain',5);pour(w,'sun',7);assert.ok(w.rainbow>.05)
-  const magic=pour(createWorld(),'rainbow',4);assert.ok(magic.rainbow>.5 && magic.observed.has('rainbow'))
+  const magic=pour(createWorld(),'rainbow',4);assert.ok(magic.rainbow>.5)
 })
-test('all seven stop their input immediately, while existing matter continues moving',()=>{
+test('all nine stop their input immediately, while existing matter continues moving',()=>{
   for(const p of POTIONS) {
     const w=pour(createWorld(),p.id,4),doses={...w.doses},injected=w.injected,moves=w.moves
     run(w,3)
@@ -118,13 +118,13 @@ test('five endings emerge from full-size actual simulations, freeze and reset',(
   }
   stopInput(broken);run(broken,80);assert.equal(broken.ending,'apocalypse');assert.ok(broken.disasters.size>=2);assert.ok(broken.disasters.has('heatwave'));valid(broken);results.push(broken.ending)
   assert.equal(new Set(results).size,5)
-  const initial=createWorld(),reset=createWorld();assert.deepEqual(reset.material,initial.material);assert.equal(reset.ending,null);assert.equal(reset.observations.length,0)
+  const initial=createWorld(),reset=createWorld();assert.deepEqual(reset.material,initial.material);assert.equal(reset.ending,null);assert.equal('observations' in reset,false);assert.equal('observed' in reset,false)
 })
 test('fixed steps, pointer mapping, invalid input and rapid changes stay bounded',()=>{
   const w=createWorld(),tick=w.tick;stepWorld(w,NaN);stepWorld(w,-1);assert.equal(w.tick,tick)
   stepWorld(w,1/60);assert.equal(w.tick,tick);stepWorld(w,1/60);assert.equal(w.tick,tick+1)
   stepWorld(w,100);assert.equal(w.tick,tick+2)
-  for(let i=0;i<1200;i++){setInput(w,POTIONS[i%7].id,{x:i%w.columns,y:(i*7)%w.rows});stepWorld(w);if(i%3===0)stopInput(w)}
+  for(let i=0;i<1200;i++){setInput(w,POTIONS[i%POTIONS.length].id,{x:i%w.columns,y:(i*7)%w.rows});stepWorld(w);if(i%3===0)stopInput(w)}
   const before=w.input;setInput(w,'unknown');setInput(w,'rain',{x:NaN,y:0});assert.equal(w.input,before)
   assert.equal(pickWorld(w,{x:-1,y:0}),null)
   assert.deepEqual(pickWorld(w,{x:WORLD.width*.5,y:WORLD.height*.5}),{x:105,y:85})

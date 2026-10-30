@@ -49,3 +49,11 @@ Chrome 實際確認開發版與正式建置從 Big 真正藥水 mesh 進入、�
 正式版停手後於 97.6 模擬秒觸發亞特蘭提斯，投入雨滴保持 10207；結局背景為 `blur(2.4px) contrast(0.72) saturate(0.72)`，卡片完全在 world-stage 內，全頁 Modal 數為零，按「啟用回溯魔法」恢復初始世界。五結局另外全部由完整網格模擬測試觸發。
 
 本機開發 Chrome 的 TelescopeTest.jsx 被瀏覽器端阻擋（`ERR_BLOCKED_BY_CLIENT`），Vite 對該模組實際回應 200；正式建置 Telescope 的地圖、LOG／CLOSE、返回 Big 均正常。未改動 Telescope 原始碼或任何瀏覽器設定，沒有清除儲存資料。
+
+## 技術參考署名（2026-10-30）
+
+正式頁尾新增 Sandspiel 參考署名與新分頁 GitHub 連結。保留上游完整 MIT 文字於 `public/licenses/sandspiel-MIT.txt`，來源為 https://github.com/MaxBittker/sandspiel/blob/master/LICENSE 。該授權文字屬於 Sandspiel，不會將本網站、使用者美術或其他原始碼改授權為 MIT。
+
+核對正式 `fallingSand` 呼叫鏈：格子交換、更新標記、砂粒重力／斜滑／沉水與植物鄰格生長參考 Sandspiel 原理；本地為獨立 JavaScript 實作，沒有辨識到直接複製或逐行轉譯的 Sandspiel 程式段。根部／支撐、生長粒子遇水啟動、氣候與結局為本地規則。未匯入 Sandspiel 的 Rust/WASM、WebGL renderer、shader 或 UI。
+
+未使用 PavelDoGreat/WebGL-Fluid-Simulation 的速度／壓力求解、shader 或其他程式；本地 `fluid()` 是材料格交換函式，不是該專案的流體模組。因此頁尾不列 Pavel Dobryakov。未找到其他直接引用的第三方模擬程式碼。既有共用轉場與字體的來源／授權不屬於本模擬引擎，本次不更動。

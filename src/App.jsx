@@ -1,3 +1,4 @@
+import HomeGeometry from './components/main/HomeGeometry'
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import ComicIntro from './components/ComicIntro'
 import HistoryEntrance from './dev/history/HistoryTest'
@@ -392,6 +393,7 @@ function App() {
           className={isHomeVisible ? 'home-content is-home-entering' : 'home-content is-waiting'}
           onAnimationEnd={handleHomeAnimationEnd}
         >
+          {isHomeVisible && <HomeGeometry />}
           <HeroSection onEnter={() => editionNavigate('scene')} isHomeVisible={isHomeVisible} revealed={homeRevealed} onRevealComplete={() => setHomeRevealed(true)} onTool={editionTool} />
           <ExploreSection onTool={editionTool} />
         </main>

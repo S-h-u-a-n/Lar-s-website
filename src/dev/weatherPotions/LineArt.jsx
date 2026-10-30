@@ -1,5 +1,16 @@
+// Match the actual filename to the potion ID; unmatched IDs retain the SVG.
+const potionImages = Object.fromEntries(Object.entries(import.meta.glob(
+  '../../../Art/potion/*-potion.png', { eager: true, query: '?url', import: 'default' },
+)).map(([path, src]) => [path.split('/').pop().replace('-potion.png', ''), src]))
+// User-confirmed filename: clod-potion.png is the cold potion artwork.
+const potionImageAliases = { cold: 'clod' }
+
 // Small, replaceable UI placeholders. World landscapes are drawn by Canvas.
 export function Bottle({ potion, pouring = false }) {
+  const image = potionImages[potion.id] || potionImages[potionImageAliases[potion.id]]
+  if (image) return <span className={`wp-bottle-art wp-bottle-image ${pouring ? 'is-tipped' : ''}`} aria-hidden="true">
+    <img src={image} alt="" width="1000" height="1000" draggable={false} />
+  </span>
   return <svg viewBox="0 0 76 108" className={`wp-bottle-art ${pouring ? 'is-tipped' : ''}`} aria-hidden="true">
     <path d="M29 15L47 14L47 36C47 43 61 46 62 63L61 87Q62 99 51 100L24 100Q13 98 14 87L15 63C15 48 29 44 29 36Z" fill="#FFFEF8" stroke="#34465A" strokeWidth="1.35" />
     <path d="M17 69Q28 64 39 68T59 68L58 87Q59 97 49 97L25 97Q17 96 17 87Z" fill={potion.color} fillOpacity=".9" />
@@ -12,6 +23,8 @@ export function Bottle({ potion, pouring = false }) {
     {potion.mark === 'wind' && <path d="M29 81H42Q48 81 45 77M29 85H46M31 89H40Q46 89 42 93" stroke="#34465A" fill="none" />}
     {potion.mark === 'cloud' && <path d="M30 89Q26 83 33 82Q36 75 42 81Q49 80 48 87Q47 91 30 89Z" stroke="#34465A" fill="none" />}
     {potion.mark === 'lava' && <path d="M29 91L35 79H41L48 91M34 85L38 88L42 84M36 76L35 72M42 76L44 72" stroke="#34465A" fill="none" />}
+    {potion.mark === 'growth' && <g stroke="#34465A" fill="none"><path d="M38 93V82M38 87Q27 87 31 79Q39 79 38 87M38 84Q47 84 46 77Q38 77 38 84" /></g>}
+    {potion.mark === 'sand' && <g fill="#34465A"><circle cx="33" cy="90" r="1.2" /><circle cx="38" cy="86" r="1.2" /><circle cx="43" cy="90" r="1.2" /><circle cx="38" cy="92" r="1.2" /><circle cx="38" cy="80" r="1" /></g>}
     {potion.mark === 'rainbow' && <g fill="none" strokeWidth="1"><path d="M29 89A9 9 0 0 1 47 89" stroke="#a57289" /><path d="M32 89A6 6 0 0 1 44 89" stroke="#b4a25e" /><path d="M35 89A3 3 0 0 1 41 89" stroke="#729787" /></g>}
   </svg>
 }

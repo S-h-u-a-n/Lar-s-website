@@ -3,22 +3,25 @@ import { clamp, makeTerrain } from './terrain.js'
 import { climate, inject } from './weather.js'
 import { updateMaterials } from './materials.js'
 import { evaluateEnding } from './endings.js'
-import { observe } from './observations.js'
 export { setInput, stopInput } from './weather.js'
-export const WORLD_VERSION = 4
+export const WORLD_VERSION = 8
 
 export function createWorld({ columns=WORLD.columns, rows=WORLD.rows }={}) {
   const size=columns*rows
   const world={
     version:WORLD_VERSION,columns,rows,
     material:new Uint8Array(size),temperatureGrid:new Float32Array(size),moisture:new Float32Array(size),
+    snowRestTicks:new Uint16Array(size),
+    thermalOffset:new Float32Array(size),thermalTick:new Uint32Array(size),
     tint:new Uint8Array(size),origin:new Uint8Array(size),age:new Uint16Array(size),exposure:new Uint16Array(size),updated:new Uint32Array(size),
-    initialSurface:new Int16Array(columns),dryColumns:new Uint8Array(columns),counts:new Uint32Array(9),
+    initialSurface:new Int16Array(columns),dryColumns:new Uint8Array(columns),counts:new Uint32Array(Object.keys(M).length),
+    plantRoot:new Uint32Array(size),plantParent:new Uint32Array(size),plantDepth:new Uint8Array(size),plantStress:new Float32Array(size),sandHeat:new Uint16Array(size),
     temperature:18,light:55,time:0,tick:0,paintRevision:0,remainder:0,random:WORLD.seed, input:null,emission:0,
-    observations:[],observed:new Set(),ending:null,endingTimers:{},disasters:new Set(),
+    ending:null,endingTimers:{},disasters:new Set(),
     doses:Object.fromEntries(POTIONS.map(p=>[p.id,0])),
     cloudiness:0,wind:0,storm:0,rainbow:0,rainMemory:0,stress:0,extreme:0,
     rainAdded:0,snowAdded:0,lavaAdded:0,cloudAdded:0,steamCreated:0,basaltCreated:0,
+    growthAdded:0,growthConsumed:0,growthExpired:0,sandAdded:0,plantsSeeded:0,plantsGrown:0,plantsWilted:0,sandWaterMoves:0,sandWindMoves:0,sandSintered:0,
     naturalRain:0,evaporated:0,condensed:0,frozen:0,melted:0,moves:0,windMoves:0,injected:0,eroded:0,fractured:0,
     seaLevel:0,riseRate:0,metrics:{moisture:.62,ice:0,snow:0,desert:0,erosion:0,damage:0,lostLand:0,flood:0,liquidRemaining:1},
   }
@@ -64,8 +67,6 @@ export function measureWorld(world,initial=false) {
   if(world.temperature>=48 && world.metrics.desert>.55 && world.metrics.moisture<.25)world.disasters.add('heatwave')
   if(world.metrics.flood>.18)world.disasters.add('flood')
   if(world.basaltCreated>200)world.disasters.add('volcano')
-  if(world.metrics.desert>.2)observe(world,'desert')
-  if(world.windMoves>15)observe(world,'wind')
 }
 export function stepWorld(world,dt=1/R.fps) {
   if(world.ending || !Number.isFinite(dt) || dt<=0)return
@@ -81,8 +82,10 @@ export function stepWorld(world,dt=1/R.fps) {
 export function snapshotWorld(world) {
   return {
     temperature:world.temperature,light:world.light,seaLevel:world.seaLevel,riseRate:world.riseRate,metrics:{...world.metrics},
-    observations:[...world.observations],ending:world.ending,input:world.input?.type || null,time:world.time,
-    particles:world.counts[M.WATER]+world.counts[M.SNOW]+world.counts[M.LAVA]+world.counts[M.STEAM]+world.counts[M.CLOUD],
+    ending:world.ending,input:world.input?.type || null,time:world.time,
+    particles:world.counts[M.WATER]+world.counts[M.SNOW]+world.counts[M.LAVA]+world.counts[M.STEAM]+world.counts[M.CLOUD]+world.counts[M.SAND]+world.counts[M.GROWTH],
+    growthAdded:world.growthAdded,growthConsumed:world.growthConsumed,growthExpired:world.growthExpired,
+    sandAdded:world.sandAdded,plantsSeeded:world.plantsSeeded,plantsGrown:world.plantsGrown,plantsWilted:world.plantsWilted,
     rainAdded:world.rainAdded,snowAdded:world.snowAdded,lavaAdded:world.lavaAdded,cloudAdded:world.cloudAdded,
     wind:world.wind,storm:world.storm,cloudiness:world.cloudiness,rainbow:world.rainbow,steamCreated:world.steamCreated,basaltCreated:world.basaltCreated,
     counts:[...world.counts],doses:{...world.doses},condensed:world.condensed,evaporated:world.evaporated,naturalRain:world.naturalRain,moves:world.moves,

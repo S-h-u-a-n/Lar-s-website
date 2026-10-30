@@ -1,0 +1,30 @@
+/* IMG_6970 composition, anchored to Explore rather than document coordinates.
+   Only two patches: a finer dot matrix behind cards 3–4, and a larger grid
+   behind cards 5–6. Both fade at the edges, leaving the heading area clear. */
+.home-content .edition-explore .home-explore-geometry {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.home-explore-geometry-dots,
+.home-explore-geometry-grid { position: absolute; pointer-events: none; }
+.home-explore-geometry-dots {
+  left: 43.5%;
+  top: clamp(140px, 10vw, 220px);
+  width: 22%;
+  height: clamp(260px, 20vw, 420px);
+  background: radial-gradient(circle, #d5adb655 clamp(1.5px, .145vw, 3px), transparent clamp(2px, .19vw, 4px));
+  background-size: clamp(14px, 1.18vw, 24px) clamp(14px, 1.18vw, 24px);
+  mask-image: radial-gradient(ellipse, #000 25%, transparent 73%);
+}
+.home-explore-geometry-grid {
+  left: 58.5%;
+  top: clamp(20px, 2.6vw, 56px);
+  width: 28%;
+  height: clamp(300px, 26vw, 540px);
+  background-image: linear-gradient(#cfa5af66 1px, transparent 1px), linear-gradient(90deg, #cfa5af66 1px, transparent 1px);
+  background-size: clamp(28px, 2.75vw, 56px) clamp(28px, 2.75vw, 56px);
+  mask-image: radial-gradient(ellipse, #000 36%, transparent 73%);
+}

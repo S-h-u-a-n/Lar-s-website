@@ -1,30 +1,31 @@
 import { STYLE } from '../naturalTest/data'
+import { ARTICLES_BY_ID } from './articles'
 export { STYLE }
-// Coordinates are local to each category. Add categories/entries without changing the camera.
 export const CATEGORIES = [
-  { id: 'history', name: 'HISTORY & CIVILIZATION', introduction: 'Time, settlements, and the ideas people carry forward.', x: 0, y: 0, width: 1100, height: 700, color: STYLE.yellow, decoration: 'architecture', landmark: '3000 BCE', entries: ['cities', 'timeline'] },
-  { id: 'culture', name: 'CULTURE & ARTS', introduction: 'Many ways to tell a story. Many ways to listen.', x: 1500, y: -150, width: 1000, height: 700, color: STYLE.pink, decoration: 'pages', landmark: 'ACT I', entries: ['theatre', 'books'] },
-  { id: 'society', name: 'SOCIETY & DAILY LIFE', introduction: 'A civilization is also a morning, a street, a shared meal.', x: 2900, y: 450, width: 1000, height: 750, color: STYLE.mint, decoration: 'city', landmark: '08:30', entries: ['commute', 'conversation'] },
-  { id: 'technology', name: 'SCIENCE & TECHNOLOGY', introduction: 'Tools that carry messages without a single spell.', x: 400, y: 1150, width: 1100, height: 750, color: STYLE.blue, decoration: 'circuit', landmark: '0101', entries: ['printing', 'networks'] },
-  { id: 'places', name: 'PLACES & PEOPLE', introduction: 'Find a place. Follow the lives that give it meaning.', x: 2150, y: 1500, width: 1100, height: 750, color: STYLE.teal, decoration: 'map', landmark: '51° N / 0° W', entries: ['bridges', 'library'] },
-]
-export const ENTRIES = [
-  ['cities', 'history', 'FIRST CITIES', 'What changes when neighbors become a city?', 'article', 70, 300],
-  ['timeline', 'history', 'A THREAD OF TIME', 'A small timeline of everyday inventions.', 'infographic', 560, 470],
-  ['theatre', 'culture', 'THE OPEN STAGE', 'Stories shared in the same room.', 'article', 40, 310],
-  ['books', 'culture', 'A BOOK TO BORROW', 'A student reading recommendation.', 'recommendation', 500, 450],
-  ['commute', 'society', 'MORNING ROUTES', 'How a city wakes and moves.', 'article', 30, 300],
-  ['conversation', 'society', 'NO SPELL REQUIRED', 'Two students discuss an ordinary train.', 'story', 510, 480],
-  ['printing', 'technology', 'WORDS IN MULTIPLES', 'Printing and the journey of ideas.', 'article', 30, 310],
-  ['networks', 'technology', 'CONNECTED VOICES', 'Messages that cross the planet.', 'article', 570, 490],
-  ['bridges', 'places', 'MEETING IN THE MIDDLE', 'A bridge is more than a crossing.', 'article', 40, 310],
-  ['library', 'places', 'THE PUBLIC LIBRARY', 'A place for borrowed knowledge.', 'article', 570, 500],
-].map(([id, category, title, description, type, x, y]) => ({ id, category, title, description, type, x, y, content: id, detail: type.toUpperCase(), image: null }))
-export const entryById = Object.fromEntries(ENTRIES.map(entry => [entry.id, entry]))
-// Replace these short editorial placeholders with researched articles before publication.
+  { id:'history', name:'HISTORY & CIVILIZATION', chineseName:'歷史與文明', introduction:'Origins, cities and connections across time.', x:0, y:0, color:STYLE.yellow, decoration:'architecture', landmark:'3000 BCE', entries:['early-humans','cities','ancient-civilizations','trade-routes','timeline'] },
+  { id:'culture', name:'CULTURE & ARTS', chineseName:'文化與藝術', introduction:'Images, performances and shared traditions.', x:2800, y:-150, color:STYLE.pink, decoration:'pages', landmark:'ACT I', entries:['visual-arts','music','theatre','books','film-animation','cultural-heritage'] },
+  { id:'society', name:'SOCIETY & DAILY LIFE', chineseName:'社會與日常生活', introduction:'Learning, movement and life together.', x:5600, y:450, color:STYLE.mint, decoration:'city', landmark:'08:30', entries:['family-community','library','food-culture','commute','bridges','conversation'] },
+  { id:'technology', name:'SCIENCE & TECHNOLOGY', chineseName:'科學與科技', introduction:'Evidence, tools and connected systems.', x:500, y:2100, color:STYLE.blue, decoration:'circuit', landmark:'0101', entries:['scientific-method','printing','electricity','computers','networks','space-exploration'] },
+  { id:'politics', name:'POLITICS & ECONOMY', chineseName:'政治與經濟', introduction:'Institutions, resources and public decisions.', x:3500, y:2250, color:STYLE.teal, decoration:'architecture', landmark:'PUBLIC', entries:['government','laws-rights','democracy','money-trade','economic-systems','international-cooperation'] },
+  { id:'language', name:'LANGUAGE & BELIEFS', chineseName:'語言與信仰', introduction:'Words, stories and ways of understanding.', x:6500, y:2600, color:STYLE.peach, decoration:'pages', landmark:'Aa', entries:['language-families','writing-systems','language-change','mythology','religions','folklore'] },
+].map(category => ({ ...category, width:1500, height:Math.max(1550, 500 + Math.ceil(category.entries.length / 2) * 350) }))
+const entryPosition = index => {
+  const row = Math.floor(index / 2), column = index % 2
+  return [column ? [810,790,805][row % 3] : [55,90,60][row % 3], 440 + row * 350 + column * 35]
+}
+const specialTypes = { timeline:'infographic', books:'recommendation', conversation:'story' }
+export const ENTRIES = CATEGORIES.flatMap(category => category.entries.map((id,index) => {
+  const item=ARTICLES_BY_ID[id], [x,y]=entryPosition(index), type=specialTypes[id] ?? 'article'
+  return { id, category:category.id, title:item.title, chineseName:item.chineseName, description:item.description, type, x,y, content:id, detail:type.toUpperCase(), image:null }
+}))
+export const entryById = Object.fromEntries(ENTRIES.map(entry => [entry.id,entry]))
+const existingIds = new Set(['cities','timeline','theatre','books','commute','conversation','printing','networks','bridges','library'])
 export const CONTENT = Object.fromEntries(ENTRIES.map(entry => [entry.id, {
-  title: entry.title, subtitle: entry.description, paragraphs: ['This field record is a starting point for a student investigation. Look closely at the objects, places, and habits people share.', 'Earth and our school world share the same natural geography. Here, we explore how communities developed tools and traditions without magic.'], note: 'A useful question for our next visit: which everyday skill would we need to learn before leaving our wands at home?', author: 'Mira · student researcher', image: null,
+  ...ARTICLES_BY_ID[entry.id], subtitle:ARTICLES_BY_ID[entry.id].chineseName,
+  note:existingIds.has(entry.id) ? 'A useful question for our next visit: which everyday skill would we need to learn before leaving our wands at home?' : null,
+  author:existingIds.has(entry.id) ? 'Mira · student researcher' : null,
 }]))
+// Existing timeline, recommendation and dialogue are retained verbatim below.
 CONTENT.timeline.steps = [{ year: 'c. 3200 BCE', title: 'Writing', text: 'Marks preserve words beyond a conversation.' }, { year: 'c. 1450', title: 'Printing in Europe', text: 'Movable type helps reproduce pages in large numbers.' }, { year: '1830s', title: 'Railways expand', text: 'Schedules become part of everyday journeys.' }, { year: '1990s', title: 'The Web', text: 'Linked documents connect readers across distances.' }]
 CONTENT.books.work = { name: 'Around the World in Eighty Days', kind: 'Novel · Jules Verne', description: 'A fictional journey shaped by transport, timetables, and unexpected company.', recommendation: 'Try reading with a map nearby. We kept pausing to ask how the travelers would solve each problem without a portal.' }
 export const CHARACTERS = { mira: { name: 'Mira', initials: 'MI', color: STYLE.pink, avatar: null }, theo: { name: 'Theo', initials: 'TH', color: STYLE.blue, avatar: null } }

@@ -3,11 +3,17 @@ import { createPortal, flushSync } from 'react-dom'
 import original from '../../../Art/Edition/main-original.jpg'
 import attention from '../../../Art/Edition/main-attention.jpg'
 import wink from '../../../Art/Edition/main-wink.jpg'
+import remo1 from '../../../Art/Main-art/REMO-1.PNG'
+import remo2 from '../../../Art/Main-art/REMO-2.PNG'
+import remo3 from '../../../Art/Main-art/REMO-3.PNG'
+import remo4 from '../../../Art/Main-art/REMO-4.PNG'
+import remo5 from '../../../Art/Main-art/REMO-5.PNG'
 import { MAIN_REVEAL as config, clamp, hash, layoutTiles, measureArtworkFace, selectTarget } from './revealConfig'
 import './MainArtworkReveal.css'
 
 const easeOut = t => 1 - (1 - t) ** 3
 const easeInOut = t => t < .5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2
+const REMO_IMAGES = [remo1, remo2, remo3, remo4, remo5]
 
 export default function MainArtworkReveal({ enabled, onComplete }) {
   const [step, setStep] = useState(0)
@@ -35,7 +41,7 @@ export default function MainArtworkReveal({ enabled, onComplete }) {
   useEffect(() => {
     alive.current = true
     let cancelled = false
-    Promise.all([original, attention, wink].map(src => {
+    Promise.all([original, attention, wink, ...REMO_IMAGES].map(src => {
       const image = new Image(); image.src = src
       return image.decode()
     })).then(() => { if (!cancelled) setReady(true) }).catch(() => { if (!cancelled) setReady(true) })
@@ -230,7 +236,7 @@ export default function MainArtworkReveal({ enabled, onComplete }) {
             const active = tile.id === activeId && step < config.manualRevealCount
             const style = { left: tile.x, top: tile.y, width: tile.size + config.seamOverlap, height: tile.size + config.seamOverlap, '--tile-color': active ? config.activeColor : tile.color, '--gap-color': config.gapColor, '--tile-gap': `${config.tileGap / 2}px`, '--tile-radius': `${config.cornerRadiusRatio * 100}%`, '--ripple-diameter': `${2 * Math.SQRT2 * tile.size}px` }
             return <div key={tile.id} data-reveal-tile={tile.id} className="main-reveal-tile" style={style}>
-              {active ? <button type="button" className="main-reveal-surface main-reveal-target" disabled={busy || !ready} onPointerEnter={event => hover(event, true)} onPointerLeave={event => hover(event, false)} onFocus={event => hover(event, true)} onBlur={event => hover(event, false)} onClick={activate} aria-label={`揭開主視覺，第 ${step + 1} 步，共 ${config.manualRevealCount} 步`}><span className="main-reveal-ripple" style={{ background: config.hoverColor }} /></button>
+              {active ? <button type="button" className="main-reveal-surface main-reveal-target" disabled={busy || !ready} onPointerEnter={event => hover(event, true)} onPointerLeave={event => hover(event, false)} onFocus={event => hover(event, true)} onBlur={event => hover(event, false)} onClick={activate} aria-label={`揭開主視覺，第 ${step + 1} 步，共 ${config.manualRevealCount} 步`}><span className="main-reveal-ripple" style={{ background: config.hoverColor }} /><img className="main-reveal-remo" src={REMO_IMAGES[step]} alt="" aria-hidden="true" draggable="false" /></button>
                 : <span className="main-reveal-surface" aria-hidden="true" />}
             </div>
           })}

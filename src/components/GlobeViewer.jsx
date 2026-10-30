@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { createContinentMarkers, modelBounds } from './globeTest/continentMarkers'
 import ResourceStatus from '../edition/ResourceStatus'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { createCosmosBillboard } from './cosmosBillboard'
@@ -36,9 +37,9 @@ function disposeObject(root) {
   materials.forEach(material => material.dispose())
 }
 
-function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, transparent = false }) {
-  const callbacks = useRef({ onSelectionChange, onReady })
-  callbacks.current = { onSelectionChange, onReady }
+function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, interactionDisabled = false, transparent = false }) {
+  const callbacks = useRef({ onSelectionChange, onContinentSelect, onReady })
+  callbacks.current = { onSelectionChange, onContinentSelect, onReady }
   const controlsRef = useRef(null)
   const disabledRef = useRef(interactionDisabled)
   disabledRef.current = interactionDisabled
@@ -77,6 +78,9 @@ function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, 
     controls.maxPolarAngle = Math.PI - 0.16
     let root
     let finalColorAttachments = []
+    let markers
+    let pointerInside = false
+    let lastHoverCheck = 0
     let updateCosmosBillboard
     let frame = 0
     let disposed = false
@@ -128,6 +132,11 @@ function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, 
       fillLight.target.position.copy(controls.target)
       fillLight.position.copy(camera.position).addScaledVector(fillRight, -0.3 * camera.position.distanceTo(controls.target)).addScaledVector(fillUp, 0.3 * camera.position.distanceTo(controls.target))
       updateCosmosBillboard?.(camera)
+      markers?.update(camera)
+      if (pointerInside && performance.now() - lastHoverCheck >= 50) {
+        lastHoverCheck = performance.now()
+        refreshHover()
+      }
       renderer.render(scene, camera)
       frame = requestAnimationFrame(render)
     }
@@ -151,7 +160,7 @@ function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, 
       if (!root) return null
       updatePointer(event)
       raycaster.setFromCamera(pointer, camera)
-      const hit = raycaster.intersectObject(root, true).find(intersection => findCelestial(intersection.object))
+      const hit = raycaster.intersectObject(root, true).find(intersection => !intersection.object.userData.continentMarker && findCelestial(intersection.object))
       return hit ? findCelestial(hit.object) : null
     }
     const animateCameraTo = (targetPosition, targetControlsTarget, viewSettings) => {
@@ -176,7 +185,7 @@ function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, 
       camera.updateProjectionMatrix()
     }
     const focusObject = object => {
-      const bounds = new THREE.Box3().setFromObject(object)
+      const bounds = modelBounds(object)
       const sphere = bounds.getBoundingSphere(new THREE.Sphere())
       const focusRadius = Math.max(sphere.radius, 0.001)
       const verticalFov = THREE.MathUtils.degToRad(camera.fov)
@@ -205,13 +214,26 @@ function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, 
       callbacks.current.onSelectionChange?.(null)
       animateCameraTo(initialView.cameraPosition, initialView.target, initialView)
     }
-    const handlePointerMove = event => {
-      const selected = pickCelestial(event)
-      if (selected !== hoveredCelestial) {
-        hoveredCelestial = selected
-        canvas.style.cursor = selected ? 'pointer' : ''
-      }
+    const refreshHover = (checkCelestial = false) => {
+      raycaster.setFromCamera(pointer, camera)
+      const marker = disabledRef.current ? null : markers?.pick(raycaster)
+      markers?.hover(marker)
+      if (disabledRef.current || marker) hoveredCelestial = null
+      else if (checkCelestial) hoveredCelestial = root ? raycaster.intersectObject(root,true).find(hit => !hit.object.userData.continentMarker && findCelestial(hit.object)) : null
+      canvas.style.cursor = marker || hoveredCelestial ? 'pointer' : ''
     }
+    const handlePointerMove = event => {
+      pointerInside = true
+      updatePointer(event)
+      refreshHover(true)
+    }
+    const handlePointerLeave = () => {
+      pointerInside = false
+      hoveredCelestial = null
+      markers?.hover(null)
+      canvas.style.cursor = ''
+    }
+    const handlePointerCancel = () => { pointerDown = null; handlePointerLeave() }
     const handlePointerDown = event => {
       if (disabledRef.current) return
       pointerDown = { x: event.clientX, y: event.clientY, time: performance.now() }
@@ -222,6 +244,14 @@ function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, 
       const duration = performance.now() - pointerDown.time
       pointerDown = null
       if (distance <= 6 && duration <= 500) {
+        updatePointer(event)
+        raycaster.setFromCamera(pointer, camera)
+        const marker = markers?.pick(raycaster)
+        if (marker) {
+          focusedCelestial = root.getObjectByName('earth')
+          callbacks.current.onContinentSelect?.(marker.userData.continentMarker.id)
+          return
+        }
         const selected = pickCelestial(event)
         if (selected) focusObject(selected)
         else if (focusedCelestial) resetView()
@@ -233,7 +263,8 @@ function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, 
     canvas.addEventListener('pointermove', handlePointerMove)
     canvas.addEventListener('pointerdown', handlePointerDown)
     canvas.addEventListener('pointerup', handlePointerUp)
-    canvas.addEventListener('pointercancel', handlePointerUp)
+    canvas.addEventListener('pointercancel', handlePointerCancel)
+    canvas.addEventListener('pointerleave', handlePointerLeave)
     new GLTFLoader().load(GLOBE_MODEL_URL, gltf => {
       if (disposed) {
         disposeObject(gltf.scene)
@@ -289,6 +320,8 @@ function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, 
         far: camera.far,
       }
       scene.add(root)
+      // Initial framing is already captured; Marker bounds must never affect it.
+      markers = callbacks.current.onContinentSelect ? createContinentMarkers(root) : null
       setResourceStatus('ready')
       callbacks.current.onReady?.({
         select: name => { const object = root.getObjectByName(name); if (object && SELECTABLE_CELESTIAL_NAMES.has(name)) focusObject(object) },
@@ -308,9 +341,11 @@ function GlobeViewer({ onSelectionChange, onReady, interactionDisabled = false, 
       canvas.removeEventListener('pointermove', handlePointerMove)
       canvas.removeEventListener('pointerdown', handlePointerDown)
       canvas.removeEventListener('pointerup', handlePointerUp)
-      canvas.removeEventListener('pointercancel', handlePointerUp)
+      canvas.removeEventListener('pointercancel', handlePointerCancel)
+      canvas.removeEventListener('pointerleave', handlePointerLeave)
       controls.dispose()
       scene.remove(fillLight, fillLight.target)
+      markers?.dispose()
       if (root) {
         scene.remove(root)
         finalColorAttachments.forEach(attachment => attachment.release())
