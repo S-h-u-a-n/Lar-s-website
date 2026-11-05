@@ -5,6 +5,7 @@ import { enablePageTextPersistence } from '../../dev/textEditorStore'
 import Background from './Background'
 import Documents from './Documents'
 import Maintenance from './Maintenance'
+import EarthChecklist from './EarthChecklist'
 import EditableText from './EditableText'
 import { MOTION, GEOMETRY } from './config'
 import FloatingSquares from './FloatingSquares'
@@ -33,6 +34,7 @@ export default function BigTest(props) {
       <div className="big-test-title-bar" aria-hidden="true" />
       <header className="big-test-title"><button type="button" className="big-test-title-home" onClick={props.onBack} aria-label="返回主頁"><EditableText id="title" as="h1">The Wizard's GENESIS</EditableText></button></header>
     </div>
+    <EarthChecklist ready={props.checklistReady} welcomeShown={props.welcomeShown} onWelcomeShown={props.onWelcomeShown} />
     <div className="big-test-artboard big-test-interface" style={{ '--bt-duration': `${MOTION.duration}ms`, '--bt-dots-delay': `${MOTION.dotsDelay}ms`, '--bt-text-delay': `${MOTION.textDelay}ms`, '--bt-easing': MOTION.easing }}>
       <Maintenance />
       <Documents onOpen={props.onCloseIntroduction} />

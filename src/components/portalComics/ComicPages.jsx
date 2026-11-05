@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import Text from '../main/Text'
 import { enablePageTextPersistence } from '../../dev/textEditorStore'
 import { PORTAL_COMICS } from './config'
@@ -23,7 +23,13 @@ export function BallComicPage(props) { return <ComicPage portalId="ball" {...pro
 export const COMIC_PAGES = { 'globe-comic': GlobeComicPage, 'natural-comic': NaturalComicPage, 'human-comic': HumanComicPage, 'ball-comic': BallComicPage }
 
 // Commit only after the lazy destination resolves. Match Main's existing arrival stage.
-export function PortalPageArrival({ children, onReady, animate }) {
+export function PortalPageArrival({ children, onReady, onMounted, animate }) {
+  useLayoutEffect(() => { onMounted?.() }, [onMounted])
+  useEffect(() => {
+    if (!animate || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const frame = requestAnimationFrame(() => onReady?.())
+    return () => cancelAnimationFrame(frame)
+  }, [animate, onReady])
   return <div className={animate ? "portal-page-arrival" : undefined} onAnimationEnd={event => {
     if (event.target === event.currentTarget && event.animationName === 'home-page-arrive') onReady()
   }}>{children}</div>

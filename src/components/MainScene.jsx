@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import ResourceStatus from '../edition/ResourceStatus'
+import { createResourceGate } from '../lib/asyncReadiness'
 import { TOOL_REACTION } from '../edition/config'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import ModelMaterialEditor from '../dev/ModelMaterialEditor'
@@ -297,12 +298,16 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
   const [focusedPortalId, setFocusedPortalId] = useState(null)
   const [editorModel, setEditorModel] = useState(null)
   const focusedPortalScreenCenterRef = useRef(null)
-  useEffect(()=>{onResourceStatus?.(resourceStatus)},[resourceStatus,onResourceStatus])
+  const resourceCallback = useRef(onResourceStatus)
+  resourceCallback.current = onResourceStatus
+  useEffect(()=>{resourceCallback.current?.(resourceStatus)},[resourceStatus])
 
   useEffect(() => {
     setResourceStatus('loading')
+    setEditorModel(null)
     const host = hostRef.current
     if (!host) return undefined
+    host.dataset.status = 'loading'
 
     const canvas = document.createElement('canvas')
     canvas.style.cssText = `position:absolute;inset:0;z-index:70;display:block;width:100%;height:100%;filter:brightness(${BIG_RENDER_COLOR.brightness}) saturate(${BIG_RENDER_COLOR.saturation})`
@@ -319,7 +324,13 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
     const scene = new THREE.Scene()
     scene.background = null
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 1000)
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
+    let renderer
+    try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }) }
+    catch (error) {
+      canvas.remove(); hoverIcon.remove(); host.dataset.status = 'error'
+      setResourceStatus('error'); console.error('[MainScene] WebGL initialization failed', error)
+      return undefined
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO))
     renderer.setClearColor(0xfdf9ee, 0)
     renderer.outputColorSpace = THREE.SRGBColorSpace
@@ -332,6 +343,8 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
     scene.add(keyLight)
 
     const controls = new OrbitControls(camera, canvas)
+    controls.enabled = false
+    canvas.style.pointerEvents = 'none'
     controls.enableDamping = true
     controls.dampingFactor = 0.08
     controls.enablePan = false
@@ -360,7 +373,26 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
     let miniCosmos
     let updateCosmosBillboard
     let frame = 0
-    let disposed = false
+    let disposed = false, failed = false, readyToPresent = false
+    const manager = new THREE.LoadingManager()
+    const loadController = new AbortController()
+    const reportFailure = error => {
+      if (disposed || failed) return
+      failed = true; controls.enabled = false; canvas.style.pointerEvents = 'none'
+      host.dataset.status = 'error'; setResourceStatus('error')
+      console.error('[MainScene] Required scene preparation failed', error)
+    }
+    const readiness = createResourceGate({
+      abort: () => { loadController.abort(); manager.abort() }, onError: reportFailure,
+      onReady: () => { controls.enabled = true; canvas.style.pointerEvents = 'auto'; host.dataset.status = 'ready'; setResourceStatus('ready') },
+    })
+    manager.onError = url => readiness.fail(new Error(`Required model dependency failed: ${url}`))
+    const contextLost = event => {
+      event.preventDefault()
+      if (readiness.pending) readiness.fail(new Error('WebGL context lost'))
+      else reportFailure(new Error('WebGL context lost'))
+    }
+    canvas.addEventListener('webglcontextlost', contextLost)
     let presentationFocus = 0
     onFocusProgress?.(host, 0)
     let focusAnimation = null
@@ -742,7 +774,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
     }
 
     const render = now => {
-      if (disposed) return
+      if (disposed || failed) return
       const delta=previousTime?Math.min((now-previousTime)/1000,.1):0
       elapsed += delta
       previousTime = now
@@ -784,7 +816,15 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
         controls.update()
       }
       updateCosmosBillboard?.(camera)
-      renderer.render(scene, camera)
+      try {
+        renderer.render(scene, camera)
+        // GPU programs and the complete model must exist before the first
+        // rendered frame is allowed to release the existing curtain.
+        if (readyToPresent && readiness.pending) readiness.complete()
+      } catch (error) {
+        if (readiness.pending) readiness.fail(error); else reportFailure(error)
+        return
+      }
       frame = requestAnimationFrame(render)
     }
 
@@ -797,75 +837,81 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
     canvas.addEventListener('pointercancel', handlePointerCancel)
     canvas.addEventListener('pointerleave', handlePointerLeave)
 
-    new GLTFLoader().load(BIG_MODEL_URL, gltf => {
-      if (disposed) {
+    // Use an owned fetch: Three's FileLoader deduplicates by URL, so aborting
+    // a StrictMode test mount must not reject the next live mount's request.
+    fetch(BIG_MODEL_URL, { signal: loadController.signal })
+      .then(response => { if (!response.ok) throw new Error(`Big.glb HTTP ${response.status}`); return response.arrayBuffer() })
+      .then(buffer => {
+        if (disposed || !readiness.pending) throw new DOMException('Scene preparation cancelled', 'AbortError')
+        return new GLTFLoader(manager).parseAsync(buffer, new URL('.', BIG_MODEL_URL).href)
+      }).then(async gltf => {
+      if (disposed || !readiness.pending) {
         disposeScene(gltf.scene)
         return
       }
 
-      modelRoot = gltf.scene
-      logModelHierarchy(modelRoot)
-      interactionRegistry = createBigInteractionRegistry(modelRoot)
-      const magglassRoot = modelRoot.getObjectByName('magglass')
-      magglassRoot?.traverse(object => magglassObjects.add(object))
+      try {
+        modelRoot = gltf.scene
+        logModelHierarchy(modelRoot)
+        interactionRegistry = createBigInteractionRegistry(modelRoot)
+        const magglassRoot = modelRoot.getObjectByName('magglass')
+        magglassRoot?.traverse(object => magglassObjects.add(object))
 
-      const bounds = new THREE.Box3().setFromObject(modelRoot)
-      const center = bounds.getCenter(new THREE.Vector3())
-      const size = bounds.getSize(new THREE.Vector3())
-      const radius = size.length() / 2
-      const distance = (radius / Math.tan(THREE.MathUtils.degToRad((fitViewport ? 38 : camera.fov) / 2))) * 1.08
-      const viewDirection = new THREE.Vector3(1, 0.68, 1.35).normalize()
+        const bounds = new THREE.Box3().setFromObject(modelRoot)
+        const center = bounds.getCenter(new THREE.Vector3())
+        const size = bounds.getSize(new THREE.Vector3())
+        const radius = size.length() / 2
+        const distance = (radius / Math.tan(THREE.MathUtils.degToRad((fitViewport ? 38 : camera.fov) / 2))) * 1.08
+        const viewDirection = new THREE.Vector3(1, 0.68, 1.35).normalize()
 
-      controls.target.copy(center)
-      camera.position.copy(center).addScaledVector(viewDirection, distance)
-      camera.near = Math.max(0.1, radius / 100)
-      camera.far = Math.max(1000, distance + radius * 4)
-      camera.updateProjectionMatrix()
-      controls.minDistance = Math.max(radius * 0.55, 0.1)
-      controls.maxDistance = radius * 5
-      controls.update()
-      initialView = {
-        cameraPosition: camera.position.clone(),
-        target: controls.target.clone(),
-        minDistance: controls.minDistance,
-        maxDistance: controls.maxDistance,
-        near: camera.near,
-        far: camera.far,
-      }
-      softenCrystalballGlass(modelRoot)
-      applyModelMaterialPreset(modelRoot, MODEL_MATERIAL_PRESETS['Big.glb'])
-      if (import.meta.env.DEV) { setModelEditorViewport(modelRoot, { camera, scene, canvas, orbit: controls, render: () => renderer.render(scene, camera) }); setEditorModel(modelRoot) }
-      if (ENABLE_MINI_COSMOS) {
-        miniCosmos = createMiniCosmos()
-        const miniCosmosAnchor = modelRoot.getObjectByName('MiniCosmosAnchor')
-        if (miniCosmosAnchor) miniCosmosAnchor.add(miniCosmos)
-        else modelRoot.add(miniCosmos)
-      }
-      scene.add(modelRoot)
-      scene.updateMatrixWorld(true)
-      interactionRegistry.entries.filter(entry=>TOOL_REACTION.ids.includes(entry.id)).forEach(entry=>{
-        entry.matchedRoots.forEach(root=>{
-          const bounds=new THREE.Box3().setFromObject(root)
-          const radius=bounds.getBoundingSphere(new THREE.Sphere()).radius
-          const parentScale=root.parent?.getWorldScale(new THREE.Vector3()).y || 1
-          toolReactions.push({id:entry.id,root,y:root.position.y,z:root.rotation.z,lift:radius*TOOL_REACTION.liftRatio/Math.abs(parentScale),amount:0})
+        controls.target.copy(center)
+        camera.position.copy(center).addScaledVector(viewDirection, distance)
+        camera.near = Math.max(0.1, radius / 100)
+        camera.far = Math.max(1000, distance + radius * 4)
+        camera.updateProjectionMatrix()
+        controls.minDistance = Math.max(radius * 0.55, 0.1)
+        controls.maxDistance = radius * 5
+        controls.update()
+        initialView = {
+          cameraPosition: camera.position.clone(),
+          target: controls.target.clone(),
+          minDistance: controls.minDistance,
+          maxDistance: controls.maxDistance,
+          near: camera.near,
+          far: camera.far,
+        }
+        softenCrystalballGlass(modelRoot)
+        applyModelMaterialPreset(modelRoot, MODEL_MATERIAL_PRESETS['Big.glb'])
+        if (import.meta.env.DEV) { setModelEditorViewport(modelRoot, { camera, scene, canvas, orbit: controls, render: () => renderer.render(scene, camera) }); setEditorModel(modelRoot) }
+        if (ENABLE_MINI_COSMOS) {
+          miniCosmos = createMiniCosmos()
+          const miniCosmosAnchor = modelRoot.getObjectByName('MiniCosmosAnchor')
+          if (miniCosmosAnchor) miniCosmosAnchor.add(miniCosmos)
+          else modelRoot.add(miniCosmos)
+        }
+        scene.add(modelRoot)
+        scene.updateMatrixWorld(true)
+        interactionRegistry.entries.filter(entry=>TOOL_REACTION.ids.includes(entry.id)).forEach(entry=>{
+          entry.matchedRoots.forEach(root=>{
+            const bounds=new THREE.Box3().setFromObject(root)
+            const radius=bounds.getBoundingSphere(new THREE.Sphere()).radius
+            const parentScale=root.parent?.getWorldScale(new THREE.Vector3()).y || 1
+            toolReactions.push({id:entry.id,root,y:root.position.y,z:root.rotation.z,lift:radius*TOOL_REACTION.liftRatio/Math.abs(parentScale),amount:0})
+          })
         })
-      })
-      setResourceStatus('ready')
-      scene.updateMatrixWorld(true)
-      updateCosmosBillboard = createCosmosBillboard(modelRoot)
-    }, undefined, error => {
-      if (!disposed) {
-        host.dataset.status = 'error'
-        setResourceStatus('error')
-        console.error('[MainScene] Big.glb failed to load', error)
-      }
-    })
+        scene.updateMatrixWorld(true)
+        updateCosmosBillboard = createCosmosBillboard(modelRoot)
+        await renderer.compileAsync(scene, camera)
+        if (!disposed && readiness.pending) readyToPresent = true
+      } catch (error) { if (!disposed) readiness.fail(error) }
+    }).catch(error => { if (!disposed) readiness.fail(error) })
 
     frame = requestAnimationFrame(render)
 
     return () => {
       disposed = true
+      readiness.dispose()
+      canvas.removeEventListener('webglcontextlost', contextLost)
       cancelAnimationFrame(frame)
       observer.disconnect()
       canvas.removeEventListener('pointermove', handlePointerMove)
@@ -920,7 +966,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       </div>
       <BigLeftside /></>}
       {children}
-      <ResourceStatus status={resourceStatus} label="創世研究桌" onRetry={()=>setRetry(v=>v+1)} />
+      <ResourceStatus showLoading={false} status={resourceStatus} label="創世研究桌" onRetry={()=>setRetry(v=>v+1)} />
       {navigation ? navigation({ onBack, showEnterButton, onEnter: () => onPortalSelect?.(focusedPortalId, focusedPortalScreenCenterRef.current?.()) }) : <><PortalBackButton onBack={onBack} />
       {showEnterButton && (
         <button className="portal-enter" type="button" onClick={() => onPortalSelect?.(focusedPortalId, focusedPortalScreenCenterRef.current?.())}>

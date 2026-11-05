@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import { markEarthExplored } from './earthExplorationStore'
 import squares from '../../../Art/Big/Big-decoration/Big-squares.PNG'
 import { DOCUMENTS, DOCUMENT_ENTRANCES, GEOMETRY, SQUARES, PANEL_PATTERN, documentFloatingStyle } from './config'
 import { patternStyle } from './Background'
 import AssetCrop from './AssetCrop'
 import EditableText from './EditableText'
+import LetterPanel from './LetterPanel'
 
 function DocumentPanel({ document, active, onClose }) {
   const closeRef = useRef(null)
@@ -38,6 +40,7 @@ export default function Documents({ onOpen }) {
   const close = useRef(() => setActiveId(null)).current
   useEffect(()=>{const open=event=>{if(DOCUMENTS.some(document=>document.id===event.detail?.id)){onOpen?.();setActiveId(event.detail.id)}};window.addEventListener('edition-open-document',open);return()=>window.removeEventListener('edition-open-document',open)},[onOpen])
   useEffect(() => {
+    if (activeId) markEarthExplored(activeId)
     window.dispatchEvent(new CustomEvent('expanded-document-open', { detail: { open: Boolean(activeId) } }))
     return () => window.dispatchEvent(new CustomEvent('expanded-document-open', { detail: { open: false } }))
   }, [activeId])
@@ -51,6 +54,8 @@ export default function Documents({ onOpen }) {
         </button>
       })}
     </div>
-    {DOCUMENTS.map(document => <DocumentPanel key={document.id} document={document} active={activeId === document.id} onClose={close} />)}
+    {DOCUMENTS.map(document => document.id === 'letter'
+      ? <LetterPanel key={document.id} active={activeId === document.id} onClose={close} />
+      : <DocumentPanel key={document.id} document={document} active={activeId === document.id} onClose={close} />)}
   </>
 }

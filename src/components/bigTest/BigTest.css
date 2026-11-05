@@ -3,7 +3,7 @@
 .big-test-background { position: absolute; inset: 0; pointer-events: none; }
 .big-test-full-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .big-test-interface { z-index: 90; }
-body:has(.main-scene--big-test) .big-hover-icon-image { width: clamp(64px, min(5vw, 8vh), 96px); height: clamp(64px, min(5vw, 8vh), 96px); }
+body:has(.main-scene--big-test) .big-hover-icon-image { width: clamp(96px, min(7.5vw, 12vh), 144px); height: clamp(96px, min(7.5vw, 12vh), 144px); }
 /* Separate sibling contexts: background (auto), decoration (20), canvas (70), UI (90). */
 .big-test-decoration-squares { z-index: 20; pointer-events: none; }
 .big-test-decoration-squares img { pointer-events: none; }
@@ -22,16 +22,13 @@ body:has(.main-scene--big-test) .big-hover-icon-image { width: clamp(64px, min(5
 .big-test-title { position: absolute; left: 5.15%; top: 4px; width: 80%; color: #fffef8; }
 .big-test-title h1 { margin: 0; font: 400 clamp(20px, 2.5cqw, 52px)/1.2 var(--display); }
 .big-test-title-home { display: block; padding: 0; border: 0; border-radius: 0; background: none; color: inherit; font: inherit; text-align: inherit; pointer-events: auto; cursor: pointer; }
-.big-test-maintenance { --bt-maintenance-shift: 11.5cqw; position: absolute; right: 1.5%; top: calc(max(13.2%, calc(32px + 4.2cqw)) + var(--bt-maintenance-extra-top, 0px)); width: 16%; pointer-events: none; color: #56525a; }
-.big-test-maintenance-heading { position: absolute; right: 24%; bottom: 100%; width: 100%; text-align: right; padding-bottom: 1cqw; }
-.big-test-maintenance-heading h2 { margin: 0; font: 400 1.15cqw/1.2 var(--sans); }
-.big-test-maintenance-heading p { margin: .3cqw 0 0; font: .65cqw/1.4 var(--sans); }
-.big-test-maintenance-item { position: relative; display: block; width: 100%; height: 3.65cqw; padding: 0; border: 0; background: none; pointer-events: none; font: 1cqw/1.2 var(--sans); color: inherit; }
-.big-test-maintenance-dot { position: absolute; right: 0; top: 0; width: 2.75cqw; height: 2.75cqw; pointer-events: auto; cursor: pointer; transition: transform var(--bt-duration) var(--bt-easing); }
+.big-test-maintenance { --bt-maintenance-shift: 11.5cqw; position: absolute; right: 1.5%; top: max(10%, calc(67px + 1cqw)); width: 16%; pointer-events: none; color: #56525a; }
+.big-test-maintenance-item { position: relative; display: block; width: 100%; height: 3cqw; padding: 0; border: 0; background: none; pointer-events: none; font: 1cqw/1.2 var(--sans); color: inherit; }
+.big-test-maintenance-dot { position: absolute; right: 0; top: 0; width: 2.25cqw; height: 2.25cqw; pointer-events: auto; cursor: pointer; transition: transform var(--bt-duration) var(--bt-easing); }
 .big-test-maintenance-dot svg { display: block; width: 100%; height: 100%; }
 .big-test-maintenance-dot .big-test-asset-tint { opacity: 1; }
 .big-test-maintenance-item.is-expanded .big-test-maintenance-dot { transform: translateX(calc(-1 * var(--bt-maintenance-shift))); }
-.big-test-maintenance-reveal { position: absolute; inset: 0 0 auto calc(100% - var(--bt-maintenance-shift) + .7cqw); height: 2.75cqw; display: flex; align-items: center; padding-left: .3cqw; overflow: hidden; clip-path: inset(0 0 0 100%); opacity: 0; transition: clip-path var(--bt-duration) var(--bt-easing), opacity var(--bt-duration) var(--bt-easing); }
+.big-test-maintenance-reveal { position: absolute; inset: 0 0 auto calc(100% - var(--bt-maintenance-shift) + .7cqw); height: 2.25cqw; display: flex; align-items: center; padding-left: .3cqw; overflow: hidden; clip-path: inset(0 0 0 100%); opacity: 0; transition: clip-path var(--bt-duration) var(--bt-easing), opacity var(--bt-duration) var(--bt-easing); }
 .big-test-maintenance-item.is-expanded .big-test-maintenance-reveal { clip-path: inset(0); opacity: 1; }
 .big-test-document-entrances { position: absolute; inset: 0; pointer-events: none; }
 .big-test-square { position: absolute; padding: 0; border: 0; background: none; pointer-events: auto; cursor: pointer; transform: rotate(var(--bt-rotation)); transition: transform var(--bt-duration) var(--bt-easing); }
@@ -65,3 +62,8 @@ body:has(.main-scene--big-test) .big-hover-icon-image { width: clamp(64px, min(5
 /* The existing camera animation supplies eased progress; nested float/reveal
    transforms remain independent. Percent translation uses the full artboard. */
 .big-test-focus-motion { position: absolute; inset: 0; pointer-events: none; transform: translateX(calc(var(--bt-focus-progress, 0) * var(--bt-focus-shift))) scale(calc(1 + var(--bt-focus-progress, 0) * var(--bt-focus-growth))); }
+
+/* One type rule also overrides per-label editor font overrides, so all six
+   names retain identical typography without changing their motion or color. */
+.big-test-maintenance-reveal {font-weight:400;line-height:1.2;letter-spacing:normal;text-align:left;}
+.big-test-maintenance-reveal > [data-text-editor-id] {font:inherit!important;letter-spacing:inherit!important;text-align:inherit!important;}

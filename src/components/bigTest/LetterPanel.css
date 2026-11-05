@@ -1,0 +1,20 @@
+/* Keep the original 65% width, 40/60 split, and 45% artboard height.
+   Only the letter body scrolls; diary and notes retain their existing layout. */
+.big-test-document-panel.big-test-letter-panel {height:45%;min-height:45%;overflow:hidden;background:var(--letter-paper);}
+.big-test-letter-panel .big-test-letter-cover {min-width:0;min-height:0;overflow:hidden;background:var(--letter-cover);}
+.big-test-letter-cover .big-test-document-dots {pointer-events:none;}
+.big-test-letter-cover > .big-test-letter-icon {position:absolute;inset:7%;width:86%;height:86%;object-fit:contain;transform:none;z-index:1;pointer-events:none;user-select:none;}
+.big-test-letter-copy {display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:1cqw;min-width:0;min-height:0;overflow:hidden;color:var(--letter-ink);}
+.big-test-letter-copy h2 {margin:0 0 .4cqw;}
+.big-test-letter-panel .big-test-letter-subtitle {margin:0;font:400 clamp(11px,1cqw,16px)/1.4 var(--display);}
+.big-test-letter-body {min-height:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;scrollbar-width:thin;padding-right:.6cqw;}
+.big-test-letter-panel .big-test-letter-body p {margin:0 0 1em;font:15px/1.9 Georgia,'Songti TC',serif;white-space:pre-line;}
+.big-test-letter-body p:last-child {margin-bottom:0;}
+.big-test-letter-signature {text-align:right;}
+.big-test-letter-footer {display:flex;align-items:center;justify-content:flex-end;gap:1cqw;min-width:0;}
+.big-test-letter-panel .big-test-letter-footer button {margin-top:0;}
+.big-test-letter-pagination {display:flex;gap:.6cqw;}
+.big-test-letter-panel .big-test-letter-pagination button {display:grid;place-items:center;box-sizing:border-box;width:32px;height:32px;padding:0;font:18px/1 var(--sans);}
+.big-test-letter-pagination button:disabled {opacity:.35;cursor:default;}
+
+.big-test-letter-panel .big-test-letter-copy {padding-bottom:12px;}

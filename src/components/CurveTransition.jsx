@@ -103,7 +103,7 @@ export default function CurveTransition({ phase, onAnimationComplete, theme }) {
       {width != null && (
         <motion.svg
           variants={reduced?{...translate,covering:{...translate.covering,transition:{duration:.01}},revealing:{...translate.revealing,transition:{duration:.01}}}:translate}
-          initial={false}
+          initial="idle"
           animate={phase}
           onAnimationComplete={onAnimationComplete}
           viewBox={`0 0 ${width} ${height + 600}`}
@@ -112,7 +112,7 @@ export default function CurveTransition({ phase, onAnimationComplete, theme }) {
           <motion.path
             className="curve-transition-shape"
             variants={reduced?{idle:{d:targetPath},covering:{d:initialPath,transition:{duration:.01}},covered:{d:initialPath},revealing:{d:targetPath,transition:{duration:.01}}}:curve(initialPath, targetPath)}
-            initial={false}
+            initial="idle"
             animate={phase}
           />
           {theme && <g>

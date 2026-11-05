@@ -17,9 +17,10 @@ export const MAINTENANCE = [
   { id: 'book-open1', name: 'Open Book', color: PIGMENTS.butter },
   { id: 'book-close1', name: 'Closed Book', color: PIGMENTS.sky },
   { id: 'ball', name: 'Crystal Ball', color: PIGMENTS.mint },
+  { id: 'potion', name: 'Magic Potion', color: '#e1d0f2' },
 ]
 export const DOCUMENTS = [
-  { id: 'letter', name: 'Letter', title: 'A Letter from the Wizard', body: 'Welcome to the laboratory. These pages hold correspondence from the Wizard. A handwritten letter, illustration and signature can be placed here when the archive is ready.', hoverColor: PIGMENTS.mint },
+  { id: 'letter', name: 'Letter', hoverColor: PIGMENTS.mint },
   { id: 'diary', name: 'Diary', title: 'Laboratory Diary', body: 'A record of quiet discoveries, unusual experiments and the small mysteries of everyday life. This space is reserved for the official diary entries and their illustrations.', hoverColor: PIGMENTS.strawberry },
   { id: 'notes', name: 'Notes', title: 'Research Notes', body: 'Observations from the worktable. Future notes, diagrams and sketches will be collected here. For now, take a moment to explore the objects in the laboratory.', hoverColor: PIGMENTS.sky },
 ]
