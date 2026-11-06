@@ -1,6 +1,10 @@
 import HomeGeometry from './components/main/HomeGeometry'
+import HomeCharacters from './components/main/HomeCharacters'
+import HomeWishbox from './components/main/HomeWishbox'
+import HomeAuthor from './components/main/HomeAuthor'
+import HomeHistory from './components/main/HomeHistory'
 import { markEarthExplored } from './components/bigTest/earthExplorationStore'
-import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import ComicIntro from './components/ComicIntro'
 import HistoryEntrance from './dev/history/HistoryTest'
 import Header from './components/Header'
@@ -28,6 +32,7 @@ import { COMIC_PAGES, PortalPageArrival } from './components/portalComics/ComicP
 const HOME_FADE_ANIMATION = 'home-page-arrive'
 const getTextPageId = screen => screen === 'transitioning' ? 'intro' : screen === 'scene' ? 'big-test' : screen === PORTAL_DESTINATIONS.globe ? 'globe-test' : screen === PORTAL_DESTINATIONS.telescope ? 'telescope-test' : screen
 const BallTest = lazy(() => import('./components/ballTest/BallTest'))
+const CharactersPage = lazy(() => import('./dev/characters/CharactersPage'))
 const isBallTestSession = import.meta.env.DEV && new URLSearchParams(window.location.search).get('dev') === 'ball-test'
 const HumanTest = lazy(() => import('./components/humanTest/HumanTest'))
 const isHumanTestSession = import.meta.env.DEV && new URLSearchParams(window.location.search).get('dev') === 'human-test'
@@ -42,7 +47,7 @@ const WeatherPage = lazy(loadWeatherPage)
 const BigTest = lazy(() => import('./components/bigTest/BigTest'))
 const isBigTestSession = import.meta.env.DEV && new URLSearchParams(window.location.search).get('dev') === 'big-test'
 
-const EDITION_ROUTES = { weather: 'bottled-weather', 'bottled-weather': 'bottled-weather', main: 'home', lab: 'scene', globe: 'globe', telescope: 'telescope', natural: 'natural-test', human: 'human-test', favorites: 'ball-test', story: 'comic', 't-comic': 't-comic' }
+const EDITION_ROUTES = { characters: 'characters', weather: 'bottled-weather', 'bottled-weather': 'bottled-weather', main: 'home', lab: 'scene', globe: 'globe', telescope: 'telescope', natural: 'natural-test', human: 'human-test', favorites: 'ball-test', story: 'comic', 't-comic': 't-comic' }
 
 function App() {
   useParallax()
@@ -56,6 +61,7 @@ function App() {
   const destinationMounted = useRef(false)
   const portalArrivalReady = useRef(false)
   const pendingScreen = useRef('home')
+  const characterHomeScroll = useRef(0), restoreCharacterScroll = useRef(null), restoreCharacterFocus = useRef(false)
   const visitedRef = useRef([])
   const failedExplorationDestinations = useRef(new Set())
   const [screenState, setScreenState] = useState(() => (
@@ -163,6 +169,11 @@ function App() {
   function editionNavigate(target) {
     if (comicHomePhaseRef.current !== 'idle' || portalCurveRef.current || portalRevealLocked.current) return
     if (target === screenState) return
+    if (screenState === 'home' && target === 'characters') characterHomeScroll.current = window.scrollY
+    if (screenState === 'characters' && target === 'home') {
+      restoreCharacterScroll.current = characterHomeScroll.current
+      restoreCharacterFocus.current = true
+    }
     if (['scene', 'big-test'].includes(target)) { sceneSettledRef.current = false; setSceneReady(false) }
     setHomeRevealed(true)
     pendingScreen.current = target
@@ -191,7 +202,20 @@ function App() {
   const isBallTestVisible = screenState === 'ball-test'
   const isHumanTestVisible = screenState === 'human-test'
   const isNaturalTestVisible = screenState === 'natural-test'
-  const isPortalPageVisible = isWeatherVisible || isBallTestVisible || isHumanTestVisible || isNaturalTestVisible || isTelescopeTestVisible || isGlobeTestVisible || isGlobeVisible || isTelescopeVisible || isPortalPlaceholderVisible
+  const isCharactersVisible = screenState === 'characters'
+  const isPortalPageVisible = isCharactersVisible || isWeatherVisible || isBallTestVisible || isHumanTestVisible || isNaturalTestVisible || isTelescopeTestVisible || isGlobeTestVisible || isGlobeVisible || isTelescopeVisible || isPortalPlaceholderVisible
+  // Only the characters → Home round trip restores a scroll position.
+  // Restore under the existing paper curtain, before its reveal animation.
+  useLayoutEffect(() => {
+    if (!isHomeVisible || restoreCharacterScroll.current === null) return
+    window.scrollTo({ top: restoreCharacterScroll.current, behavior: 'instant' })
+    restoreCharacterScroll.current = null
+  }, [isHomeVisible])
+  useEffect(() => {
+    if (!isHomeVisible || comicHomePhase !== 'idle' || !restoreCharacterFocus.current) return
+    restoreCharacterFocus.current = false
+    document.querySelector('.hc-enter')?.focus({ preventScroll: true })
+  }, [isHomeVisible, comicHomePhase])
   const activePortalRevealDestination = portalReveal?.destination || (isTComicScreen || isPortalComicScreen ? screenState : null)
 
   function enterMainScene(event) {
@@ -369,10 +393,11 @@ function App() {
   }
 
   function renderPortalDestination(destination) {
+    if (destination === 'characters') return <CharactersPage onBack={() => editionNavigate('home')} />
     if (destination === PORTAL_DESTINATIONS.potion) return <WeatherPage onReady={handleWeatherReady} onBack={() => returnFromPortal('potion')} onHome={() => editionNavigate('home')} />
     if (destination === 'ball-test') return <BallTest onBack={() => returnFromPortal('ball')} />
-    if (destination === 'human-test') return <HumanTest entranceReady={!portalCurve && (!portalReveal || screenState === portalReveal.destination)} onBack={() => returnFromPortal('book-close1')} />
-    if (destination === 'natural-test') return <NaturalTest entranceReady={!portalCurve && (!portalReveal || screenState === portalReveal.destination)} onBack={() => returnFromPortal('book-open1')} />
+    if (destination === 'human-test') return <HumanTest revealOnMount={!portalReveal && !portalCurve && comicHomePhase === 'idle'} entranceReady={comicHomePhase === 'idle' && !portalCurve && (!portalReveal || screenState === portalReveal.destination)} onBack={() => returnFromPortal('book-close1')} />
+    if (destination === 'natural-test') return <NaturalTest revealOnMount={!portalReveal && !portalCurve && comicHomePhase === 'idle'} entranceReady={comicHomePhase === 'idle' && !portalCurve && (!portalReveal || screenState === portalReveal.destination)} onBack={() => returnFromPortal('book-open1')} />
     const ComicPage = COMIC_PAGES[destination]
     if (ComicPage) {
       const portalId = Object.keys(PORTAL_COMICS).find(id => PORTAL_COMICS[id].screen === destination)
@@ -435,6 +460,10 @@ function App() {
           {isHomeVisible && <HomeGeometry />}
           <HeroSection onEnter={() => editionNavigate('scene')} isHomeVisible={isHomeVisible} revealed={homeRevealed} onRevealComplete={() => setHomeRevealed(true)} onTool={editionTool} />
           <ExploreSection onTool={editionTool} />
+          <HomeHistory />
+          <HomeCharacters onEnter={() => editionNavigate('characters')} />
+          <HomeWishbox />
+          <HomeAuthor />
         </main>
         <Footer textEditable={isHomeVisible} />
       </>}

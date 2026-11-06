@@ -1,0 +1,7 @@
+/* The backdrop belongs to the original animated/fading arrow itself. */
+.history-viewport .history-direction::before {
+  content:''; position:absolute; inset:-6px; z-index:-1;
+  background:rgba(255,255,255,.8); border:1px solid rgba(255,255,255,.7);
+  border-radius:8px; box-shadow:0 2px 8px rgba(70,40,25,.08);
+  pointer-events:none;
+}

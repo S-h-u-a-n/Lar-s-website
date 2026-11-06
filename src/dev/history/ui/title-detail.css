@@ -1,0 +1,11 @@
+/* Detail 3: out-of-flow accents above the existing left title anchor.
+   Neither the heading box nor the visibility gate is changed. */
+.history-viewport .history-title::before {
+  content:''; position:absolute; left:0; top:-.24em; width:.63em; height:1px;
+  background:currentColor; opacity:.25; pointer-events:none;
+}
+.history-viewport .history-title::after {
+  content:''; position:absolute; left:.74em; top:calc(-.24em - 2px);
+  width:4px; height:4px; border:1px solid currentColor;
+  transform:rotate(10deg); opacity:.28; pointer-events:none;
+}

@@ -7,12 +7,21 @@ import { createEntryGesture } from './entryGesture'
 import { openingSettings, warmOpeningActor, startOpeningActor } from './openingAnimation'
 import { createDiagnostics } from './diagnostics'
 import HistoryTitle from './HistoryTitle'
+import InitialHistoryTitle from './InitialHistoryTitle'
+import { initialHintPeople, createInitialPeopleHint } from './initialPeopleHint'
 import HistorySquares from './HistorySquares'
 import HistoryLabel from './HistoryLabel'
+import ExtraSquares from './ui/ExtraSquares'
+import HistoryProgress from './ui/HistoryProgress'
 import { personAnchor, personContour } from './labelPosition'
 import './history.css'
+import './ui/entry-detail.css'
+import './ui/reading-progress.css'
+import './ui/title-detail.css'
+import './ui/direction-detail.css'
 
 export default function HistoryTest({ onEnter, disabled = false, leaving = false } = {}) {
+  const initialTitle = useRef(null)
   const viewport = useRef(null), world = useRef(null), images = useRef([]), title = useRef(null), items = useRef([]), motionItems = useRef([]), arrow = useRef(null), entryHint = useRef(null), titlePlayback = useRef(null), squares = useRef(null), historyLabel = useRef(null)
   const disabledRef = useRef(disabled)
   disabledRef.current = disabled
@@ -45,6 +54,7 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
     let hovered = -1, pointerIntent = false
     let mouse = null, pointerDX = 0, pointerDY = 0, lastHoverHit = 0, lastWheel = -Infinity, hoverTimer = 0
     let arrowDismissed = false, entryRequested = false
+    let initialHint = null
     const openingDuration = Math.max(...ASSETS.map(a => { const g=openingSettings(a,C.entrance);return g.delay+g.duration }))
     const parallax = { position: 0, velocity: 0, scrollVelocity: 0 }
     const rendered = ASSETS.map(() => false)
@@ -144,6 +154,12 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
             request();previous=0;return
           }
           openingStart=time
+          if (camera === 1 && target === 1 && !reduced.matches) {
+            const indices = initialHintPeople(ASSETS, { width, height, scale, cameraPx: camera * max, ready: i => loader.state[i] === 'ready' })
+            initialHint = createInitialPeopleHint(indices, time + 1050)
+            host.dataset.initialHintPeople = indices.map(i => ASSETS[i].id).join(',')
+            host.dataset.initialHintPeakOverlap = '0'
+          }
           if (traceOpening) host.dataset.openingStart=String(time)
           if (!reduced.matches) for (const i of openingSet) {
             const a=ASSETS[i],g=openingSettings(a,C.entrance)
@@ -158,6 +174,8 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
         ready = true; host.dataset.ready = 'true'
       }
       if (!ready) { previous = 0; return }
+      initialTitle.current?.update({ ready: true, camera })
+      if (camera !== 1 || target !== 1 || disabledRef.current || reduced.matches) initialHint?.cancel(time)
       const cameraChanged = camera !== lastCamera || scale !== lastScale
       if (cameraChanged) world.current.style.transform = `translateX(${-camera * max}px)`
       if (titleGeometry) titlePlayback.current?.check({ rect: { ...titleGeometry, x: titleGeometry.x - camera * max }, viewport: { width, height } })
@@ -177,6 +195,13 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       if (atEnd) gesture.arrive(time)
       else gesture.leave()
       pickHover(time)
+      const hintWeights = initialHint?.update(time)
+      if (initialHint) {
+        host.dataset.initialHintState = initialHint.phase
+        host.dataset.initialHintAsset = [...hintWeights.keys()].map(i => ASSETS[i].id).join(',')
+        host.dataset.initialHintPeakOverlap = String(Math.max(Number(host.dataset.initialHintPeakOverlap), hintWeights.size))
+        moving ||= initialHint.running
+      }
       ASSETS.forEach((asset, i) => {
         const img = nodes[i], item = items.current[i], visible = near.has(i) && loader.state[i] === 'ready'
         if (rendered[i] !== visible) {
@@ -229,7 +254,10 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
         if (reduced.matches) interaction.angle.value = interaction.angle.velocity = interaction.tilt.value = interaction.tilt.velocity = 0
         const rotateX = clamp(s.tilt * m.verticalAngle * entrance.progress + interaction.tilt.value, -C.hover.maxTilt, C.hover.maxTilt)
         const rotateZ = clamp(s.angle * entrance.progress + interaction.angle.value, -C.hover.maxAngle, C.hover.maxAngle)
-        const hoverScale = interaction.scale.value
+        // Cues never write to real hover state. The larger scale wins, so ending
+        // a cue cannot shrink a hovered person or disturb its hover spring.
+        const hintScale = reduced.matches ? 1 : 1 + (C.hover.scale - 1) * (hintWeights?.get(i) ?? 0)
+        const hoverScale = Math.max(interaction.scale.value, hintScale)
         setStyle(item, 'zIndex', String(selected ? 81 : hoverScale > 1.001 ? 80 : asset.z))
         nodes[i].dataset.hovered = String(selected)
         nodes[i].dataset.hoverScale = hoverScale.toFixed(4)
@@ -357,6 +385,9 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       {ASSETS.map((asset, i) => <div key={asset.id} ref={node => { items.current[i] = node }} className="history-item" style={{ zIndex: asset.z, transformOrigin: `${asset.origin[0]}% ${asset.origin[1]}%` }}>
         <div className="history-motion" ref={node => { motionItems.current[i] = node }}><img ref={node => { images.current[i] = node }} alt="" decoding="async" draggable="false" data-asset={asset.id} className={asset.id.startsWith('map') ? 'history-map' : 'history-person'}/></div>
       </div>)}
+      <ExtraSquares />
     </div>
+    <HistoryProgress />
+    <InitialHistoryTitle ref={initialTitle}/>
   </main>
 }

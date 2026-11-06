@@ -21,6 +21,7 @@ export const TOOLS = [
 ]
 export const MOTION = { travel: .68, travelRevealDelay: .16, paper: .42, storyLayerMs: 420, parallax: 12, tilt: 3 }
 export function pageName(screen) {
+  if (screen === 'characters') return '同行者檔案館'
   return ({intro:'序章',transitioning:'序章',comic:'創世故事',home:'世界的封面',scene:'魔法師們的研究室','big-test':'魔法師們的研究室','t-comic':'望遠鏡的故事'})[screen] || TOOLS.find(tool=>tool.route===screen)?.name || '研究手冊'
 }
 

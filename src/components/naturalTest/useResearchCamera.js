@@ -12,7 +12,7 @@ function easing(time) {
   }
   return 3 * (1 - t) ** 2 * t * .75 + 3 * (1 - t) * t * t + t ** 3
 }
-export default function useResearchCamera(bounds, minimumScale = CAMERA.minScale) {
+export default function useResearchCamera(bounds, minimumScale = CAMERA.minScale, pageRef, selectedCategory) {
   const viewportRef = useRef(null), worldRef = useRef(null)
   const view = useRef({ x: 0, y: 0, scale: .3 }), target = useRef(view.current)
   const size = useRef({ width: 1, height: 1 }), frame = useRef(null), drag = useRef(null)
@@ -20,6 +20,7 @@ export default function useResearchCamera(bounds, minimumScale = CAMERA.minScale
   const [level, setLevel] = useState('overview')
   const levelRef = useRef('overview')
   const boundsRef = useRef(bounds); boundsRef.current = bounds
+  const selectedCategoryRef = useRef(selectedCategory); selectedCategoryRef.current = selectedCategory
   const minimum = useCallback(() => {
     const b = boundsRef.current, s = size.current
     return Math.min(minimumScale, Math.max(.02, Math.min((s.width - CAMERA.padding * 2) / b.width, (s.height - CAMERA.padding * 2) / b.height)))
@@ -29,9 +30,16 @@ export default function useResearchCamera(bounds, minimumScale = CAMERA.minScale
     viewportRef.current?.style.setProperty('--camera-scale',next.scale)
     if (worldRef.current) worldRef.current.style.transform = `translate3d(${next.x}px,${next.y}px,0) scale(${next.scale})`
     const normalThreshold = Math.min(CAMERA.normalThreshold, CAMERA.normalThreshold * size.current.height / 600, CAMERA.normalThreshold * size.current.width / 1000)
+    // Only the decorative circle reads this factor. Start fading after a
+    // small zoom-out from the selected topic's existing fitted camera scale.
+    const category = selectedCategoryRef.current
+    const fittedScale = category ? Math.min(CAMERA.categoryScale, (size.current.width - 60) / category.width, (size.current.height - 40) / category.height) : CAMERA.categoryScale
+    const fadeStart = fittedScale * .94, fadeEnd = fittedScale * .72
+    const circleVisibility = Math.max(0, Math.min(1, (next.scale - fadeEnd) / (fadeStart - fadeEnd)))
+    pageRef?.current?.style.setProperty('--nt-circle-visibility', String(circleVisibility))
     const tier = next.scale < normalThreshold ? 'overview' : next.scale < CAMERA.detailThreshold ? 'normal' : 'detail'
     if (tier !== levelRef.current) { levelRef.current = tier; setLevel(tier) }
-  }, [])
+  }, [pageRef])
   const stop = useCallback(() => { if (frame.current !== null) cancelAnimationFrame(frame.current); frame.current = null; target.current = view.current }, [])
   const move = useCallback((next, animate = true, options = {}) => {
     stop()

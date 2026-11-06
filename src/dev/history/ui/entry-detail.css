@@ -1,0 +1,16 @@
+/* Detail 1: no font, dimensions, margin or entry-state overrides. */
+.history-viewport .history-entry-hint { position:relative; }
+.history-viewport .history-entry-hint::before {
+  content:''; position:absolute; inset:-7px -12px; background:transparent;
+}
+.history-viewport .history-entry-hint::after {
+  content:''; position:absolute; left:0; bottom:-5px; width:100%; height:1px;
+  background:currentColor; opacity:.42; transform:scaleX(.32); transform-origin:left;
+  pointer-events:none; transition:transform 380ms cubic-bezier(.22,1,.36,1),opacity 380ms ease;
+}
+.history-viewport .history-entry-hint:is(:hover,:focus-visible):not(:disabled)::after {
+  transform:scaleX(1); opacity:.65;
+}
+@media(prefers-reduced-motion:reduce) {
+  .history-viewport .history-entry-hint::after { transition:none; }
+}

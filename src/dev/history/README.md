@@ -8,6 +8,24 @@ See `docs/history-production-integration.md` for the formal handoff and checks.
 
 ## Files and adjustment
 
+- `InitialHistoryTitle.jsx` / `initialHistoryTitle.css`: approved initial C title,
+  1200ms two-line entrance, indefinite hold, 800ms shared text/haze fade on actual
+  camera travel. Separate from the original far-left `HistoryTitle` and replay.
+- `initialPeopleHint.js`: one pass through the first three decoded, visible
+  silhouettes in right-to-left order. Begins 1050ms after opening; uses the same
+  1.10 hover scale and inherited foot origin. Each scale-only pulse lasts 500ms;
+  starts are staggered 180ms (0–500 / 180–680 / 360–860ms). The larger of real
+  hover and cue scale wins without writing to hover state. Scroll departure
+  cancels pending cues and smoothly restores active cues over 120ms;
+  reduced motion skips them. No click events or label activation are synthesized.
+  Existing people expose hover/labels, not a content-opening click handler.
+
+Formal integration checks: all 24 history tests pass. Chrome confirms C holds after
+the cue sequence, people-1/2/3 cue in that order, real hover stays at 1.10 after
+the sequence, boundary wheel retains the title,
+actual travel fades/removes it, early travel cancels pending cues, and the left
+GENESIS replay and Into the World button still enter the existing storybook flow.
+
 - `HistoryTest.jsx`: the exported standalone component, one RAF loop, immutable
   image wrappers, input handling, composed entrance/global/local transforms.
 - `entry.jsx`: bootstrap only, so component HMR does not recreate the React root.
