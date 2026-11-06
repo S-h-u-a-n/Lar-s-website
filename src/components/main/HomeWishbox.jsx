@@ -48,8 +48,8 @@ export default function HomeWishbox() {
     <span className="wish-distance-mark" aria-hidden="true">·</span>
     <motion.div className="wish-letter" initial={reduced ? false : { opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .2 }} transition={{ duration: .8, ease: [.22,.75,.25,1] }}>
       <span className="wish-emblem" aria-hidden="true">✧</span><p className="wish-kicker">A LETTER TO THE SKY</p>
-      <h2 id="wishbox-title">把願望留在這裡吧。</h2>
-      <p className="wish-intro">不必很大，也不用急著實現。</p>
+      <h2 id="wishbox-title">許個願望吧！</h2>
+      <p className="wish-intro">說不定魔法師們能接收到並實現你的願望喔！</p>
       <div className="wish-sheet"><AnimatePresence mode="wait" initial={false}>
         {status === 'success' ? <motion.div key="sent" className="wish-success" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: reduced ? 0 : .65 }}>
           <motion.span aria-hidden="true" className="wish-sent-star" initial={{ opacity: 0, y: 25, scale: .65 }} animate={{ opacity: [0,1,1], y: reduced ? 0 : -16, scale: 1 }} transition={{ duration: reduced ? 0 : 1.6, ease: 'easeOut' }}>✧</motion.span>

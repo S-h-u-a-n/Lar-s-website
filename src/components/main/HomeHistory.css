@@ -6,7 +6,7 @@
 .hh-panorama { position: absolute; inset: 0; transition: opacity .35s; }.hh-stage[data-observing=true] .hh-panorama { opacity: .12; }
 .hh-viewport { position: absolute; inset: 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; touch-action: pan-y; user-select: none; cursor: grab; overscroll-behavior-x: contain; }.hh-viewport::-webkit-scrollbar { display: none; }.hh-viewport.is-dragging { cursor: grabbing; }
 .hh-world { position: relative; }.hh-ground { position: absolute; left: 0; right: 0; bottom: 36px; height: 1px; background: #b79a5c4d; }.hh-ground::after { content: ''; position: absolute; left: 0; right: 0; top: 5px; height: 3px; border-top: 1px dotted #b79a5c55; }
-.hh-actor { position: absolute; }.hh-person-button { position: absolute; inset: 0; padding: 0; border: 0; background: transparent; pointer-events: none; color: inherit; }.hh-person-button img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; transition: filter .2s; }.hh-actor.is-hovered .hh-person-button img { filter: none; }.hh-person-button:focus-visible { outline: 1px dashed #987d4c; outline-offset: -15px; border-radius: 30%; }
+.hh-actor { position: absolute; }.hh-person-button { position: absolute; inset: 0; padding: 0; border: 0; background: transparent; pointer-events: none; color: inherit; }.hh-person-button img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; transition: filter .2s; }.hh-person-button:focus-visible { outline: 1px dashed #987d4c; outline-offset: -15px; border-radius: 30%; }
 .hh-person-caption { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; font: 9px/1.5 var(--body); color: #7d857c; pointer-events: none; }.hh-person-caption small { color: #b79a5c; font: 8px var(--sans); margin-right: 7px; }
 .hh-hover-label { position: absolute; top: 10%; left: 62%; width: max-content; max-width: 250px; padding: 10px 15px; border: 1px solid #b79a5c55; border-radius: 10px 0; background: #fffef8f5; font: 13px/1.5 var(--body); box-shadow: 3px 4px 0 #34465a09; opacity: 0; transform: translateY(5px); transition: opacity .2s, transform .2s; pointer-events: none; z-index: 3; }.hh-hover-label small { display: block; color: #7d857c; font-size: 9px; margin-top: 4px; }.hh-actor.is-hovered { z-index: 2; }.hh-actor.is-hovered .hh-hover-label { opacity: 1; transform: none; }
 .hh-edge-label { position: absolute; left: 17px; top: 15px; font: 9px var(--body); color: #8b8e7d; pointer-events: none; background: #fdf9eed0; padding: 5px 8px; }
@@ -44,7 +44,7 @@
 .hh-person-caption { padding:4px 8px; background:transparent; color:var(--edition-ink); font-size:11px; }
 .hh-person-caption small { color:#76684E; font-size:9px; }
 .hh-edge-label { top:10px; background:none; font-size:8px; letter-spacing:.05em; }
-.hh-actor.is-hovered .hh-person-button img { filter:none; }
+
 .hh-navigation { padding-block:25px 20px; }.hh-navigation > button { background:#fffef880; }.hh-navigation > button:active { transform:scale(.93); }
 .hh-context { font-size:10px; }
 .hh-observation-paper { background:var(--edition-paper); }
@@ -110,3 +110,14 @@
 .hh-explanation { margin:0 0 22px; font:13px/2 var(--body); color:#65746d; }
 .hh-source-note { margin:0 0 5px; font:10px/1.9 var(--body); }
 @media(max-width:600px) { .hh-explanation { font-size:12px; } }
+
+/* Full-bleed band stays in the existing section stack, above the home curve. */
+.home-history { overflow-x: clip; }
+.hh-display-mat { position: relative; }
+.hh-display-mat::before { content: ''; position: absolute; top: -18px; bottom: -18px; left: 50%; width: calc(100vw + 4px); transform: translateX(-50%); z-index: -1; background: var(--edition-paper); pointer-events: none; }
+.hh-background-squares { position: absolute; inset: 0 0 auto; overflow: hidden; pointer-events: none; }
+.hh-panorama { z-index: 1; }
+.hh-explore-triangle { display: block; width: 12px; height: 14px; margin: auto; font: 14px/14px Arial, sans-serif; }
+
+/* Same alpha-following drop shadow and scaled parameters as the entry figures. */
+.hh-person-button img, .hh-observed-person { filter: drop-shadow(var(--hh-person-shadow)); }

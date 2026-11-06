@@ -44,10 +44,10 @@ export default function HomeCharacters({ onEnter }) {
           </AnimatePresence>
           {!characters.length && <p className="hc-loading" role="status">正在翻閱肖像收藏⋯</p>}
         </div>
-        <div className="hc-controls"><button type="button" onClick={() => turn(-1)} disabled={characters.length < 2} aria-label="上一位同行者">←</button><p aria-live="polite" aria-atomic="true"><span>{characters[current]?.name || '肖像收藏'}</span><small>{String(characters.length ? current + 1 : 0).padStart(2,'0')} <i>/</i> {String(characters.length).padStart(2,'0')}</small></p><button type="button" onClick={() => turn(1)} disabled={characters.length < 2} aria-label="下一位同行者">→</button></div>
+        <div className="hc-controls"><button type="button" onClick={() => turn(-1)} disabled={characters.length < 2} aria-label="上一位同行者"><span className="hc-control-triangle" aria-hidden="true">◀</span></button><p aria-live="polite" aria-atomic="true"><span>{characters[current]?.name || '肖像收藏'}</span><small>{String(characters.length ? current + 1 : 0).padStart(2,'0')} <i>/</i> {String(characters.length).padStart(2,'0')}</small></p><button type="button" onClick={() => turn(1)} disabled={characters.length < 2} aria-label="下一位同行者"><span className="hc-control-triangle" aria-hidden="true">▶</span></button></div>
       </div>
-      <div className="hc-copy"><p className="edition-kicker">A LITTLE MAGIC. A SHARED CURIOSITY.</p><h2 id="home-characters-title">角色介紹<em>好奇心，讓我們相遇。</em></h2><p className="hc-description">有人追著星光跑，有人把問題寫滿筆記。<br/>一群魔法師，一個還在繼續的研究計畫。<br/>來認識這些一起觀察世界的同行者，<br/>翻開他們尚在書寫的故事。</p><button type="button" className="edition-enter hc-enter" onClick={onEnter}><span>翻開角色檔案</span><i aria-hidden="true">↗</i></button><p className="hc-postscript"><span aria-hidden="true">✦</span> 一張肖像，一段等待被認識的故事。</p></div>
+      <div className="hc-copy"><p className="edition-kicker">A LITTLE MAGIC. A SHARED CURIOSITY.</p><h2 id="home-characters-title">角色介紹<em>關於B-612研究室的大家</em></h2><p className="hc-description">地球研究計畫越做越大，參與的人也越來越多了！<br/>大家來自不同的地方，有各自擅長的事情，也有完全不同的個性。<br/>那麼，就來認識一下大家吧！</p><button type="button" className="edition-enter hc-enter" onClick={onEnter}><span>瀏覽成員檔案</span><i aria-hidden="true">↗</i></button><p className="hc-postscript"><span aria-hidden="true">✦</span> B-612 / MEMBER ARCHIVE</p></div>
     </div>
-    <div className="hc-bottom-note"><span>PORTRAITS & FIELD NOTES</span><span>一起，把世界看得更近一點。</span></div>
+    <div className="hc-bottom-note"><span>PORTRAITS & FIELD NOTES</span><span>研究室成員檔案持續收錄中⋯</span></div>
   </motion.section>
 }

@@ -7,7 +7,7 @@ const images = import.meta.glob('/Art/avatar/*.{jpg,jpeg,png,webp,avif,gif,JPG,J
 
 export const characters = Object.entries(images).sort(([a], [b]) => a.localeCompare(b, 'zh-Hant')).map(([path, image]) => {
   const id = path.split('/').at(-1).replace(/\.[^.]+$/, '')
-  return { id, name: id, year: '', department: '', specialties: [], missions: [], notes: '', ...profiles[id], image }
+  return { id, name: id, age: '', affiliation: '', specialties: [], projects: [], biography: '', ...profiles[id], image }
 })
 
 export function loadCharacters() {

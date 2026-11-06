@@ -34,9 +34,9 @@ export default function CharactersPage({ onBack }) {
         {!characters && <p className="cw-loading" role="status">正在整理肖像收藏⋯</p>}
         {characters?.length === 0 && <p className="cw-loading" role="status">目前沒有可載入的肖像。</p>}
         <span className="cw-corner cw-corner-tl" aria-hidden="true">+</span><span className="cw-corner cw-corner-br" aria-hidden="true">+</span>
-        {indexOpen && <aside className="cw-index" id="cw-index" aria-label="角色檔案索引"><div className="cw-index-title"><span>COLLECTION INDEX</span><button aria-label="關閉索引" onClick={() => setIndexOpen(false)}>×</button></div><p>選一位同行者，翻開他的檔案。</p><div>{characters?.map((item, index) => <button key={item.id} onClick={event => open(item.id, event.currentTarget)}><span>{String(index + 1).padStart(2, '0')}</span>{item.name}<span>↗</span></button>)}</div></aside>}
+        {indexOpen && <aside className="cw-index" id="cw-index" aria-label="角色檔案索引"><div className="cw-index-title"><span>COLLECTION INDEX</span><button aria-label="關閉索引" onClick={() => setIndexOpen(false)}>×</button></div><p>B-612研究室的成員們！</p><div>{characters?.map((item, index) => <button key={item.id} onClick={event => open(item.id, event.currentTarget)}><span>{String(index + 1).padStart(2, '0')}</span>{item.name}<span>↗</span></button>)}</div></aside>}
       </section>
-      <footer className="cw-footer"><span><b>{String(characters?.length || 0).padStart(2, '0')}</b> 位同行者 <i>·</i> 肖像持續收錄中</span><span className="cw-instruction">↔ 自由拖曳 <i>/</i> 滾輪漫遊 <i>/</i> 點擊翻閱檔案</span><span className="cw-footer-mark">COLLECTED WITH CURIOSITY ✦</span></footer>
+      <footer className="cw-footer"><span><b>{String(characters?.length || 0).padStart(2, '0')}</b> 位成員 <i>・</i> 持續收錄中</span><span className="cw-instruction">↔ 自由拖曳 <i>/</i> 滾輪漫遊 <i>/</i> 點擊翻閱檔案</span><span className="cw-footer-mark">COLLECTED WITH CURIOSITY ✦</span></footer>
     </div>
     {character && <CharacterFile character={character} characters={characters} onSelect={setSelected} onClose={close}/>}
   </main>

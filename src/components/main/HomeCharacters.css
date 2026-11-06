@@ -24,3 +24,5 @@
 @media (max-width:1100px) { .hc-composition { gap: 4vw; padding: 45px 0; }.hc-portrait { width: clamp(165px,18vw,220px); }.hc-cards { height: 290px; }.hc-orbit { inset: 10px -3% 35px; }.hc-description { font-size: 13px; } }
 @media (max-width:760px) { .hc-section-label span:last-child { display: none; }.hc-composition { grid-template-columns: 1fr; gap: 35px; padding-top: 30px; }.hc-gallery { width: min(100%,510px); justify-self: center; }.hc-portrait { width: 195px; }.hc-cards { height: 300px; }.hc-copy { padding: 10px 5vw 0; }.hc-copy h2 { font-size: 37px; }.hc-description { font-size: 14px; }.hc-bottom-note { font-size: 8px; } }
 @media (prefers-reduced-motion: reduce) { .home-characters, .hc-controls button { animation: none !important; transition: none !important; } }
+
+.hc-control-triangle { display: inline-block; font: 16px/1 Arial, sans-serif; vertical-align: middle; }

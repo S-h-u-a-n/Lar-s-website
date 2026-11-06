@@ -2,9 +2,11 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 import { HISTORY_RECORDS } from './historyArchive/data'
 import { makeStripLayout, maskHit, nearestRecord } from './historyArchive/layout'
 import HistoryObservation from './historyArchive/HistoryObservation'
+import HistoryBackdropSquares from './historyArchive/HistoryBackdropSquares'
 import './HomeHistory.css'
 import useArchiveMotion from './historyArchive/useArchiveMotion'
 import { localPoint } from '../../dev/history/interactionMath'
+import { HISTORY } from '../../dev/history/config'
 
 const placements = HISTORY_RECORDS.map(record=>({...record.placement,origin:record.interaction.foot}))
 const masks = HISTORY_RECORDS.map(record=>Uint8Array.from(atob(record.interaction.bits), char=>char.charCodeAt(0)))
@@ -112,9 +114,11 @@ export default function HomeHistory() {
     if(viewport.current.hasPointerCapture(event.pointerId))viewport.current.releasePointerCapture(event.pointerId)
   }
   return <section id="home-history" className="home-history" aria-labelledby="hh-title">
-    <header className="hh-heading"><div className="hh-heading-title"><div className="hh-colour-notes home-geometry-swatches" aria-hidden="true">{['#f08fad','#ffdcc9','#f5f1a4','#80b9e5','#a2d8de','#e1d0f2'].map(color=><i key={color} style={{backgroundColor:color}}/>)}</div><div><p className="edition-kicker">HUMAN CIVILIZATION / FIELD RECORDS</p><h2 id="hh-title">人類歷史長卷<em>沿著足跡，觀察世界。</em></h2></div></div><div className="hh-heading-note"><p>從兩足行走，到相連的世界。<br/>選一個身影，讀一段歷史。</p><label>年代索引 <select value={selection?.index ?? current} onChange={event=>jump(Number(event.target.value))} disabled={Boolean(selection)} aria-label="選擇長卷中的時代">{HISTORY_RECORDS.map(record=><option key={record.id} value={record.index}>{String(record.index+1).padStart(2,'0')} / {record.name}</option>)}</select></label></div></header>
+    <header className="hh-heading"><div className="hh-heading-title"><div className="hh-colour-notes home-geometry-swatches" aria-hidden="true">{['#f08fad','#ffdcc9','#f5f1a4','#80b9e5','#a2d8de','#e1d0f2'].map(color=><i key={color} style={{backgroundColor:color}}/>)}</div><div><p className="edition-kicker">HUMAN CIVILIZATION / FIELD RECORDS</p><h2 id="hh-title">地球文明史<em>沿著足跡，觀察世界。</em></h2></div></div><div className="hh-heading-note"><p>大家好不容易按時間一點一滴整理的資料！</p><label>年代索引 <select value={selection?.index ?? current} onChange={event=>jump(Number(event.target.value))} disabled={Boolean(selection)} aria-label="選擇長卷中的時代">{HISTORY_RECORDS.map(record=><option key={record.id} value={record.index}>{String(record.index+1).padStart(2,'0')} / {record.name}</option>)}</select></label></div></header>
+    <div className="hh-display-mat">
     <div className="hh-scroll-label"><span>THE HUMAN STORY</span><span>文明觀察室 <i>✧</i> 研究卷 01</span></div>
-    <div ref={stage} className="hh-stage" style={{height:layout.height}} data-observing={Boolean(selection)}>
+    <div ref={stage} className="hh-stage" style={{height:layout.height,'--hh-person-shadow':`${HISTORY.shadow.x*layout.scale}px ${HISTORY.shadow.y*layout.scale}px ${HISTORY.shadow.blur*layout.scale}px ${HISTORY.shadow.color}`}} data-observing={Boolean(selection)}>
+      <HistoryBackdropSquares height={layout.baseline+9}/>
       <div className="hh-panorama" inert={Boolean(selection)}>
         <svg className="hh-stage-dots" viewBox="0 0 62 31" aria-hidden="true">{[0,1].flatMap(row=>[0,1,2,3].map(column=><circle key={`${row}-${column}`} cx={column*15.5+4} cy={row*15.5+4} r="1.75" fill="#b98f994f"/>))}</svg>
         <div ref={viewport} className="hh-viewport" onScroll={sync} onPointerDown={event=>{if(event.button!==0||!event.isPrimary||selection)return;drag.current={id:event.pointerId,x:event.clientX,y:event.clientY,scroll:viewport.current.scrollLeft,moved:false}}} onPointerMove={event=>{
@@ -137,8 +141,9 @@ export default function HomeHistory() {
       </div>
       {selection && <HistoryObservation selection={selection} size={size} closing={closing} originFor={originFor} onClose={close} onChange={changeRecord} onClosed={()=>{setSelection(null);setClosing(false);requestAnimationFrame(()=>opener.current?.focus({preventScroll:true}))}}/>}
     </div>
-    <div className="hh-navigation" inert={Boolean(selection)}><button type="button" onClick={()=>jump(Math.min(HISTORY_RECORDS.length-1,current+2))} aria-label="向較近的年代探索">←</button><div className="hh-progress"><label htmlFor="hh-progress">{String(current+1).padStart(2,'0')} / {HISTORY_RECORDS.length} <span>{HISTORY_RECORDS[current].name}</span></label><input ref={range} id="hh-progress" type="range" min="0" max="100" step=".1" defaultValue="0" dir="rtl" aria-label="探索歷史長卷的進度" onChange={event=>{const max=viewport.current.scrollWidth-viewport.current.clientWidth;viewport.current.scrollLeft=max*(1-Number(event.target.value)/100)}}/></div><button type="button" onClick={()=>jump(Math.max(0,current-2))} aria-label="向較早的年代探索">→</button><p>拖曳長卷 · 橫向滑動 · Shift＋滾輪<br/><span>點擊人物，翻開時代觀察紀錄。</span></p></div>
-    <p className="hh-context">18 個觀察節點，不是唯一的文明路徑。各地發展與時代互有重疊，圖像間距不代表時間長度。</p>
+    <div className="hh-navigation" inert={Boolean(selection)}><button type="button" onClick={()=>jump(Math.min(HISTORY_RECORDS.length-1,current+2))} aria-label="向較近的年代探索"><span className="hh-explore-triangle" aria-hidden="true">◀</span></button><div className="hh-progress"><label htmlFor="hh-progress">{String(current+1).padStart(2,'0')} / {HISTORY_RECORDS.length} <span>{HISTORY_RECORDS[current].name}</span></label><input ref={range} id="hh-progress" type="range" min="0" max="100" step=".1" defaultValue="0" dir="rtl" aria-label="探索歷史長卷的進度" onChange={event=>{const max=viewport.current.scrollWidth-viewport.current.clientWidth;viewport.current.scrollLeft=max*(1-Number(event.target.value)/100)}}/></div><button type="button" onClick={()=>jump(Math.max(0,current-2))} aria-label="向較早的年代探索"><span className="hh-explore-triangle" aria-hidden="true">▶</span></button><p>拖曳長卷 · 橫向滑動 · Shift＋滾輪<br/><span>點擊人物就可以查看大家整理出的資料喔！</span></p></div>
+    <p className="hh-context">各時期與地區的發展可能重疊，圖示間距不代表實際時間比例。</p>
+    </div>
     {notice&&<p className="hh-load-error" role="alert">{notice}</p>}
   </section>
 }
