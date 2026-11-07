@@ -8,16 +8,36 @@
 .gt-header button { pointer-events: auto; background: var(--gt-teal); }
 .gt-header h1 { font: 800 clamp(22px,3vw,46px)/1.1 var(--display); margin: 16px 0 5px; max-width: 55%; }
 .gt-header p { margin: 0; font-size: 13px; }
+.gt-page .gt-header { translate: 0 -12px; }
 .gt-model { position: absolute; inset: 140px 0 64px; z-index: 1; }
 .gt-body-picker { position: absolute; z-index: 3; bottom: 20px; left: 24px; display: flex; gap: 8px; align-items: center; font-size: 12px; }
 .gt-body-picker select { background: var(--gt-yellow); }
 .gt-decor { position: absolute; inset: 0; pointer-events: none; }
 .gt-decor i { position: absolute; display: block; }
 .gt-disc { width: min(58vw,70vh); aspect-ratio: 1; left: 4%; top: 20%; border-radius: 50%; background: var(--gt-white); }
+.gt-page .gt-disc { left: calc(26% - min(29vw,35vh)); }
 .gt-stripes { width: 17vw; height: 27vh; right: 3%; top: 14%; transform: rotate(12deg); background: repeating-linear-gradient(-45deg,var(--gt-pink) 0 20px,var(--gt-white) 20px 25px); }
 .gt-grid { width: 32vw; height: 28vh; left: 8%; bottom: 13%; background-image: linear-gradient(#91d9df70 1px,transparent 1px),linear-gradient(90deg,#91d9df70 1px,transparent 1px); background-size: 28px 28px; }
 .gt-pink-square { width: clamp(30px,5vw,70px); aspect-ratio: 1; left: 4%; top: 44%; background: var(--gt-pink); transform: rotate(-12deg); }
 .gt-yellow-square { width: clamp(24px,4vw,54px); aspect-ratio: 1; right: 9%; bottom: 12%; background: var(--gt-yellow); transform: rotate(20deg); }
+.gt-extra-square { width: var(--square-size); aspect-ratio: 1; background: var(--square-color); transform: rotate(var(--square-angle)); opacity: .7; }
+.gt-floating-square { translate: calc(var(--gt-float-x,0px) + var(--pointer-x,0) * var(--gt-pointer-gain-x,4px)) calc(var(--gt-float-y,0px) + var(--pointer-y,0) * var(--gt-pointer-gain-y,4px)); will-change: translate; pointer-events: none; }
+.gt-page .edition-observation-invitation h2 span { display: block; font-size: clamp(23px,2.3vw,35px); }
+.gt-page .edition-observation-invitation h2 em { display: block; font-size: clamp(64px,6.5vw,100px); line-height: 1.18; }
+.gt-page .edition-observation-invitation .gt-invitation-title { margin-bottom: 0; }
+.gt-page .edition-observation-invitation .gt-invitation-subtitle { margin: 6px 0 0; font: 600 16px/1.4 var(--body); color: #7a897d; }
+.gt-page .edition-observation-invitation .gt-instructions { margin: 30px 0 0; font: 400 13px/1.65 var(--body); color: var(--edition-ink); }
+.gt-page .edition-observation-invitation .gt-body-dots { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 4px; margin: 20px 0 0; }
+body .gt-page .gt-body-dots .gt-body-dot { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 0; background: transparent; transform: none; }
+.gt-body-dot { flex: 0 0 44px; }
+.gt-body-dot-decoration { opacity: .45; pointer-events: none; }
+.gt-body-dot svg { display: block; width: clamp(19px,2.05vw,32px); height: auto; aspect-ratio: 1; transition: transform var(--gt-dot-duration) var(--gt-dot-easing); }
+.gt-body-dot .big-test-asset-tint { opacity: 1; }
+.gt-body-dot:is(:hover,:focus-visible,[aria-pressed="true"]):not(:disabled) svg { transform: translateY(-4px); }
+@media (max-width: 650px) { .gt-body-picker { flex-wrap: wrap; max-width: calc(100% - 36px); } .gt-extra-square { opacity: .45; } }
+@media (prefers-reduced-motion: reduce) { .gt-floating-square { translate: none; will-change: auto; } .gt-body-dot svg { transition: none; } }
+@media (max-height: 680px) { .gt-page .edition-observation-invitation h2 em { font-size: clamp(48px,9vh,64px); } }
+@media (max-height: 540px) { .gt-page .edition-star-chart { width: 60px; height: 60px; } .gt-page .edition-star-chart span { font-size: 36px; } .gt-page .edition-observation-invitation h2 span { font-size: 26px; } .gt-page .edition-observation-invitation .gt-invitation-title { margin-top: 10px; } }
 .gt-notes { position: absolute; z-index: 4; right: 3vw; top: max(140px,16vh); bottom: 10vh; width: clamp(310px,35vw,530px); border-radius: 24px; background: var(--gt-white); overflow-y: auto; overflow-x: hidden; visibility: hidden; opacity: 0; transform: translateX(calc(100% + 4vw)); transition: transform var(--gt-panel-duration) var(--gt-easing),opacity var(--gt-panel-duration) var(--gt-easing),visibility 0s var(--gt-panel-duration); }
 .gt-notes.is-open { visibility: visible; opacity: 1; transform: translateX(0); transition-delay: 0s; }
 .gt-note-dots { position: absolute; top: 0; right: 0; width: 42%; height: 160px; pointer-events: none; background: radial-gradient(circle,#91d9df 1.5px,transparent 2px) 0 0/17px 17px; opacity: 0; transition: opacity var(--gt-story-duration) var(--gt-easing); }

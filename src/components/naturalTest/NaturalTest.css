@@ -16,11 +16,20 @@ body:has(.natural-test) .orientation-prompt{z-index:10040}
 body .nt-level-overview .is-entrance-target .nt-category-title,body .nt-level-overview .is-entrance-target .nt-category-intro,body .nt-level-overview .is-entrance-target .nt-category-number,body .nt-level-overview .is-entrance-target .ht-landmark{visibility:visible}
 body .nt-level-overview .is-entrance-target .nt-entry{visibility:visible;pointer-events:auto}
 .nt-article-body h3{font:400 19px/1.4 var(--display);margin:28px 0 10px}
+.natural-test .nt-related-page{padding:10px 14px;background:var(--nt-mint);border:1px solid var(--edition-line);border-radius:0 20px 0 0;font:13px var(--sans)}
 .nt-article-sources{margin-top:28px;font:10px/1.7 var(--sans);opacity:.8;overflow-wrap:anywhere}
 .nt-article-sources h3{font:inherit;letter-spacing:.08em}
 .nt-article-sources a{color:inherit;text-underline-offset:2px}
 /* Edition's generic card rule is relative; atlas coordinates are category-local. */
 .natural-test .nt-category > .nt-entry{position:absolute}
+/* Both title representations own their decoration: the corner anchor moves
+   with the button, including its hover transform. Artwork keeps its world size. */
+.natural-test .nt-category-title,.natural-test .edition-atlas-labels>button{overflow:visible}
+.natural-test .nt-title-decoration{position:absolute;right:12px;top:12px;z-index:2;width:0;height:0;pointer-events:none;overflow:visible}
+.natural-test .nt-title-decoration-art{position:absolute;right:0;top:0;width:0;height:0;overflow:visible}
+body .natural-test .nt-title-decoration .nt-decoration{left:auto;right:0;top:0;animation:none;opacity:1}
+.natural-test .nt-title-decoration--overview .nt-title-decoration-art{scale:var(--atlas-scale,1);transform-origin:100% 0}
+body .natural-test .nt-title-decoration--overview .nt-decoration{translate:50% 0}
 /* Bilingual names use existing Chinese/English fields without changing content. */
 .natural-test .nt-title-zh,.natural-test .nt-title-en{display:block;overflow-wrap:anywhere}
 .natural-test .nt-title-zh{font:inherit;color:inherit}
@@ -52,3 +61,55 @@ body .natural-test .nt-category[data-expanded="true"]>.nt-entry{visibility:visib
 body .natural-test .nt-category[data-expanded="false"]>.nt-entry{visibility:hidden;pointer-events:none;animation:none}
 body .natural-test .nt-category[data-expanded="true"]>.nt-category-intro{opacity:1}
 @media(prefers-reduced-motion:reduce){body .natural-test .nt-category[data-expanded="true"]>.nt-entry{animation:none!important}}
+/* Compact world-space groups retain the atlas's offset columns. */
+.natural-test .nt-category-intro{width:85%;margin:18px 0;font-size:23px;line-height:1.5}
+.natural-test .nt-category-circle{width:1200px;height:1200px;left:45px;top:20px}
+.natural-test .nt-entry{min-height:190px}
+.natural-test .nt-entry-copy{gap:9px}
+.natural-test .nt-entry strong{font-size:32px}
+.natural-test .nt-entry .nt-title-en{margin-top:5px}
+.natural-test .nt-entry-description{line-height:1.5;color:#687582}
+/* Reading-only label and photo remain separate; category layout stays fixed. */
+.natural-test .nt-entry.is-reading-entry{min-height:0;animation:none}
+.natural-test .nt-entry.is-reading-entry:hover{transform:none}
+.natural-test.has-reading .nt-entry:not(.is-reading-entry){visibility:hidden!important;pointer-events:none!important}
+.natural-test .research-photo{display:block;position:relative;box-sizing:border-box;overflow:hidden;min-width:0;max-width:100%;aspect-ratio:4/3;background:#F2EDE363;border:1px solid #34465A20;border-radius:0 16px 0 0;pointer-events:none}
+.natural-test .research-photo img{display:block;width:100%;height:100%;object-fit:contain}
+.natural-test .edition-atlas-labels>button{min-height:148px}
+.natural-test .edition-atlas-labels strong{min-height:72px}
+.natural-test .edition-atlas-labels .nt-title-en{line-height:1.3}
+@media(max-height:620px){
+ .natural-test .edition-atlas-labels>button{min-height:120px;padding:10px 13px}
+ .natural-test .edition-atlas-labels strong{min-height:60px;margin:6px 0;font-size:18px}
+ .natural-test .edition-atlas-labels strong .nt-title-en{font-size:10px;margin-top:4px}
+}
+.natural-test .nt-entry.is-reading-entry strong{font-size:40px}
+.natural-test .nt-entry.is-reading-entry .nt-entry-description{font-size:20px}
+.natural-test .nt-entry.is-reading-entry .nt-title-en{font-size:16px}
+.natural-test .nt-category-number{top:-28px;left:0}
+
+.natural-test .is-reading-entry .nt-read,.natural-test .is-reading-entry .nt-entry-detail{display:none}
+.natural-test .nt-reading-photo{position:absolute;width:440px;z-index:2;pointer-events:none}
+.natural-test .nt-reading-photo>.research-photo{width:100%;background:#FFFEF8B8}
+.natural-test .nt-article-heading{display:flex;align-items:center;gap:14px;margin:20px 0 12px}
+.natural-test .nt-article-heading h2{min-width:0;margin:0}
+.natural-test .nt-article-icon{display:block;flex:0 0 1em;width:1em;height:1em;font-size:clamp(26px,3vw,44px)}
+.natural-test .nt-article-icon svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2}
+.human-test .nt-article-icon svg{stroke-width:2}
+.natural-test .research-photo-info{position:absolute;z-index:8;display:grid;place-items:center;width:23px;height:23px;padding:0;border:1px solid #34465A55;border-radius:50%;background:#FFFEF8E8;color:var(--nt-ink);font:17px/1 Georgia,serif;cursor:pointer;box-shadow:0 1px 4px #34465A16}
+.natural-test .research-photo-info:hover{background:#fffef8}
+.research-photo-license{position:fixed;inset:0;margin:auto;max-width:min(520px,calc(100vw - 36px));max-height:calc(100dvh - 48px);padding:0;border:1px solid #34465A55;border-radius:0 25px 0 0;background:#FFFEF8;color:#34465A;overflow:auto;font:15px/1.7 Georgia,'Songti TC',serif}
+.research-photo-license::backdrop{background:#34465A55}
+.research-photo-license-copy{position:relative;padding:28px}
+.research-photo-license h2{font:400 24px/1.4 var(--display);padding-right:30px;margin:0 0 20px}
+.research-photo-license p{overflow-wrap:anywhere}
+.research-photo-license dl{margin:20px 0 0}
+.research-photo-license dt{font-size:12px;opacity:.7;margin-top:16px}
+.research-photo-license dd{margin:4px 0 0;overflow-wrap:anywhere}
+.research-photo-license a{color:inherit;text-underline-offset:3px}
+.research-photo-license-close{position:absolute;right:20px;top:16px;border:0;background:transparent;color:inherit;font:26px/1.5 Georgia,serif;cursor:pointer}
+.research-photo-license :focus-visible{outline:2px solid #648275;outline-offset:4px}
+/* Artwork shares one foreground layer, outside each transformed label's
+   stacking context. The screen-space anchor and original artwork are retained. */
+.natural-test .atlas-decoration-layer{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:visible}
+.natural-test [data-atlas-decoration]{position:absolute;transform:translateY(-4px);transform-origin:50% 50%;pointer-events:none;overflow:visible}

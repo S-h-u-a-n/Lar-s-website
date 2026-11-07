@@ -1,3 +1,5 @@
+import { CARD_DESCRIPTIONS } from '../research/cardDescriptions'
+import { withResearchPhoto } from '../research/photoConfig'
 import { STYLE } from '../naturalTest/data'
 import { ARTICLES_BY_ID } from './articles'
 export { STYLE }
@@ -8,20 +10,20 @@ export const CATEGORIES = [
   { id:'technology', name:'SCIENCE & TECHNOLOGY', chineseName:'科學與科技', introduction:'Evidence, tools and connected systems.', x:500, y:2100, color:STYLE.blue, decoration:'circuit', landmark:'0101', entries:['scientific-method','printing','electricity','computers','networks','space-exploration'] },
   { id:'politics', name:'POLITICS & ECONOMY', chineseName:'政治與經濟', introduction:'Institutions, resources and public decisions.', x:3500, y:2250, color:STYLE.teal, decoration:'architecture', landmark:'PUBLIC', entries:['government','laws-rights','democracy','money-trade','economic-systems','international-cooperation'] },
   { id:'language', name:'LANGUAGE & BELIEFS', chineseName:'語言與信仰', introduction:'Words, stories and ways of understanding.', x:6500, y:2600, color:STYLE.peach, decoration:'pages', landmark:'Aa', entries:['language-families','writing-systems','language-change','mythology','religions','folklore'] },
-].map(category => ({ ...category, width:1500, height:Math.max(1550, 500 + Math.ceil(category.entries.length / 2) * 350) }))
+].map(category => ({ ...category, width:1120, height:Math.max(1190, 380 + Math.ceil(category.entries.length / 2) * 270) }))
 const entryPosition = index => {
   const row = Math.floor(index / 2), column = index % 2
-  return [column ? [810,790,805][row % 3] : [55,90,60][row % 3], 440 + row * 350 + column * 35]
+  return [column ? [580,560,575][row % 3] : [40,65,45][row % 3], 340 + row * 270 + column * 22]
 }
 const specialTypes = { timeline:'infographic', books:'recommendation', conversation:'story' }
 export const ENTRIES = CATEGORIES.flatMap(category => category.entries.map((id,index) => {
   const item=ARTICLES_BY_ID[id], [x,y]=entryPosition(index), type=specialTypes[id] ?? 'article'
-  return { id, category:category.id, title:item.title, chineseName:item.chineseName, description:item.description, type, x,y, content:id, detail:type.toUpperCase(), image:null }
+  return { id, category:category.id, title:item.title, chineseName:item.chineseName, description:CARD_DESCRIPTIONS.human[id], type, x,y, content:id, detail:type.toUpperCase(), image:null }
 }))
 export const entryById = Object.fromEntries(ENTRIES.map(entry => [entry.id,entry]))
 const existingIds = new Set(['cities','timeline','theatre','books','commute','conversation','printing','networks','bridges','library'])
 export const CONTENT = Object.fromEntries(ENTRIES.map(entry => [entry.id, {
-  ...ARTICLES_BY_ID[entry.id], subtitle:ARTICLES_BY_ID[entry.id].chineseName,
+  ...withResearchPhoto('human', ARTICLES_BY_ID[entry.id]), subtitle:ARTICLES_BY_ID[entry.id].chineseName,
   note:existingIds.has(entry.id) ? 'A useful question for our next visit: which everyday skill would we need to learn before leaving our wands at home?' : null,
   author:existingIds.has(entry.id) ? 'Mira · student researcher' : null,
 }]))

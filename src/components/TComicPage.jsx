@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import LayoutEditor from '../dev/LayoutEditor'
 import layoutDefaults from './tComicLayout.json'
+import subtitleConfig from './tComicTextConfig.json'
 import { useDevEditorState } from '../dev/devEditorStore'
 import { usePersistedEditableText } from '../dev/useEditableText'
-import { enablePageTextPersistence, useTextEditorState } from '../dev/textEditorStore'
+import { buildTextStyle, enablePageTextPersistence } from '../dev/textEditorStore'
 import './TComicPage.css'
 import './portalComics/ComicPages.css'
 import comic1 from '../../Art/telescope/t-comic/t-comic1.PNG'
@@ -97,19 +98,7 @@ const AUTO_FOLLOW_STEPS = {
   14: 15,
 }
 const AUTO_FOLLOW_DELAY_MS = 80
-const DIALOGUE_TEXT_DEFAULTS = {
-  1: { text: '這是尤塔學長之前做的\n特製望遠鏡，\n聽說可以更仔細地觀測地球\n\n但不知道怎麼用...', x: 94, y: 138, width: null, maxWidth: null, height: null, maxHeight: null, fontSize: 20, fontFamily: '"Chiron Sung", "Songti SC", serif', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, textAlign: 'left', writingMode: 'vertical-rl', rotation: 0, zIndex: 1, opacity: 1, color: '#1a497a' },
-  2: { text: '直接看的話，\n什麼也看不到……', x: 116, y: 111, width: null, maxWidth: null, height: null, maxHeight: null, fontSize: 20, fontFamily: '"Chiron Sung", "Songti SC", serif', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, textAlign: 'left', writingMode: 'vertical-rl', rotation: 0, zIndex: 1, opacity: 1, color: '#1a497a' },
-  3: { text: '那直接問學長吧。\n不知道他現在有沒有空\n……', x: 111, y: 103, width: null, maxWidth: null, height: null, maxHeight: null, fontSize: 18, fontFamily: '"Chiron Sung", "Songti SC", serif', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, textAlign: 'left', writingMode: 'vertical-rl', rotation: 0, zIndex: 1, opacity: 1, color: '#1a497a' },
-  4: { text: '喔？', x: 68, y: 55, width: null, maxWidth: null, height: null, maxHeight: null, fontSize: 24, fontFamily: '"Chiron Sung", "Songti SC", serif', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, textAlign: 'left', writingMode: 'vertical-rl', rotation: 0, zIndex: 1, opacity: 1, color: '#1a497a' },
-  5: { text: '尤塔學長？\n他上週就去鄰國的\n姐妹校交流了啊。\n\n一時半會兒\n應該回不來吧。', x: 122, y: 116, width: null, maxWidth: null, height: null, maxHeight: null, fontSize: 22, fontFamily: '"Chiron Sung", "Songti SC", serif', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, textAlign: 'left', writingMode: 'vertical-rl', rotation: 0, zIndex: 1, opacity: 1, color: '#1a497a' },
-  6: { text: '誒？！', x: 77, y: 112, width: null, maxWidth: null, height: null, maxHeight: null, fontSize: 20, fontFamily: '"Chiron Sung", "Songti SC", serif', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, textAlign: 'left', writingMode: 'vertical-rl', rotation: 0, zIndex: 1, opacity: 1, color: '#1a497a' },
-  7: { text: '滋啦——', x: 54, y: 63, width: null, maxWidth: null, height: null, maxHeight: null, fontSize: 16, fontFamily: '"Chiron Sung", "Songti SC", serif', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, textAlign: 'left', writingMode: 'vertical-rl', rotation: 0, zIndex: 1, opacity: 1, color: '#1a497a' },
-  8: { text: '影像？！', x: 81, y: 74, width: null, maxWidth: null, height: null, maxHeight: null, fontSize: 21, fontFamily: '"Chiron Sung", "Songti SC", serif', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, textAlign: 'left', writingMode: 'vertical-rl', rotation: 0, zIndex: 1, opacity: 1, color: '#1a497a' },
-  9: { text: '喂——？」\n這樣應該聽得到吧。', x: 130, y: 85, width: null, maxWidth: null, height: null, maxHeight: null, fontSize: 22, fontFamily: '"Chiron Sung", "Songti SC", serif', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, textAlign: 'left', writingMode: 'vertical-rl', rotation: 0, zIndex: 1, opacity: 1, color: '#1a497a' },
-  10: { text: '很好，那就開始吧。', x: 131, y: 68, width: null, maxWidth: null, height: null, maxHeight: null, fontSize: 21, fontFamily: '"Chiron Sung", "Songti SC", serif', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, textAlign: 'left', writingMode: 'vertical-rl', rotation: 0, zIndex: 1, opacity: 1, color: '#1a497a' },
-  11: { text: '?!', x: 132, y: 115, width: null, maxWidth: null, height: null, maxHeight: null, fontSize: 60, fontFamily: '"Chiron Sung", "Songti SC", serif', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, textAlign: 'left', writingMode: 'horizontal-tb', rotation: 0, zIndex: 1, opacity: 1, color: '#1a497a' },
-}
+const DIALOGUE_TEXT_DEFAULTS = Object.fromEntries(Object.entries(subtitleConfig.registered).map(([id, { coordinateSpace, ...values }]) => [Number(id.replace('t-dialog-text-', '')), values]))
 
 function DialogueText({ number }) {
   const id = `t-dialog-text-${number}`
@@ -117,18 +106,18 @@ function DialogueText({ number }) {
     id,
     label: `Telescope / Dialog ${number}`,
     coordinateSpace: 'dialogue-group',
+    sourceRevision: subtitleConfig.revision,
     defaultValues: DIALOGUE_TEXT_DEFAULTS[number],
   })
 
   return (
-    <div id={id} ref={editable.ref} {...editable.props} style={{ ...editable.props.style, whiteSpace: 'pre-wrap' }} className="t-comic-dialogue-text">
+    <div id={id} ref={editable.ref} {...editable.props} style={{ ...buildTextStyle({ sourceDefaultKeys: Object.keys(DIALOGUE_TEXT_DEFAULTS[number]), defaults: DIALOGUE_TEXT_DEFAULTS[number], values: DIALOGUE_TEXT_DEFAULTS[number] }), ...editable.props.style, whiteSpace: 'pre-wrap' }} className="t-comic-dialogue-text">
       {editable.text ?? editable.defaultText ?? DIALOGUE_TEXT_DEFAULTS[number].text}
     </div>
   )
 }
 
 function TComicPage({ onComplete, onBack }) {
-  const { data: textData } = useTextEditorState()
   // Development persistence is owned by PageEditors; production only restores.
   useEffect(() => {
     if (!import.meta.env.DEV) return enablePageTextPersistence('t-comic', 't-comic-', { readOnly: true })
@@ -139,7 +128,6 @@ function TComicPage({ onComplete, onBack }) {
   ].map(item => ({ ...item, ...DEFAULT_LAYOUT_BY_ID.get(item.id) })))
   const [items, setItems] = useState(() => loadLayoutItems(initialItems))
   const [visibleThrough, setVisibleThrough] = useState(-1)
-  const [showCaption,setShowCaption]=useState(true)
   const [activeFadeIndex, setActiveFadeIndex] = useState(null)
   const [completedIndex, setCompletedIndex] = useState(-1)
   const { active } = useDevEditorState()
@@ -232,12 +220,9 @@ function TComicPage({ onComplete, onBack }) {
     }
   })
 
-  const latestDialogue=SEQUENCE.slice(0,visibleThrough+1).filter(id=>id.startsWith('t-dialog-')).at(-1)
-  const dialogueNumber = latestDialogue ? Number(latestDialogue.replace('t-dialog-', '')) : null
-  const caption = dialogueNumber ? textData[`t-dialog-text-${dialogueNumber}`]?.values.text ?? DIALOGUE_TEXT_DEFAULTS[dialogueNumber]?.text : null
   return (
     <main className="t-comic-page" aria-label="Telescope comic transition" aria-busy={activeFadeIndex !== null} data-reading-step={completedIndex} tabIndex={0} onKeyDown={event=>{if(event.target!==event.currentTarget)return;if(event.key==='Enter'||event.key===' '){event.preventDefault();handleStageClick(event)}if(event.key==='Escape')onBack?.()}} onClick={handleStageClick} onTransitionEnd={handleFadeComplete} style={{ '--t-comic-fade-duration': `${FADE_DURATION_MS}ms` }}>
-      <div className="edition-comic-controls" onClick={event=>event.stopPropagation()}><button onClick={onBack}>↙ 回研究室</button><span>觀測工具 / 望遠鏡的故事</span><button aria-pressed={showCaption} onClick={()=>setShowCaption(v=>!v)}>閱讀字幕 {showCaption?'−':'＋'}</button><button onClick={onComplete}>開始觀測 ↗</button><small>點畫面或按空白鍵，繼續閱讀。</small></div><div className="t-comic-frame-heading" aria-hidden="true" />
+      <div className="edition-comic-controls" onClick={event=>event.stopPropagation()}><button onClick={onBack}>↙ 回研究室</button><div className="t-comic-title"><h1>望遠鏡的故事</h1><p lang="en">The Story of the Telescope</p></div><button onClick={onComplete}>開始觀測 ↗</button></div><div className="t-comic-frame-heading" aria-hidden="true" />
       <div className="portal-comic__panels t-comic-frame">
         <div ref={frameRef} className="t-comic-fit">
         <LayoutEditor
@@ -255,7 +240,6 @@ function TComicPage({ onComplete, onBack }) {
         />
         </div>
       </div>
-      {showCaption&&caption&&<aside className="edition-comic-caption" key={latestDialogue} aria-live="polite"><small>對話筆記 / {Number(latestDialogue.replace('t-dialog-',''))}</small><p style={{ whiteSpace: 'pre-wrap' }}>{caption}</p></aside>}
       <div className="t-comic-frame-footer" aria-hidden="true" />
     </main>
   )

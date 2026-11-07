@@ -14,6 +14,10 @@
   inset: 0;
 }
 
+.t-comic-title{text-align:center;color:var(--edition-ink)}
+.t-comic-title h1{margin:0;font:400 20px/1.2 var(--body)}
+.t-comic-title p{margin:5px 0 0;font:11px/1.2 var(--sans);opacity:.7}
+
 .t-comic-page .layout-editor-stage {
   z-index: 1 !important;
 }

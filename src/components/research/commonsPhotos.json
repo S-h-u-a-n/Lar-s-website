@@ -1,0 +1,1046 @@
+{
+  "natural": {
+    "volcano": {
+      "image": "/research-photos/natural-volcano.jpg",
+      "imageAlt": "夏威夷基拉韋厄火山噴發時形成的半球形熔岩噴泉",
+      "photoCredit": {
+        "title": "Lava fountain dome 2.jpg",
+        "author": "J.B. Judd - USGS",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lava_fountain_dome_2.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Lava_fountain_dome_2.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 855,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "earthquakes": {
+      "image": "/research-photos/natural-earthquakes.jpg",
+      "imageAlt": "加州卡里佐平原的聖安地列斯斷層空拍",
+      "photoCredit": {
+        "title": "Aerial-SanAndreas-CarrizoPlain.jpg",
+        "author": "John Wiley User:Jw4nvc - Santa Barbara, California",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aerial-SanAndreas-CarrizoPlain.jpg",
+        "license": "CC BY 3.0",
+        "licenseVersion": "3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "modifications": "使用原檔；本站未裁切、未調色，完整顯示。",
+        "width": 829,
+        "height": 768,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "plate-tectonics": {
+      "image": "/research-photos/natural-plate-tectonics.jpg",
+      "imageAlt": "冰島辛格維利爾國家公園的張裂地形",
+      "photoCredit": {
+        "title": "IS-thingvellir-05.jpg",
+        "author": "Balou46",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:IS-thingvellir-05.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1933,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "rocks-minerals": {
+      "image": "/research-photos/natural-rocks-minerals.jpg",
+      "imageAlt": "花崗岩碎塊與表面可見的不同礦物顆粒",
+      "photoCredit": {
+        "title": "Karinkal.jpg",
+        "author": "Rameshng at Malayalam Wikipedia",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Karinkal.jpg",
+        "license": "CC BY 3.0",
+        "licenseVersion": "3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1707,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "minerals": {
+      "image": "/research-photos/natural-minerals.jpg",
+      "imageAlt": "墨西哥韋拉克魯斯產的紫水晶石英晶簇",
+      "photoCredit": {
+        "title": "Quartz-148106.jpg",
+        "author": "Rob Lavinsky, iRocks.com – CC-BY-SA-3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Quartz-148106.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseVersion": "3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modifications": "使用原檔；本站未裁切、未調色，完整顯示。",
+        "width": 600,
+        "height": 459,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "mountains-valleys": {
+      "image": "/research-photos/natural-mountains-valleys.jpg",
+      "imageAlt": "從冰河點眺望優勝美地河谷與半圓頂",
+      "photoCredit": {
+        "title": "Half Dome with Eastern Yosemite Valley.jpg",
+        "author": "Thomas Wolf, www.foto-tw.de",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Half_Dome_with_Eastern_Yosemite_Valley.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseVersion": "3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 811,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "currents": {
+      "image": "/research-photos/natural-currents.jpg",
+      "imageAlt": "NASA Terra 衛星拍攝愛爾蘭海中隨水流分布的沉積物",
+      "photoCredit": {
+        "title": "Sediment in the Irish Sea (MODIS 2022-03-22).jpg",
+        "author": "MODIS Land Rapid Response Team, NASA GSFC",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sediment_in_the_Irish_Sea_(MODIS_2022-03-22).jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Sediment_in_the_Irish_Sea_(MODIS_2022-03-22).jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 993,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "water-cycle": {
+      "image": "/research-photos/natural-water-cycle.jpg",
+      "imageAlt": "降雨前的雲，呈現大氣中凝結的水滴",
+      "photoCredit": {
+        "title": "Clouds before rain.jpg",
+        "author": "Paolo Neo",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Clouds_before_rain.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Clouds_before_rain.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 960,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "rivers-lakes": {
+      "image": "/research-photos/natural-rivers-lakes.jpg",
+      "imageAlt": "哥斯大黎加河流的曲流與舊河道空拍",
+      "photoCredit": {
+        "title": "A Meandering River in Costa Rica - aerial photo.jpg",
+        "author": "Luke Jones (Accretion Disc on Flickr) https://www.flickr.com/photos/befuddledsenses/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_Meandering_River_in_Costa_Rica_-_aerial_photo.jpg",
+        "license": "CC BY 2.0",
+        "licenseVersion": "2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 960,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "lakes": {
+      "image": "/research-photos/natural-lakes.jpg",
+      "imageAlt": "俄羅斯貝加爾湖奧爾洪島的湖岸與岩岬",
+      "photoCredit": {
+        "title": "Olkhon Island, Capes, cliffs at sunset, Lake Baikal, Russia.jpg",
+        "author": "© Vyacheslav Argenberg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Olkhon_Island,_Capes,_cliffs_at_sunset,_Lake_Baikal,_Russia.jpg",
+        "license": "CC BY 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 851,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "tides": {
+      "image": "/research-photos/natural-tides.jpg",
+      "imageAlt": "加拿大芬迪灣阿爾馬港退潮時露出的港底與船隻",
+      "photoCredit": {
+        "title": "Bay of Fundy - Tide Out.jpg",
+        "author": "Dylan Kereluk from White Rock, Canada",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bay_of_Fundy_-_Tide_Out.jpg",
+        "license": "CC BY 2.0",
+        "licenseVersion": "2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 960,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "deep-sea": {
+      "image": "/research-photos/natural-deep-sea.jpg",
+      "imageAlt": "深海熱泉附近的管蟲與蹲龍蝦群落",
+      "photoCredit": {
+        "title": "Expl2366 - Flickr - NOAA Photo Library.jpg",
+        "author": "University of Washington; NOAA/OAR/OER.",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Expl2366_-_Flickr_-_NOAA_Photo_Library.jpg",
+        "license": "CC BY 2.0",
+        "licenseVersion": "2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1650,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "clouds": {
+      "image": "/research-photos/natural-clouds.jpg",
+      "imageAlt": "天空中不同形態的積雲與卷雲",
+      "photoCredit": {
+        "title": "Clouds in the sky in August 2014.JPG",
+        "author": "Jakec",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Clouds_in_the_sky_in_August_2014.JPG",
+        "license": "CC BY-SA 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 853,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "aurora": {
+      "image": "/research-photos/natural-aurora.jpg",
+      "imageAlt": "美國冰河國家公園夜空中的綠色極光",
+      "photoCredit": {
+        "title": "The Aurora Borealis adds green hue to night skies over Glacier National Park, Montana. (0d18dad7-1dd8-b71b-0ba2-394f5a8d3ff8).jpg",
+        "author": "NPS",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Aurora_Borealis_adds_green_hue_to_night_skies_over_Glacier_National_Park,_Montana._(0d18dad7-1dd8-b71b-0ba2-394f5a8d3ff8).jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:The_Aurora_Borealis_adds_green_hue_to_night_skies_over_Glacier_National_Park,_Montana._(0d18dad7-1dd8-b71b-0ba2-394f5a8d3ff8).jpg",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 851,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "storms": {
+      "image": "/research-photos/natural-storms.jpg",
+      "imageAlt": "國際太空站拍攝的米爾頓颶風風眼與雲系",
+      "photoCredit": {
+        "title": "Eye of Hurricane Milton from the ISS 2024-10-07.jpg",
+        "author": "NASA & International Space Station",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eye_of_Hurricane_Milton_from_the_ISS_2024-10-07.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Eye_of_Hurricane_Milton_from_the_ISS_2024-10-07.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 719,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "atmosphere": {
+      "image": "/research-photos/natural-atmosphere.jpg",
+      "imageAlt": "從國際太空站看地球邊緣的薄層大氣與月球",
+      "photoCredit": {
+        "title": "ISS-51 Moon, Earth's limb and the thin blue atmosphere.jpg",
+        "author": "NASA",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:ISS-51_Moon,_Earth%27s_limb_and_the_thin_blue_atmosphere.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:ISS-51_Moon,_Earth%27s_limb_and_the_thin_blue_atmosphere.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 852,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "seasons": {
+      "image": "/research-photos/natural-seasons.jpg",
+      "imageAlt": "格林內爾冰河在 1938 年與 2009 年的對照照片",
+      "photoCredit": {
+        "title": "Grinnell Glacier 1938-2009.jpg",
+        "author": "T.J. Hileman (1938 - Glacier National Park Archives) e Lindsey Bengtson (2009)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grinnell_Glacier_1938-2009.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Grinnell_Glacier_1938-2009.jpg",
+        "modifications": "使用原檔；本站未裁切、未調色，完整顯示。",
+        "width": 861,
+        "height": 600,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "seasonal-cycle": {
+      "image": "/research-photos/natural-seasonal-cycle.jpg",
+      "imageAlt": "德國黑森州秋季的落葉闊葉林",
+      "photoCredit": {
+        "title": "Autumnal deciduous forest - Laubwald im Herbst - 01.jpg",
+        "author": "Norbert Nagel, Mörfelden-Walldorf, Germany",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Autumnal_deciduous_forest_-_Laubwald_im_Herbst_-_01.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseVersion": "3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 848,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "photosynthesis": {
+      "image": "/research-photos/natural-photosynthesis.jpg",
+      "imageAlt": "顯微鏡下加拿大伊樂藻葉尖細胞與葉綠體",
+      "photoCredit": {
+        "title": "Canadian Pond Weed Leaf Tip.jpg",
+        "author": "KarlGaff",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Canadian_Pond_Weed_Leaf_Tip.jpg",
+        "license": "CC BY 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 848,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "flowering-plants": {
+      "image": "/research-photos/natural-flowering-plants.jpg",
+      "imageAlt": "朱槿花的雄蕊、花粉與柱頭特寫",
+      "photoCredit": {
+        "title": "Macro of the reproductive organs of a hibiscus flower, the yellow stamens and the red pistils.jpg",
+        "author": ". Ray in Manila",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Macro_of_the_reproductive_organs_of_a_hibiscus_flower,_the_yellow_stamens_and_the_red_pistils.jpg",
+        "license": "CC BY 2.0",
+        "licenseVersion": "2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modifications": "使用原檔；本站未裁切、未調色，完整顯示。",
+        "width": 1163,
+        "height": 718,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "pollinators": {
+      "image": "/research-photos/natural-pollinators.jpg",
+      "imageAlt": "蜜蜂停留在花朵上訪花的微距照片",
+      "photoCredit": {
+        "title": "Honey Bee(Ápis melliféra) on a flower.jpg",
+        "author": "Plaksin Alexander",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Honey_Bee(%C3%81pis_mellif%C3%A9ra)_on_a_flower.jpg",
+        "license": "CC BY 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1792,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "forests": {
+      "image": "/research-photos/natural-forests.jpg",
+      "imageAlt": "尼泊爾 Shivapuri 森林中可見的林冠與林下植被",
+      "photoCredit": {
+        "title": "Dense forest canopy and understory at Shivapuri hills.jpg",
+        "author": "Krishna k. sahh",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dense_forest_canopy_and_understory_at_Shivapuri_hills.jpg",
+        "license": "CC0 1.0",
+        "licenseVersion": "0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1703,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "fungi": {
+      "image": "/research-photos/natural-fungi.jpg",
+      "imageAlt": "林地蘑菇的子實體與菌褶",
+      "photoCredit": {
+        "title": "Wild mushroom with visible gills.jpg",
+        "author": "Mar Mkrtchyan",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Wild_mushroom_with_visible_gills.jpg",
+        "license": "CC0 1.0",
+        "licenseVersion": "0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 902,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "seeds": {
+      "image": "/research-photos/natural-seeds.jpg",
+      "imageAlt": "蒲公英成熟果實與協助風力傳播的冠毛",
+      "photoCredit": {
+        "title": "Seeding dandelion macro.jpg",
+        "author": "Chris Willis",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Seeding_dandelion_macro.jpg",
+        "license": "CC BY 2.0",
+        "licenseVersion": "2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modifications": "使用原檔；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 850,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "evolution": {
+      "image": "/research-photos/natural-evolution.jpg",
+      "imageAlt": "柏林自然博物館展示的始祖鳥化石原標本",
+      "photoCredit": {
+        "title": "Berlin Archaeopteryx.jpg",
+        "author": "Emily Willoughby",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Berlin_Archaeopteryx.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1529,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "animal-diversity": {
+      "image": "/research-photos/natural-animal-diversity.png",
+      "imageAlt": "帕甘島附近由珊瑚、海扇與魚類組成的礁區群落",
+      "photoCredit": {
+        "title": "Sea fans coral reef Pagan 2022.png",
+        "author": "NOAA Fisheries/Andrew Gray",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sea_fans_coral_reef_Pagan_2022.png",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Sea_fans_coral_reef_Pagan_2022.png#Licensing",
+        "modifications": "使用原檔；本站未裁切、未調色，完整顯示。",
+        "width": 1219,
+        "height": 801,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "animal-behavior": {
+      "image": "/research-photos/natural-animal-behavior.jpg",
+      "imageAlt": "紅嘴鷗的求偶展示行為",
+      "photoCredit": {
+        "title": "Black-headed gulls courtship display.jpg",
+        "author": "Alexis Lours",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-headed_gulls_courtship_display.jpg",
+        "license": "CC BY 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 853,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "ecosystems": {
+      "image": "/research-photos/natural-ecosystems.jpg",
+      "imageAlt": "英國 Waldridge Fell 的雨水池塘與周圍石楠植被",
+      "photoCredit": {
+        "title": "Boggy area on Waldridge Fell.jpg",
+        "author": "Jimmy Pitt",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boggy_area_on_Waldridge_Fell.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Boggy_area_on_Waldridge_Fell.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 960,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "biodiversity": {
+      "image": "/research-photos/natural-biodiversity.png",
+      "imageAlt": "巴拿馬 Barro Colorado 島具有多種樹木的森林林冠",
+      "photoCredit": {
+        "title": "Forest on Barro Colorado.png",
+        "author": "Photos courtesy of Christian Ziegler.",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Forest_on_Barro_Colorado.png",
+        "license": "CC BY 2.5",
+        "licenseVersion": "2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+        "modifications": "使用原檔；本站未裁切、未調色，完整顯示。",
+        "width": 1000,
+        "height": 1168,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "observational-astronomy": {
+      "image": "/research-photos/natural-observational-astronomy.jpg",
+      "imageAlt": "澳洲塔斯馬尼亞 Mount Pleasant 天文台的 26 公尺無線電望遠鏡",
+      "photoCredit": {
+        "title": "Mount Pleasant Radio Telescope.jpg",
+        "author": "Noodle snacks",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mount_Pleasant_Radio_Telescope.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseVersion": "3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 851,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "stellar-evolution": {
+      "image": "/research-photos/natural-stellar-evolution.jpg",
+      "imageAlt": "哈伯太空望遠鏡拍攝的蟹狀星雲超新星殘骸觀測合成影像",
+      "photoCredit": {
+        "title": "Crab Nebula.jpg",
+        "author": "NASA, ESA, J. Hester and A. Loll (Arizona State University)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crab_Nebula.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Crab_Nebula.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1280,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "galaxies": {
+      "image": "/research-photos/natural-galaxies.jpg",
+      "imageAlt": "GALEX 觀測仙女座星系的紫外線資料配色影像",
+      "photoCredit": {
+        "title": "Andromeda galaxy.jpg",
+        "author": "NASA/JPL/California Institute of Technology",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Andromeda_galaxy.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Andromeda_galaxy.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1280,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "cosmology": {
+      "image": "/research-photos/natural-cosmology.jpg",
+      "imageAlt": "曾用於發現宇宙微波背景輻射的 Holmdel 號角天線",
+      "photoCredit": {
+        "title": "Horn Antenna-in Holmdel, New Jersey.jpeg",
+        "author": "NASA",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Horn_Antenna-in_Holmdel,_New_Jersey.jpeg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Horn_Antenna-in_Holmdel,_New_Jersey.jpeg",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1007,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "space-exploration": {
+      "image": "/research-photos/natural-space-exploration.jpg",
+      "imageAlt": "阿波羅十一號任務中，艾德林在月球著陸器旁取出地震儀",
+      "photoCredit": {
+        "title": "Buzz Aldrin and Apollo 11 Lunar Lander, AS11-40-5927.jpg",
+        "author": "Neil Armstrong",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buzz_Aldrin_and_Apollo_11_Lunar_Lander,_AS11-40-5927.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Buzz_Aldrin_and_Apollo_11_Lunar_Lander,_AS11-40-5927.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1527,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "exoplanets": {
+      "image": "/research-photos/natural-exoplanets.jpg",
+      "imageAlt": "克卜勒太空望遠鏡在發射前的整備實拍",
+      "photoCredit": {
+        "title": "Kepler space telescope seen fom downside.jpg",
+        "author": "NASA/Troy Cryder",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kepler_space_telescope_seen_fom_downside.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Kepler_space_telescope_seen_fom_downside.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 857,
+        "verifiedAt": "2026-11-07"
+      }
+    }
+  },
+  "human": {
+    "early-humans": {
+      "image": "/research-photos/human-early-humans.jpg",
+      "imageAlt": "紐西蘭坎特伯里博物館展示的阿舍利石製手斧",
+      "photoCredit": {
+        "title": "Acheulean hand axe, c. 450,000 years before present, stone - Canterbury Museum - Christchurch, NZ - DSC02244.jpg",
+        "author": "Daderot",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acheulean_hand_axe,_c._450,000_years_before_present,_stone_-_Canterbury_Museum_-_Christchurch,_NZ_-_DSC02244.jpg",
+        "license": "CC0 1.0",
+        "licenseVersion": "0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1591,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "ancient-civilizations": {
+      "image": "/research-photos/human-ancient-civilizations.jpg",
+      "imageAlt": "從印度河文明摩亨佐達羅出土的男性雕像",
+      "photoCredit": {
+        "title": "Moenjo-Daro sculpture.jpg",
+        "author": "amir taj",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moenjo-Daro_sculpture.jpg",
+        "license": "CC BY 2.0",
+        "licenseVersion": "2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modifications": "使用原檔；本站未裁切、未調色，完整顯示。",
+        "width": 504,
+        "height": 672,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "trade-routes": {
+      "image": "/research-photos/human-trade-routes.jpg",
+      "imageAlt": "土庫曼 Akja Gala 商隊驛站的建築遺址",
+      "photoCredit": {
+        "title": "Akja Gala Caravanserai - general view.jpg",
+        "author": "A. T. Orazow",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Akja_Gala_Caravanserai_-_general_view.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseVersion": "3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 960,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "visual-arts": {
+      "image": "/research-photos/human-visual-arts.jpg",
+      "imageAlt": "梵谷《星夜》（1889）的畫作數位影像",
+      "photoCredit": {
+        "title": "Van Gogh - Starry Night - Google Art Project.jpg",
+        "author": "Vincent van Gogh（1889 年畫作）；數位影像：Google Art Project / The Museum of Modern Art",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1013,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "music": {
+      "image": "/research-photos/human-music.jpg",
+      "imageAlt": "法蘭克福世界文化博物館收藏的甘美朗樂器組",
+      "photoCredit": {
+        "title": "Gamelan orchestra, Museum der Weltkulturen, Frankfurt.jpg",
+        "author": "Gerda Arendt",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gamelan_orchestra,_Museum_der_Weltkulturen,_Frankfurt.jpg",
+        "license": "CC0 1.0",
+        "licenseVersion": "0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 960,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "theatre": {
+      "image": "/research-photos/human-theatre.jpg",
+      "imageAlt": "日本橫濱能樂堂的舞台與觀眾席",
+      "photoCredit": {
+        "title": "Yokohama Noh Theater stage.jpg",
+        "author": "KQuhen",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yokohama_Noh_Theater_stage.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1707,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "family-community": {
+      "image": "/research-photos/human-family-community.jpg",
+      "imageAlt": "紐約 Woodside 由志工維護的 Moore Jackson 社區花園",
+      "photoCredit": {
+        "title": "Moore Jackson Community Garden, Woodside, New York, 2025.jpg",
+        "author": "CastIronSeasoner",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moore_Jackson_Community_Garden,_Woodside,_New_York,_2025.jpg",
+        "license": "CC BY 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 960,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "library": {
+      "image": "/research-photos/human-library.jpg",
+      "imageAlt": "美國國會圖書館湯瑪斯傑佛遜大樓的主閱覽室",
+      "photoCredit": {
+        "title": "LOC Main Reading Room Highsmith.jpg",
+        "author": "Carol M. Highsmith",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:LOC_Main_Reading_Room_Highsmith.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:LOC_Main_Reading_Room_Highsmith.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 854,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "commute": {
+      "image": "/research-photos/human-commute.jpg",
+      "imageAlt": "東京車站的東海道新幹線月台與列車",
+      "photoCredit": {
+        "title": "Tokyo-Station-2005-7-21 4.jpg",
+        "author": "User:Araisyohei",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tokyo-Station-2005-7-21_4.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseVersion": "3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 960,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "bridges": {
+      "image": "/research-photos/human-bridges.jpg",
+      "imageAlt": "紐約東河上的 Triborough 懸索橋與河岸都市空間",
+      "photoCredit": {
+        "title": "Triborough Bridge, February 2022.jpg",
+        "author": "Rublov",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Triborough_Bridge,_February_2022.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 853,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "computers": {
+      "image": "/research-photos/human-computers.png",
+      "imageAlt": "美國陸軍彈道研究實驗室安裝的 ENIAC 電腦機櫃",
+      "photoCredit": {
+        "title": "ARL ENIAC 01.png",
+        "author": "U.S. Army Photo",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:ARL_ENIAC_01.png",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:ARL_ENIAC_01.png#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1026,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "electricity": {
+      "image": "/research-photos/human-electricity.jpg",
+      "imageAlt": "美國 Chickamauga 水壩發電廠的發電機大廳",
+      "photoCredit": {
+        "title": "Generator hall of the powerhouse, Chickamauga Dam, Tenn. 1a35264v.jpg",
+        "author": "Alfred T. Palmer",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Generator_hall_of_the_powerhouse,_Chickamauga_Dam,_Tenn._1a35264v.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Generator_hall_of_the_powerhouse,_Chickamauga_Dam,_Tenn._1a35264v.jpg#Licensing",
+        "modifications": "使用原檔；本站未裁切、未調色，完整顯示。",
+        "width": 1024,
+        "height": 830,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "government": {
+      "image": "/research-photos/human-government.jpg",
+      "imageAlt": "愛爾蘭眾議院 Dáil Éireann 的議事廳",
+      "photoCredit": {
+        "title": "Inside the Dáil - The Irish Parliament Chamber.jpg",
+        "author": "David Kernan",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Inside_the_D%C3%A1il_-_The_Irish_Parliament_Chamber.jpg",
+        "license": "CC BY 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 731,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "laws-rights": {
+      "image": "/research-photos/human-laws-rights.jpg",
+      "imageAlt": "羅浮宮收藏的漢摩拉比法典石碑正面",
+      "photoCredit": {
+        "title": "P1050763 Louvre code Hammurabi face rwk.JPG",
+        "author": "Mbzt",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:P1050763_Louvre_code_Hammurabi_face_rwk.JPG",
+        "license": "CC BY 3.0",
+        "licenseVersion": "3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "modifications": "使用原檔；本站未裁切、未調色，完整顯示。",
+        "width": 1215,
+        "height": 2000,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "democracy": {
+      "image": "/research-photos/human-democracy.jpg",
+      "imageAlt": "美國加州 Sonoma 在 2022 年選舉使用的選票投遞箱",
+      "photoCredit": {
+        "title": "Ballot box in Sonoma, California - November 2022 - Sarah Stierch 01.jpg",
+        "author": "Missvain",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ballot_box_in_Sonoma,_California_-_November_2022_-_Sarah_Stierch_01.jpg",
+        "license": "CC BY 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 960,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "printing": {
+      "image": "/research-photos/human-printing.jpg",
+      "imageAlt": "美國 New Echota 展示的切羅基文印刷活字",
+      "photoCredit": {
+        "title": "Historic Cherokee printing press letters at New Echota in Gordon County, Georgia (9fb7abb0-05d3-415b-a671-839f2fd5505a).JPG",
+        "author": "National Trails Office (US National Park Service)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Historic_Cherokee_printing_press_letters_at_New_Echota_in_Gordon_County,_Georgia_(9fb7abb0-05d3-415b-a671-839f2fd5505a).JPG",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Historic_Cherokee_printing_press_letters_at_New_Echota_in_Gordon_County,_Georgia_(9fb7abb0-05d3-415b-a671-839f2fd5505a).JPG",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 2276,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "space-exploration": {
+      "image": "/research-photos/human-space-exploration.jpg",
+      "imageAlt": "太空梭奮進號離站後拍攝的國際太空站",
+      "photoCredit": {
+        "title": "STS-134 International Space Station after undocking.jpg",
+        "author": "NASA",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:STS-134_International_Space_Station_after_undocking.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:STS-134_International_Space_Station_after_undocking.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 850,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "international-cooperation": {
+      "image": "/research-photos/human-international-cooperation.jpg",
+      "imageAlt": "紐約聯合國總部的大會會議廳",
+      "photoCredit": {
+        "title": "United Nations General Assembly Hall (3).jpg",
+        "author": "Basil D Soufi",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:United_Nations_General_Assembly_Hall_(3).jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseVersion": "3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 853,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "money-trade": {
+      "image": "/research-photos/human-money-trade.jpg",
+      "imageAlt": "斯洛維尼亞國家博物館收藏的古代銀幣與銅幣",
+      "photoCredit": {
+        "title": "Ancient coins in the National Museum of Slovenia.jpg",
+        "author": "Szilas",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ancient_coins_in_the_National_Museum_of_Slovenia.jpg",
+        "license": "CC0 1.0",
+        "licenseVersion": "0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 825,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "writing-systems": {
+      "image": "/research-photos/human-writing-systems.jpg",
+      "imageAlt": "大英博物館收藏的羅塞塔石碑",
+      "photoCredit": {
+        "title": "Rosetta Stone, British Museum.jpg",
+        "author": "APK",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rosetta_Stone,_British_Museum.jpg",
+        "license": "CC BY 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1489,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "cities": {
+      "image": "/research-photos/human-cities.jpg",
+      "imageAlt": "柏林博物館展示的烏魯克伊南娜神廟立面殘件",
+      "photoCredit": {
+        "title": "Part of front of Inanna temple of Kara Indasch from Uruk Vorderasiatisches Museum Berlin.jpg",
+        "author": "Picture taken by Marcus Cyron",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Part_of_front_of_Inanna_temple_of_Kara_Indasch_from_Uruk_Vorderasiatisches_Museum_Berlin.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseVersion": "3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 994,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "film-animation": {
+      "image": "/research-photos/human-film-animation.jpg",
+      "imageAlt": "停格動畫製作中的燈光、攝影機與小型布景",
+      "photoCredit": {
+        "title": "Studio ~ lights on (463483).jpg",
+        "author": "hobvias sudoneighm from Seattle, United States of America",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Studio_~_lights_on_(463483).jpg",
+        "license": "CC BY 2.0",
+        "licenseVersion": "2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modifications": "使用原檔；本站未裁切、未調色，完整顯示。",
+        "width": 768,
+        "height": 1024,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "networks": {
+      "image": "/research-photos/human-networks.jpg",
+      "imageAlt": "倫敦科學博物館展示的 Fujikura 光纖傳輸材料",
+      "photoCredit": {
+        "title": "Fujikura optic fiber at Science Museum.jpg",
+        "author": "Syced",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fujikura_optic_fiber_at_Science_Museum.jpg",
+        "license": "CC0 1.0",
+        "licenseVersion": "0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 960,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "cultural-heritage": {
+      "image": "/research-photos/human-cultural-heritage.jpg",
+      "imageAlt": "日本姬路城的天守建築群",
+      "photoCredit": {
+        "title": "Himeji Castle The Keep Towers.jpg",
+        "author": "by ja:User:Reggaeman",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Himeji_Castle_The_Keep_Towers.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Himeji_Castle_The_Keep_Towers.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 960,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "food-culture": {
+      "image": "/research-photos/human-food-culture.jpg",
+      "imageAlt": "用於儲存與發酵食物的韓國甕器",
+      "photoCredit": {
+        "title": "Korean pottery-Onggi-01.jpg",
+        "author": "karendotcom127",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Korean_pottery-Onggi-01.jpg",
+        "license": "CC BY 2.0",
+        "licenseVersion": "2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 850,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "language-change": {
+      "image": "/research-photos/human-language-change.jpg",
+      "imageAlt": "古英語《貝武夫》手稿第一頁的文字局部",
+      "photoCredit": {
+        "title": "Beowulf.Kenning.jpg",
+        "author": "原手稿抄寫者不詳；影像上傳者：Groogokk",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beowulf.Kenning.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Beowulf.Kenning.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 239,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "mythology": {
+      "image": "/research-photos/human-mythology.jpg",
+      "imageAlt": "描繪希臘神話赫拉克勒斯乘坐赫利俄斯杯子的古代陶器圖像",
+      "photoCredit": {
+        "title": "Heracles on the sea in the bowl of Helios.jpg",
+        "author": "Pompilos",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Heracles_on_the_sea_in_the_bowl_of_Helios.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1240,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "religions": {
+      "image": "/research-photos/human-religions.jpg",
+      "imageAlt": "洛杉磯郡藝術博物館收藏的十九世紀西藏轉經輪",
+      "photoCredit": {
+        "title": "Prayer Wheel LACMA AC1994.116.7.jpg",
+        "author": "攝影者未標示；影像提供：Los Angeles County Museum of Art (LACMA)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Prayer_Wheel_LACMA_AC1994.116.7.jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Prayer_Wheel_LACMA_AC1994.116.7.jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 558,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "folklore": {
+      "image": "/research-photos/human-folklore.jpg",
+      "imageAlt": "Juan Llorens 於 1859 年製作的皮影人物木刻印刷圖樣（大都會藝術博物館藏）",
+      "photoCredit": {
+        "title": "Sheet 3 of figures for Chinese shadow puppets MET DP875743.jpg",
+        "author": "Juan Llorens（1859 年作品）；影像提供：The Metropolitan Museum of Art，Max G. Wildnauer Fund, 1978",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sheet_3_of_figures_for_Chinese_shadow_puppets_MET_DP875743.jpg",
+        "license": "CC0 1.0",
+        "licenseVersion": "0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 1775,
+        "verifiedAt": "2026-11-07"
+      }
+    },
+    "scientific-method": {
+      "image": "/research-photos/human-scientific-method.jpg",
+      "imageAlt": "國際太空站 Plant Habitat-04 植物栽培實驗的受控生長環境",
+      "photoCredit": {
+        "title": "Plant Habitat-04 experiment (ISS065-E-235366).jpg",
+        "author": "NASA/Shane Kimbrough",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plant_Habitat-04_experiment_(ISS065-E-235366).jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Plant_Habitat-04_experiment_(ISS065-E-235366).jpg#Licensing",
+        "modifications": "使用 Commons 提供的等比例縮圖；本站未裁切、未調色，完整顯示。",
+        "width": 1280,
+        "height": 853,
+        "verifiedAt": "2026-11-07"
+      }
+    }
+  }
+}

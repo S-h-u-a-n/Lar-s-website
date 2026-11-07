@@ -1,6 +1,9 @@
 import { article, publicReference } from '../research/articleData'
+import { ASTRONOMY_ARTICLES } from './astronomyArticles'
+import { balanceNaturalArticles } from './balancedArticles'
 // Names and order are maintained by data.js; article IDs remain stable.
-export const ARTICLE_LIST = [
+export const SOURCE_ARTICLES = [
+  ...ASTRONOMY_ARTICLES,
   article('volcano', 'VOLCANOES', '火山', 'Magma, eruptions and new landscapes.',
     '火山是岩漿、氣體與碎屑通往地表的開口及其形成的地形。噴發方式受岩漿成分、黏度與氣體含量影響，不是每座火山都猛烈爆炸。', ['Volcano'], [
       ['岩漿從哪裡來？', '地函或地殼局部熔融形成岩漿；板塊張裂、隱沒帶與熱點都是常見環境。到達地表的岩漿稱為熔岩，冷卻後形成火成岩。火山並非都位於板塊邊界。'],
@@ -152,5 +155,6 @@ export const ARTICLE_LIST = [
       ['評估與合作', '一項措施是否成功，需要比較族群、棲地與時間變化，而非只看短期活動人數。地方居民的知識、生計與權益也必須納入；保育方案會有取捨，應清楚說明證據與不確定性。'],
     ]),
 ]
-ARTICLE_LIST.find(item => item.id === 'seasons').sources.push(publicReference('What Causes the Seasons?', 'https://spaceplace.nasa.gov/seasons/en/', 'NASA Space Place'))
+SOURCE_ARTICLES.find(item => item.id === 'seasons').sources.push(publicReference('What Causes the Seasons?', 'https://spaceplace.nasa.gov/seasons/en/', 'NASA Space Place'))
+export const ARTICLE_LIST = balanceNaturalArticles(SOURCE_ARTICLES)
 export const ARTICLES_BY_ID = Object.fromEntries(ARTICLE_LIST.map(item => [item.id, item]))

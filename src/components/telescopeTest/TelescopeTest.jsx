@@ -1,17 +1,71 @@
 import { useEffect, useRef, useState } from 'react'
 import { TelescopeMap } from '../TelescopePage'
+import { geometryFloat, geometryPointerGain } from '../globeTest/geometryMotion'
 import { enablePageTextPersistence } from '../../dev/textEditorStore'
 import Text from './Text'
-import { ANIMATION, COLLECTION_KEY, COLORS, DIALOGUE, SCHOOL_RECORDS } from './data'
+import { ANIMATION, COLLECTION_KEY, COLORS, DIALOGUE } from './data'
 import { RANDOM_LOCATIONS, RECOMMENDATIONS, sameObservation, readObservations } from './observations'
 import './TelescopeTest.css'
+
+function TelescopeGeometry() {
+  const root = useRef(null)
+  useEffect(() => {
+    const nodes = [...root.current.querySelectorAll('[data-floating-square]')]
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)')
+    let frame = 0, previous = 0, seconds = 0, alive = true
+    nodes.forEach((node, index) => {
+      const gain = geometryPointerGain(index)
+      node.style.setProperty('--tt-pointer-gain-x', `${gain.x}px`)
+      node.style.setProperty('--tt-pointer-gain-y', `${gain.y}px`)
+    })
+    function paint(time) {
+      frame = 0
+      if (!alive || reduced.matches || document.hidden) return
+      const dt = Math.min(.032, (time - (previous || time - 16)) / 1000)
+      previous = time
+      seconds += dt
+      nodes.forEach((node, index) => {
+        const drift = geometryFloat(seconds, index)
+        node.style.setProperty('--tt-float-x', `${drift.x.toFixed(3)}px`)
+        node.style.setProperty('--tt-float-y', `${drift.y.toFixed(3)}px`)
+      })
+      frame = requestAnimationFrame(paint)
+    }
+    function resume() {
+      cancelAnimationFrame(frame)
+      frame = 0
+      previous = 0
+      if (reduced.matches) {
+        nodes.forEach(node => {
+          node.style.setProperty('--tt-float-x', '0px')
+          node.style.setProperty('--tt-float-y', '0px')
+        })
+      } else if (!document.hidden) frame = requestAnimationFrame(paint)
+    }
+    reduced.addEventListener('change', resume)
+    document.addEventListener('visibilitychange', resume)
+    resume()
+    return () => {
+      alive = false
+      cancelAnimationFrame(frame)
+      reduced.removeEventListener('change', resume)
+      document.removeEventListener('visibilitychange', resume)
+    }
+  }, [])
+  return <div ref={root} className="tt-square-decor" aria-hidden="true">
+    <i className="tt-floating-square tt-floating-square--pink" data-floating-square="pink"/>
+    <i className="tt-floating-square tt-floating-square--yellow" data-floating-square="yellow"/>
+    <i className="tt-floating-square tt-floating-square--blue" data-floating-square="blue"/>
+  </div>
+}
+
 export default function TelescopeTest({ onBack }) {
   const [mode, setMode] = useState('globe')
   const [status, setStatus] = useState('loading')
   const [focusing, setFocusing] = useState(true)
   const [observation, setObservation] = useState({ longitude: 121, latitude: 23.5, zoom: 1, bearing: 0, pitch: 0, roll: 0, mode: 'globe' })
   const [open, setOpen] = useState(false)
-  const [tab, setTab] = useState('school')
+  const [tab, setTab] = useState('recommendations')
   const [initialCollection] = useState(() => readObservations(localStorage, COLLECTION_KEY))
   const [collection, setCollection] = useState(initialCollection.items)
   const [notice, setNotice] = useState('')
@@ -57,13 +111,15 @@ export default function TelescopeTest({ onBack }) {
   const busy = focusing || status === 'loading'
   const toolLog = Boolean(functionTrigger.current)
   return <main className="telescope-test" style={{ '--tt-cream': COLORS.cream, '--tt-ink': COLORS.ink, '--tt-teal': COLORS.teal, '--tt-pink': COLORS.pink, '--tt-blue': COLORS.blue, '--tt-yellow': COLORS.yellow, '--tt-duration': `${ANIMATION.duration}ms`, '--tt-easing': ANIMATION.easing }}>
+    <div className="tt-background-geometry" aria-hidden="true"><span className="tt-background-grid"/><span className="tt-background-dots"/></div>
+    <TelescopeGeometry/>
     <header className="tt-header"><button onClick={onBack}><span aria-hidden="true">← </span><Text id="back">BACK</Text></button><Text as="h1" id="title">TELESCOPE</Text><button ref={logButton} aria-expanded={open} onClick={() => { functionTrigger.current = null; setOpen(!open) }}><Text id="log">LOG</Text><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="3" width="15" height="18" rx="2"/><path d="M10 3v18M3 7h5M3 12h5M3 17h5M14 8h4M14 12h4"/></svg></button></header>
     <div className="tt-layout"><section className="tt-observation"><div className="tt-window-anchor"><div className={`tt-window ${busy ? 'is-focusing' : ''}`}><TelescopeMap mode={mode} attributionHostRef={attribution} onReady={value => { api.current = value }} onStatus={setStatus} onObservation={setObservation}/><span key={mode} className="edition-lens-calibration" aria-hidden="true"/><div className="tt-focus" aria-live="polite"><div className="tt-reticle"/>{busy && <Text id="loading">Focusing the observation window…</Text>}</div></div><nav data-dev-text-dynamic className="tt-observation-tools" aria-label="觀測輔助功能">
       <button className="tt-observation-dot" aria-label="隨機地點觀測 Random Location" title="隨機地點觀測" disabled={busy || !api.current} onClick={randomLocation}><span aria-hidden="true">⤨</span><small>隨機觀測</small></button>
-      <button className="tt-observation-dot" aria-label="學長推薦 Recommendations" aria-expanded={open && tab === 'recommendations'} aria-controls="tt-observation-log" title="學長推薦" onClick={event => openTool('recommendations', event)}><span aria-hidden="true">⋯</span><small>學長推薦</small></button>
+      <button className="tt-observation-dot" aria-label="大家推薦 Recommendations" aria-expanded={open && tab === 'recommendations'} aria-controls="tt-observation-log" title="大家推薦" onClick={event => openTool('recommendations', event)}><span aria-hidden="true">⋯</span><small>大家推薦</small></button>
       <button className="tt-observation-dot" aria-label="我的收藏 Favorites" aria-expanded={open && tab === 'collection'} aria-controls="tt-observation-log" title="我的收藏" onClick={event => openTool('collection', event)}><span aria-hidden="true">{currentFavorite ? '★' : '☆'}</span><small>我的收藏</small></button>
     </nav></div><div className="tt-modes"><button aria-pressed={mode === 'globe'} onClick={() => switchMode('globe')}><Text id="globe">GLOBE</Text></button><button aria-pressed={mode === 'satellite'} onClick={() => switchMode('satellite')}><Text id="street">SATELLITE</Text></button></div><div className="tt-map-status" aria-live="polite">{status === 'error' && <Text id="map-error">Some map resources could not load. Check your connection.</Text>}{mode === 'satellite' && <Text id="street-limit">Satellite terrain preview · Street-level imagery is not connected.</Text>}</div><p data-dev-text-dynamic className="tt-observation-notice" role="status">{notice}</p><div ref={attribution} className="tt-attribution"/></section>
     <aside className="tt-mentor"><button className="tt-character" onClick={() => setDialogue('active')} aria-label="Talk to the student guide"><small className="edition-coordinate-kicker">CURRENT OBSERVATION</small><span className="tt-character-shape" aria-hidden="true"/><strong className="edition-live-coordinate"><span><i>LATITUDE</i>{Math.abs(observation.latitude).toFixed(2)}° <em>{observation.latitude<0?'S':'N'}</em></span><span><i>LONGITUDE</i>{Math.abs(observation.longitude).toFixed(2)}° <em>{observation.longitude<0?'W':'E'}</em></span></strong><Text id="live2d">觀測者的筆記</Text></button><section className="tt-dialogue"><Text as="h2" id="mentor-name">Student Guide</Text>{Object.entries(DIALOGUE).map(([id, content]) => <Text as="p" key={id} id={`dialogue-${id}`} hidden={dialogue !== id}>{content}</Text>)}{!tutorialDone && <button onClick={() => { if (dialogue === 'welcome') setDialogue('tutorial'); else { setTutorialDone(true); setDialogue(mode) } }}><Text id="next">NEXT</Text></button>}</section><div className="tt-compass"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28"/><path style={{ transform: `rotate(${-observation.bearing}deg)`, transformOrigin: '32px 32px' }} d="M32 10L40 42L32 36L24 42Z"/></svg><Text id="north">N</Text><span>{observation.latitude.toFixed(3)}°, {observation.longitude.toFixed(3)}°</span></div></aside></div>
-    <div className={`tt-log-layer ${open ? 'is-open' : ''}${toolLog ? ' is-observation-tool' : ''}`} inert={!open ? true : undefined}><button hidden={toolLog} className="tt-log-scrim" aria-label="Close observation log" onClick={closeLog}/><aside id="tt-observation-log" ref={drawer} className="tt-drawer" role="dialog" aria-modal={!toolLog} aria-label="Observation log" onKeyDown={event => { if (event.key === 'Escape') closeLog(); if (event.key === 'Tab' && !toolLog) { const buttons = [...drawer.current.querySelectorAll('button,input')].filter(element => !element.disabled && element.getClientRects().length); const first = buttons[0], last = buttons.at(-1); if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() } else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() } } }}><div className="tt-drawer-title"><Text as="h2" id="log-title">OBSERVATION LOG</Text><button ref={closeButton} onClick={closeLog}><Text id="close">CLOSE</Text></button></div><nav className="tt-tabs"><button aria-pressed={tab === 'school'} onClick={() => setTab('school')}><Text id="school">SCHOOL RECORDS</Text></button><button aria-pressed={tab === 'collection'} onClick={() => setTab('collection')}><Text id="collection">MY COLLECTION</Text></button><button aria-pressed={tab === 'recommendations'} onClick={() => setTab('recommendations')}>學長推薦</button></nav><section hidden={tab !== 'recommendations'}><h3>學長推薦</h3><p>推薦內容尚未完成，之後會在這裡提供。</p>{RECOMMENDATIONS.length > 0 && <p>推薦資料待接入。</p>}</section><section hidden={tab !== 'school'}>{SCHOOL_RECORDS.map(record => <details key={record.id}><summary><Text id={`record-${record.id}-name`}>{record.name}</Text></summary><p>{record.latitude}°, {record.longitude}°</p><Text as="p" id={`record-${record.id}-author`}>{record.author}</Text><Text as="p" id={`record-${record.id}-description`}>{record.description}</Text><button onClick={() => visit(record)}><Text id={`record-${record.id}-view`}>VIEW LOCATION</Text></button></details>)}</section><section hidden={tab !== 'collection'}><Text as="p" id="storage-notice">Your collection is saved only in this browser.</Text><p data-dev-text-dynamic className="tt-current-view">目前觀測：{observation.mode === 'satellite' ? '衛星地形' : '地球觀測'} · {observation.latitude.toFixed(6)}°, {observation.longitude.toFixed(6)}° · zoom {(observation.zoom ?? 1).toFixed(3)} · 方向 {(observation.bearing ?? 0).toFixed(3)}° · 俯仰 {(observation.pitch ?? 0).toFixed(3)}° · 傾斜 {(observation.roll ?? 0).toFixed(3)}°</p><p data-dev-text-dynamic role="status">{notice}</p><form onSubmit={event => { event.preventDefault(); save() }}><label htmlFor="tt-name"><Text id="location-name">收藏名稱（選填）</Text></label><input id="tt-name" value={name} maxLength={100} onChange={event => setName(event.target.value)} placeholder="留空則使用模式與座標"/><button data-dev-text-dynamic disabled={busy || !api.current || !initialCollection.readable}>{currentFavorite ? '取消目前收藏' : '收藏目前觀測'}</button></form>{storageError && <Text as="p" id="storage-error">無法保存收藏。儲存空間可能受限，或既有收藏格式無法讀取；原資料已保留。</Text>}{!collection.length && <Text as="p" id="empty">Your next discovery belongs here.</Text>}{collection.map(item => <article key={item.id}><h3>{item.name}</h3><p>{item.latitude.toFixed(6)}°, {item.longitude.toFixed(6)}°<br/>{item.mode === 'satellite' ? '衛星地形' : '地球觀測'} · zoom {(item.zoom ?? 12).toFixed(2)} · 方向 {(item.bearing ?? 0).toFixed(3)}° · 俯仰 {(item.pitch ?? (item.mode === 'satellite' ? 70 : 0)).toFixed(3)}° · 傾斜 {(item.roll ?? 0).toFixed(3)}°</p><button onClick={() => visit(item)}><Text id={`saved-${item.id}-view`}>VIEW LOCATION</Text></button><button onClick={() => { if (persist(collection.filter(entry => entry.id !== item.id))) setNotice('已刪除這筆收藏。') }}><Text id={`saved-${item.id}-delete`}>DELETE</Text></button></article>)}</section></aside></div>
+    <div className={`tt-log-layer ${open ? 'is-open' : ''}${toolLog ? ' is-observation-tool' : ''}`} inert={!open ? true : undefined}><button hidden={toolLog} className="tt-log-scrim" aria-label="Close observation log" onClick={closeLog}/><aside id="tt-observation-log" ref={drawer} className="tt-drawer" role="dialog" aria-modal={!toolLog} aria-label="Observation log" onKeyDown={event => { if (event.key === 'Escape') closeLog(); if (event.key === 'Tab' && !toolLog) { const buttons = [...drawer.current.querySelectorAll('button,input')].filter(element => !element.disabled && element.getClientRects().length); const first = buttons[0], last = buttons.at(-1); if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() } else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() } } }}><div className="tt-drawer-title"><Text as="h2" id="log-title">OBSERVATION LOG</Text><button ref={closeButton} onClick={closeLog}><Text id="close">CLOSE</Text></button></div><nav className="tt-tabs"><button aria-pressed={tab === 'collection'} onClick={() => setTab('collection')}><Text id="my-collection-tab">我的收藏</Text></button><button aria-pressed={tab === 'recommendations'} onClick={() => setTab('recommendations')}>大家推薦</button></nav><section hidden={tab !== 'recommendations'}><h3>大家推薦</h3><p>推薦內容尚未完成，之後會在這裡提供。</p>{RECOMMENDATIONS.length > 0 && <p>推薦資料待接入。</p>}</section><section hidden={tab !== 'collection'}><Text as="p" id="storage-notice">Your collection is saved only in this browser.</Text><p data-dev-text-dynamic className="tt-current-view">目前觀測：{observation.mode === 'satellite' ? '衛星地形' : '地球觀測'} · {observation.latitude.toFixed(6)}°, {observation.longitude.toFixed(6)}° · zoom {(observation.zoom ?? 1).toFixed(3)} · 方向 {(observation.bearing ?? 0).toFixed(3)}° · 俯仰 {(observation.pitch ?? 0).toFixed(3)}° · 傾斜 {(observation.roll ?? 0).toFixed(3)}°</p><p data-dev-text-dynamic role="status">{notice}</p><form onSubmit={event => { event.preventDefault(); save() }}><label htmlFor="tt-name"><Text id="location-name">收藏名稱（選填）</Text></label><input id="tt-name" value={name} maxLength={100} onChange={event => setName(event.target.value)} placeholder="留空則使用模式與座標"/><button data-dev-text-dynamic disabled={busy || !api.current || !initialCollection.readable}>{currentFavorite ? '取消目前收藏' : '收藏目前觀測'}</button></form>{storageError && <Text as="p" id="storage-error">無法保存收藏。儲存空間可能受限，或既有收藏格式無法讀取；原資料已保留。</Text>}{!collection.length && <Text as="p" id="empty">Your next discovery belongs here.</Text>}{collection.map(item => <article key={item.id}><h3>{item.name}</h3><p>{item.latitude.toFixed(6)}°, {item.longitude.toFixed(6)}°<br/>{item.mode === 'satellite' ? '衛星地形' : '地球觀測'} · zoom {(item.zoom ?? 12).toFixed(2)} · 方向 {(item.bearing ?? 0).toFixed(3)}° · 俯仰 {(item.pitch ?? (item.mode === 'satellite' ? 70 : 0)).toFixed(3)}° · 傾斜 {(item.roll ?? 0).toFixed(3)}°</p><button onClick={() => visit(item)}><Text id={`saved-${item.id}-view`}>VIEW LOCATION</Text></button><button onClick={() => { if (persist(collection.filter(entry => entry.id !== item.id))) setNotice('已刪除這筆收藏。') }}><Text id={`saved-${item.id}-delete`}>DELETE</Text></button></article>)}</section></aside></div>
   </main>
 }

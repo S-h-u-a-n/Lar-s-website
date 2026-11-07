@@ -1,3 +1,4 @@
+import { fittedView } from '../research/categoryBounds'
 import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { CAMERA, STYLE } from './data'
 const clampScale = (value, minimum) => Math.min(CAMERA.maxScale, Math.max(minimum, value))
@@ -65,10 +66,19 @@ export default function useResearchCamera(bounds, minimumScale = CAMERA.minScale
     const scale = Math.min((s.width - CAMERA.padding * 2) / b.width, (s.height - CAMERA.padding * 2) / b.height)
     center({ x: b.x + b.width / 2, y: b.y + b.height / 2 }, scale, .5, animate)
   }, [center])
+  const fit = useCallback((bounds, options) => {
+    intent.current = { type: 'fit', bounds }
+    const fitted = fittedView(bounds, size.current, 30, CAMERA.categoryScale)
+    center(fitted.point, fitted.scale, .5, true, options)
+  }, [center])
   const locate = useCallback((point, scale, fraction = .5, options) => { intent.current = { type: 'point', point, scale, fraction }; center(point, scale, fraction, true, options) }, [center])
   const interrupt = useCallback(() => { stop(); intent.current = { type: 'free' } }, [stop])
-  const snapshot = useCallback(() => { const v = view.current; return { x: (size.current.width / 2 - v.x) / v.scale, y: (size.current.height / 2 - v.y) / v.scale, scale: v.scale, intent: intent.current } }, [])
-  const restore = useCallback(saved => { intent.current = saved.intent; center(saved, saved.scale) }, [center])
+  const snapshot = useCallback(() => { const v = target.current; return { x: (size.current.width / 2 - v.x) / v.scale, y: (size.current.height / 2 - v.y) / v.scale, scale: v.scale, intent: intent.current } }, [])
+  const restore = useCallback(saved => {
+    intent.current = saved.intent
+    if (saved.intent.type === 'fit') { const fitted = fittedView(saved.intent.bounds, size.current, 30, CAMERA.categoryScale); center(fitted.point, fitted.scale) }
+    else center(saved, saved.scale)
+  }, [center])
   const zoom = useCallback((factor, anchor) => {
     intent.current = { type: 'free' }
     const base = target.current, a = anchor || { x: size.current.width / 2, y: size.current.height / 2 }, scale = clampScale(base.scale * factor, minimum())
@@ -83,6 +93,7 @@ export default function useResearchCamera(bounds, minimumScale = CAMERA.minScale
       size.current = next
       const currentIntent = intent.current
       if (currentIntent.type === 'overview') overview(false)
+      else if (currentIntent.type === 'fit') { const fitted = fittedView(currentIntent.bounds, next, 30, CAMERA.categoryScale); center(fitted.point, fitted.scale, .5, false) }
       else if (currentIntent.type === 'point') center(currentIntent.point, currentIntent.scale, currentIntent.fraction, false)
       else move({ ...v, x: v.x + (next.width - old.width) / 2, y: v.y + (next.height - old.height) / 2 }, false)
     })
@@ -122,5 +133,5 @@ export default function useResearchCamera(bounds, minimumScale = CAMERA.minScale
     onPointerCancel() { drag.current = null; suppressClick.current = true; viewportRef.current.classList.remove('is-dragging') },
     onClickCapture(event) { if (suppressClick.current) { event.preventDefault(); event.stopPropagation(); suppressClick.current = false } },
   }
-  return { viewportRef, worldRef, level, overview, locate, snapshot, restore, zoom, interrupt, handlers }
+  return { viewportRef, worldRef, level, overview, fit, locate, snapshot, restore, zoom, interrupt, handlers }
 }

@@ -42,6 +42,7 @@ const TELESCOPE_LAYOUT_DRAFT_KEY = 'telescope-layout-v2'
 // Shared design coordinate system for every Telescope layout item.
 const TELESCOPE_STAGE = { width: 880, height: 504 }
 const MAX_MAP_PIXEL_RATIO = 4
+const OBSERVATION_BACKGROUND = '#fff9e9'
 
 setWorkerUrl(workerUrl)
 
@@ -50,6 +51,7 @@ const OCEAN_COLOR = '#8fcbe3'
 // Liberty layers behind water: water = ocean and lakes, waterway_* = rivers.
 function applyMapPalette(map) {
   const paint = (id, property, value) => map.getLayer(id) && map.setPaintProperty(id, property, value)
+  paint('background', 'background-color', OBSERVATION_BACKGROUND)
   paint('water', 'fill-color', OCEAN_COLOR)
   ;['waterway_tunnel', 'waterway_river', 'waterway_other'].forEach(id => paint(id, 'line-color', OCEAN_COLOR))
 }
@@ -72,7 +74,10 @@ function createSatelliteStyle() {
         url: 'https://tiles.mapterhorn.com/tilejson.json',
       },
     },
-    layers: [{ id: 'satellite', type: 'raster', source: 'satelliteSource' }],
+    layers: [
+      { id: 'background', type: 'background', paint: { 'background-color': OBSERVATION_BACKGROUND } },
+      { id: 'satellite', type: 'raster', source: 'satelliteSource' },
+    ],
     terrain: { source: 'terrainSource', exaggeration: 1 },
     sky: { 'atmosphere-blend': ['interpolate', ['linear'], ['zoom'], 0, 1, 2, 0] },
   }

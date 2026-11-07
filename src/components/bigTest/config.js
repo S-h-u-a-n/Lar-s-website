@@ -12,7 +12,7 @@ export const GEOMETRY = [
 ]
 export const MOTION = { duration: 420, dotsDelay: 90, textDelay: 160, easing: 'cubic-bezier(.22,.75,.25,1)' }
 export const MAINTENANCE = [
-  { id: 'globe', name: 'Globe', color: PIGMENTS.strawberry },
+  { id: 'globe', name: '天體觀測', color: PIGMENTS.strawberry },
   { id: 'telescope', name: 'Telescope', color: PIGMENTS.peach },
   { id: 'book-open1', name: 'Open Book', color: PIGMENTS.butter },
   { id: 'book-close1', name: 'Closed Book', color: PIGMENTS.sky },

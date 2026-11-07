@@ -56,7 +56,12 @@ function App() {
   const [indexSignal, setIndexSignal] = useState(0)
   const [sceneReady,setSceneReady] = useState(false)
   // This welcome belongs to the current App lifetime, never browser storage.
-  const [hasShownEarthWelcome, setHasShownEarthWelcome] = useState(false)
+  const hasShownEarthWelcome = useRef(false)
+  const claimEarthWelcome = useCallback(() => {
+    if (hasShownEarthWelcome.current) return false
+    hasShownEarthWelcome.current = true
+    return true
+  }, [])
   const sceneSettledRef = useRef(false)
   const destinationMounted = useRef(false)
   const portalArrivalReady = useRef(false)
@@ -397,7 +402,7 @@ function App() {
     if (destination === PORTAL_DESTINATIONS.potion) return <WeatherPage onReady={handleWeatherReady} onBack={() => returnFromPortal('potion')} onHome={() => editionNavigate('home')} />
     if (destination === 'ball-test') return <BallTest onBack={() => returnFromPortal('ball')} />
     if (destination === 'human-test') return <HumanTest revealOnMount={!portalReveal && !portalCurve && comicHomePhase === 'idle'} entranceReady={comicHomePhase === 'idle' && !portalCurve && (!portalReveal || screenState === portalReveal.destination)} onBack={() => returnFromPortal('book-close1')} />
-    if (destination === 'natural-test') return <NaturalTest revealOnMount={!portalReveal && !portalCurve && comicHomePhase === 'idle'} entranceReady={comicHomePhase === 'idle' && !portalCurve && (!portalReveal || screenState === portalReveal.destination)} onBack={() => returnFromPortal('book-open1')} />
+    if (destination === 'natural-test') return <NaturalTest onNavigate={editionNavigate} revealOnMount={!portalReveal && !portalCurve && comicHomePhase === 'idle'} entranceReady={comicHomePhase === 'idle' && !portalCurve && (!portalReveal || screenState === portalReveal.destination)} onBack={() => returnFromPortal('book-open1')} />
     const ComicPage = COMIC_PAGES[destination]
     if (ComicPage) {
       const portalId = Object.keys(PORTAL_COMICS).find(id => PORTAL_COMICS[id].screen === destination)
@@ -450,7 +455,7 @@ function App() {
           {!portalReveal && isPortalPageVisible && <Suspense fallback={null}>
             <DestinationBoundary key={screenState} onError={() => handleDestinationError(screenState)}><PortalPageArrival onMounted={handleDestinationMounted} animate={Boolean(portalCurve) && portalCurve.phase !== 'covering'} onReady={revealPortalDestination}>{renderPortalDestination(screenState === 'globe-test' ? 'globe' : screenState === 'telescope-test' ? 'telescope' : screenState)}</PortalPageArrival></DestinationBoundary>
           </Suspense>}
-          {isSceneVisible && <Suspense fallback={null}><DestinationBoundary key={screenState} onError={() => handleDestinationError(screenState)}><PortalPageArrival onMounted={handleDestinationMounted} animate={Boolean(portalCurve) && portalCurve.phase !== 'covering'} onReady={revealPortalDestination}><BigTest welcomeShown={hasShownEarthWelcome} onWelcomeShown={setHasShownEarthWelcome} checklistReady={sceneReady && comicHomePhase === 'idle' && !portalCurve && !portalReveal} onResourceStatus={handleSceneResourceStatus} onBack={returnToMainPage} returnedFromEntrance={returnedFromEntrance} onPortalSelect={openPortal} onOpenIntroduction={openBigIntroduction} onCloseIntroduction={closeBigIntroduction} visitedBigPortals={visitedBigPortals} hasBigIntroduction={hasBigIntroduction} /></PortalPageArrival></DestinationBoundary></Suspense>}
+          {isSceneVisible && <Suspense fallback={null}><DestinationBoundary key={screenState} onError={() => handleDestinationError(screenState)}><PortalPageArrival onMounted={handleDestinationMounted} animate={Boolean(portalCurve) && portalCurve.phase !== 'covering'} onReady={revealPortalDestination}><BigTest claimWelcome={claimEarthWelcome} checklistReady={sceneReady && comicHomePhase === 'idle' && !portalCurve && !portalReveal} onResourceStatus={handleSceneResourceStatus} onBack={returnToMainPage} returnedFromEntrance={returnedFromEntrance} onPortalSelect={openPortal} onOpenIntroduction={openBigIntroduction} onCloseIntroduction={closeBigIntroduction} visitedBigPortals={visitedBigPortals} hasBigIntroduction={hasBigIntroduction} /></PortalPageArrival></DestinationBoundary></Suspense>}
       {!isSceneVisible && !isPortalPageVisible && !isTComicScreen && !isPortalComicScreen && <>
         <Header onHome={() => { setHomeRevealed(true); window.scrollTo({top:0,behavior:'smooth'}) }} onExplore={() => editionNavigate('scene')} onStory={() => editionNavigate('comic')} onIndex={() => {setHomeRevealed(true);setIndexSignal(v=>v+1)}} />
         <main

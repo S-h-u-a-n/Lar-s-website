@@ -5,6 +5,8 @@ import { enablePageTextPersistence } from '../../dev/textEditorStore'
 import Text from './Text'
 import ResearchNotes from './ResearchNotes'
 import StoryDialog from './StoryDialog'
+import BodyDots from './BodyDots'
+import FloatingGeometry from './FloatingGeometry'
 import { BODIES, ALL_CHAPTERS, PALETTE, MOTION_SETTINGS } from './data'
 import './GlobeTest.css'
 
@@ -23,9 +25,9 @@ export default function GlobeTest({ onBack }) {
   const reset = () => commands.current?.reset()
   const chapter = ALL_CHAPTERS.find(c => c.id === chapterId)
   return <main className="gt-page" style={{ ...Object.fromEntries(Object.entries(PALETTE).map(([key,value]) => [`--gt-${key}`,value])), '--gt-panel-duration': `${MOTION_SETTINGS.panel}ms`, '--gt-dots-delay': `${MOTION_SETTINGS.dotsDelay}ms`, '--gt-text-delay': `${MOTION_SETTINGS.textDelay}ms`, '--gt-easing': MOTION_SETTINGS.easing, '--gt-story-duration': `${MOTION_SETTINGS.story}ms` }}>
-    <div className="gt-decor" aria-hidden="true"><i className="gt-disc" /><i className="gt-stripes" /><i className="gt-grid" /><i className="gt-pink-square" /><i className="gt-yellow-square" /></div>
+    <FloatingGeometry />
     <section className="gt-model" aria-label="Celestial model"><GlobeViewer transparent onReady={onReady} onSelectionChange={select} onContinentSelect={selectContinent} interactionDisabled={Boolean(chapterId)} /></section>
-    <header className="gt-header"><button onClick={onBack}><Text id="back">Back to the laboratory</Text></button><Text id="title" as="h1">Celestial Field Notes</Text><Text id="subtitle" as="p">A student observatory</Text></header>
+    <header className="gt-header"><button onClick={onBack}><Text id="back">Back to the laboratory</Text></button><Text id="observation-title" as="h1">天體觀測</Text><Text id="subtitle" as="p">A student observatory</Text></header>
     <nav className="gt-body-picker" aria-label="Celestial selection">
       <Text id="picker-label">Observe</Text>
       <select disabled={!ready} value={selected ?? ''} onChange={event => event.target.value ? commands.current?.select(event.target.value) : reset()} aria-label="Choose a celestial body">
@@ -37,9 +39,10 @@ export default function GlobeTest({ onBack }) {
     {!selected&&<aside className="edition-observation-invitation">
       <p className="edition-kicker">OBSERVATION / 01</p>
       <div className="edition-star-chart" aria-hidden="true"><i/><i/><i/><span>✧</span></div>
-      <h2>從一顆星球，<br/><em>開始一個問題。</em></h2>
-      <p>拖曳模型，看看另一面。<br/>點選天體，展開它的觀測筆記。</p>
-      <div>{[['earth','地球'],['moon','月球'],['sun','太陽']].map(([id,name])=><button key={id} disabled={!ready} onClick={()=>commands.current?.select(id)}>{name} ↗</button>)}</div>
+      <h2 className="gt-invitation-title"><span>相對於天球的</span><em>地球</em></h2>
+      <p className="gt-invitation-subtitle">沒有魔法也超級精彩的世界！</p>
+      <p className="gt-instructions">拖曳模型可以旋轉視角。<br/>點擊天體可以查看相關資料</p>
+      <BodyDots ready={ready} selected={selected} onSelect={id => commands.current?.select(id)} />
     </aside>}
     <ResearchNotes selected={selected} continent={continent} onContinent={selectContinent} onChapter={id => { setLine(0); setChapterId(id) }} onReset={reset} />
     <StoryDialog chapterId={chapterId} line={line} onNext={() => setLine(current => Math.min(current + 1,(chapter?.dialogue.length ?? 1)-1))} onClose={closeStory} />

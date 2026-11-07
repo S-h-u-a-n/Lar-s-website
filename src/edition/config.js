@@ -12,7 +12,7 @@ import human from '../../Art/Big/Big-icon/icon-book2.PNG'
 import ball from '../../Art/Big/Big-icon/icon-ball.PNG'
 import potion from '../../Art/Big/Big-icon/icon-potion.PNG'
 export const TOOLS = [
-  { id: 'globe', route: 'globe', number: '01', name: '天體觀測', english: 'Celestial notes', question: homeToolDescription('globe'), icon: globe, color: PIGMENTS.mint },
+  { id: 'globe', route: 'globe', number: '01', name: '天體觀測', english: '天體觀測', question: homeToolDescription('globe'), icon: globe, color: PIGMENTS.mint },
   { id: 'telescope', route: 'telescope', number: '02', name: '遠方的地球', english: 'The observation window', question: homeToolDescription('telescope'), icon: telescope, color: PIGMENTS.sky },
   { id: 'book-open1', route: 'natural-test', number: '03', name: '自然研究', english: 'An atlas of curious things', question: homeToolDescription('book-open1'), icon: natural, color: PIGMENTS.butter },
   { id: 'book-close1', route: 'human-test', number: '04', name: '人文研究', english: 'Life without a spell', question: homeToolDescription('book-close1'), icon: human, color: PIGMENTS.peach },
@@ -22,6 +22,7 @@ export const TOOLS = [
 export const MOTION = { travel: .68, travelRevealDelay: .16, paper: .42, storyLayerMs: 420, parallax: 12, tilt: 3 }
 export function pageName(screen) {
   if (screen === 'characters') return '同行者檔案館'
+  if (screen === 'globe-test') return '天體觀測'
   return ({intro:'序章',transitioning:'序章',comic:'創世故事',home:'世界的封面',scene:'魔法師們的研究室','big-test':'魔法師們的研究室','t-comic':'望遠鏡的故事'})[screen] || TOOLS.find(tool=>tool.route===screen)?.name || '研究手冊'
 }
 

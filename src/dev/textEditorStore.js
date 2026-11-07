@@ -70,10 +70,11 @@ export function registerText(id, label, element, type = 'registered', options = 
   const existing = state.data[id]
   const defaults = { ...captureDefaults(element), ...existing?.defaults, ...options.defaultValues }
   const sourceDefaultKeys = [...new Set([...(existing?.sourceDefaultKeys ?? []), ...Object.keys(options.defaultValues ?? {})])]
+  const revised = options.sourceRevision && existing?.sourceRevision !== options.sourceRevision
   setState({
     mounted: state.mounted.includes(id) ? state.mounted : [...state.mounted, id],
     selectedId: state.selectedId ?? id,
-    data: { ...state.data, [id]: { ...existing, type: existing?.type ?? type, label, selector: options.selector ?? existing?.selector, pageId: options.pageId ?? existing?.pageId ?? inferPageId(id), coordinateSpace: existing?.coordinateSpace ?? options.coordinateSpace, sourceDefaultKeys, defaults, values: existing?.values ?? { ...defaults } } },
+    data: { ...state.data, [id]: { ...existing, type: existing?.type ?? type, label, selector: options.selector ?? existing?.selector, pageId: options.pageId ?? existing?.pageId ?? inferPageId(id), coordinateSpace: existing?.coordinateSpace ?? options.coordinateSpace, sourceRevision: options.sourceRevision ?? existing?.sourceRevision, sourceDefaultKeys, defaults, values: revised ? { ...defaults, ...existing?.values, ...options.defaultValues } : existing?.values ?? { ...defaults } } },
   })
 }
 
@@ -119,6 +120,11 @@ export function enablePageTextPersistence(pageId, prefix, { readOnly = !import.m
       const runtimeId = entry.type === 'draft' && /^draft-text-\d+$/.test(id) ? `draft-text-${pageId}-legacy-${id.slice(11)}` : id
       const restored = runtimeId === id ? entry : { ...entry, originalId: id }
       data[runtimeId] = data[runtimeId] ? { ...data[runtimeId], values: { ...data[runtimeId].defaults, ...entry.values } } : restored
+      // Only opt-in, revised source text supersedes an older saved draft.
+      // Leave storage and all unspecified fields/other pages intact.
+      if (data[runtimeId].sourceRevision && data[runtimeId].sourceRevision !== entry.sourceRevision) {
+        for (const key of data[runtimeId].sourceDefaultKeys ?? []) data[runtimeId].values[key] = data[runtimeId].defaults[key]
+      }
       if (entry.type === 'draft') draftCounter = Math.max(draftCounter, Number(id.match(/(\d+)$/)?.[1]) || 0)
     })
     setState({ ...state, data })

@@ -25,3 +25,17 @@
 .human-test .nt-category-title h2,
 .human-test .nt-category:nth-child(2) .nt-category-title h2,
 .human-test .nt-category:nth-child(4) .nt-category-title h2 { font-size: 60px; }
+/* Keep the existing line drawing in the outer margin of the tighter card group. */
+.human-test .ht-diagram{left:1000px;right:auto;bottom:20px}
+
+/* Overview artwork belongs to its own label, never the world-space diagram. */
+.human-test:not([data-selected-category]) .ht-diagram{visibility:hidden}
+.human-test .edition-atlas-labels>button .ht-overview-icon{
+  position:absolute;right:16px;bottom:14px;left:auto;top:auto;
+  width:min(calc(var(--ht-icon-width,310px) * var(--atlas-scale,.1)),calc(100% - 120px));
+  aspect-ratio:1;display:block;color:var(--nt-category-color);opacity:.65;
+  pointer-events:none;z-index:1;
+}
+.human-test .edition-atlas-labels>button .ht-overview-icon svg{
+  display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:4;
+}
