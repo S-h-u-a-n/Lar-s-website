@@ -189,7 +189,7 @@ export function TelescopeMap({ mode, attributionHostRef, onReady, onStatus, onOb
     }
   }, [])
 
-  return <div ref={containerRef} className="telescope-map" role="region" aria-label={mode === 'satellite' ? 'Telescope satellite terrain map' : 'Telescope globe map'} />
+  return <div ref={containerRef} className="telescope-map" role="region" aria-label={mode === 'satellite' ? 'Telescope VIEW terrain map' : 'Telescope MAP map'} />
 }
 
 function createInitialItems() {
