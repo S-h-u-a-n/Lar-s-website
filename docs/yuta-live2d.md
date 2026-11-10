@@ -14,19 +14,24 @@
 - Core 必須先載入，才動態匯入 Framework（其模組頂層使用 Core enum）。載入前檢查 moc version，並啟用 moc consistency check。沒有降版或重寫模型。
 - 貼圖在記憶體中採 premultiplied alpha 解碼與渲染，原 PNG 不變。
 
-## 八段動作與接口
+## 動作資源與接口
 
-所有名稱直接對應同名 `.motion3.json`：
+模型 `Live2DYuta.model3.json` 沒有內嵌 `FileReferences.Motions` 動作表；`yutaRuntime.js` 透過 `YUTA_MOTIONS` 載入並註冊各動作，名稱直接對應同名 `.motion3.json`：
 
 | 名稱 | 實際檔案 |
 | --- | --- |
 | 待機1 | 待機1.motion3.json |
 | 待機2 | 待機2.motion3.json |
+| 待機3 | 待機3.motion3.json |
 | 待機一般 | 待機一般.motion3.json |
+| 指右邊-開心 | 指右邊-開心.motion3.json |
 | 指右邊 | 指右邊.motion3.json |
+| 開心 | 開心.motion3.json |
 | 開場 | 開場.motion3.json |
+| 感興趣 | 感興趣.motion3.json |
 | 對話-思考 | 對話-思考.motion3.json |
 | 對話-開心 | 對話-開心.motion3.json |
+| 對話 | 對話.motion3.json |
 | 對話-wink | 對話-wink.motion3.json |
 
 `TelescopeTest` 的 `yuta` React ref 提供：
@@ -39,7 +44,9 @@ yuta.current.startDialogue('對話-wink')
 yuta.current.endDialogue()
 ```
 
-呼叫會排到目前完整動作結束後執行；連續指定時採最新要求。首次掛載先播一次開場，再進入待機一般。每四輪待機插入待機1或待機2。對話指定動作持續完整重播，結束對話後排入待機一般。所有 motion 原檔雖設 Loop true，網站以 SDK `setLoop(false)` 播放完整單輪，統一由單一佇列安排，不修改動畫曲線。既有對話目前沒有動作標記，因此未擅自替其指定情緒。
+`play(name)` 會排到目前動作結束後播放；`startDialogue(name)` 會以最新指定動作取代當前動作；`endDialogue()` 會回到待機。所有 motion 原檔雖設 Loop true，網站以 SDK `setLoop(false)` 播放完整單輪，統一由單一佇列安排，不修改動畫曲線。望遠鏡頁初次進場播放「開場」標記，後續段落只有明確標記才派送動作。
+
+對話標記只在段落開始時派送一次；沒有標記的下一段只更新文字，不打斷當前動畫。指定動作自然結束後依待機3／待機一般／待機1 的 70%／15%／15% 權重銜接。待機一般或待機1 結束後接待機3；待機3 結束後隨機接待機一般或待機1；待機2僅在長時間沒有互動時偶爾觸發。模型由 `YutaLive2D` 單次掛載，不會因段落文字更新重新載入。
 
 離頁時取消 RAF、終止資源請求、釋放 motion / model / renderer / texture / WebGL context。背景分頁停止累計動作時間。
 
@@ -117,13 +124,13 @@ yuta.current.endDialogue()
 
 ### 狀態與事件
 
-`introActive` 只在完整首次教學進行中為 true；`introCompleted` 必須在最後一段出現後，再由玩家確認一次才保存。模糊和既有焦點圖形由 introActive 持續鎖定，期間沒有解除計時器；完成後重新使用既有 focusDuration 對焦過渡。第二次進入改用三段 welcome，不再鎖定教學。
+`introActive` 只在完整首次教學進行中為 true；教學完成與 Telescope 是否已進入，由 App 層級的 ref 管理，只在目前網站載入期間有效。每次整頁重新載入後，第一次進入 Telescope 播完整教學；同一次載入中離開再進入則播三段 welcome。模糊和既有焦點圖形由 introActive 持續鎖定，期間沒有解除計時器；完成後重新使用既有 focusDuration 對焦過渡。
 
 對話有 active / kind / group / index / segmentKey / hasNext；完成整組後保留最後台詞但 active=false。next 僅在還有下一段時顯示。最後一段 next 隱藏，但按鈕仍可點擊或用 Enter / Space 完成。140ms 重複點擊防護避免同一連點跳段；切句時取消上次氣泡動畫。
 
 優先序為教學 > 主動功能 > 主動閒聊 > 自動提示 > 待機。教學不可中斷；主動閒聊可取代自動提示，但不可重新抽掉正在閱讀的閒聊。功能操作可取代其他非教學對話。自動提示不得取代任何 active 對話。
 
-持久化 key：`genesis:telescope:yuta-dialogue:v1`。記錄教學完成、隨機／收藏計數、功能使用及提示狀態、14 組閒聊剩餘洗牌袋與上次抽到的組別。收藏只在原本 localStorage 寫入成功後通知管理器；已計數的相同觀測視角不重複計入。儲存失敗、取消收藏、單純開列表皆不增加次數。原收藏 key 不變。
+持久化 key：`genesis:telescope:yuta-dialogue:v1`（瀏覽器 `localStorage`）。記錄隨機／收藏計數、功能使用及提示狀態、14 組閒聊剩餘洗牌袋與上次抽到的組別；舊資料中的 `introCompleted` 僅為相容保留，不參與教學判定，也不再由完成教學更新。收藏只在原本 localStorage 寫入成功後通知管理器；已計數的相同觀測視角不重複計入。儲存失敗、取消收藏、單純開列表皆不增加次數。原收藏 key 不變。
 
 `DIALOGUE_CONFIG` 集中設定 30 秒閒置、待機2 機率、45 秒未互動提示門檻、60 秒提示間隔、三功能提示順序與點擊防護。正常待機隨機選待機一般／待機1，完整播完才切換；對話仍在閱讀時禁止待機2，長時間無互動且沒有 active 對話才偶爾播一次待機2。玩家互動重置閒置時間。
 

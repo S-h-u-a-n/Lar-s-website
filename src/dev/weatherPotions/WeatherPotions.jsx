@@ -116,18 +116,18 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
     </header>
     <section className="wp-layout">
       <aside className="wp-introduction">
-        <p className="edition-kicker">A SMALL WORLD. A BIG WHAT IF.</p>
+        <p className="edition-kicker">WEATHER EXPERIMENT / 06</p>
         <h1 aria-label="Bottled weather. 魔法天氣藥水"><span>Bottled</span><em>weather.</em><small>魔法天氣藥水</small></h1>
-        <p className="wp-lead">把一場天氣，倒進世界裡。</p>
-        <p className="wp-description">雨多一點，太陽久一點，<br />或者，乾脆把整座島冷藏。<br />山海會記得你的每一次胡鬧。</p>
+        <p className="wp-lead">試著用不同的藥水，改變眼前的世界吧！</p>
+        <p className="wp-description">不同的藥水會對環境產生不同影響。可以自由組合，也可以觀察地形與氣候的變化。</p>
         <WeatherOrbit />
-        <div className="wp-margin-note"><span>✳</span><p>魔法師的溫馨提醒：<br /><em>「天氣很好」不代表你做得很好。</em></p></div>
-        <p className="wp-chapter">FIELD EXPERIMENT / 06<br /><span>本研究不保證明天還有陸地。</span></p>
+        <div className="wp-margin-note"><span>✳</span><p>實驗備註：不同藥水可能產生連鎖反應。</p></div>
+        <p className="wp-chapter">FIELD EXPERIMENT / 06<br /><span>所有氣候變化皆為模擬實驗結果。</span></p>
       </aside>
 
       <div className="wp-world-column">
         <figure className={`wp-world-plate ${world.input ? 'is-casting' : ''}`} style={{ '--weather-color': potion.color }}>
-          <div className="wp-plate-header"><span>PLATE 06 / A WORLD IN YOUR HANDS</span><span className={`wp-live ${world.input ? 'is-active' : ''}`} role="status"><i />{status}</span></div>
+          <div className="wp-plate-header"><span>EXPERIMENT 06 / WEATHER SIMULATION</span><span className={`wp-live ${world.input ? 'is-active' : ''}`} role="status"><i />{status}</span></div>
           <div className="wp-map-grid" aria-hidden="true" />
           <div className={`wp-world-stage ${ending ? 'has-ending' : ''}`}>
           <div className="wp-world-background" inert={Boolean(ending) || rewinding}>
@@ -141,7 +141,7 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
           {rewinding && <div className="wp-rewind-magic" aria-hidden="true"><i /><i /><i /><span>↶</span><small>REWINDING THE WORLD</small></div>}
           </div>
           <div className="wp-compass" aria-hidden="true"><span>N</span><i>✧</i></div>
-          <figcaption><span>一座島。九種藥水。先玩一會兒。</span><span>{WORLD.columns} × {WORLD.rows} / PARTICLE WORLD</span></figcaption>
+          <figcaption><span>使用右側的藥水，在島嶼上進行實驗。</span><span>{WORLD.columns} × {WORLD.rows} / PARTICLE WORLD</span></figcaption>
         </figure>
         <div className="wp-world-readings" aria-label="即時世界狀態"><span><small>氣溫</small><b>{world.temperature.toFixed(0)}°</b></span><span><small>陸地留存</small><b>{Math.round((1 - world.metrics.lostLand) * 100)}<i>%</i></b></span><span><small>世界穩定度</small><b>{Math.round((1 - world.metrics.damage) * 100)}<i>%</i></b></span></div>
         <p className="wp-world-instruction"><span>點一下，或按住拖曳，沿途改變天氣。</span><small>放開就停。也可以把瓶子拖進世界，持續倒入。</small></p>
@@ -150,7 +150,7 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
       <aside className="wp-research">
         <section className="wp-potion-paper">
           <div className="wp-paper-heading"><span className="edition-kicker">01 / CHOOSE YOUR WEATHER</span><span>↙</span></div>
-          <h2>今天，想要什麼天氣？</h2>
+          <h2>選擇實驗藥水</h2>
           <div className="wp-potions" aria-label="天氣藥水選擇">{POTIONS.map(p => <button type="button" key={p.id} disabled={Boolean(ending) || rewinding} className={selected === p.id ? 'is-selected' : ''} aria-label={`選擇${p.name}藥水`} aria-pressed={selected === p.id} style={{ '--bottle-color': p.color }}
             onClick={() => setSelected(p.id)} onPointerDown={event => beginPointer(event, 'bottle', p.id)} onPointerMove={movePointer} onPointerUp={release} onPointerCancel={release} onLostPointerCapture={release}>
             <small>{p.number}</small><Bottle potion={p} /><strong>{p.name}</strong>
@@ -164,11 +164,11 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
             event.currentTarget.parentElement.querySelectorAll('button')[next]?.focus()
           }}><i aria-hidden="true" /><span>{size.label}</span></button>)}</div></div>
           <div className="wp-strength" role="group" aria-label="倒入份量"><span>倒入份量</span>{[[RULES.defaultStrength, '一小口'],[1, '放手一倒']].map(([value,label]) => <button key={value} type="button" disabled={Boolean(ending) || rewinding} aria-pressed={strength===value} onClick={() => setStrength(value)}>{label}</button>)}</div>
-          <div className="wp-dose-instruction"><span>∞</span><p>藥水不限量，世界不一定。<small>聚焦世界後，可按住空白鍵施法。</small></p></div>
+          <div className="wp-dose-instruction"><span>∞</span><p>可自由重複實驗，並隨時重置世界。</p></div>
         </section>
 
         <div className="wp-lower-controls">
-          <button type="button" className="wp-rewind-link" disabled={rewinding} onClick={rewind}>↶ 回溯這個世界<span>重新開始</span></button>
+          <button type="button" className="wp-rewind-link" disabled={rewinding} onClick={rewind}>↶ 重置世界</button>
           <button type="button" className="wp-possibilities" aria-expanded={hints} aria-controls="wp-ending-hints" onClick={() => setHints(!hints)}>偶爾會發生的小事故<span>{hints ? '−' : '＋'}</span></button>
           {hints && <div className="wp-ending-hints" id="wp-ending-hints">{ENDINGS.map(e => <p key={e.id}><b>{e.number} / {e.title}</b><span>{e.cause}</span></p>)}</div>}
         </div>

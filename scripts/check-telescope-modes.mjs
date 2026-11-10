@@ -19,6 +19,11 @@ assert.deepEqual(Object.values(MODE_DIALOGUE).flat().map(line => line.text), [
   '嗯？是在比較兩種模式的差異嗎？',
   '呵呵，這台望遠鏡的切換功能應該已經通過你的測試了吧？',
 ])
+assert.deepEqual(Object.values(MODE_DIALOGUE).flat().map(line => line.motion), [
+  '對話', '對話-開心', '感興趣',
+  '對話-開心', '開心', '對話',
+  '感興趣', '對話-wink',
+])
 const weights = { '待機3': 0, '待機一般': 0, '待機1': 0 }
 for (let i = 0; i < 10000; i++) weights[chooseDialogueIdle(() => (i + .5) / 10000)]++
 assert.deepEqual(weights, { '待機3': 7000, '待機一般': 1500, '待機1': 1500 })

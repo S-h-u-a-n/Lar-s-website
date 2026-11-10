@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { YUTA_DIALOGUE as groups, CHAT_GROUP_IDS } from '../src/components/telescopeTest/dialogue/yutaDialogue.js'
+import { MODE_DIALOGUE } from '../src/components/telescopeTest/dialogue/modeDialogue.js'
 import { createDialogueController, DIALOGUE_STORAGE_KEY, DIALOGUE_CONFIG } from '../src/components/telescopeTest/dialogue/dialogueController.js'
-import { chooseIdleMotion } from '../src/components/telescopeTest/dialogue/motionPolicy.js'
+import { chooseIdleMotion, isDialogueMotion } from '../src/components/telescopeTest/dialogue/motionPolicy.js'
 
 // Independently extract balanced OUTER quotation pairs from the supplied text.
 // Inner 「你」, 「做不到」, etc. remain literal dialogue, not new bubbles.
@@ -15,21 +16,35 @@ for (const ch of original) {
 }
 assert.equal(depth, 0)
 const all = Object.values(groups).flatMap(group => group.segments)
+const modeSegments = Object.values(MODE_DIALOGUE).flat()
 assert.equal(all.length, 82); assert.equal(CHAT_GROUP_IDS.length, 14)
-assert.deepEqual(all.map(s => s.text), quoted)
-const rawMotions = [...original.matchAll(/^（(開場|指右邊|對話(?:-思考|-開心|-wink|-笑容)?)）$/gm)].map(match => match[1])
-assert.deepEqual(all.filter(s => s.motion).map(s => s.motion), rawMotions)
-const allowed = new Set(['開場','指右邊','對話','對話-思考','對話-開心','對話-wink','對話-笑容'])
+assert.deepEqual([...all, ...modeSegments].map(s => s.text), quoted)
+const rawMotions = [...original.matchAll(/^（(開場|指右邊-開心|指右邊|開心|感興趣|對話(?:-思考|-開心|-wink|-笑容)?)）$/gm)].map(match => match[1])
+assert.deepEqual([...all, ...modeSegments].filter(s => s.motion).map(s => s.motion), rawMotions)
+const allowed = new Set(['開場','指右邊-開心','指右邊','開心','感興趣','對話','對話-思考','對話-開心','對話-wink','對話-笑容'])
 assert(all.every(s => s.motion === null || allowed.has(s.motion)))
+const motionFiles = new Set(readdirSync(new URL('../Art/telescope/yuta-live2d/', import.meta.url)).filter(file => file.endsWith('.motion3.json')).map(file => file.replace(/\.motion3\.json$/, '')))
+assert([...new Set(all.map(s => s.motion).filter(Boolean))].every(motion => motionFiles.has(motion)))
+assert(motionFiles.has('對話-wink'))
+const assetSource = readFileSync(new URL('../src/components/telescopeTest/yutaAssets.js', import.meta.url), 'utf8')
+const mappedNames = assetSource.match(/export const YUTA_MOTIONS = Object\.fromEntries\(\[([\s\S]*?)\]\.map/)?.[1]
+assert(mappedNames)
+assert.deepEqual([...mappedNames.matchAll(/'([^']+)'/g)].map(match => match[1]), [
+  '待機1','待機2','待機3','待機一般','指右邊-開心','指右邊','開心','開場','感興趣','對話-思考','對話-開心','對話','對話-wink',
+])
+assert([...mappedNames.matchAll(/'([^']+)'/g)].every(([, name]) => motionFiles.has(name)))
+assert([...new Set([...all, ...modeSegments].map(s => s.motion).filter(Boolean))].every(motion => mappedNames.includes(`'${motion}'`)))
 assert.deepEqual(CHAT_GROUP_IDS.map(id => groups[id].segments.length), [5,3,5,4,4,5,3,3,3,4,4,7,3,8])
 assert.deepEqual(groups.intro.segments.map(s => s.motion), ['開場', '指右邊', null, '對話-wink'])
+for (const name of ['開場','指右邊','指右邊-開心','開心','感興趣','對話','對話-思考','對話-開心','對話-wink']) assert(isDialogueMotion(name))
+for (const name of ['待機1','待機2','待機3','待機一般']) assert(!isDialogueMotion(name))
 
 function fixture(initial) {
   let time = 0, seed = 12345
   const map = new Map(initial ? [[DIALOGUE_STORAGE_KEY, JSON.stringify(initial)]] : [])
   const storage = { getItem: key => map.get(key) ?? null, setItem: (key, value) => map.set(key, value) }
   const now = () => time, random = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
-  const create = () => createDialogueController({ storage, now, random })
+  const create = (initialEntry = 'intro') => createDialogueController({ storage, now, random, initialEntry })
   const c = create()
   const advance = controller => { time += 150; return controller.advance() }
   const finish = (controller = c) => { while (controller.getSnapshot().active) advance(controller) }
@@ -44,8 +59,21 @@ function fixture(initial) {
   assert.equal(c.getSnapshot().index, 3); assert.equal(c.getSnapshot().hasNext, false)
   assert(c.getSnapshot().introActive); assert(!c.getSnapshot().introCompleted)
   advance(c); assert(!c.getSnapshot().introActive); assert(c.getSnapshot().introCompleted)
-  const returning = create(); assert.equal(returning.getSnapshot().group, 'welcome'); assert(!returning.getSnapshot().introActive)
+  const returning = create('welcome'); assert.equal(returning.getSnapshot().group, 'welcome'); assert(!returning.getSnapshot().introActive)
   assert.equal(groups.welcome.segments.length, 3)
+}
+{
+  const saved = { version: 1, introCompleted: true, randomCount: 7, favoriteCount: 3, used: { random: true }, shownHints: ['random'], chatBag: ['chat-3'], lastChat: 'chat-2', lastRandom: 1, creditedFavorites: [] }
+  const f = fixture(saved)
+  let time = 0
+  const storage = { getItem: key => f.map.get(key) ?? null, setItem: (key, value) => f.map.set(key, value) }
+  const replay = createDialogueController({ storage, initialEntry: 'intro', now: () => time })
+  assert.equal(replay.getSnapshot().group, 'intro'); assert(replay.getSnapshot().introActive); assert(!replay.getSnapshot().introCompleted)
+  while (replay.getSnapshot().active) { time += 150; replay.advance() }
+  assert.equal(replay.getSnapshot().introCompleted, true)
+  assert.deepEqual(JSON.parse(f.map.get(DIALOGUE_STORAGE_KEY)), saved)
+  assert.equal(createDialogueController({ storage, initialEntry: 'intro', now: () => time }).getSnapshot().group, 'intro')
+  assert.equal(createDialogueController({ storage, initialEntry: 'welcome', now: () => time }).getSnapshot().group, 'welcome')
 }
 {
   const f = fixture(); f.finish()

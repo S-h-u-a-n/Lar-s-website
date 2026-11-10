@@ -10,7 +10,7 @@ import FloatingGeometry from './FloatingGeometry'
 import { BODIES, ALL_CHAPTERS, PALETTE, MOTION_SETTINGS } from './data'
 import './GlobeTest.css'
 
-export default function GlobeTest({ onBack }) {
+export default function GlobeTest({ onBack, onModelReady, onModelError }) {
   const [selected,setSelected] = useState(null)
   const [continent,setContinent] = useState(null)
   const [chapterId,setChapterId] = useState(null)
@@ -18,7 +18,11 @@ export default function GlobeTest({ onBack }) {
   const [ready,setReady] = useState(false)
   const commands = useRef(null)
   useEffect(() => enablePageTextPersistence('globe-test','globe-test-'), [])
-  const onReady = useCallback(api => { commands.current = api; setReady(Boolean(api)) }, [])
+  const onReady = useCallback(api => {
+    commands.current = api
+    setReady(Boolean(api))
+    if (api) onModelReady?.()
+  }, [onModelReady])
   const select = useCallback(id => { setSelected(id); setContinent(null); setChapterId(null); setLine(0) }, [])
   const selectContinent = useCallback(id => { setSelected('earth'); setContinent(id); setChapterId(null); setLine(0) }, [])
   const closeStory = useCallback(() => setChapterId(null), [])
@@ -26,7 +30,7 @@ export default function GlobeTest({ onBack }) {
   const chapter = ALL_CHAPTERS.find(c => c.id === chapterId)
   return <main className="gt-page" style={{ ...Object.fromEntries(Object.entries(PALETTE).map(([key,value]) => [`--gt-${key}`,value])), '--gt-panel-duration': `${MOTION_SETTINGS.panel}ms`, '--gt-dots-delay': `${MOTION_SETTINGS.dotsDelay}ms`, '--gt-text-delay': `${MOTION_SETTINGS.textDelay}ms`, '--gt-easing': MOTION_SETTINGS.easing, '--gt-story-duration': `${MOTION_SETTINGS.story}ms` }}>
     <FloatingGeometry />
-    <section className="gt-model" aria-label="Celestial model"><GlobeViewer transparent onReady={onReady} onSelectionChange={select} onContinentSelect={selectContinent} interactionDisabled={Boolean(chapterId)} /></section>
+    <section className="gt-model" aria-label="Celestial model"><GlobeViewer transparent onReady={onReady} onError={onModelError} onSelectionChange={select} onContinentSelect={selectContinent} interactionDisabled={Boolean(chapterId)} /></section>
     <header className="gt-header"><button onClick={onBack}><Text id="back">Back to the laboratory</Text></button><Text id="observation-title" as="h1">天體觀測</Text><Text id="subtitle" as="p">A student observatory</Text></header>
     <nav className="gt-body-picker" aria-label="Celestial selection">
       <Text id="picker-label">Observe</Text>

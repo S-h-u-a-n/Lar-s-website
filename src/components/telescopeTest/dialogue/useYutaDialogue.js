@@ -1,10 +1,10 @@
 import { useEffect, useState, useSyncExternalStore } from 'react'
 import { createDialogueController } from './dialogueController'
-export default function useYutaDialogue() {
+export default function useYutaDialogue(initialEntry = 'intro') {
   const [controller] = useState(() => {
     let storage
     try { storage = window.localStorage } catch { /* Session-only operation. */ }
-    return createDialogueController({ storage })
+    return createDialogueController({ storage, initialEntry })
   })
   const state = useSyncExternalStore(controller.subscribe, controller.getSnapshot, controller.getSnapshot)
   useEffect(() => {

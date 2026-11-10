@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import ResourceStatus from '../edition/ResourceStatus'
 import { createResourceGate } from '../lib/asyncReadiness'
 import { TOOL_REACTION } from '../edition/config'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
@@ -293,7 +292,6 @@ function softenCrystalballGlass(root) {
 
 function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroduction, onCloseIntroduction, returnedFromEntrance, visitedBigPortals, hasBigIntroduction, presentation, children, navigation, viewportAspect, fitViewport = false, onFocusProgress }) {
   const [resourceStatus,setResourceStatus] = useState('loading')
-  const [retry,setRetry] = useState(0)
   const hostRef = useRef(null)
   const [focusedPortalId, setFocusedPortalId] = useState(null)
   const [editorModel, setEditorModel] = useState(null)
@@ -945,7 +943,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       canvas.remove()
       hoverIcon.remove()
     }
-  }, [BIG_RENDER_COLOR.brightness, BIG_RENDER_COLOR.saturation, viewportAspect, fitViewport, onFocusProgress, retry])
+  }, [BIG_RENDER_COLOR.brightness, BIG_RENDER_COLOR.saturation, viewportAspect, fitViewport, onFocusProgress])
 
   const showEnterButton = focusedPortalId && focusedPortalId === returnedFromEntrance
 
@@ -966,7 +964,6 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       </div>
       <BigLeftside /></>}
       {children}
-      <ResourceStatus showLoading={false} status={resourceStatus} label="創世研究桌" onRetry={()=>setRetry(v=>v+1)} />
       {navigation ? navigation({ onBack, showEnterButton, onEnter: () => onPortalSelect?.(focusedPortalId, focusedPortalScreenCenterRef.current?.()) }) : <><PortalBackButton onBack={onBack} />
       {showEnterButton && (
         <button className="portal-enter" type="button" onClick={() => onPortalSelect?.(focusedPortalId, focusedPortalScreenCenterRef.current?.())}>

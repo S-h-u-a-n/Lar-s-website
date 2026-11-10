@@ -1,4 +1,4 @@
-import { chooseIdleMotion, chooseDialogueIdle } from './dialogue/motionPolicy'
+import { chooseIdleMotion, chooseDialogueIdle, isDialogueMotion } from './dialogue/motionPolicy'
 import { YUTA_ASSETS, YUTA_MOTIONS, resolveYutaMotion } from './yutaAssets'
 let corePromise, frameworkInitialized = false
 function loadCore() {
@@ -112,7 +112,7 @@ export async function createYuta(canvas, signal, onMotion, { autoOpening = true 
     }
     function next() {
       if (pending) { const name = pending; pending = null; return name }
-      if (current.startsWith('對話') || current === '開場' || current === '指右邊') return chooseDialogueIdle()
+      if (isDialogueMotion(current)) return chooseDialogueIdle()
       return chooseIdleMotion({ current, dialogueActive, idleForMs: performance.now() - lastInteraction })
     }
     const normalIdle = () => '待機3'

@@ -26,7 +26,7 @@ function TelescopeGeometry() {
   </div>
 }
 
-export default function TelescopeTest({ onBack }) {
+export default function TelescopeTest({ onBack, initialEntry = 'intro', onEntered }) {
   const [mode, setMode] = useState('globe')
   const currentMode = useRef('globe')
   const [status, setStatus] = useState('loading')
@@ -40,7 +40,7 @@ export default function TelescopeTest({ onBack }) {
   const lastRandom = useRef(null), functionTrigger = useRef(null)
   const [name, setName] = useState('')
   const [storageError, setStorageError] = useState(!initialCollection.readable)
-  const dialogue = useYutaDialogue()
+  const dialogue = useYutaDialogue(initialEntry)
   const { introActive, introCompleted } = dialogue
   const yuta = useRef(null), bubble = useRef(null), mentorStage = useRef(null)
   useLargeFrameTools(mentorStage)
@@ -72,6 +72,7 @@ export default function TelescopeTest({ onBack }) {
   }, [dialogueStep])
   const api = useRef(null), attribution = useRef(null), logButton = useRef(null), closeButton = useRef(null), drawer = useRef(null)
   useEffect(() => enablePageTextPersistence('telescope-test', 'telescope-test-'), [])
+  useEffect(() => { onEntered?.() }, [onEntered])
   useEffect(() => {
     setFocusing(true)
     if (introActive) return
@@ -132,7 +133,7 @@ export default function TelescopeTest({ onBack }) {
       </div>
       </div>
       <button type="button" ref={bubble} className="tt-dialogue tt-dialogue-bubble" aria-label="尤塔的對話" aria-disabled={!dialogue.active} data-dialogue-group={dialogue.group ?? 'idle'} data-dialogue-index={dialogue.index ?? ''} onClickCapture={advanceDialogue}>
-        <span className="tt-dialogue-copy" aria-live="polite"><span className="tt-dialogue-line" data-segment-id={dialogue.segment.id}>{dialogue.segment.text}</span></span>
+        <span className="tt-dialogue-copy" aria-live="polite"><span key={dialogue.segment.id} className="tt-dialogue-line" data-segment-id={dialogue.segment.id}>{dialogue.segment.text}</span></span>
 
         {hasNextDialogue && <span className="tt-dialogue-next" aria-hidden="true">next <span>▹</span></span>}
       </button><div ref={coordinate} className="tt-compass"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28"/><path style={{ transform: `rotate(${-observation.bearing}deg)`, transformOrigin: '32px 32px' }} d="M32 10L40 42L32 36L24 42Z"/></svg><Text id="north">N</Text><span>{observation.latitude.toFixed(3)}°, {observation.longitude.toFixed(3)}°</span></div></aside></div>

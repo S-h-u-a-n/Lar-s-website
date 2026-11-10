@@ -8,10 +8,12 @@ for line in s.splitlines():
  if depth:
   buf+='\n'
  else:
+  if line in ['切換MAP','切換VIEW','連續切換兩種模式']: section=None;motion=None;continue
   if line in heads: section=heads[line];motion=None;continue
   if re.fullmatch(r'（\d+）',line): section='chat-'+line[1:-1];continue
   if line in ['（第一次）','（第五次）','（第十次）']:count={'（第一次）':1,'（第五次）':5,'（第十次）':10}[line];continue
-  if re.fullmatch(r'（(?:開場|指右邊|對話(?:-思考|-開心|-wink|-笑容)?)）',line):motion=line[1:-1];continue
+  if re.fullmatch(r'（(?:開場|指右邊-開心|指右邊|開心|感興趣|對話(?:-思考|-開心|-wink|-笑容)?)）',line):motion=line[1:-1];continue
+  if section is None:continue
   if not line.startswith('「'):continue
  for ch in line:
   if ch=='「':

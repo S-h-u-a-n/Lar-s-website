@@ -17,7 +17,7 @@ function read(storage) {
   } catch { return { progress: fresh(), writable: false } }
 }
 
-export function createDialogueController({ storage, now = Date.now, random = Math.random, config = DIALOGUE_CONFIG, initialMode = 'globe' } = {}) {
+export function createDialogueController({ storage, now = Date.now, random = Math.random, config = DIALOGUE_CONFIG, initialMode = 'globe', initialEntry = 'intro' } = {}) {
   const loaded = read(storage), progress = loaded.progress, listeners = new Set()
   let revision = 0, interaction = 0, active = null, lastSegment = null, lastAdvance = -Infinity, passive = null
   let currentMode = initialMode, switches = [], lastBurst = -Infinity
@@ -31,7 +31,7 @@ export function createDialogueController({ storage, now = Date.now, random = Mat
   function emit() {
     snapshot = { active: Boolean(active), kind: active?.kind ?? passive?.kind ?? null, group: active?.group ?? passive?.group ?? null, index: active?.index ?? (passive ? 0 : null),
       segment: active ? active.segments[active.index] : lastSegment, segmentKey: revision, segmentMotion: active ? active.segments[active.index].motion : passive ? lastSegment.motion : null,
-      hasNext: Boolean(active && active.index + 1 < active.segments.length), introActive: active?.kind === 'intro', introCompleted: progress.introCompleted,
+      hasNext: Boolean(active && active.index + 1 < active.segments.length), introActive: active?.kind === 'intro', introCompleted,
       interaction, randomCount: progress.randomCount, favoriteCount: progress.favoriteCount }
     listeners.forEach(listener => listener())
   }
@@ -51,7 +51,8 @@ export function createDialogueController({ storage, now = Date.now, random = Mat
   function markUsed(feature) { progress.used[feature] = true; persist() }
   // Initialization is read-only so StrictMode's discarded render cannot mark
   // a tutorial complete or consume a chat from the persistent shuffle bag.
-  const entry = progress.introCompleted ? 'welcome' : 'intro'
+  const entry = initialEntry === 'welcome' ? 'welcome' : 'intro'
+  let introCompleted = entry === 'welcome'
   active = { group: entry, kind: entry, segments: YUTA_DIALOGUE[entry].segments, index: 0 }
   lastSegment = active.segments[0]
   revision++
@@ -66,7 +67,7 @@ export function createDialogueController({ storage, now = Date.now, random = Mat
         active = { ...active, index: active.index + 1 }
         lastSegment = active.segments[active.index]
       } else {
-        if (active.kind === 'intro') { progress.introCompleted = true; persist() }
+        if (active.kind === 'intro') introCompleted = true
         active = null
       }
       revision++; emit(); return true

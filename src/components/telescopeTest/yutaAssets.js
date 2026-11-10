@@ -10,7 +10,8 @@ export const YUTA_ASSETS = {
   texture: asset('Texture-yuta.png'), displayInfo: asset('Live2DYuta.cdi3.json'),
 }
 export const YUTA_MOTIONS = Object.fromEntries([
-  '待機1', '待機2', '待機3', '待機一般', '指右邊', '開場', '對話', '對話-思考', '對話-開心', '對話-wink',
+  '待機1', '待機2', '待機3', '待機一般', '指右邊-開心', '指右邊', '開心', '開場', '感興趣',
+  '對話-思考', '對話-開心', '對話', '對話-wink',
 ].map(name => [name, asset(`${name}.motion3.json`)]))
 
 // Preserve editorial labels separately from the actual exported filenames.

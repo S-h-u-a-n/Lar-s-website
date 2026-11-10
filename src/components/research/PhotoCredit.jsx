@@ -27,18 +27,21 @@ export default function PhotoCredit({ photoRef, credit }) {
   }, [open])
   if (!host) return null
   const close = () => { setOpen(false); button.current?.focus({ preventScroll: true }) }
-  return <>{createPortal(<button ref={button} className="research-photo-info" aria-label="圖片來源與授權" aria-haspopup="dialog" onClick={event => { event.stopPropagation(); setOpen(true) }}>ⓘ</button>, host)}
+  const isOriginalPhoto = Boolean(credit.attribution)
+  return <>{createPortal(<button ref={button} className="research-photo-info" aria-label={isOriginalPhoto ? '圖片版權資訊' : '圖片來源與授權'} aria-haspopup="dialog" onClick={event => { event.stopPropagation(); setOpen(true) }}>ⓘ</button>, host)}
     {open && createPortal(<dialog ref={dialog} className="research-photo-license" aria-labelledby="research-photo-license-title" onCancel={close} onClose={close} onKeyDown={event => event.stopPropagation()} onClick={event => { event.stopPropagation(); if (event.target === event.currentTarget) close() }}>
       <div className="research-photo-license-copy">
         <button className="research-photo-license-close" aria-label="關閉圖片來源" onClick={close}>×</button>
-        <h2 id="research-photo-license-title">圖片來源與授權</h2>
-        <p>{credit.title}</p>
-        <dl>
-          <dt>作者</dt><dd>{credit.author}</dd>
-          <dt>來源</dt><dd><a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer">Wikimedia Commons 原始檔案頁 ↗</a></dd>
-          <dt>授權</dt><dd><a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer">{credit.license}</a></dd>
-          <dt>修改</dt><dd>{credit.modifications}</dd>
-        </dl>
+        <h2 id="research-photo-license-title">{isOriginalPhoto ? '圖片版權資訊' : '圖片來源與授權'}</h2>
+        {isOriginalPhoto ? <p>{credit.attribution}</p> : <>
+          <p>{credit.title}</p>
+          <dl>
+            <dt>作者</dt><dd>{credit.author}</dd>
+            <dt>來源</dt><dd><a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer">Wikimedia Commons 原始檔案頁 ↗</a></dd>
+            <dt>授權</dt><dd><a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer">{credit.license}</a></dd>
+            <dt>修改</dt><dd>{credit.modifications}</dd>
+          </dl>
+        </>}
       </div>
     </dialog>, document.body)}
   </>

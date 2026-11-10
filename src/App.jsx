@@ -55,13 +55,16 @@ function App() {
   const [homeRevealed, setHomeRevealed] = useState(false)
   const [indexSignal, setIndexSignal] = useState(0)
   const [sceneReady,setSceneReady] = useState(false)
-  // This welcome belongs to the current App lifetime, never browser storage.
-  const hasShownEarthWelcome = useRef(false)
-  const claimEarthWelcome = useCallback(() => {
-    if (hasShownEarthWelcome.current) return false
-    hasShownEarthWelcome.current = true
+  // These independent entry gates live only for this App lifetime.
+  const hasEnteredBig = useRef(false)
+  const hasEnteredTelescope = useRef(false)
+  const globeResourceReady = useRef(false)
+  const claimBigFirstEntry = useCallback(() => {
+    if (hasEnteredBig.current) return false
+    hasEnteredBig.current = true
     return true
   }, [])
+  const markTelescopeEntered = useCallback(() => { hasEnteredTelescope.current = true }, [])
   const sceneSettledRef = useRef(false)
   const destinationMounted = useRef(false)
   const portalArrivalReady = useRef(false)
@@ -156,6 +159,7 @@ function App() {
   function beginEditionReveal() {
     if (comicHomePhaseRef.current !== 'covered' || !destinationMounted.current) return
     if (['scene', 'big-test'].includes(pendingScreen.current) && !sceneSettledRef.current) return
+    if (pendingScreen.current === PORTAL_DESTINATIONS.globe && !globeResourceReady.current && !failedExplorationDestinations.current.has(PORTAL_DESTINATIONS.globe)) return
     comicHomePhaseRef.current = 'revealing'
     setComicHomePhase('revealing')
   }
@@ -178,6 +182,10 @@ function App() {
     if (screenState === 'characters' && target === 'home') {
       restoreCharacterScroll.current = characterHomeScroll.current
       restoreCharacterFocus.current = true
+    }
+    if (target === PORTAL_DESTINATIONS.globe) {
+      globeResourceReady.current = false
+      failedExplorationDestinations.current.delete(PORTAL_DESTINATIONS.globe)
     }
     if (['scene', 'big-test'].includes(target)) { sceneSettledRef.current = false; setSceneReady(false) }
     setHomeRevealed(true)
@@ -233,6 +241,7 @@ function App() {
     const destination = comic && (comic.panels?.length === 0 || visitedRef.current.includes(portalId)) ? comic.destination : comic?.screen || getPortalDestination(portalId)
     if (!destination || portalRevealLocked.current || portalCurveRef.current || comicHomePhaseRef.current !== 'idle') return
     failedExplorationDestinations.current.delete(destination)
+    if (portalId === 'globe') globeResourceReady.current = false
     portalRevealLocked.current = true
     setReturnedFromEntrance(null)
     setActivePortalInteractionId(portalId)
@@ -334,7 +343,11 @@ function App() {
       setPortalCurve(next)
       setPortalReveal(null)
       if (current.returning) completePortalReturn(current.portalId, current.markVisited)
-      else setScreenState(PORTAL_COMICS[current.portalId].destination)
+      else {
+        const destination = PORTAL_COMICS[current.portalId].destination
+        if (destination === PORTAL_DESTINATIONS.globe) globeResourceReady.current = false
+        setScreenState(destination)
+      }
     } else if (phase === 'revealing') {
       portalCurveRef.current = null
       setPortalCurve(null)
@@ -351,6 +364,7 @@ function App() {
     const current = portalCurveRef.current
     // The shared paper curtain stays shut for both arrival animation and GLB.
     if (current?.phase !== 'covered' || !portalArrivalReady.current || (current.returning && !sceneSettledRef.current)) return
+    if (!current.returning && PORTAL_COMICS[current.portalId]?.destination === PORTAL_DESTINATIONS.globe && !globeResourceReady.current && !failedExplorationDestinations.current.has(PORTAL_DESTINATIONS.globe)) return
     if (!current.returning && !failedExplorationDestinations.current.has(PORTAL_COMICS[current.portalId]?.destination)) markEarthExplored(current.portalId)
     const next = { ...current, phase: 'revealing' }
     portalCurveRef.current = next
@@ -375,8 +389,27 @@ function App() {
   }
 
   function handlePortalMounted(destination) {
-    if (destination === PORTAL_DESTINATIONS.potion) return
+    if (destination === PORTAL_DESTINATIONS.potion || destination === PORTAL_DESTINATIONS.globe) return
     setPortalReveal(current => current?.destination === destination && !current.ready ? { ...current, ready: true } : current)
+  }
+
+  function handleGlobeReady() {
+    globeResourceReady.current = true
+    failedExplorationDestinations.current.delete(PORTAL_DESTINATIONS.globe)
+    if (screenState === PORTAL_DESTINATIONS.globe && !portalCurveRef.current && !portalReveal) {
+      markEarthExplored('globe')
+    }
+    setPortalReveal(current => current?.destination === PORTAL_DESTINATIONS.globe && !current.ready ? { ...current, ready: true } : current)
+    tryRevealPortalDestination()
+    beginEditionReveal()
+  }
+
+  function handleGlobeError() {
+    globeResourceReady.current = false
+    failedExplorationDestinations.current.add(PORTAL_DESTINATIONS.globe)
+    setPortalReveal(current => current?.destination === PORTAL_DESTINATIONS.globe && !current.ready ? { ...current, ready: true } : current)
+    tryRevealPortalDestination()
+    beginEditionReveal()
   }
 
   function handleWeatherReady() {
@@ -410,10 +443,14 @@ function App() {
     }
     if (destination === 't-comic') return <TComicPage onComplete={() => beginPortalComicTransition('telescope')} onBack={() => returnFromPortal('telescope')} />
     if (destination === PORTAL_DESTINATIONS.globe) {
-      return <GlobeTest onBack={() => returnFromPortal('globe')} />
+      return <GlobeTest onModelReady={handleGlobeReady} onModelError={handleGlobeError} onBack={() => returnFromPortal('globe')} />
     }
     if (destination === PORTAL_DESTINATIONS.telescope) {
-      return <TelescopeTest onBack={() => returnFromPortal('telescope')} />
+      return <TelescopeTest
+        initialEntry={hasEnteredTelescope.current ? 'welcome' : 'intro'}
+        onEntered={markTelescopeEntered}
+        onBack={() => returnFromPortal('telescope')}
+      />
     }
     return <PortalPlaceholderPage onBack={() => returnFromPortal(destination)} />
   }
@@ -455,7 +492,7 @@ function App() {
           {!portalReveal && isPortalPageVisible && <Suspense fallback={null}>
             <DestinationBoundary key={screenState} onError={() => handleDestinationError(screenState)}><PortalPageArrival onMounted={handleDestinationMounted} animate={Boolean(portalCurve) && portalCurve.phase !== 'covering'} onReady={revealPortalDestination}>{renderPortalDestination(screenState === 'globe-test' ? 'globe' : screenState === 'telescope-test' ? 'telescope' : screenState)}</PortalPageArrival></DestinationBoundary>
           </Suspense>}
-          {isSceneVisible && <Suspense fallback={null}><DestinationBoundary key={screenState} onError={() => handleDestinationError(screenState)}><PortalPageArrival onMounted={handleDestinationMounted} animate={Boolean(portalCurve) && portalCurve.phase !== 'covering'} onReady={revealPortalDestination}><BigTest claimWelcome={claimEarthWelcome} checklistReady={sceneReady && comicHomePhase === 'idle' && !portalCurve && !portalReveal} onResourceStatus={handleSceneResourceStatus} onBack={returnToMainPage} returnedFromEntrance={returnedFromEntrance} onPortalSelect={openPortal} onOpenIntroduction={openBigIntroduction} onCloseIntroduction={closeBigIntroduction} visitedBigPortals={visitedBigPortals} hasBigIntroduction={hasBigIntroduction} /></PortalPageArrival></DestinationBoundary></Suspense>}
+          {isSceneVisible && <Suspense fallback={null}><DestinationBoundary key={screenState} onError={() => handleDestinationError(screenState)}><PortalPageArrival onMounted={handleDestinationMounted} animate={Boolean(portalCurve) && portalCurve.phase !== 'covering'} onReady={revealPortalDestination}><BigTest claimWelcome={claimBigFirstEntry} checklistReady={sceneReady && comicHomePhase === 'idle' && !portalCurve && !portalReveal} onResourceStatus={handleSceneResourceStatus} onBack={returnToMainPage} returnedFromEntrance={returnedFromEntrance} onPortalSelect={openPortal} onOpenIntroduction={openBigIntroduction} onCloseIntroduction={closeBigIntroduction} visitedBigPortals={visitedBigPortals} hasBigIntroduction={hasBigIntroduction} /></PortalPageArrival></DestinationBoundary></Suspense>}
       {!isSceneVisible && !isPortalPageVisible && !isTComicScreen && !isPortalComicScreen && <>
         <Header onHome={() => { setHomeRevealed(true); window.scrollTo({top:0,behavior:'smooth'}) }} onExplore={() => editionNavigate('scene')} onStory={() => editionNavigate('comic')} onIndex={() => {setHomeRevealed(true);setIndexSignal(v=>v+1)}} />
         <main

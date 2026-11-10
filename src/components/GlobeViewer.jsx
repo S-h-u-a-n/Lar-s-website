@@ -37,9 +37,9 @@ function disposeObject(root) {
   materials.forEach(material => material.dispose())
 }
 
-function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, interactionDisabled = false, transparent = false }) {
-  const callbacks = useRef({ onSelectionChange, onContinentSelect, onReady })
-  callbacks.current = { onSelectionChange, onContinentSelect, onReady }
+function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, onError, interactionDisabled = false, transparent = false }) {
+  const callbacks = useRef({ onSelectionChange, onContinentSelect, onReady, onError })
+  callbacks.current = { onSelectionChange, onContinentSelect, onReady, onError }
   const controlsRef = useRef(null)
   const disabledRef = useRef(interactionDisabled)
   disabledRef.current = interactionDisabled
@@ -57,7 +57,16 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, interactio
     const scene = new THREE.Scene()
     scene.background = transparent ? null : new THREE.Color(0xfdf9ee)
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 1000)
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: transparent })
+    let renderer
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: transparent })
+    } catch (error) {
+      canvas.remove()
+      setResourceStatus('error')
+      console.error('[GlobeViewer] WebGL initialization failed', error)
+      callbacks.current.onError?.(error)
+      return undefined
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
     renderer.setClearColor(0xfdf9ee, transparent ? 0 : 1)
     renderer.outputColorSpace = THREE.SRGBColorSpace
@@ -84,6 +93,9 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, interactio
     let updateCosmosBillboard
     let frame = 0
     let disposed = false
+    let failed = false
+    let reportedReady = false
+    let renderPrepared = false
     let focusAnimation = null
     let transitionHandoff = null
     let focusedCelestial = null
@@ -91,6 +103,14 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, interactio
     const originalDamping = controls.enableDamping
     let pointerDown = null
     let hoveredCelestial = null
+    const reportFailure = error => {
+      if (disposed || failed) return
+      failed = true
+      controls.enabled = false
+      setResourceStatus('error')
+      console.error('[GlobeViewer] Required globe preparation failed', error)
+      callbacks.current.onError?.(error)
+    }
     const resize = () => {
       const width = host.clientWidth
       const height = host.clientHeight
@@ -101,7 +121,7 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, interactio
       renderer.setSize(width, height, false)
     }
     const render = () => {
-      if (disposed) return
+      if (disposed || failed) return
       if (focusAnimation) {
         const elapsed = performance.now() - focusAnimation.startedAt
         const progress = Math.min(elapsed / CELESTIAL_FOCUS_DURATION, 1)
@@ -137,7 +157,20 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, interactio
         lastHoverCheck = performance.now()
         refreshHover()
       }
-      renderer.render(scene, camera)
+      try {
+        renderer.render(scene, camera)
+      } catch (error) {
+        reportFailure(error)
+        return
+      }
+      if (root && renderPrepared && !reportedReady) {
+        reportedReady = true
+        setResourceStatus('ready')
+        callbacks.current.onReady?.({
+          select: name => { const object = root.getObjectByName(name); if (object && SELECTABLE_CELESTIAL_NAMES.has(name)) focusObject(object) },
+          reset: resetView,
+        })
+      }
       frame = requestAnimationFrame(render)
     }
 
@@ -270,66 +303,68 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, interactio
         disposeObject(gltf.scene)
         return
       }
-      root = gltf.scene
-      const globePreset = MODEL_MATERIAL_PRESETS['globe.glb']
-      applyModelMaterialPreset(root, globePreset)
-      const attachedMaterials = new Set()
-      root.traverse(object => {
-        if (!object.isMesh) return
-        for (const material of [].concat(object.material)) {
-          if (!material) continue
-          if (material.map) {
-            if (attachedMaterials.has(material)) continue
-            attachedMaterials.add(material)
-            const shaderDefaults = globePreset.shaderDefaults[`${object.name} / ${material.name}`]
-            const attachment = attachFinalColorControls(material, shaderDefaults, { includeBuiltIn: true })
-            if (attachment) finalColorAttachments.push(attachment)
+      try {
+        root = gltf.scene
+        const globePreset = MODEL_MATERIAL_PRESETS['globe.glb']
+        applyModelMaterialPreset(root, globePreset)
+        const attachedMaterials = new Set()
+        root.traverse(object => {
+          if (!object.isMesh) return
+          for (const material of [].concat(object.material)) {
+            if (!material) continue
+            if (material.map) {
+              if (attachedMaterials.has(material)) continue
+              attachedMaterials.add(material)
+              const shaderDefaults = globePreset.shaderDefaults[`${object.name} / ${material.name}`]
+              const attachment = attachFinalColorControls(material, shaderDefaults, { includeBuiltIn: true })
+              if (attachment) finalColorAttachments.push(attachment)
+            }
           }
+        })
+        if (import.meta.env.DEV) { setModelEditorViewport(root, { camera, scene, canvas, orbit: controls, render: () => renderer.render(scene, camera) }); setEditorModel(root) }
+        const bounds = new THREE.Box3().setFromObject(root)
+        const center = bounds.getCenter(new THREE.Vector3())
+        const sphere = bounds.getBoundingSphere(new THREE.Sphere())
+        const radius = sphere.radius
+        const verticalFov = THREE.MathUtils.degToRad(camera.fov)
+        // Preserve the established globe framing after expanding the canvas from
+        // the old 48% column to the full page; this does not constrain rendering.
+        const framingAspect = Math.min(camera.aspect, 0.78)
+        const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * framingAspect)
+        const verticalFitDistance = radius / Math.tan(verticalFov / 2)
+        const horizontalFitDistance = radius / Math.tan(horizontalFov / 2)
+        const fitDistance = Math.max(verticalFitDistance, horizontalFitDistance)
+        const framingFactor = 0.60
+        const distance = fitDistance * framingFactor
+        controls.target.copy(center)
+        camera.position.copy(center).add(new THREE.Vector3(1, 0, 0).multiplyScalar(distance))
+        camera.lookAt(center)
+        camera.near = Math.max(0.1, radius / 100)
+        camera.far = Math.max(1000, distance + radius * 4)
+        camera.updateProjectionMatrix()
+        controls.minDistance = Math.max(radius * 0.55, 0.1)
+        controls.maxDistance = radius * 5
+        controls.update()
+        initialView = {
+          cameraPosition: camera.position.clone(),
+          target: controls.target.clone(),
+          minDistance: controls.minDistance,
+          maxDistance: controls.maxDistance,
+          near: camera.near,
+          far: camera.far,
         }
-      })
-      if (import.meta.env.DEV) { setModelEditorViewport(root, { camera, scene, canvas, orbit: controls, render: () => renderer.render(scene, camera) }); setEditorModel(root) }
-      const bounds = new THREE.Box3().setFromObject(root)
-      const center = bounds.getCenter(new THREE.Vector3())
-      const sphere = bounds.getBoundingSphere(new THREE.Sphere())
-      const radius = sphere.radius
-      const verticalFov = THREE.MathUtils.degToRad(camera.fov)
-      // Preserve the established globe framing after expanding the canvas from
-      // the old 48% column to the full page; this does not constrain rendering.
-      const framingAspect = Math.min(camera.aspect, 0.78)
-      const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * framingAspect)
-      const verticalFitDistance = radius / Math.tan(verticalFov / 2)
-      const horizontalFitDistance = radius / Math.tan(horizontalFov / 2)
-      const fitDistance = Math.max(verticalFitDistance, horizontalFitDistance)
-      const framingFactor = 0.60
-      const distance = fitDistance * framingFactor
-      controls.target.copy(center)
-      camera.position.copy(center).add(new THREE.Vector3(1, 0, 0).multiplyScalar(distance))
-      camera.lookAt(center)
-      camera.near = Math.max(0.1, radius / 100)
-      camera.far = Math.max(1000, distance + radius * 4)
-      camera.updateProjectionMatrix()
-      controls.minDistance = Math.max(radius * 0.55, 0.1)
-      controls.maxDistance = radius * 5
-      controls.update()
-      initialView = {
-        cameraPosition: camera.position.clone(),
-        target: controls.target.clone(),
-        minDistance: controls.minDistance,
-        maxDistance: controls.maxDistance,
-        near: camera.near,
-        far: camera.far,
+        scene.add(root)
+        // Initial framing is already captured; Marker bounds must never affect it.
+        markers = callbacks.current.onContinentSelect ? createContinentMarkers(root) : null
+        updateCosmosBillboard = createCosmosBillboard(root)
+        renderer.compileAsync(scene, camera).then(() => {
+          if (!disposed && !failed) renderPrepared = true
+        }).catch(reportFailure)
+      } catch (error) {
+        reportFailure(error)
       }
-      scene.add(root)
-      // Initial framing is already captured; Marker bounds must never affect it.
-      markers = callbacks.current.onContinentSelect ? createContinentMarkers(root) : null
-      setResourceStatus('ready')
-      callbacks.current.onReady?.({
-        select: name => { const object = root.getObjectByName(name); if (object && SELECTABLE_CELESTIAL_NAMES.has(name)) focusObject(object) },
-        reset: resetView,
-      })
-      updateCosmosBillboard = createCosmosBillboard(root)
     }, undefined, error => {
-      if (!disposed) {setResourceStatus('error');console.error('[GlobeViewer] globe.glb failed to load', error)}
+      reportFailure(error)
     })
     frame = requestAnimationFrame(render)
     return () => {
@@ -359,7 +394,7 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, interactio
 
   return <>
     <div ref={hostRef} className="globe-viewer" aria-label="Interactive globe model" />
-    <ResourceStatus status={resourceStatus} label="天體模型" onRetry={()=>setRetry(v=>v+1)} />
+    <ResourceStatus status={resourceStatus} label="天體模型" showLoading={false} onRetry={()=>{ setResourceStatus('loading'); setRetry(v=>v+1) }} />
     {import.meta.env.DEV && editorModel && <ModelMaterialEditor pageId="globe-test" model={editorModel} modelName="globe.glb" batchDefaults={MODEL_MATERIAL_PRESETS['globe.glb'].batch} batchColorMode="finalColor" shaderDefaults={MODEL_MATERIAL_PRESETS['globe.glb'].shaderDefaults} />}
   </>
 }

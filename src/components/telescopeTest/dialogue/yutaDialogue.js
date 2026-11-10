@@ -108,7 +108,7 @@ export const YUTA_DIALOGUE = {
         "id": "hint-collection-1",
         "group": "hint-collection",
         "text": "如果有感興趣的地方，可以先記下來喔，會記錄在左上角的Log裡。\n下次想再看看時，就不用重新尋找了。",
-        "motion": "對話"
+        "motion": "開心"
       }
     ]
   },
@@ -122,7 +122,7 @@ export const YUTA_DIALOGUE = {
         "id": "random-1",
         "group": "random",
         "text": "又想試試運氣了嗎？",
-        "motion": "對話-開心"
+        "motion": "開心"
       },
       {
         "id": "random-2",
@@ -140,7 +140,7 @@ export const YUTA_DIALOGUE = {
         "id": "random-4",
         "group": "random",
         "text": "世界這麼大，總會有些意想不到的發現吧？",
-        "motion": "對話"
+        "motion": "感興趣"
       }
     ]
   },
@@ -155,7 +155,7 @@ export const YUTA_DIALOGUE = {
         "id": "random-milestone-5-1",
         "group": "random-milestone-5",
         "text": "還沒找到滿意的地方嗎？",
-        "motion": "對話"
+        "motion": "感興趣"
       }
     ]
   },
@@ -200,7 +200,7 @@ export const YUTA_DIALOGUE = {
         "id": "favorite-5-1",
         "group": "favorite-5",
         "text": "喔？看來你感興趣的地方不少呢\n呵呵，照這個速度，說不定很快就能整理出一份自己的觀測紀錄了。",
-        "motion": "對話"
+        "motion": "感興趣"
       }
     ]
   },
@@ -279,7 +279,7 @@ export const YUTA_DIALOGUE = {
         "id": "chat-2-3",
         "group": "chat-2",
         "text": "如果某位副會長也能再努努力就好啦～",
-        "motion": null
+        "motion": "開心"
       }
     ]
   },
@@ -317,7 +317,7 @@ export const YUTA_DIALOGUE = {
         "id": "chat-3-5",
         "group": "chat-3",
         "text": "如果只是問我想不想參加，那答案當然是想囉。",
-        "motion": "對話-開心"
+        "motion": "感興趣"
       }
     ]
   },
@@ -413,7 +413,7 @@ export const YUTA_DIALOGUE = {
         "id": "chat-6-4",
         "group": "chat-6",
         "text": "不過那兩個人居然會在這種事情上達成共識，倒也挺難得的。",
-        "motion": "對話-開心"
+        "motion": "開心"
       },
       {
         "id": "chat-6-5",
@@ -433,7 +433,7 @@ export const YUTA_DIALOGUE = {
         "id": "chat-7-1",
         "group": "chat-7",
         "text": "說起來，里德真是個可靠的副會長呢。\n我不在學院的這段時間，學生會的工作幾乎都交給他了。",
-        "motion": "對話"
+        "motion": "開心"
       },
       {
         "id": "chat-7-2",
@@ -445,7 +445,7 @@ export const YUTA_DIALOGUE = {
         "id": "chat-7-3",
         "group": "chat-7",
         "text": "等我回去以後，得好好感謝他才行",
-        "motion": "對話-笑容"
+        "motion": "感興趣"
       }
     ]
   },
@@ -471,7 +471,7 @@ export const YUTA_DIALOGUE = {
         "id": "chat-8-3",
         "group": "chat-8",
         "text": "呵呵，真相有時候比傳聞還要普通呢",
-        "motion": "對話-開心"
+        "motion": "開心"
       }
     ]
   },
@@ -497,7 +497,7 @@ export const YUTA_DIALOGUE = {
         "id": "chat-9-3",
         "group": "chat-9",
         "text": "真是不可思議啊～",
-        "motion": null
+        "motion": "開心"
       }
     ]
   },
@@ -555,7 +555,7 @@ export const YUTA_DIALOGUE = {
         "id": "chat-11-3",
         "group": "chat-11",
         "text": "不過，既然笑容能讓人比較容易親近，那也沒什麼不好吧？",
-        "motion": "對話-開心"
+        "motion": "開心"
       },
       {
         "id": "chat-11-4",
@@ -605,7 +605,7 @@ export const YUTA_DIALOGUE = {
         "id": "chat-12-6",
         "group": "chat-12",
         "text": "不過，如果所有事情都按照預定的方向發展，那觀察起來反而沒什麼意思了吧。",
-        "motion": "對話-開心"
+        "motion": "感興趣"
       },
       {
         "id": "chat-12-7",
@@ -637,7 +637,7 @@ export const YUTA_DIALOGUE = {
         "id": "chat-13-3",
         "group": "chat-13",
         "text": "看來無論有沒有魔法，大家都不太願意接受「做不到」這個答案啊，哈哈。",
-        "motion": "對話-開心"
+        "motion": "開心"
       }
     ]
   },
@@ -663,7 +663,7 @@ export const YUTA_DIALOGUE = {
         "id": "chat-14-3",
         "group": "chat-14",
         "text": "原本還以為自己只是來幫忙做台望遠鏡的呢，\n沒想到意外的有趣呀～",
-        "motion": "對話-笑容"
+        "motion": "開心"
       },
       {
         "id": "chat-14-4",
