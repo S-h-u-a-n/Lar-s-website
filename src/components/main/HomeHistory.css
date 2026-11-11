@@ -57,7 +57,7 @@
 .hh-detail-scroll ul { list-style:none; padding:0; border-top:1px solid #987d4c28; }
 .hh-detail-scroll li { position:relative; padding:10px 0 10px 19px; margin:0; border-bottom:1px solid #987d4c28; line-height:1.8; }
 .hh-detail-scroll li::before { content:'◇'; position:absolute; left:0; color:#b38f79; font-size:10px; }
-.hh-detail-scroll h4 { color:#748578; font-size:10px; letter-spacing:.08em; }
+.hh-detail-scroll h4 { color:inherit; font-size:10px; letter-spacing:.08em; }
 .hh-summary { line-height:1.9; margin-bottom:17px; }
 .hh-sources { display:block; border-top:1px dashed #987d4c40; padding-top:12px; }
 .hh-sources summary { cursor:pointer; width:fit-content; font-size:10px; color:#688d7d; }
@@ -121,3 +121,5 @@
 
 /* Same alpha-following drop shadow and scaled parameters as the entry figures. */
 .hh-person-button img, .hh-observed-person { filter: drop-shadow(var(--hh-person-shadow)); }
+
+.hh-research-section .hh-explanation { margin-bottom: 22px; }

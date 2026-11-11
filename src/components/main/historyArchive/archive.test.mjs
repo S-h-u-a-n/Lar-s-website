@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
-import { makeStripLayout, maskHit, nearestRecord } from './layout.js'
+import { adjacentRecord, makeStripLayout, maskHit, nearestRecord } from './layout.js'
 
 const placements = JSON.parse(readFileSync(new URL('../../../dev/history/placements.json', import.meta.url))).filter(item=>item.id.startsWith('people-')).sort((a,b)=>Number(a.id.split('-')[1])-Number(b.id.split('-')[1]))
 const geometry = JSON.parse(readFileSync(new URL('../../../dev/history/interactionGeometry.json', import.meta.url)))
@@ -40,13 +40,37 @@ test('all opaque silhouettes share a visual height and baseline without stretchi
     assert.equal(nearestRecord(layout.items,layout.items[7].x+layout.items[7].width/2),7)
   }
 })
+test('left and right neighbors follow actual horizontal positions, including visual edges',()=>{
+  const items=[{x:200,width:20},{x:0,width:20},{x:100,width:20}]
+  assert.equal(adjacentRecord(items,2,'left'),1)
+  assert.equal(adjacentRecord(items,2,'right'),0)
+  assert.equal(adjacentRecord(items,1,'left'),null)
+  assert.equal(adjacentRecord(items,0,'right'),null)
+  assert.equal(adjacentRecord(items,-1,'left'),null)
+
+  const layout=makeStripLayout(placements)
+  assert.equal(adjacentRecord(layout.items,8,'left'),9)
+  assert.equal(adjacentRecord(layout.items,8,'right'),7)
+  assert.equal(adjacentRecord(layout.items,placements.length-1,'left'),null)
+  assert.equal(adjacentRecord(layout.items,0,'right'),null)
+})
 test('every era has explanatory sections, source notes and distinct Wikipedia references',()=>{
   const sources=JSON.parse(readFileSync(new URL('./sources.json',import.meta.url)))
   for(const record of records){
-    assert.ok(record.summary.length<125)
-    for(const field of ['background','significance','detail','sourceNote'])assert.ok(record[field]?.length>20,`${record.id}: missing ${field}`)
+    assert.ok(record.summary.length > 0)
+    for(const text of [record.summary,record.sourceNote,...record.sections.flatMap(section=>section.paragraphs)]) assert.doesNotMatch(text,/[；;]/)
+    assert.ok(record.sourceNote.length > 20)
+    assert.ok(record.sections.length >= 4 && record.sections.length <= 6)
+    assert.equal(new Set(record.sections.map(section=>section.title)).size,record.sections.length)
+    for (const section of record.sections) {
+      assert.ok(section.title && section.paragraphs.length)
+      assert.ok(section.paragraphs.every(text=>text.length>30))
+      assert.ok(section.sources.length>0)
+      assert.ok(section.sources.every(id=>record.sources.includes(id)))
+    }
+    assert.deepEqual(record.sources,[...new Set(record.sections.flatMap(section=>section.sources))])
+    for(const field of ['background','developments','significance','detail'])assert.equal(record[field],undefined)
     assert.match(record.verifiedAt,/^\d{4}-\d{2}-\d{2}$/)
-    assert.ok(record.developments.length>=2&&record.developments.length<=3)
     assert.ok(record.sources.length>0)
     for(const key of record.sources){
       assert.ok(sources[key][0].includes('Wikipedia'))
@@ -54,6 +78,7 @@ test('every era has explanatory sections, source notes and distinct Wikipedia re
     }
   }
   assert.equal(new Set(records.map(record=>record.sources[0])).size,records.length)
+  assert.deepEqual([...new Set(records.map(record=>record.sections.length))].sort(),[4,5,6])
 })
 test('transparent padding cannot select a person; opaque pixels do at different sizes',()=>{
   const geometry={maskWidth:2,maskHeight:2},bits=Uint8Array.of(0b01000000)

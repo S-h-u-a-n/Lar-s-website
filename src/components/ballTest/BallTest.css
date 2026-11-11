@@ -5,7 +5,7 @@
 .ball-test button:hover { background: var(--ball-yellow); }
 .ball-test button:focus-visible { outline: 3px solid var(--ball-teal); outline-offset: 3px; }
 .ball-header { position: absolute; inset: 0 0 auto; z-index: 5; display: flex; align-items: center; gap: 24px; padding: 16px 28px; flex-wrap: wrap; border-bottom: 2px solid var(--ball-teal); background: var(--ball-cream); height: 126px; }
-.ball-header h1 { font: 400 clamp(28px, 3vw, 44px)/1.1 var(--display); margin: 0; }
+.ball-header h1 { position: absolute; left: 50%; transform: translateX(-50%); font: 400 clamp(28px, 3vw, 44px)/1.1 var(--display); margin: 0; }
 .ball-header nav { display: flex; gap: 8px; overflow-x: auto; margin-left: auto; max-width: 100%; }
 .ball-header nav button { flex-shrink: 0; font-size: 12px; }
 .ball-header nav button[aria-pressed=true] { background: var(--ball-pink); }
@@ -37,6 +37,10 @@
 .ball-background i { position: absolute; width: 170px; height: 170px; background: var(--ball-yellow); left: -65px; top: 30%; transform: rotate(25deg); }
 .ball-background i:nth-child(2) { left: auto; right: -60px; top: 30%; background: repeating-linear-gradient(-45deg,var(--ball-mint) 0 14px,transparent 14px 20px); }
 .ball-background i:nth-child(3) { width: 35%; height: 35%; left: 32%; top: 40%; background: radial-gradient(circle,var(--ball-pink) 2px,transparent 2.5px) 0 0 / 18px 18px; transform: none; opacity: .4; }
+.ball-background i[data-floating-square] { translate: calc(var(--ball-float-x,0px) + var(--pointer-x,0) * var(--ball-pointer-gain-x,4px)) calc(var(--ball-float-y,0px) + var(--pointer-y,0) * var(--ball-pointer-gain-y,4px)); will-change: translate; }
+.ball-background .ball-background-mint { width: clamp(42px,5vw,68px); height: clamp(42px,5vw,68px); left: 28%; top: 34%; background: var(--ball-mint); transform: rotate(-15deg); opacity: .72; }
+.ball-background .ball-background-pink-stripes { width: clamp(48px,5.2vw,72px); height: clamp(48px,5.2vw,72px); left: 69%; top: 37%; background: repeating-linear-gradient(45deg,var(--ball-pink) 0 8px,var(--ball-cream) 8px 12px); transform: rotate(14deg); opacity: .75; }
+.ball-background .ball-background-blue-grid { width: clamp(44px,4.5vw,62px); height: clamp(44px,4.5vw,62px); left: 25%; top: 44%; background-color: var(--ball-cream); background-image: linear-gradient(var(--ball-blue) 1px,transparent 1px),linear-gradient(90deg,var(--ball-blue) 1px,transparent 1px); background-size: 10px 10px; transform: rotate(-9deg); opacity: .72; }
 .ball-modal { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: 24px; background: rgba(255,254,248,.72); backdrop-filter: blur(8px); }
 .ball-work-dialog { width: min(1000px, 94vw); max-height: 90vh; display: flex; flex-direction: column; background: var(--ball-panel); border: 2px solid var(--ball-mint); border-radius: 30px; overflow: hidden; }
 .ball-work-dialog header { flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; background: radial-gradient(circle,var(--ball-pink) 2px,transparent 2.5px) 0 0 / 18px 18px; }
@@ -50,7 +54,7 @@
 @keyframes ball-message { from { opacity: 0; translate: 0 4px; } to { opacity: 1; translate: 0 0; } }
 @media (max-width: 1200px) { .ball-header { gap: 12px; height: 126px; } .ball-header nav { width: 100%; justify-content: center; } }
 @media (max-height: 620px) { .ball-header { height: 90px; padding: 8px 20px; gap: 6px 18px; } .ball-header h1 { font-size: 28px; } .ball-header nav button { padding: 7px 14px; font-size: 10px; } .ball-stage { top: 90px; } .ball-selector { bottom: 135px; top: 8px; gap: 5px; } .ball-dialogue { height: 120px; bottom: 8px; } .ball-test .ball-dialogue { padding: 10px 18px; gap: 5px; } .ball-speaker { font-size: 18px; } .ball-arrow { padding: 6px 15px; } }
-@media (prefers-reduced-motion: reduce) { .ball-test *, .ball-test *::before { animation: none!important; transition: none!important; } }
+@media (prefers-reduced-motion: reduce) { .ball-test *, .ball-test *::before { animation: none!important; transition: none!important; }.ball-background i[data-floating-square] { translate: none; will-change: auto; } }
 body:has(.ball-test) .dev-editor-launcher { z-index: 10030; }
 body:has(.ball-test) .text-editor-panel { z-index: 10020; }
 body:has(.ball-test) .text-draft-layer { z-index: 10010; }
@@ -59,3 +63,32 @@ body:has(.ball-test) .orientation-prompt { z-index: 10040; }
 .ball-dialogue-message { min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
 .ball-cover-window { user-select: none; }
 .ball-work-scroll { min-height: 0; }
+
+/* Portrait slots use a separate class from legacy paper standees and their !important rules. */
+.ball-portrait { position:absolute; top:25px; bottom:183px; width:23%; pointer-events:none; overflow:visible; z-index:2; transform-origin:bottom center; animation:ball-arrive 600ms var(--ball-ease) both; }
+.ball-portrait-left { left:5%; }
+.ball-portrait-right { right:5%; }
+.ball-portrait-float { position:absolute; inset:0; width:100%; height:100%; transform:rotate(calc(var(--pointer-x) * 1deg)); transform-origin:bottom center; }
+/* Both slots keep Tivbo's accepted idle motion; dialogue must not add a second rotation. */
+.ball-portrait-scene { display:block; width:100%; height:100%; overflow:visible; }
+.ball-portrait-pattern { opacity:.88; }
+.ball-portrait-status { position:absolute; left:10%; right:10%; top:50%; text-align:center; font:11px/1.6 var(--body); }
+.ball-test .ball-portrait-retry { pointer-events:auto; position:absolute; top:48%; left:10%; width:80%; font-size:11px; }
+.ball-character-dev { position:fixed; left:12px; bottom:12px; z-index:10050; max-width:340px; max-height:70dvh; overflow:auto; padding:8px 12px; background:#fffef8f5; border:1px solid #34465a66; font:12px/1.6 var(--sans); }
+.ball-character-dev summary { cursor:pointer; }
+.ball-character-dev fieldset { margin:8px 0; display:flex; gap:12px; border:1px solid #34465a33; }
+.ball-character-dev label { display:grid; gap:4px; }
+.ball-character-dev select { max-width:155px; padding:4px; }
+@media(max-height:680px) { .ball-portrait { top:15px; bottom:166px; } }
+@media(prefers-reduced-motion:reduce) { .ball-portrait, .ball-portrait-float, .ball-portrait-pattern { animation:none!important; transform:none!important; translate:none; rotate:none; } }
+
+/* Ball dialogue is one shared bubble. Its upper tail follows the current speaker. */
+body .ball-test button.ball-dialogue { border-radius:24px; overflow:visible; gap:6px; }
+.ball-dialogue .ball-speaker { line-height:1.15; }
+.ball-dialogue::after { content:""; position:absolute; left:15%; top:-11px; bottom:auto; width:20px; height:20px; transform:skewX(18deg) rotate(45deg); background:inherit; border-left:1px solid var(--edition-line, #34465a33); border-top:1px solid var(--edition-line, #34465a33); border-radius:4px 0 0 0; pointer-events:none; }
+.ball-dialogue[data-speaker=lar]::after { left:auto; right:15%; transform:skewX(-18deg) rotate(45deg); }
+@media(max-height:620px) { .ball-dialogue::after { width:14px; height:14px; top:-8px; } }
+.ball-character-dev { max-width:min(340px, calc(100vw - 24px)); }
+
+body .ball-test .ball-header button.ball-back { padding:0 0 4px; border:0; border-bottom:1px solid currentColor; border-radius:0; background:transparent; box-shadow:none; }
+.ball-test > .ball-page > .ball-credit { position:absolute; bottom:7px; left:50%; transform:translateX(-50%); z-index:7; white-space:nowrap; }

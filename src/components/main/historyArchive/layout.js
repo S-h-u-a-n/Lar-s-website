@@ -23,3 +23,18 @@ export function nearestRecord(items, center) {
   items.forEach((item, index) => { const next = Math.abs(item.x + item.width / 2 - center); if (next < distance) { best = index; distance = next } })
   return best
 }
+export function adjacentRecord(items, index, direction) {
+  const current = items[index]
+  if (!current) return null
+  const center = current.x + current.width / 2
+  let adjacent = null, distance = Infinity
+  items.forEach((item, candidate) => {
+    const offset = item.x + item.width / 2 - center
+    const isInDirection = direction === 'left' ? offset < 0 : offset > 0
+    if (isInDirection && Math.abs(offset) < distance) {
+      adjacent = candidate
+      distance = Math.abs(offset)
+    }
+  })
+  return adjacent
+}

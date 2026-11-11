@@ -4,8 +4,8 @@
 
 ## 資料與素材
 
-- `records.json`：18 個時代的年代、區域、概述、時代背景、兩項發展、歷史意義、查證細節與來源 ID／來源備註；可加 `name` 覆寫主頁名稱，或 `illustrationNote` 註明素材待確認處。
-- `sources.json`：本次逐一查閱的 23 篇 Wikipedia 條目（含太空競賽、Oldowan、阿法南方古猿、哥倫布大交換與數位落差），含可點擊網址與中英文條目名稱。查閱日期：2026-11-06。各份詳情底部可展開參考資料。
+- `records.json`：18 個時代的年代、區域、概述與可變長度的 `sections`。各分類包含 `title`、`paragraphs` 與 `sources`（條目 ID）；時代層級的 `sources` 是各分類來源依出現順序去重的清單。目前使用 4、5、6 個分類，渲染不限制分類或段落數量。正文於2026-11-11全面擴寫，補充背景、制度運作、生活及變遷，未設字數上限，不使用中英文分號。
+- `sources.json`：實際查閱的 Wikipedia 總覽與專題條目，包含中英文名稱及連結。查閱日期：2026-11-11。各分類的來源 ID 保留在資料中；`references.js` 依條目網址彙整去重（忽略章節、查詢參數、行動版網域、空格／底線及編碼差異），底部統一展開參考資料與範圍說明，連結保留原網址。
 - `data.js`：組合進站既有標籤、定位、透明命中遮罩與 Vite 素材 URL。
 - 18 張原始 `Art/IntroScreen/history/people-1.PNG`～`people-18.PNG` 均為 2109×2984，未重繪、裁切、拉伸、鏡射或覆寫。
 
@@ -24,7 +24,7 @@
 
 ## 詳情轉場
 
-`HistoryObservation.jsx`：修正首次 AnimatePresence initial=false 抑制起點的問題。原位框、旋轉、縮放、透視與腳底支點一起量測並保留；背景姿態暫停，同一 motion image 往返來源與左側目標。切換時原圖預載，人物旁的三角與文字導覽同步設定首尾邊界。詳情保持同一固定展示區，右側可獨立捲動，Escape 收起。背景 inert，長卷位置與主頁捲動位置保留。
+`HistoryObservation.jsx`：修正首次 AnimatePresence initial=false 抑制起點的問題。原位框、旋轉、縮放、透視與腳底支點一起量測並保留；背景姿態暫停，同一 motion image 往返來源與左側目標。切換依人物實際水平位置尋找左右鄰者，並預載相鄰插畫；人物旁的三角與文字導覽依畫面位置設定首尾邊界。詳情保持同一固定展示區，右側可獨立捲動，Escape 收起。背景 inert，長卷位置與主頁捲動位置保留。
 
 拖曳、觸控板水平滑動、Shift＋滾輪、進度滑桿、年代索引與探索按鈕沿用。普通垂直滾輪仍可捲動主頁。拖曳 6px 門檻與 350ms click 抑制避免誤開。
 
@@ -57,3 +57,9 @@
 `../HomeGeometry.jsx` 保留既有SVG路徑與區塊定位，在重新量測時依路徑弧長採樣769個實際y座標。`../scrollPathMap.js` 用單調回歸處理角色區迴圈的向上回折，再以少量弧長分量展開平台區間，採單調三次插值讓段落間速率連續。
 
 每次scroll只排程一次RAF，以目前視窗82%高度對應路徑，不再使用整頁百分比的1.7次方或90ms追趕延遲。頁面ResizeObserver和resize會重新建立映射，往上捲動沿同一映射返回；不修改人物動畫、主頁其他區塊外觀或原始插畫。筆端位置可從`.home-geometry`的`data-tip-y`（視窗座標）與`data-draw-mapped`檢查。
+
+## 長文閱讀檢查
+
+閱讀區沿用 flex:1、min-height:0 與 overflow-y:auto，正文按 paragraphs 逐段渲染，未設行數截斷或固定正文高度。底部導覽位於捲動區之外。
+
+`node --test src/components/main/historyArchive/*.test.mjs src/dev/history/interactions.test.mjs` 檢查全部正文段落、18個時代的底部去重來源、分號規則與既有互動。渲染測試採獨立暫存目錄，避免影響開發預覽的相依套件快取。

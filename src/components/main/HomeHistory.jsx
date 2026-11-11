@@ -139,7 +139,7 @@ export default function HomeHistory() {
         </div>
         <div className="hh-edge-label" aria-hidden="true">← 朝向更近的年代</div>
       </div>
-      {selection && <HistoryObservation selection={selection} size={size} closing={closing} originFor={originFor} onClose={close} onChange={changeRecord} onClosed={()=>{setSelection(null);setClosing(false);requestAnimationFrame(()=>opener.current?.focus({preventScroll:true}))}}/>}
+      {selection && <HistoryObservation selection={selection} items={layout.items} size={size} closing={closing} originFor={originFor} onClose={close} onChange={changeRecord} onClosed={()=>{setSelection(null);setClosing(false);requestAnimationFrame(()=>opener.current?.focus({preventScroll:true}))}}/>}
     </div>
     <div className="hh-navigation" inert={Boolean(selection)}><button type="button" onClick={()=>jump(Math.min(HISTORY_RECORDS.length-1,current+2))} aria-label="向較近的年代探索"><span className="hh-explore-triangle" aria-hidden="true">◀</span></button><div className="hh-progress"><label htmlFor="hh-progress">{String(current+1).padStart(2,'0')} / {HISTORY_RECORDS.length} <span>{HISTORY_RECORDS[current].name}</span></label><input ref={range} id="hh-progress" type="range" min="0" max="100" step=".1" defaultValue="0" dir="rtl" aria-label="探索歷史長卷的進度" onChange={event=>{const max=viewport.current.scrollWidth-viewport.current.clientWidth;viewport.current.scrollLeft=max*(1-Number(event.target.value)/100)}}/></div><button type="button" onClick={()=>jump(Math.max(0,current-2))} aria-label="向較早的年代探索"><span className="hh-explore-triangle" aria-hidden="true">▶</span></button><p>拖曳長卷 · 橫向滑動 · Shift＋滾輪<br/><span>點擊人物就可以查看大家整理出的資料喔！</span></p></div>
     <p className="hh-context">各時期與地區的發展可能重疊，圖示間距不代表實際時間比例。</p>
