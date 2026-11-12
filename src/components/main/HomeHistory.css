@@ -1,4 +1,5 @@
-.home-history { position: relative; z-index: 1; padding: 35px 5vw 60px; color: var(--edition-ink); }
+.home-history { position: relative; z-index: 1; isolation: isolate; padding: 35px 5vw 60px; color: var(--edition-ink); }
+.hh-heading, .hh-display-mat, .hh-load-error { position: relative; z-index: 1; }
 .hh-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 35px; border-top: 1px solid var(--edition-line); padding-top: 36px; margin-bottom: 30px; }
 .hh-heading .edition-kicker { margin: 0 0 20px; font-size: 9px; }.hh-heading h2 { font: 400 clamp(32px,3.3vw,52px)/1.25 var(--body); letter-spacing: .03em; }.hh-heading h2 em { display: block; margin-top: 12px; font: 400 clamp(16px,1.6vw,23px)/1.6 var(--body); color: #688d7d; }
 .hh-heading-note { text-align: right; flex-shrink: 0; }.hh-heading-note p { font: 12px/1.9 var(--body); color: #7d857c; margin: 0 0 15px; }.hh-heading-note label { font: 10px var(--body); }.hh-heading-note select { margin-left: 10px; max-width: 230px; padding: 8px 12px; color: inherit; background: #fffef8; border: 1px solid var(--edition-line); border-radius: 6px; font: 11px var(--body); }
@@ -77,6 +78,7 @@
 }
 .home-history .hh-colour-notes.home-geometry-swatches i { width:20px; }
 .hh-heading-title { gap:25px; }
+.hh-heading-annotation { flex: 0 1 310px; max-width: 310px; margin: 0 0 4px; color: #748578; font: 10px/1.8 var(--body); }
 /* Hero illustration frame / Explore's turned page corner, with the same flat offset shadow. */
 .hh-scroll-label { background:var(--edition-nav-banner); border-color:var(--edition-line); border-radius:0 32px 0 0; padding-inline:20px 26px; }
 .hh-stage { background:var(--edition-white); border-color:var(--edition-line); border-top-color:#34465a20; border-radius:0; box-shadow:8px 10px 0 #A2D8DE42; }
@@ -95,11 +97,14 @@
   .home-history .hh-colour-notes.home-geometry-swatches { grid-template-columns:repeat(2,17px); gap:9px; margin-right:0; }
   .home-history .hh-colour-notes.home-geometry-swatches i { width:17px; }
   .hh-heading-title { gap:19px; }
+  .hh-heading-annotation { flex-basis: 240px; max-width: 240px; font-size: 9px; }
 }
 @media(max-width:600px) {
   .home-history .hh-colour-notes.home-geometry-swatches { grid-template-columns:repeat(2,12px); gap:8px; }
   .home-history .hh-colour-notes.home-geometry-swatches i { width:12px; }
   .hh-heading-title { gap:15px; }
+  .hh-heading-title { flex-wrap:wrap; }
+  .hh-heading-annotation { flex: 1 1 calc(100% - 35px); max-width:none; margin: 0 0 0 27px; font-size: 10px; }
   .hh-scroll-label { border-top-right-radius:24px; }
   .hh-stage { box-shadow:5px 7px 0 #A2D8DE42; }
   .hh-stage-dots { display:none; }
@@ -123,3 +128,37 @@
 .hh-person-button img, .hh-observed-person { filter: drop-shadow(var(--hh-person-shadow)); }
 
 .hh-research-section .hh-explanation { margin-bottom: 22px; }
+
+.hh-ending { position: absolute; top: 0; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 12px; color: var(--edition-ink); }
+.hh-ending p { margin: 0; font: 13px/1.8 var(--body); }
+.hh-ending p:first-child { margin-bottom: 10px; font: 400 26px/1.35 var(--display); color: #688d7d; }
+
+/* Native modal layer keeps the roll's dimensions and scroll position intact. */
+.hh-reflection { position: fixed; inset: 0; box-sizing: border-box; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 24px; border: 0; background: transparent; color: var(--edition-ink); overflow: hidden; }
+.hh-reflection[open] { display: grid; place-items: center; }
+.hh-reflection::backdrop { background: #34465a80; animation: hh-reflection-shade-in 480ms ease-out both; }
+.hh-reflection-panel { position: relative; isolation: isolate; box-sizing: border-box; width: min(640px, 100%); max-height: calc(100dvh - 48px); padding: 30px clamp(20px, 4vw, 36px); overflow-y: auto; overscroll-behavior: contain; border: 1px solid var(--edition-line); border-radius: 18px 30px 18px 18px; background: var(--edition-paper); box-shadow: 7px 9px 0 #A2D8DE70, 0 16px 48px #34465a24; animation: hh-reflection-in 480ms cubic-bezier(.2,.7,.2,1) both; }
+.hh-reflection-panel::before, .hh-reflection-panel::after { content: ''; position: absolute; z-index: -1; pointer-events: none; }
+.hh-reflection-panel::before { top: 0; right: 0; width: 110px; height: 100px; border-radius: 0 28px 0 60px; background: radial-gradient(circle, #688d7d55 1px, transparent 1.5px) 0 0 / 10px 10px, #A2D8DE38; }
+.hh-reflection-panel::after { bottom: 0; left: 0; width: 78px; height: 62px; border-radius: 0 24px 0 16px; background: linear-gradient(#f08fad22 1px, transparent 1px) 0 0 / 12px 12px, linear-gradient(90deg, #f08fad22 1px, transparent 1px) 0 0 / 12px 12px, #ffdcc930; }
+.hh-reflection-image { margin: 0 0 22px; }
+.hh-reflection-image img { display: block; width: 100%; height: auto; border-radius: 14px; }
+.hh-reflection-copy { position: relative; font: 14px/1.95 var(--body); }
+.hh-reflection-copy p { margin: 0 0 18px; }
+.hh-reflection-copy p:last-child { margin-bottom: 0; }
+.hh-reflection[data-closing=true] .hh-reflection-panel { animation: hh-reflection-out 300ms ease-in both; pointer-events: none; }
+.hh-reflection[data-closing=true]::backdrop { animation: hh-reflection-shade-out 300ms ease-in both; }
+@keyframes hh-reflection-in { from { opacity: 0; transform: translateY(8px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes hh-reflection-out { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(5px) scale(.97); } }
+@keyframes hh-reflection-shade-in { from { background: #34465a00; } to { background: #34465a80; } }
+@keyframes hh-reflection-shade-out { from { background: #34465a80; } to { background: #34465a00; } }
+@media(max-width:600px) {
+  .hh-ending p:first-child { font-size: 24px; }
+  .hh-reflection { padding: 18px; }
+  .hh-reflection-panel { max-height: calc(100dvh - 36px); padding: 24px 20px; }
+  .hh-reflection-copy { font-size: 13px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .hh-reflection-panel, .hh-reflection[data-closing=true] .hh-reflection-panel { animation-duration: 1ms; transform: none; }
+  .hh-reflection::backdrop, .hh-reflection[data-closing=true]::backdrop { animation-duration: 1ms; }
+}

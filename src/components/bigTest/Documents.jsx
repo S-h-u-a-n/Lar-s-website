@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { markEarthExplored } from './earthExplorationStore'
-import squares from '../../../Art/Big/Big-decoration/Big-squares.PNG'
-import { DOCUMENTS, DOCUMENT_ENTRANCES, GEOMETRY, SQUARES, PANEL_PATTERN, documentFloatingStyle } from './config'
+import { DOCUMENTS, DOCUMENT_ENTRANCES, documentPanelTheme, GEOMETRY, PANEL_PATTERN, documentFloatingStyle } from './config'
 import { patternStyle } from './Background'
-import AssetCrop from './AssetCrop'
+import DocumentOverlay from './DocumentOverlay'
 import EditableText from './EditableText'
 import LetterPanel from './LetterPanel'
+import { LETTERS, NOTES } from './letters'
 
-function DocumentPanel({ document, active, onClose }) {
+function DocumentPanel({ document, active, onClose, theme }) {
   const closeRef = useRef(null)
   const previousFocus = useRef(null)
   useEffect(() => {
@@ -21,18 +21,16 @@ function DocumentPanel({ document, active, onClose }) {
     window.addEventListener('keydown', keydown)
     return () => { window.removeEventListener('keydown', keydown); previousFocus.current?.focus?.({ preventScroll: true }) }
   }, [active, onClose])
-  const crop = SQUARES.find(square => square.document === document.id)
-  return <section data-dev-scope={import.meta.env.DEV ? `document-${document.id}` : undefined} className={`big-test-document-overlay${active ? ' is-open' : ''}`} inert={!active} aria-hidden={!active}>
-    <div className="big-test-document-scrim" onClick={onClose} />
+  return <DocumentOverlay id={document.id} active={active} onClose={onClose}>
     <div className="big-test-document-panel" role="dialog" aria-modal="true" aria-labelledby={`big-test-document-title-${document.id}`}>
-      <div className="big-test-document-cover"><AssetCrop src={squares} crop={crop} /><div className="big-test-document-dots" style={patternStyle(PANEL_PATTERN)} /></div>
+      <div className="big-test-document-cover" style={{ backgroundColor: theme.cover }}><span className="big-test-document-white-square" aria-hidden="true"/><div className="big-test-document-dots" style={patternStyle({ ...PANEL_PATTERN, patternColor: theme.dots })} /></div>
       <div className="big-test-document-copy">
         <EditableText id={`document-title-${document.id}`} as="h2" htmlId={`big-test-document-title-${document.id}`}>{document.title}</EditableText>
         <EditableText id={`document-body-${document.id}`} as="p">{document.body}</EditableText>
         <button ref={closeRef} type="button" onClick={onClose}><EditableText id={`document-close-${document.id}`}>Close</EditableText></button>
       </div>
     </div>
-  </section>
+  </DocumentOverlay>
 }
 
 export default function Documents({ onOpen }) {
@@ -55,7 +53,11 @@ export default function Documents({ onOpen }) {
       })}
     </div>
     {DOCUMENTS.map(document => document.id === 'letter'
-      ? <LetterPanel key={document.id} active={activeId === document.id} onClose={close} />
-      : <DocumentPanel key={document.id} document={document} active={activeId === document.id} onClose={close} />)}
+      ? LETTERS.length > 0
+        ? <LetterPanel key={document.id} active={activeId === document.id} onClose={close} entries={LETTERS} category="letter" />
+        : <DocumentPanel key={document.id} document={document} active={activeId === document.id} onClose={close} theme={documentPanelTheme(document.id)} />
+      : document.id === 'notes'
+        ? <LetterPanel key={document.id} active={activeId === document.id} onClose={close} entries={NOTES} category="notes" />
+        : <DocumentPanel key={document.id} document={document} active={activeId === document.id} onClose={close} theme={documentPanelTheme(document.id)} />)}
   </>
 }

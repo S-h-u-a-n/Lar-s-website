@@ -20,9 +20,9 @@ export const MAINTENANCE = [
   { id: 'potion', name: 'Magic Potion', color: '#e1d0f2' },
 ]
 export const DOCUMENTS = [
-  { id: 'letter', name: 'Letter', hoverColor: PIGMENTS.mint },
+  { id: 'letter', name: 'Letter', title: '來信', body: '目前沒有其他來信。', hoverColor: PIGMENTS.mint },
   { id: 'diary', name: 'Diary', title: 'Laboratory Diary', body: 'A record of quiet discoveries, unusual experiments and the small mysteries of everyday life. This space is reserved for the official diary entries and their illustrations.', hoverColor: PIGMENTS.strawberry },
-  { id: 'notes', name: 'Notes', title: 'Research Notes', body: 'Observations from the worktable. Future notes, diagrams and sketches will be collected here. For now, take a moment to explore the objects in the laboratory.', hoverColor: PIGMENTS.sky },
+  { id: 'notes', name: '天球見聞', title: '天球見聞', body: 'Observations from the worktable. Future notes, diagrams and sketches will be collected here. For now, take a moment to explore the objects in the laboratory.', hoverColor: PIGMENTS.sky },
 ]
 // Hit regions for the already-rendered corner geometry, not the model's Big-squares.
 // Keep the former text IDs so the user's saved hover-label settings carry over.
@@ -46,6 +46,13 @@ export const SQUARES = [
 ]
 export const PATTERN_DEFAULTS = { spacing: 16, thickness: 2, color: PIGMENTS.mint, angle: 45 }
 export const PANEL_PATTERN = { pattern: 'dots', spacing: 17, thickness: 2, patternColor: PIGMENTS.mint }
+export const DOCUMENT_PANEL_THEMES = [
+  { paper: PIGMENTS.white, ink: PIGMENTS.ink, cover: PIGMENTS.butter, dots: PIGMENTS.mint },
+  { paper: PIGMENTS.white, ink: PIGMENTS.ink, cover: '#ffe1d8', dots: PIGMENTS.mint },
+  { paper: PIGMENTS.white, ink: PIGMENTS.ink, cover: '#d8e9ff', dots: '#9bb9d1' },
+  { paper: PIGMENTS.white, ink: PIGMENTS.ink, cover: '#f1e5f6', dots: '#9bb9d1' },
+  { paper: PIGMENTS.white, ink: PIGMENTS.ink, cover: '#ffefd3', dots: PIGMENTS.mint },
+]
 export const FLOATING = { durations: [6.2, 7.4, 5.6, 8, 6.8, 4.9, 7.8, 6, 7.1, 5.3], amplitudeY: 'clamp(2px, .3cqw, 6px)', amplitudeX: 'clamp(.5px, .08cqw, 1.6px)' }
 export function floatingStyle(index) {
   return { '--bt-float-duration': `${FLOATING.durations[index % FLOATING.durations.length]}s`, '--bt-float-delay': `${-index * 1.37}s`, '--bt-float-y': FLOATING.amplitudeY, '--bt-float-x': FLOATING.amplitudeX }
@@ -66,4 +73,11 @@ export const FOCUS_MOTION = {
 export function focusStyle(group) {
   const motion = FOCUS_MOTION[group]
   return { '--bt-focus-shift': motion.shift, '--bt-focus-growth': motion.scale - 1, transformOrigin: motion.origin }
+}
+
+// Stable per-content assignment, shared by every entrance and reopen path.
+export function documentPanelTheme(id) {
+  const fixed = { letter: 1, diary: 2, notes: 3 }
+  const index = fixed[id] ?? [...id].reduce((hash, char) => (hash * 31 + char.codePointAt(0)) >>> 0, 0) % DOCUMENT_PANEL_THEMES.length
+  return DOCUMENT_PANEL_THEMES[index]
 }

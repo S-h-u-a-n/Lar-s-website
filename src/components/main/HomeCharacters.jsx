@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { loadCharacters } from '../../dev/characters/characters'
+import HomeSectionGeometry from './HomeSectionGeometry'
 import './HomeCharacters.css'
 
 export default function HomeCharacters({ onEnter }) {
@@ -27,6 +28,7 @@ export default function HomeCharacters({ onEnter }) {
     return { character: characters[(current + position + characters.length) % characters.length], position }
   }) : []
   return <motion.section ref={section} id="home-characters" className="home-characters" aria-labelledby="home-characters-title" initial={reduced ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .15 }} transition={{ duration: .7, ease: [.22, .75, .25, 1] }}>
+    <HomeSectionGeometry variant="home-characters"/>
     <div className="hc-section-label"><span>03 / FELLOW EXPLORERS</span><span>THE PEOPLE BEHIND THE WONDER</span></div>
     <div className="hc-composition">
       <div className="hc-gallery" role="region" aria-roledescription="輪播" aria-label="研究計畫同行者肖像" onKeyDown={event => { if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); turn(event.key === 'ArrowLeft' ? -1 : 1) } }}>

@@ -11,16 +11,14 @@ export const LETTER_THEMES = {
   lavenderSky: { paper: PIGMENTS.white, cover: '#e1d0f2', dots: PIGMENTS.sky, ink: PIGMENTS.ink },
 }
 
-// Add one record per letter. All text, artwork and colors belong to the record.
-export const LETTERS = [
-  {
-    id: 'royal-orbis-academy',
-    title: '王立 Orbis 學院',
-    subtitle: 'Royal Orbis Academy',
-    icon: orbisIcon,
-    iconAlt: '王立 Orbis 學院校徽',
-    theme: LETTER_THEMES.butterMint,
-    body: `坐落於王都的王立 Orbis 學院，是一所面向 10 至 22 歲學生開放的綜合魔法學院。
+const royalOrbisAcademy = {
+  id: 'royal-orbis-academy',
+  title: '王立 Orbis 學院',
+  subtitle: 'Royal Orbis Academy',
+  icon: orbisIcon,
+  iconAlt: '王立 Orbis 學院校徽',
+  theme: LETTER_THEMES.butterMint,
+  body: `坐落於王都的王立 Orbis 學院，是一所面向 10 至 22 歲學生開放的綜合魔法學院。
 
 從第一次接觸魔法與世界的基本知識，到逐漸找到真正願意投入的方向，Orbis 提供完整的基礎教育、魔法教育與高等專業課程。我們相信，每個人的道路都不必相同，學習也不應只存在於預先劃定的路線之中。
 
@@ -43,9 +41,11 @@ export const LETTERS = [
 如果還沒有找到，也不必著急。
 去學習、去嘗試、去認識不同的人。
 或許下一條道路，就藏在某個尚未問出口的問題裡。`,
-    signature: '校長',
-  },
-]
+  signature: '校長',
+}
+
+export const LETTERS = []
+export const NOTES = [royalOrbisAcademy]
 
 export function adjacentLetterIndex(index, direction, count = LETTERS.length) {
   return Math.max(0, Math.min(count - 1, index + direction))

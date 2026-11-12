@@ -1,5 +1,5 @@
 /* Keep the original 65% width, 40/60 split, and 45% artboard height.
-   Only the letter body scrolls; diary and notes retain their existing layout. */
+   The academy note reuses this panel while standard diary pages keep their layout. */
 .big-test-document-panel.big-test-letter-panel {height:45%;min-height:45%;overflow:hidden;background:var(--letter-paper);}
 .big-test-letter-panel .big-test-letter-cover {min-width:0;min-height:0;overflow:hidden;background:var(--letter-cover);}
 .big-test-letter-cover .big-test-document-dots {pointer-events:none;}
@@ -11,10 +11,11 @@
 .big-test-letter-panel .big-test-letter-body p {margin:0 0 1em;font:15px/1.9 Georgia,'Songti TC',serif;white-space:pre-line;}
 .big-test-letter-body p:last-child {margin-bottom:0;}
 .big-test-letter-signature {text-align:right;}
-.big-test-letter-footer {display:flex;align-items:center;justify-content:flex-end;gap:1cqw;min-width:0;}
+.big-test-letter-footer {display:flex;align-items:center;justify-content:space-between;gap:1cqw;min-width:0;}
 .big-test-letter-panel .big-test-letter-footer button {margin-top:0;}
-.big-test-letter-pagination {display:flex;gap:.6cqw;}
-.big-test-letter-panel .big-test-letter-pagination button {display:grid;place-items:center;box-sizing:border-box;width:32px;height:32px;padding:0;font:18px/1 var(--sans);}
+.big-test-letter-pagination {display:flex;justify-content:space-between;align-items:center;width:100%;gap:1cqw;}
+.big-test-letter-panel .big-test-letter-pagination button {display:inline-flex;align-items:center;gap:.55em;box-sizing:border-box;width:auto;height:28px;padding:0;border:0;border-radius:0;background:transparent;color:inherit;font:12px/1.4 var(--body);box-shadow:none;}
+.big-test-letter-panel .big-test-letter-pagination button:hover:not(:disabled) {background:transparent;color:#688d7d;}
 .big-test-letter-pagination button:disabled {opacity:.35;cursor:default;}
 
 .big-test-letter-panel .big-test-letter-copy {padding-bottom:12px;}

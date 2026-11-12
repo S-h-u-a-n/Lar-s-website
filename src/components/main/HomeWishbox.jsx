@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import wishImage from '../../../Art/Main-art/wish-REMO.png'
 import WishCaptcha from './wishbox/WishCaptcha'
 import { sendWish, validateWish, wishErrorMessage } from './wishbox/service'
 import './HomeWishbox.css'
@@ -52,8 +53,8 @@ export default function HomeWishbox() {
       <p className="wish-intro">說不定魔法師們能接收到並實現你的願望喔！</p>
       <div className="wish-sheet"><AnimatePresence mode="wait" initial={false}>
         {status === 'success' ? <motion.div key="sent" className="wish-success" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: reduced ? 0 : .65 }}>
-          <motion.span aria-hidden="true" className="wish-sent-star" initial={{ opacity: 0, y: 25, scale: .65 }} animate={{ opacity: [0,1,1], y: reduced ? 0 : -16, scale: 1 }} transition={{ duration: reduced ? 0 : 1.6, ease: 'easeOut' }}>✧</motion.span>
-          <p ref={element => { success.current = element; element?.focus({ preventScroll: true }) }} tabIndex={-1} role="status">你的願望，已經送往天球了。</p><button type="button" onClick={rewrite}>再寫下一個願望 <span aria-hidden="true">↗</span></button>
+          <motion.img aria-hidden="true" className="wish-sent-image" src={wishImage} alt="" draggable="false" initial={{ opacity: 0, y: 25, scale: .65 }} animate={{ opacity: [0,1,1], y: reduced ? 0 : -16, scale: 1 }} transition={{ duration: reduced ? 0 : 1.6, ease: 'easeOut' }}/>
+          <p ref={element => { success.current = element; element?.focus({ preventScroll: true }) }} tabIndex={-1} role="status">你的願望，已經送往天球了！</p><p className="wish-success-support">一定能成真的！放心！</p><button type="button" onClick={rewrite}>再寫下一個願望 <span aria-hidden="true">↗</span></button>
         </motion.div> : <motion.form key="letter" className="wish-form" noValidate onSubmit={submit} aria-busy={status === 'sending'} exit={{ opacity: 0, y: reduced ? 0 : -8 }} transition={{ duration: reduced ? 0 : .4 }}>
           <label className="wish-visually-hidden" htmlFor="wish-message">願望內容（必填）</label>
           <textarea ref={messageInput} id="wish-message" name="message" onFocus={() => setStarted(true)} required maxLength={5000} value={message} onChange={update(setMessage, 'message')} placeholder="寫下你的願望……" readOnly={status === 'sending'} aria-invalid={error?.field === 'message' || undefined} aria-describedby={error?.field === 'message' ? 'wish-error' : undefined}/>

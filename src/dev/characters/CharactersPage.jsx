@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { loadCharacters } from './characters'
 import InfinitePortraits from './InfinitePortraits'
 import CharacterFile from './CharacterFile'
+import HomeSectionGeometry from '../../components/main/HomeSectionGeometry'
 import './characters.css'
 
 export default function CharactersPage({ onBack }) {
@@ -27,6 +28,7 @@ export default function CharactersPage({ onBack }) {
   const character = characters?.find(item => item.id === selected)
   return <main className="cw-page">
     <div className="cw-main" inert={Boolean(character)}>
+      <HomeSectionGeometry variant="characters-page"/>
       <header className="cw-header"><div className="cw-brand"><span className="cw-brand-mark" aria-hidden="true">✦</span><span>The Wizard's<br/><b>GENESIS</b></span></div><div className="cw-header-actions">{onBack && <button onClick={onBack}>返回</button>}</div></header>
       <div className="cw-heading"><p className="cw-kicker">THE PEOPLE BEHIND THE WONDER</p></div>
       <section className="cw-stage" aria-label="角色肖像收藏">

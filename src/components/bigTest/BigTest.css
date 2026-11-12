@@ -7,7 +7,7 @@ body:has(.main-scene--big-test) .big-hover-icon-image { width: clamp(96px, min(7
 /* Separate sibling contexts: background (auto), decoration (20), canvas (70), UI (90). */
 .big-test-decoration-squares { z-index: 20; pointer-events: none; }
 .big-test-decoration-squares img { pointer-events: none; }
-.big-test-banner { position: absolute; inset: 0 0 auto; height: 48px; z-index: 90; pointer-events: none; container-type: inline-size; }
+.big-test-banner { position: absolute; inset: 0 0 auto; height: 48px; z-index: 91; pointer-events: none; container-type: inline-size; }
 .big-test-title-bar { position: absolute; inset: 0; pointer-events: none; }
 .big-test-shape-position, .big-test-small-square { position: absolute; pointer-events: none; }
 .big-test-shape-static, .big-test-float, .big-test-background-shape { width: 100%; height: 100%; }
@@ -39,10 +39,11 @@ body:has(.main-scene--big-test) .big-hover-icon-image { width: clamp(96px, min(7
 .big-test-square:hover .big-test-square-label, .big-test-square:focus-visible .big-test-square-label { opacity: 1; }
 .big-test-document-overlay { position: absolute; inset: 0; z-index: 120; display: grid; place-items: center; visibility: hidden; opacity: 0; pointer-events: none; transition: opacity var(--bt-duration) var(--bt-easing), visibility 0s var(--bt-duration); }
 .big-test-document-overlay.is-open { visibility: visible; opacity: 1; pointer-events: auto; transition-delay: 0s; }
-.big-test-document-scrim { position: absolute; inset: -100vmax; background: #fdf9ee99; backdrop-filter: blur(3px); }
-.big-test-document-panel { position: relative; width: 65%; min-height: 45%; max-height: 85%; display: grid; grid-template-columns: 40% 60%; border-radius: 2cqw; overflow: auto; background: #fffef8; box-shadow: 0 1cqw 4cqw #685f6824; transform: translateY(2cqw) scale(.96); transition: transform var(--bt-duration) var(--bt-easing); }
+.big-test-document-scrim { position: absolute; z-index: 0; inset: -100vmax; background: #fdf9ee99; backdrop-filter: blur(3px); }
+.big-test-document-panel { position: relative; z-index: 1; width: 65%; min-height: 45%; max-height: 85%; display: grid; grid-template-columns: 40% 60%; border-radius: 2cqw; overflow: auto; background: #fffef8; box-shadow: 0 1cqw 4cqw #685f6824; transform: translateY(2cqw) scale(.96); transition: transform var(--bt-duration) var(--bt-easing); }
 .is-open .big-test-document-panel { transform: translateY(0) scale(1); }
 .big-test-document-cover { position: relative; display: grid; place-items: center; background: #f7f19a; }
+.big-test-document-white-square { position:absolute; z-index:0; left:26.5%; top:27.5%; width:45%; aspect-ratio:1; background:#ffffff; transform:rotate(-6deg); pointer-events:none; }
 .big-test-document-cover > svg { width: 45%; aspect-ratio: 1; z-index: 1; transform: rotate(-8deg); }
 .big-test-document-dots { position: absolute; inset: 0; opacity: 0; transform: translateY(1cqw); transition: opacity var(--bt-duration) var(--bt-easing), transform var(--bt-duration) var(--bt-easing); }
 .is-open .big-test-document-dots { opacity: .7; transform: translateY(0); transition-delay: var(--bt-dots-delay); }
@@ -67,3 +68,9 @@ body:has(.main-scene--big-test) .big-hover-icon-image { width: clamp(96px, min(7
    names retain identical typography without changing their motion or color. */
 .big-test-maintenance-reveal {font-weight:400;line-height:1.2;letter-spacing:normal;text-align:left;}
 .big-test-maintenance-reveal > [data-text-editor-id] {font:inherit!important;letter-spacing:inherit!important;text-align:inherit!important;}
+
+/* Match the existing artboard exactly while escaping MainScene's z-index:40. */
+.big-test-document-floating.big-test-document-overlay { position: fixed; inset: auto; top: 50%; left: 50%; width: min(100vw, 175vh); height: auto; aspect-ratio: 7 / 4; transform: translate(-50%, -50%); z-index: 101; pointer-events: none; --bt-duration: 420ms; --bt-dots-delay: 90ms; --bt-text-delay: 160ms; --bt-easing: cubic-bezier(.22,.75,.25,1); }
+.big-test-document-floating.is-open > .big-test-document-panel { pointer-events: auto; }
+.big-test-document-white-square { z-index: 1; }
+.big-test-document-dots { pointer-events: none; }

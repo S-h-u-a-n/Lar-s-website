@@ -55,7 +55,7 @@ export default function HistoryObservation({ selection, items, size, closing, or
           <details className="hh-sources" key={record.id}><summary>參考資料 · Wikipedia ↗</summary><div><p className="hh-source-note">{record.sourceNote}（核對：{record.verifiedAt}）</p>{record.references.map(source=><a key={source.id} href={source.href} target="_blank" rel="noopener noreferrer">{source.label} ↗</a>)}</div></details>
         </motion.article></AnimatePresence>
       </div>
-      <nav className="hh-detail-nav" aria-label="切換觀察時代"><button type="button" disabled={closing || leftIndex===null} onClick={()=>onChange(leftIndex)}>← 左側時代</button><span>{selection.index+1} / {HISTORY_RECORDS.length}</span><button type="button" disabled={closing || rightIndex===null} onClick={()=>onChange(rightIndex)}>右側時代 →</button></nav>
+      <nav className="hh-detail-nav" aria-label="切換觀察時代"><button type="button" disabled={closing || leftIndex===null} onClick={()=>onChange(leftIndex)}>← Prev</button><span>{selection.index+1} / {HISTORY_RECORDS.length}</span><button type="button" disabled={closing || rightIndex===null} onClick={()=>onChange(rightIndex)}>Next →</button></nav>
     </motion.div>
   </div>
 }
