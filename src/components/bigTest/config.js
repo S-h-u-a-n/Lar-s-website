@@ -21,8 +21,8 @@ export const MAINTENANCE = [
 ]
 export const DOCUMENTS = [
   { id: 'letter', name: 'Letter', title: '來信', body: '目前沒有其他來信。', hoverColor: PIGMENTS.mint },
-  { id: 'diary', name: 'Diary', title: 'Laboratory Diary', body: 'A record of quiet discoveries, unusual experiments and the small mysteries of everyday life. This space is reserved for the official diary entries and their illustrations.', hoverColor: PIGMENTS.strawberry },
-  { id: 'notes', name: '天球見聞', title: '天球見聞', body: 'Observations from the worktable. Future notes, diagrams and sketches will be collected here. For now, take a moment to explore the objects in the laboratory.', hoverColor: PIGMENTS.sky },
+  { id: 'diary', name: 'Diary', title: 'Laboratory Diary', body: '目前沒有已發布的研究日誌。', hoverColor: PIGMENTS.strawberry },
+  { id: 'notes', name: '天球見聞', title: '天球見聞', body: '目前沒有已發布的天球見聞。', hoverColor: PIGMENTS.sky },
 ]
 // Hit regions for the already-rendered corner geometry, not the model's Big-squares.
 // Keep the former text IDs so the user's saved hover-label settings carry over.

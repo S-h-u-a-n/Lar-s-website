@@ -14,8 +14,28 @@
 .big-test-letter-footer {display:flex;align-items:center;justify-content:space-between;gap:1cqw;min-width:0;}
 .big-test-letter-panel .big-test-letter-footer button {margin-top:0;}
 .big-test-letter-pagination {display:flex;justify-content:space-between;align-items:center;width:100%;gap:1cqw;}
+.big-test-letter-list {min-height:0;overflow-y:auto;overscroll-behavior:contain;list-style:none;margin:0;padding:0 .6cqw 0 0;}
+.big-test-letter-list li+li {border-top:1px solid #dcded8;}
+.big-test-letter-panel .big-test-letter-list button {position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:.3em;width:100%;margin:0;padding:.6em 2em .6em 0;border:0;border-radius:0;background:transparent;color:inherit;font:inherit;text-align:left;box-shadow:none;cursor:pointer;}
+.big-test-letter-list button:hover {color:#688d7d;}
+.big-test-letter-list-title {font:500 clamp(14px,1.15cqw,18px)/1.4 var(--body);}
+.big-test-letter-list-meta {font:11px/1.45 var(--sans);opacity:.68;}
+.big-test-letter-list-arrow {position:absolute;right:.4em;top:50%;transform:translateY(-50%);font:16px var(--sans);opacity:.6;}
+.big-test-letter-list-footer > span {font:12px/1.4 var(--sans);opacity:.65;}
+.big-test-letter-stepper {display:flex;align-items:center;justify-content:center;gap:.55cqw;min-width:0;}
+.big-test-letter-stepper .big-test-letter-page-count {white-space:nowrap;}
 .big-test-letter-panel .big-test-letter-pagination button {display:inline-flex;align-items:center;gap:.55em;box-sizing:border-box;width:auto;height:28px;padding:0;border:0;border-radius:0;background:transparent;color:inherit;font:12px/1.4 var(--body);box-shadow:none;}
 .big-test-letter-panel .big-test-letter-pagination button:hover:not(:disabled) {background:transparent;color:#688d7d;}
 .big-test-letter-pagination button:disabled {opacity:.35;cursor:default;}
 
 .big-test-letter-panel .big-test-letter-copy {padding-bottom:12px;}
+.big-test-letter-page-count {font:12px var(--display);opacity:.7;}
+.big-test-letter-body .nt-article-body {font:15px/1.9 Georgia,'Songti TC',serif;color:inherit;}
+.big-test-letter-body .nt-article-body p {margin:0 0 1em;font:inherit;white-space:pre-line;}
+.big-test-letter-body .nt-article-body h2,
+.big-test-letter-body .nt-article-body h3,
+.big-test-letter-body .nt-article-body h4 {margin:1em 0 .55em;font:600 1em/1.5 var(--body);color:inherit;}
+.big-test-letter-body .nt-article-body ul,
+.big-test-letter-body .nt-article-body ol {margin:0 0 1em;padding-left:1.5em;}
+.big-test-letter-body .nt-article-body a {color:inherit;text-underline-offset:2px;}
+.big-test-envelope-icon {color:var(--letter-ink);}

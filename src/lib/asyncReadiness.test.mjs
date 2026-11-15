@@ -9,6 +9,7 @@ function clock() {
     setTimer(fn, delay) { const key = ++id; jobs.set(key, { fn, at: now + delay }); return key },
     clearTimer(key) { jobs.delete(key) },
     advance(ms) { now += ms; for (const [key, job] of [...jobs]) if (job.at <= now) { jobs.delete(key); job.fn() } },
+    now: () => now,
     get pending() { return jobs.size },
   }
 }
@@ -37,6 +38,21 @@ test('unmount aborts preparation and ignores a late loader completion', () => {
   const gate = createResourceGate({ ...timer, onReady: () => callbacks++, onError: () => callbacks++, abort: () => aborted++ })
   gate.dispose(); gate.complete(); gate.fail(new Error()); timer.advance(60000)
   assert.equal(callbacks, 0); assert.equal(aborted, 1); assert.equal(timer.pending, 0)
+})
+test('hidden time does not consume a visibility-paused resource deadline', () => {
+  const timer = clock(), document = visibleDocument(); let errors = 0
+  const gate = createResourceGate({ ...timer, document, pauseOnHidden: true, timeoutMs: 100, onReady() {}, onError: () => errors++ })
+  timer.advance(40); document.hide(true); timer.advance(1000)
+  assert.equal(errors, 0); assert.equal(timer.pending, 0)
+  document.hide(false); timer.advance(59); assert.equal(errors, 0)
+  timer.advance(1); assert.equal(errors, 1); assert.equal(timer.pending, 0)
+})
+test('a resource mounted in a hidden tab starts its full deadline when visible', () => {
+  const timer = clock(), document = visibleDocument(); document.hidden = true; let errors = 0
+  createResourceGate({ ...timer, document, pauseOnHidden: true, timeoutMs: 100, onReady() {}, onError: () => errors++ })
+  timer.advance(1000); assert.equal(errors, 0); assert.equal(timer.pending, 0)
+  document.hide(false); timer.advance(99); assert.equal(errors, 0)
+  timer.advance(1); assert.equal(errors, 1)
 })
 test('visible overview lasts 1250ms and expands only once', () => {
   const timer = clock(), document = visibleDocument(); let expanded = 0

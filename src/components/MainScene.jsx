@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { createResourceGate } from '../lib/asyncReadiness'
+import ResourceStatus from '../edition/ResourceStatus'
 import { TOOL_REACTION } from '../edition/config'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import ModelMaterialEditor from '../dev/ModelMaterialEditor'
@@ -292,6 +293,7 @@ function softenCrystalballGlass(root) {
 
 function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroduction, onCloseIntroduction, returnedFromEntrance, visitedBigPortals, hasBigIntroduction, presentation, children, navigation, viewportAspect, fitViewport = false, onFocusProgress }) {
   const [resourceStatus,setResourceStatus] = useState('loading')
+  const [retry,setRetry] = useState(0)
   const hostRef = useRef(null)
   const [focusedPortalId, setFocusedPortalId] = useState(null)
   const [editorModel, setEditorModel] = useState(null)
@@ -381,7 +383,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       console.error('[MainScene] Required scene preparation failed', error)
     }
     const readiness = createResourceGate({
-      abort: () => { loadController.abort(); manager.abort() }, onError: reportFailure,
+      abort: () => { loadController.abort(); manager.abort() }, onError: reportFailure, pauseOnHidden: true,
       onReady: () => { controls.enabled = true; canvas.style.pointerEvents = 'auto'; host.dataset.status = 'ready'; setResourceStatus('ready') },
     })
     manager.onError = url => readiness.fail(new Error(`Required model dependency failed: ${url}`))
@@ -943,7 +945,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       canvas.remove()
       hoverIcon.remove()
     }
-  }, [BIG_RENDER_COLOR.brightness, BIG_RENDER_COLOR.saturation, viewportAspect, fitViewport, onFocusProgress])
+  }, [BIG_RENDER_COLOR.brightness, BIG_RENDER_COLOR.saturation, viewportAspect, fitViewport, onFocusProgress, retry])
 
   const showEnterButton = focusedPortalId && focusedPortalId === returnedFromEntrance
 
@@ -970,6 +972,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
           Enter
         </button>
       )}</>}
+      <ResourceStatus status={resourceStatus} label="3D 研究桌模型" showLoading={false} onRetry={() => { setResourceStatus('loading'); setRetry(value => value + 1) }} />
       {import.meta.env.DEV && editorModel && <ModelMaterialEditor pageId="big-test" model={editorModel} modelName="Big.glb" batchDefaults={MODEL_MATERIAL_PRESETS['Big.glb'].batch} />}
     </main>
   )

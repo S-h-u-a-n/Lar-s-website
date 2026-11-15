@@ -5,7 +5,8 @@ import { patternStyle } from './Background'
 import DocumentOverlay from './DocumentOverlay'
 import EditableText from './EditableText'
 import LetterPanel from './LetterPanel'
-import { LETTERS, NOTES } from './letters'
+import ResearchLogPanel from './ResearchLogPanel'
+import { LETTERS, NOTES, RESEARCH_LOGS } from './letters'
 
 function DocumentPanel({ document, active, onClose, theme }) {
   const closeRef = useRef(null)
@@ -52,12 +53,17 @@ export default function Documents({ onOpen }) {
         </button>
       })}
     </div>
-    {DOCUMENTS.map(document => document.id === 'letter'
-      ? LETTERS.length > 0
-        ? <LetterPanel key={document.id} active={activeId === document.id} onClose={close} entries={LETTERS} category="letter" />
-        : <DocumentPanel key={document.id} document={document} active={activeId === document.id} onClose={close} theme={documentPanelTheme(document.id)} />
-      : document.id === 'notes'
-        ? <LetterPanel key={document.id} active={activeId === document.id} onClose={close} entries={NOTES} category="notes" />
-        : <DocumentPanel key={document.id} document={document} active={activeId === document.id} onClose={close} theme={documentPanelTheme(document.id)} />)}
+    {DOCUMENTS.map(document => {
+      if (document.id === 'letter' && LETTERS.length) {
+        return <LetterPanel key={document.id} active={activeId === document.id} onClose={close} entries={LETTERS} category="letter" />
+      }
+      if (document.id === 'notes' && NOTES.length) {
+        return <LetterPanel key={document.id} active={activeId === document.id} onClose={close} entries={NOTES} category="notes" />
+      }
+      if (document.id === 'diary' && RESEARCH_LOGS.length) {
+        return <ResearchLogPanel key={document.id} active={activeId === document.id} onClose={close} entries={RESEARCH_LOGS} />
+      }
+      return <DocumentPanel key={document.id} document={document} active={activeId === document.id} onClose={close} theme={documentPanelTheme(document.id)} />
+    })}
   </>
 }

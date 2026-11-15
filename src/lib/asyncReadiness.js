@@ -1,16 +1,32 @@
 // A timeout is a real failure, never permission to present incomplete resources.
-export function createResourceGate({ onReady, onError, abort = () => {}, timeoutMs = 60000, setTimer = setTimeout, clearTimer = clearTimeout }) {
+export function createResourceGate({ onReady, onError, abort = () => {}, timeoutMs = 60000, setTimer = setTimeout, clearTimer = clearTimeout, now = Date.now, pauseOnHidden = false, document: doc = globalThis.document }) {
   let state = 'pending'
-  const timer = setTimer(() => fail(new Error('Required resource preparation timed out')), timeoutMs)
+  let remaining = timeoutMs, startedAt = 0, timer = null
+  const stopTimer = () => { if (timer !== null) clearTimer(timer); timer = null }
+  const removeVisibilityListener = () => { if (pauseOnHidden) doc?.removeEventListener('visibilitychange', handleVisibilityChange) }
+  function armTimer() {
+    if (state !== 'pending' || (pauseOnHidden && doc?.hidden)) return
+    startedAt = now()
+    timer = setTimer(() => fail(new Error('Required resource preparation timed out')), remaining)
+  }
+  function handleVisibilityChange() {
+    if (state !== 'pending') return
+    if (doc.hidden) {
+      if (timer !== null) remaining = Math.max(0, remaining - (now() - startedAt))
+      stopTimer()
+    } else if (timer === null) armTimer()
+  }
+  if (pauseOnHidden) doc?.addEventListener('visibilitychange', handleVisibilityChange)
+  armTimer()
   function fail(error) {
     if (state !== 'pending') return
-    state = 'error'; clearTimer(timer); abort(); onError(error)
+    state = 'error'; stopTimer(); removeVisibilityListener(); abort(); onError(error)
   }
   return {
     get pending() { return state === 'pending' },
-    complete() { if (state !== 'pending') return; state = 'ready'; clearTimer(timer); onReady() },
+    complete() { if (state !== 'pending') return; state = 'ready'; stopTimer(); removeVisibilityListener(); onReady() },
     fail,
-    dispose() { state = 'disposed'; clearTimer(timer); abort() },
+    dispose() { state = 'disposed'; stopTimer(); removeVisibilityListener(); abort() },
   }
 }
 

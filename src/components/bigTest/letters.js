@@ -1,5 +1,7 @@
-import orbisIcon from '../../../Art/Big/Big-letter/orbis.PNG'
 import { PIGMENTS } from '../../edition/palette'
+import { LETTERS, NOTES, RESEARCH_LOGS } from './bigContent'
+
+export { LETTERS, NOTES, RESEARCH_LOGS }
 
 // Theme choices reuse the six maintenance-dot colors; these are not empty letters.
 export const LETTER_THEMES = {
@@ -9,44 +11,4 @@ export const LETTER_THEMES = {
   skyButter: { paper: PIGMENTS.white, cover: PIGMENTS.sky, dots: PIGMENTS.butter, ink: PIGMENTS.ink },
   mintPeach: { paper: PIGMENTS.white, cover: PIGMENTS.mint, dots: PIGMENTS.peach, ink: PIGMENTS.ink },
   lavenderSky: { paper: PIGMENTS.white, cover: '#e1d0f2', dots: PIGMENTS.sky, ink: PIGMENTS.ink },
-}
-
-const royalOrbisAcademy = {
-  id: 'royal-orbis-academy',
-  title: '王立 Orbis 學院',
-  subtitle: 'Royal Orbis Academy',
-  icon: orbisIcon,
-  iconAlt: '王立 Orbis 學院校徽',
-  theme: LETTER_THEMES.butterMint,
-  body: `坐落於王都的王立 Orbis 學院，是一所面向 10 至 22 歲學生開放的綜合魔法學院。
-
-從第一次接觸魔法與世界的基本知識，到逐漸找到真正願意投入的方向，Orbis 提供完整的基礎教育、魔法教育與高等專業課程。我們相信，每個人的道路都不必相同，學習也不應只存在於預先劃定的路線之中。
-
-在 Orbis，魔法始終伴隨著學生的學習，但它並不是唯一的答案。
-
-有人擅長施術，有人專精術式與理論，有人研究自然、社會與歷史，也有人將魔法運用於工程、藝術、生活與各式各樣的實踐之中。隨著學習階段逐漸深入，學生可以依照自己的興趣與能力選擇專業方向，也可以跨越學科界線，修習其他領域的課程，參與研究與創作。
-
-而探索未知，從來不意味著必須獨自完成一切。
-
-一個人的知識總有邊界，因此 Orbis 鼓勵學生分享自己擅長的事，也向不同領域的人尋求幫助。測繪者可以與騎士共同踏上實地調查，魔導具的製作者也可能與陣術研究者坐在同一張桌前。不同的知識、能力與想法在這裡相遇，一個人的疑問，也可能成為許多人的共同研究。
-
-不必一個人學會所有事情。
-
-知道自己擅長什麼，願意承認自己不知道什麼，並找到能夠一起前進的人，同樣是學習的一部分。
-
-學院設有藏書館、魔法實驗室、研究室、工房、訓練場及各類專業設施，並鼓勵學生自主提出研究、創作與實踐計畫。從一個課堂上的小小疑問，到跨越數年的大型研究，都可能在這裡得到嘗試的機會。
-
-我們希望每一位來到 Orbis 的學生，都能在漫長的學習旅程中找到屬於自己的方向。
-
-如果還沒有找到，也不必著急。
-去學習、去嘗試、去認識不同的人。
-或許下一條道路，就藏在某個尚未問出口的問題裡。`,
-  signature: '校長',
-}
-
-export const LETTERS = []
-export const NOTES = [royalOrbisAcademy]
-
-export function adjacentLetterIndex(index, direction, count = LETTERS.length) {
-  return Math.max(0, Math.min(count - 1, index + direction))
 }
