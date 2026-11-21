@@ -76,7 +76,33 @@
 }
 /* Reuse the exact placeholder frame rules; the stage fits its inner bounds. */
 .t-comic-frame-heading { flex: 0 0 clamp(28px, 5vw, 64px); }
-.t-comic-frame-footer { flex: 0 0 48px; }
+.t-comic-frame-footer {
+  flex: 0 0 48px;
+}
+.t-comic-page > .portal-comic__continue {
+  align-self: center;
+  margin: 0;
+  border: 0;
+  border-radius: 12px;
+  background: #91d9df;
+  color: #56525a;
+  padding: 14px 24px;
+  font: 800 16px/1.2 "Chiron Sung", "Songti TC", serif;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 500ms ease, visibility 0s linear 500ms, transform 200ms ease;
+}
+.t-comic-page > .portal-comic__continue.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+.t-comic-page > .portal-comic__continue.is-visible:hover {
+  transform: scale(1.03);
+}
 .t-comic-frame { width: 100%; }
 
 /* Telescope only: symmetric inset, preserving the existing frame height. */
@@ -93,4 +119,17 @@
   top: -10vh;
   bottom: -2vh;
   pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-comic-page > .portal-comic__continue {
+    transition: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .t-comic-page > .portal-comic__continue {
+    padding: 9px 13px;
+    font-size: 11px;
+  }
 }

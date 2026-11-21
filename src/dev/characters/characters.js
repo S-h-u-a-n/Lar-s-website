@@ -5,10 +5,14 @@ const images = import.meta.glob('/Art/avatar/*.{jpg,jpeg,png,webp,avif,gif,JPG,J
   eager: true, query: '?url', import: 'default',
 })
 
-const orderedCharacters = Object.entries(images).sort(([a], [b]) => a.localeCompare(b, 'zh-Hant')).map(([path, image]) => {
+export const characterImages = Object.fromEntries(Object.entries(images).map(([path, image]) => {
   const id = path.split('/').at(-1).replace(/\.[^.]+$/, '')
-  return { id, name: id, age: '', affiliation: '', specialties: [], projects: [], biography: '', ...profiles[id], image }
-})
+  return [id, image]
+}))
+
+const orderedCharacters = Object.entries(characterImages).sort(([a], [b]) => a.localeCompare(b, 'zh-Hant')).map(([id, image]) => ({
+  id, name: id, age: '', affiliation: '', specialties: [], projects: [], biography: '', ...profiles[id], image,
+}))
 
 const yitiIndex = orderedCharacters.findIndex(character => character.id === '衵依')
 const yierIndex = orderedCharacters.findIndex(character => character.id === '伊爾')
@@ -18,6 +22,11 @@ if (yitiIndex !== -1 && yierIndex !== -1) {
 }
 
 export const characters = orderedCharacters
+export const charactersWithProfiles = characters.filter(character => profiles[character.id]?.name === character.id)
+
+export function findCharacterProfile(name) {
+  return charactersWithProfiles.find(character => character.name === name)
+}
 
 export function loadCharacters() {
   return Promise.all(characters.map(character => new Promise(resolve => {

@@ -26,6 +26,8 @@ BigTest 的 ID 前綴 big-test- 和儲存鍵 genesis:text-editor:big-test:v1 保
 
 BigTest 幾何、動畫與鏡頭適配仍沿用原 config／viewportFraming；模型 renderer 和互動未改寫。舊 Big 的 layout-editor:big-leftside 及各 expanded 文件鍵不遷移至新版，其原資料仍保留。原 3D 編輯器沒有查到獨立的 localStorage 自動保存機制，不能宣稱新增了其保存能力。
 
+Big 頁物件介紹筆記的六個 ENTER 位置使用獨立文字編輯器項目（`big-test-enter-position-{interactionId}`），以筆記紙張為基準使用中心百分比座標；拖曳與座標欄位的變更沿用 `genesis:text-editor:big-test:v1` 自動保存。使用者提供的編輯器匯出資料包含六個物件各自的座標，已作為各自的預設值恢復；現有的每物件保存值仍優先於預設值。
+
 localStorage 受 origin 限制：原開發網址的設定不會自行跨 port／網域出現在部署站。如需跨來源設定，須另行使用既有匯出資料確認，這次不做資料搬移。
 
 ## 實際測試

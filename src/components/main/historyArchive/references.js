@@ -28,3 +28,23 @@ export function collectReferences(record, sources) {
     return [{ id, label: label.replace(/^Wikipedia · /, ''), href }]
   })
 }
+
+export function referenceTextParts(text, seen = new Set()) {
+  const parts = []
+  const urls = /https?:\/\/[^\s]+/g
+  let start = 0, match
+  while ((match = urls.exec(text))) {
+    const trailing = match[0].match(/[.,!?，。；！？]+$/)?.[0] || ''
+    const href = match[0].slice(0, match[0].length - trailing.length)
+    if (!href) continue
+    parts.push({ text: text.slice(start, match.index) })
+    if (!seen.has(referenceKey(href))) {
+      seen.add(referenceKey(href))
+      parts.push({ text: href, href })
+    }
+    if (trailing) parts.push({ text: trailing })
+    start = match.index + match[0].length
+  }
+  parts.push({ text: text.slice(start) })
+  return parts
+}

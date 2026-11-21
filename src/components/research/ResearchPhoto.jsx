@@ -1,3 +1,5 @@
+import './ResearchPhoto.css'
+
 // Both research atlases use the article image; empty slots contain no UI text.
 export default function ResearchPhoto({ content, className = '' }) {
   return <span className={`research-photo ${className}`} aria-hidden={content?.image ? undefined : true}>

@@ -1,0 +1,11 @@
+.research-photo-license{position:fixed;inset:0;margin:auto;max-width:min(520px,calc(100vw - 36px));max-height:calc(100dvh - 48px);padding:0;border:1px solid #34465A55;border-radius:0 25px 0 0;background:#FFFEF8;color:#34465A;overflow:auto;font:15px/1.7 Georgia,'Songti TC',serif}
+.research-photo-license::backdrop{background:#34465A55}
+.research-photo-license-copy{position:relative;padding:28px}
+.research-photo-license h2{font:400 24px/1.4 var(--display);padding-right:30px;margin:0 0 20px}
+.research-photo-license p{overflow-wrap:anywhere}
+.research-photo-license dl{margin:20px 0 0}
+.research-photo-license dt{font-size:12px;opacity:.7;margin-top:16px}
+.research-photo-license dd{margin:4px 0 0;overflow-wrap:anywhere}
+.research-photo-license a{color:inherit;text-underline-offset:3px}
+.research-photo-license-close{position:absolute;right:20px;top:16px;border:0;background:transparent;color:inherit;font:26px/1.5 Georgia,serif;cursor:pointer}
+.research-photo-license :focus-visible{outline:2px solid #648275;outline-offset:4px}

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { AttributionControl, Map, setWorkerUrl } from 'maplibre-gl'
+import { AttributionControl, Map, Marker, setWorkerUrl } from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import LayoutEditor from '../dev/LayoutEditor'
@@ -113,18 +113,100 @@ export function TelescopeMap({ mode, attributionHostRef, onReady, onStatus, onOb
     let activeMode = 'globe'
     let loadingStyle = true
     let pendingLocation = null
+    let focusRequestId = 0
+    let stagedMoveEnd = null
+    let globalCamera = null
+    let clearGlobalCameraAfterMove = false
+    let locationMarker = null
+    let locationMarkerLabel = null
+    const updateLocationMarker = location => {
+      if (!location.markerName) {
+        locationMarker?.remove()
+        locationMarker = null
+        locationMarkerLabel = null
+        return
+      }
+      if (!locationMarker) {
+        const element = document.createElement('div')
+        element.className = 'telescope-location-marker'
+        element.setAttribute('aria-hidden', 'true')
+        locationMarkerLabel = document.createElement('span')
+        locationMarkerLabel.className = 'telescope-location-marker-label'
+        const dot = document.createElement('span')
+        dot.className = 'telescope-location-marker-dot'
+        element.append(locationMarkerLabel, dot)
+        locationMarker = new Marker({ element, anchor: 'bottom' }).setLngLat([location.longitude, location.latitude])
+        locationMarker.addTo(map)
+      }
+      locationMarkerLabel.textContent = location.markerName
+      locationMarker.setLngLat([location.longitude, location.latitude])
+    }
     const flyToPendingLocation = () => {
       if (!pendingLocation || loadingStyle || activeMode !== requestedModeRef.current) return
       const location = pendingLocation
       pendingLocation = null
-      map.flyTo({ center: [location.longitude, location.latitude], zoom: location.zoom ?? 12, bearing: location.bearing ?? 0, pitch: location.pitch ?? pitches[activeMode], roll: location.roll ?? 0, essential: false })
+      const requestId = ++focusRequestId
+      const center = [location.longitude, location.latitude]
+      const camera = {
+        center,
+        bearing: location.bearing ?? 0,
+        pitch: location.pitch ?? pitches[activeMode],
+        roll: location.roll ?? 0,
+        essential: false,
+      }
+      const zoomToLocation = () => {
+        stagedMoveEnd = null
+        if (requestId !== focusRequestId) return
+        map.flyTo({ ...camera, zoom: location.focusZoom, duration: 1300 })
+      }
+      if (Number.isFinite(location.focusZoom)) {
+        const overviewZoom = location.overviewZoom ?? Math.max(1, Math.min(5, location.focusZoom - 4))
+        const alreadyAtOverview = Math.abs(map.getZoom() - overviewZoom) < .05
+          && Math.abs(map.getCenter().lat - location.latitude) < .01
+          && Math.abs(map.getCenter().wrap().lng - location.longitude) < .01
+        if (alreadyAtOverview) {
+          zoomToLocation()
+          return
+        }
+        stagedMoveEnd = zoomToLocation
+        map.once('moveend', stagedMoveEnd)
+        map.flyTo({ ...camera, zoom: overviewZoom, duration: 900 })
+        return
+      }
+      map.flyTo({
+        ...camera,
+        zoom: location.zoom ?? 12,
+        ...(Number.isFinite(location.duration) ? { duration: location.duration } : {}),
+      })
     }
+    const cancelQueuedFocus = () => {
+      focusRequestId += 1
+      pendingLocation = null
+      if (stagedMoveEnd) {
+        map.off('moveend', stagedMoveEnd)
+        stagedMoveEnd = null
+      }
+    }
+    const stopCameraFlight = () => {
+      cancelQueuedFocus()
+      map.stop()
+    }
+    const mapInput = map.getCanvasContainer()
+    const cancelFocusFromPointer = () => cancelQueuedFocus()
+    const cancelFocusFromKeyboard = () => cancelQueuedFocus()
+    mapInput.addEventListener('pointerdown', cancelFocusFromPointer)
+    map.getCanvas().addEventListener('keydown', cancelFocusFromKeyboard)
 
     const switchMode = () => {
       const nextMode = requestedModeRef.current
       // Serialize style changes; rapid clicks keep only the latest request.
       if (loadingStyle || nextMode === activeMode) return
       pitches[activeMode] = map.getPitch()
+      if (stagedMoveEnd) {
+        map.off('moveend', stagedMoveEnd)
+        stagedMoveEnd = null
+      }
+      focusRequestId += 1
       map.stop()
       if (map.getTerrain()) map.setTerrain(null)
       activeMode = nextMode
@@ -149,11 +231,59 @@ export function TelescopeMap({ mode, attributionHostRef, onReady, onStatus, onOb
     const capture = () => ({ longitude: map.getCenter().wrap().lng, latitude: map.getCenter().lat, bearing: map.getBearing(), pitch: map.getPitch(), roll: map.getRoll(), zoom: map.getZoom(), mode: activeMode })
     const report = () => callbacks.current.onObservation?.(capture())
     map.on('moveend', report)
+    map.on('moveend', () => {
+      if (clearGlobalCameraAfterMove) {
+        globalCamera = null
+        clearGlobalCameraAfterMove = false
+      }
+    })
     map.on('rotate', report)
     map.on('idle', () => { flyToPendingLocation(); if (!loadingStyle && requestedModeRef.current === activeMode) callbacks.current.onStatus?.('ready'); report() })
     map.on('error', () => callbacks.current.onStatus?.('error'))
     callbacks.current.onStatus?.('loading')
-    callbacks.current.onReady?.({ goTo: location => { pendingLocation = location; requestedModeRef.current = location.mode === 'satellite' ? 'satellite' : 'globe'; switchMode(); flyToPendingLocation() }, getLocation: () => loadingStyle || map.isMoving() || activeMode !== requestedModeRef.current ? null : capture() })
+    callbacks.current.onReady?.({
+      goTo: location => {
+        clearGlobalCameraAfterMove = false
+        stopCameraFlight()
+        if (Number.isFinite(location.focusZoom) && !globalCamera) {
+          globalCamera = {
+            longitude: map.getCenter().wrap().lng,
+            latitude: map.getCenter().lat,
+            bearing: map.getBearing(),
+            pitch: map.getPitch(),
+            roll: map.getRoll(),
+            zoom: map.getZoom(),
+            mode: activeMode,
+          }
+        }
+        updateLocationMarker(location)
+        pendingLocation = location
+        requestedModeRef.current = location.mode === 'satellite' ? 'satellite' : 'globe'
+        switchMode()
+        flyToPendingLocation()
+      },
+      resetLocation: requestedMode => {
+        clearGlobalCameraAfterMove = false
+        stopCameraFlight()
+        updateLocationMarker({})
+        const savedCamera = globalCamera
+        pendingLocation = {
+          longitude: savedCamera?.longitude ?? map.getCenter().wrap().lng,
+          latitude: savedCamera?.latitude ?? map.getCenter().lat,
+          zoom: savedCamera?.zoom ?? 1,
+          duration: 1600,
+          mode: requestedMode === 'satellite' ? 'satellite' : 'globe',
+          bearing: savedCamera?.bearing ?? map.getBearing(),
+          pitch: savedCamera?.mode === requestedMode ? savedCamera.pitch : pitches[requestedMode === 'satellite' ? 'satellite' : 'globe'],
+          roll: savedCamera?.roll ?? map.getRoll(),
+        }
+        requestedModeRef.current = pendingLocation.mode
+        switchMode()
+        clearGlobalCameraAfterMove = true
+        flyToPendingLocation()
+      },
+      getLocation: () => loadingStyle || map.isMoving() || activeMode !== requestedModeRef.current ? null : capture(),
+    })
     const stageElement = containerRef.current.closest('.layout-editor-stage-box')
     let resolutionFrame = null
     const syncRenderingResolution = () => {
@@ -183,7 +313,10 @@ export function TelescopeMap({ mode, attributionHostRef, onReady, onStatus, onOb
       observer.disconnect()
       stageObserver.disconnect()
       window.removeEventListener('resize', scheduleResolutionSync)
+      mapInput.removeEventListener('pointerdown', cancelFocusFromPointer)
+      map.getCanvas().removeEventListener('keydown', cancelFocusFromKeyboard)
       if (resolutionFrame !== null) cancelAnimationFrame(resolutionFrame)
+      locationMarker?.remove()
       map.remove()
       attributionPosition.remove()
     }

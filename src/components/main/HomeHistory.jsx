@@ -40,12 +40,17 @@ export default function HomeHistory() {
   const close = useCallback(()=>setClosing(true),[])
   useLayoutEffect(()=>{alive.current=true;return()=>{alive.current=false;cancelAnimationFrame(frame.current)}},[])
   useLayoutEffect(()=>{
-    const observer = new ResizeObserver(()=>{
-      const node=viewport.current, next=withEpilogue(makeStripLayout(placements,node.clientWidth<700?.22:.28),node.clientWidth)
+    const resize = ()=>{
+      const node=viewport.current
+      // Keep the full stage and its controls usable on shorter desktop windows.
+      const scale=node.clientWidth<700?.22:Math.min(.38,Math.max(.22,(window.innerHeight-277)/1060))
+      const next=withEpilogue(makeStripLayout(placements,scale),node.clientWidth)
       setLayout(next); setSize({width:node.clientWidth,height:next.height})
-    })
+    }
+    const observer = new ResizeObserver(resize)
     observer.observe(viewport.current)
-    return()=>observer.disconnect()
+    window.addEventListener('resize',resize)
+    return()=>{observer.disconnect();window.removeEventListener('resize',resize)}
   },[])
   useLayoutEffect(()=>{
     const node=viewport.current
@@ -126,7 +131,7 @@ export default function HomeHistory() {
     opener.current=source||buttons.current[index]
     try {
       if(!images.current[index].complete || !images.current[index].naturalWidth){const image=new Image();image.src=HISTORY_RECORDS[index].src;await image.decode()}
-      if(alive.current){setSelection({index,origin:originFor(index)});setClosing(false);setHover(-1)}
+      if(alive.current){setSelection({index,origin:originFor(index)});setClosing(false);setHover(-1);stage.current.scrollIntoView({block:'nearest',behavior:'instant'})}
     }catch{if(alive.current)setNotice('這張插畫暫時無法載入，請稍後再試。')}
     finally{busy.current=false}
   }
@@ -201,9 +206,9 @@ export default function HomeHistory() {
       <div className="hh-reflection-panel" tabIndex={-1} autoFocus onAnimationEnd={event=>{if(event.target===event.currentTarget && event.animationName==='hh-reflection-out')finishReflectionClose()}}>
       <figure className="hh-reflection-image"><img src={worldImage} alt="地球文明史長卷結尾插畫" draggable="false"/></figure>
       <div className="hh-reflection-copy">
-        <p>大家都很努力，才有了今天。雖然幾個世紀裡也未必會出現多少位天才，但總的來說，正是世上每個人的努力，才推動了歷史。</p>
+        <p>大家都很努力，才有了今天。雖然足以改變時代的天才，幾個世紀裡也未必能出現幾位，但總的來說，正是世上每個人的付出，才推動了歷史。</p>
         <p>一個人的存在，必然會影響到其他人。由無數個蝴蝶效應交織、匯聚，才有了世界。這麼想，就感覺很感動。</p>
-        <p>能夠生活在這樣的世界，真是一件不可思議的事。</p>
+        <p>能夠生活在這樣的世界，真是一件不可思議的事！</p>
       </div>
       </div>
     </dialog>

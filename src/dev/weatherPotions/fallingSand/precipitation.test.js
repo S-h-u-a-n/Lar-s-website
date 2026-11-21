@@ -32,6 +32,16 @@ test('rain sources use the live local formation temperature',()=>{
   assert.equal(precipitationTemperature(w,20,45),-10)
   spawnAt(w,'rain',20,45,true);assert.equal(w.material[45*60+20],M.SNOW)
 })
+test('rain at normal ambient temperature remains rain in the upper atmosphere; cold air still produces snow',()=>{
+  const warm=createWorld();warm.temperature=18
+  assert.ok(spawnAt(warm,'rain',20,2,true))
+  assert.ok(precipitationTemperature(warm,20,2)>R.precipitationMixBand)
+  assert.equal(warm.material[2*warm.columns+20],M.WATER)
+  const cold=createWorld();cold.temperature=-10
+  assert.ok(spawnAt(cold,'rain',20,2,true))
+  assert.ok(precipitationTemperature(cold,20,2)<-R.precipitationMixBand)
+  assert.equal(cold.material[2*cold.columns+20],M.SNOW)
+})
 test('cold brush retains its local cooling alongside direct magical snowfall',()=>{
   const w=createWorld();w.temperature=1
   paintStroke(w,'cold',null,{x:150,y:100},1,true)

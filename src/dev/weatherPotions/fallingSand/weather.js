@@ -12,7 +12,7 @@ export function setInput(world, type, location = { x: world.columns * .50, y: wo
 }
 export function stopInput(world) { world.input = null; world.emission = 0 }
 export function environmentTemperature(world, y) {
-  return world.temperature - Math.max(0, world.rows * .49 - y) / world.rows * 50
+  return world.temperature - Math.max(0, world.rows * .49 - y) / world.rows * R.upperAirCooling
 }
 // Air temperature is evaluated live: empty cells' material temperatures are
 // not continuously updated. A short-lived local brush anomaly stays in space.

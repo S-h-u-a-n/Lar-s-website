@@ -25,6 +25,7 @@ import bigLineImage from '../../Art/Big/Big-decoration/Big-line.png'
 const BIG_MODEL_URL = new URL('../../Mode/Big.glb', import.meta.url).href
 const MAX_PIXEL_RATIO = 2
 const ENABLE_MINI_COSMOS = false
+const FUNCTIONAL_PORTAL_IDS = new Set(['globe', 'telescope', 'book-open1', 'book-close1', 'ball', 'potion'])
 const BIG_RENDER_COLOR = {
   brightness: 1.08,
   saturation: 1.03,
@@ -291,7 +292,7 @@ function softenCrystalballGlass(root) {
   }))
 }
 
-function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroduction, onCloseIntroduction, returnedFromEntrance, visitedBigPortals, hasBigIntroduction, presentation, children, navigation, viewportAspect, fitViewport = false, onFocusProgress }) {
+function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect, onOpenIntroduction, onCloseIntroduction, returnedFromEntrance, visitedBigPortals, hasBigIntroduction, presentation, children, navigation, viewportAspect, fitViewport = false, onFocusProgress }) {
   const [resourceStatus,setResourceStatus] = useState('loading')
   const [retry,setRetry] = useState(0)
   const hostRef = useRef(null)
@@ -737,9 +738,8 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
       if (distance <= 6 && duration <= 500) {
         const entry = resolveInteractionHit(intersections)
         if (entry?.type === 'portal') {
-          if (['book-open1', 'book-close1', 'ball', 'globe', 'telescope', 'potion'].includes(entry.id)) {
-            // Registered instruments use the same portal flow on every visit.
-            onPortalSelect?.(entry.id, getInteractionScreenCenter(entry))
+          if (FUNCTIONAL_PORTAL_IDS.has(entry.id)) {
+            onBigObjectSelect?.(entry.id, getInteractionScreenCenter(entry), () => focusSmallObject(entry))
           } else if (visitedBigPortals.includes(entry.id) && hasBigIntroduction?.(entry.id)) {
             focusSmallObject(entry)
             onOpenIntroduction?.(entry.id)
@@ -762,7 +762,11 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onOpenIntroductio
     const handleEditionInspect = event => {
       const entry=interactionRegistry?.entries.find(item=>item.id===event.detail?.id)
       if(!entry?.meshTargets.length)return
-      focusSmallObject(entry);onOpenIntroduction?.(entry.id)
+      if (entry.type === 'portal' && FUNCTIONAL_PORTAL_IDS.has(entry.id)) {
+        onBigObjectSelect?.(entry.id, getInteractionScreenCenter(entry), () => focusSmallObject(entry))
+      } else {
+        focusSmallObject(entry);onOpenIntroduction?.(entry.id)
+      }
     }
     window.addEventListener('edition-inspect-object',handleEditionInspect)
     const handlePointerLeave = () => {

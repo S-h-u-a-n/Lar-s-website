@@ -1,4 +1,16 @@
-export const RECOMMENDATIONS = [] // Future entries: { id, name, observation, description }
+import recommendationsMarkdown from '../../../content/telescope/recommendations.md?raw'
+import { parseRecommendations } from './recommendationsParser'
+
+const avatarFiles = import.meta.glob('../../../Art/avatar/*.jpg', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+})
+const avatarUrls = Object.fromEntries(
+  Object.entries(avatarFiles).map(([path, url]) => [path.replace('../../../', ''), url]),
+)
+
+export const RECOMMENDATIONS = parseRecommendations(recommendationsMarkdown, avatarUrls)
 
 // Deliberate map locations; not recommendations or character-authored records.
 export const RANDOM_LOCATIONS = [

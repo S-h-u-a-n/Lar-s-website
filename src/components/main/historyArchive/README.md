@@ -4,9 +4,11 @@
 
 ## 資料與素材
 
-- `records.json`：18 個時代的年代、區域、概述與可變長度的 `sections`。各分類包含 `title`、`paragraphs` 與 `sources`（條目 ID）；時代層級的 `sources` 是各分類來源依出現順序去重的清單。目前使用 4、5、6 個分類，渲染不限制分類或段落數量。正文於2026-11-11全面擴寫，補充背景、制度運作、生活及變遷，未設字數上限，不使用中英文分號。
-- `sources.json`：實際查閱的 Wikipedia 總覽與專題條目，包含中英文名稱及連結。查閱日期：2026-11-11。各分類的來源 ID 保留在資料中；`references.js` 依條目網址彙整去重（忽略章節、查詢參數、行動版網域、空格／底線及編碼差異），底部統一展開參考資料與範圍說明，連結保留原網址。
-- `data.js`：組合進站既有標籤、定位、透明命中遮罩與 Vite 素材 URL。
+- `content/history/01-*.md`～`18-*.md`：18 個時代的正式文章來源，包含地區、年代、導言、章節、正文與原文參考資料。`parseArticle.js` 依原始空行分段與獨立章節行解析，不要求 Markdown 標題語法；參考資料中的網址會轉為可點擊連結。
+- `records.json`：只保留 `people-1`～`people-18` 的人物 ID 與仍有使用的插畫註記，不再存放文章正文、年代、地區或來源。
+- `data.js`：以 Vite `import.meta.glob(..., { query: '?raw' })` 依檔名前綴排序讀取 Markdown，再組合文章、定位、透明命中遮罩與插畫 URL。
+- `wikipediaReferenceIds.json`：保留各時代原有的 Wikipedia 來源 ID 對應；`sources.json` 與 `references.js` 依各自時代的 ID 重建舊有參考連結。
+- 參考資料展開區先列原 Wikipedia 連結與核對說明，再列 Markdown 原始參考文字及連結；相同網址依 `referenceKey` 去重，不會跨時代共用來源。
 - 18 張原始 `Art/IntroScreen/history/people-1.PNG`～`people-18.PNG` 均為 2109×2984，未重繪、裁切、拉伸、鏡射或覆寫。
 
 ## 動畫與排列
@@ -62,4 +64,4 @@
 
 閱讀區沿用 flex:1、min-height:0 與 overflow-y:auto，正文按 paragraphs 逐段渲染，未設行數截斷或固定正文高度。底部導覽位於捲動區之外。
 
-`node --test src/components/main/historyArchive/*.test.mjs src/dev/history/interactions.test.mjs` 檢查全部正文段落、18個時代的底部去重來源、分號規則與既有互動。渲染測試採獨立暫存目錄，避免影響開發預覽的相依套件快取。
+`node --test src/components/main/historyArchive/*.test.mjs src/dev/history/interactions.test.mjs` 檢查 Markdown 順序、解析出的文章欄位、章節及段落渲染、參考資料連結與既有互動。渲染測試採獨立暫存目錄，避免影響開發預覽的相依套件快取。

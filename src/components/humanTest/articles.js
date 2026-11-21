@@ -1,26 +1,26 @@
 import { article, publicReference } from '../research/articleData'
 export const ARTICLE_LIST = [
-  article('early-humans', 'EARLY HUMANS', '早期人類', 'Fossils, tools and human origins.',
+  article('early-humans', 'EARLY HUMANS', '歷史與時代', 'Fossils, tools and human origins.',
     '人類演化不是從某種現代猿直接變成人的直線階梯，而是具有共同祖先、分支與交流的歷史。化石、工具及遺傳資料共同提供線索。', ['Human evolution'], [
       ['身體與生活的改變', '直立行走、手部操作、食物取得與腦部變化並非在同一時間完成。不同人族曾同時存在；工具或火的使用也需要依個別遺址證據判斷，不能只由物種名稱推定。'],
       ['遷徙與證據限制', '現代人起源於非洲，之後擴散至其他地區，並與部分古人群發生基因交流。新化石可能改變親緣或年代判斷；考古中沒有發現某種材料，不一定表示當時完全不曾使用。'],
     ]),
-  article('cities', 'FIRST CITIES', '最早的城市', 'Settlements become urban communities.',
+  article('cities', 'FIRST CITIES', '文明與發展', 'Settlements become urban communities.',
     '最早城市的形成涉及人口集中、分工、交換與政治組織，並不只等於房屋變多。考古學對「城市」的判準不同，因此最早城市沒有毫無爭議的單一答案。', [['History of cities', 'History_of_the_city']], [
       ['從聚落到城市', '糧食生產與儲存可支持部分人從事工藝、管理或交易，公共建築與基礎設施也逐漸出現。這些條件會互相影響，並非所有地區都走過相同發展步驟。'],
       ['以兩河流域為例', '烏魯克等城市呈現大型聚落、行政記錄與區域交換網絡的發展。研究者也比較其他地區的都市中心，避免把單一城市模式視為普遍標準；早期城市既帶來合作，也有資源與權力分配問題。'],
     ]),
-  article('ancient-civilizations', 'ANCIENT CIVILIZATIONS', '古代文明', 'Different paths to complex societies.',
+  article('ancient-civilizations', 'ANCIENT CIVILIZATIONS', '歷史事件', 'Different paths to complex societies.',
     '古代文明常用來討論具有城市、制度、專業分工與文化傳承的複雜社會。這是分析歷史的概念，不是把族群排成高低等級。', ['Cradle of civilization'], [
       ['多個發展中心', '兩河流域、尼羅河流域、印度河流域、中國及美洲等地形成不同的複雜社會。灌溉、貿易、宗教與政治制度的重要性因地而異，文字也不是每個社會都以相同形式出現。'],
       ['如何認識沒有留下完整記錄的社會？', '建築、墓葬、植物遺存與器物能補充文獻，但每種資料都有保存偏差。比較不同地區時，應區分已知證據與推論，也不要把後世國界直接套回古代文化範圍。'],
     ]),
-  article('trade-routes', 'TRADE ROUTES', '貿易路線', 'Goods, people and knowledge on the move.',
+  article('trade-routes', 'TRADE ROUTES', '歷史人物', 'Goods, people and knowledge on the move.',
     '貿易路線是連結生產地、市場與中轉地的陸海網絡。它們運送商品，也讓技術、語言、宗教與疾病隨人群移動。', ['Trade route'], [
       ['路線如何形成？', '地形、水源、季風、交通技術與政治安全影響路徑及成本。商人可能只走其中一段，商品經多次轉手才抵達遠方，並不是每件貨物都由同一人全程運送。'],
       ['絲路不只一條路', '絲綢之路包含多條隨時代改變的路線，印度洋航海則利用季風連接港口。商品流通可促進交流，也可能伴隨強迫勞動、掠奪與不平等，不能只用繁榮概括全部經驗。'],
     ]),
-  article('timeline', 'A THREAD OF TIME', '人類歷史時間軸', 'Comparing change across time.',
+  article('timeline', 'A THREAD OF TIME', '考古與史料', 'Comparing change across time.',
     '歷史時間軸把事件放在相對次序中，方便比較前後關係；但同一年份的不同地方，可能正經歷完全不同的生活與制度。', ['Human history'], [
       ['年代與分期', '史前、古代或近代等分期是研究工具，界線與適用地區並不完全一致。文字出現後仍有許多人未留下自述，歷史也需借助考古、口述與環境資料。'],
       ['閱讀下方時間軸', '四個節點分別舉出文字、歐洲印刷、鐵路與全球資訊網的變化，不是完整發明清單。某項技術的出現、擴散與普及往往分屬不同年代；時間先後也不等於已證明因果。'],
@@ -85,32 +85,32 @@ export const ARTICLE_LIST = [
       ['描述與期待', '大家實際常做什麼，與大家認為應該做什麼，是不同問題。排隊、讓座或交談距離的慣例可能因地方而異，理解差異不代表任何規範都無需批判。'],
       ['示例與真實社會', '規範可促進協調，也可能維持排除與不平等。下方保留原有列車學生對話作為介面示例，尚待正式劇本替換；它不是地球史實或正式世界觀設定，也不代表所有地方的乘車習慣。'],
     ]),
-  article('scientific-method', 'THE SCIENTIFIC METHOD', '科學方法', 'Questions tested against evidence.',
+  article('scientific-method', 'THE SCIENTIFIC METHOD', '科學方法與發現', 'Questions tested against evidence.',
     '科學研究透過觀察、提出可檢驗解釋、蒐集證據與修正模型來理解世界。實際研究不一定照固定步驟單向前進，而常反覆比較與調整。', ['Scientific method'], [
       ['檢驗與控制', '假說需要提出可與觀察比較的預測，實驗盡量控制其他條件，例如比較光照對幼苗生長的影響時，需留意水分與品種差異。天文與歷史科學未必能重做整個事件，仍可利用多種獨立證據檢驗解釋。'],
       ['結果如何可信？', '方法透明、資料品質、重複研究與同行檢視有助發現錯誤。相關不等於因果，一次結果也不是永遠的證明；承認誤差和不確定性，是評估知識的重要部分。'],
     ]),
-  article('printing', 'PRINTING', '印刷術', 'Reproducing words and images.',
+  article('printing', 'PRINTING', '工程與技術', 'Reproducing words and images.',
     '印刷利用版面或數位設備重複產生文字與圖像，改變書籍、新聞及知識流通。不同地區的雕版、活字與機械化發展，不能只用單一發明者概括。', ['Printing'], [
       ['技術如何不同？', '雕版把整頁刻在版上，活字則可重新排列個別字模。東亞較早發展雕版和活字，十五世紀歐洲的金屬活字印刷體系則促進當地書籍大量生產。'],
       ['從技術到社會', '紙張、油墨、排版、識字與市場共同影響出版；有印刷機不等於資訊能自由流通。今日膠印與數位印刷用於不同需求，讀者也需區分大量複製的能力與內容本身的可信度。'],
     ]),
-  article('electricity', 'ELECTRICITY', '電力', 'Charge, circuits and energy transfer.',
+  article('electricity', 'ELECTRICITY', '能源與電力', 'Charge, circuits and energy transfer.',
     '電現象與電荷及其運動有關。電流、電壓和電阻描述不同物理量；電力系統則把能量從發電端輸送到使用設備。', ['Electricity'], [
       ['基本概念', '電流是電荷流動率，電壓描述每單位電荷的電位能差，電阻反映材料與構造對電流的影響。導體與絕緣體行為不同，電路必須有適當路徑才能持續運作。'],
       ['發電不是製造能量', '發電機把機械能轉換成電能，太陽能電池則利用光能；能量不會憑空產生。電網需要平衡供需與維持安全，發電來源、儲能及輸送方式也影響環境與可靠度。'],
     ]),
-  article('computers', 'COMPUTERS', '電腦', 'Programs turn instructions into operations.',
+  article('computers', 'COMPUTERS', '資訊與電腦', 'Programs turn instructions into operations.',
     '電腦依程式處理資料，可進行計算、儲存與控制。它的用途不只數字運算，文字、影像與聲音也能以編碼方式處理。', ['Computer'], [
       ['硬體與軟體', '處理器執行指令，記憶體存放運作中的資料，儲存裝置保留較長期資訊。程式和作業系統安排這些資源；同一硬體可因軟體不同而完成多種任務。'],
       ['資料與判斷', '二進位是常用表示方式，不代表電腦理解資料的社會意義。輸入錯誤、程式缺陷或偏差資料都可能造成錯誤結果；快速輸出與可信結論是不同的事。'],
     ]),
-  article('networks', 'THE INTERNET', '網際網路', 'Networks exchange packets.',
+  article('networks', 'THE INTERNET', '通訊與網際網路', 'Networks exchange packets.',
     '網際網路是以共同協定互連的全球網路系統。全球資訊網是其中一種服務，電子郵件、檔案傳輸等也使用網際網路，兩者不能直接畫上等號。', ['Internet'], [
       ['資料如何旅行？', '資料可拆成封包，經路由器與多個網路到達目的地；協定規定傳送與解讀方式。光纖、無線與海底電纜提供實體連結，並非所有資料都透過衛星傳送。'],
       ['連結與限制', '網站可互相連結，不表示所有人都擁有同樣設備、語言或接取機會。資訊來源、隱私與安全需要持續評估；搜尋排名或轉傳次數不能代替內容查證。'],
     ]),
-  article('space-exploration', 'SPACE EXPLORATION', '太空探索', 'Engineering beyond Earth.',
+  article('space-exploration', 'SPACE EXPLORATION', '航太與太空探索', 'Engineering beyond Earth.',
     '太空探索透過望遠鏡、無人探測器與載人任務研究地球之外的環境。這裡著重探索方法與歷史，天體本身的介紹則由 Globe 頁提供。', ['Space exploration'], [
       ['不同任務的選擇', '飛越能快速接近目標，環繞器可長期觀測，著陸器與探測車研究地表，採樣返回則把材料帶回地球。燃料、通訊延遲、輻射與生命維持限制任務設計。'],
       ['歷史與合作', '1957 年史普尼克一號進入軌道，1969 年阿波羅 11 號首次載人登月，是重要節點。太空活動也包括地球觀測、國際合作與商業服務，同時需要處理成本、碎片及不同使用者的利益。'],
@@ -125,7 +125,7 @@ export const ARTICLE_LIST = [
       ['規則與程序', '憲法、立法、判例或習慣在不同法系中扮演不同角色。程序、公平審理與權力限制影響法律如何落實；紙上有規定，不代表每個人都能同等取得救濟。'],
       ['權利與爭議', '人權概念包括平等、信仰自由與受教育等基本保障，不因身分差異而失去尊嚴；具體法律實現仍受不同條約和制度影響。權利可能相互牽涉，應交代適用範圍與限制理由，不能用單一口號解決所有衝突。'],
     ]),
-  article('democracy', 'DEMOCRACY', '民主制度', 'Participation, representation and accountability.',
+  article('democracy', 'DEMOCRACY', '政治制度', 'Participation, representation and accountability.',
     '民主涉及人民參與公共權力與決策，可採直接或代議方式。選舉是重要機制，但評估制度還需要看參與條件、權利與問責。', ['Democracy'], [
       ['不同實作方式', '代議制度由選出的代表處理許多決策，直接民主則讓公民對特定議題直接表決。選制、任期、議會與行政關係不同，會影響代表性與決策過程。'],
       ['多數與保障', '多數決不是民主全部；言論、結社、資訊取得及少數權利也影響參與是否實質平等。制度運作品質不能只由名稱或一次投票判斷，需要比較長期程序和實際權力關係。'],
@@ -140,7 +140,7 @@ export const ARTICLE_LIST = [
       ['市場與規劃', '市場透過價格和交易協調部分活動，政府規劃與公共機構也能分配資源。現實社會通常混合多種機制，例如公營交通與私人商店可以並存；資本主義或社會主義等名稱之下也有很大差異。'],
       ['多面向比較', '效率、平等、自由、穩定與環境永續可能涉及取捨。比較制度需要說明衡量方式、時代及條件，不能只挑單一成功或失敗案例，就推論所有地方都會有同樣結果。'],
     ]),
-  article('international-cooperation', 'INTERNATIONAL COOPERATION', '國際合作', 'Working across borders.',
+  article('international-cooperation', 'INTERNATIONAL COOPERATION', '國際關係', 'Working across borders.',
     '國際合作讓不同國家與其他參與者協調跨境問題，形式包括條約、共同計畫與國際組織。合作不表示各方利益從此完全一致。', ['International organization'], [
       ['組織與規則', '政府間組織由成員政府依協議成立，非政府組織則有不同組成。聯合國與區域組織提供討論、協調及特定行動的平台，但權限取決於規則與成員授權。'],
       ['共同問題與限制', '氣候、傳染病、交通與海洋使用都可能跨越國界。資料分享與共同標準有助協作，資源差距、履約與主權考量則可能造成分歧。理解合作，需要同時看共同目標和實際執行能力。'],

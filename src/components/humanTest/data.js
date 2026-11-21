@@ -1,5 +1,6 @@
 import { CARD_DESCRIPTIONS } from '../research/cardDescriptions'
 import { withResearchPhoto } from '../research/photoConfig'
+import { loadArticleMarkdown } from '../research/articleMarkdown'
 import { STYLE } from '../naturalTest/data'
 import { ARTICLES_BY_ID } from './articles'
 export { STYLE }
@@ -22,11 +23,17 @@ export const ENTRIES = CATEGORIES.flatMap(category => category.entries.map((id,i
 }))
 export const entryById = Object.fromEntries(ENTRIES.map(entry => [entry.id,entry]))
 const existingIds = new Set(['cities','timeline','theatre','books','commute','conversation','printing','networks','bridges','library'])
-export const CONTENT = Object.fromEntries(ENTRIES.map(entry => [entry.id, {
+const contentRecords = ENTRIES.map(entry => ({
   ...withResearchPhoto('human', ARTICLES_BY_ID[entry.id]), subtitle:ARTICLES_BY_ID[entry.id].chineseName,
   note:existingIds.has(entry.id) ? 'A useful question for our next visit: which everyday skill would we need to learn before leaving our wands at home?' : null,
   author:existingIds.has(entry.id) ? 'Mira · student researcher' : null,
-}]))
+}))
+const markdownContent = loadArticleMarkdown(
+  contentRecords,
+  import.meta.glob('/content/human/*.md', { eager:true, query:'?raw', import:'default' }),
+  'Human articles',
+)
+export const CONTENT = Object.fromEntries(contentRecords.map(record => [record.id, markdownContent[record.id]]))
 // Existing timeline, recommendation and dialogue are retained verbatim below.
 CONTENT.timeline.steps = [{ year: 'c. 3200 BCE', title: 'Writing', text: 'Marks preserve words beyond a conversation.' }, { year: 'c. 1450', title: 'Printing in Europe', text: 'Movable type helps reproduce pages in large numbers.' }, { year: '1830s', title: 'Railways expand', text: 'Schedules become part of everyday journeys.' }, { year: '1990s', title: 'The Web', text: 'Linked documents connect readers across distances.' }]
 CONTENT.books.work = { name: 'Around the World in Eighty Days', kind: 'Novel · Jules Verne', description: 'A fictional journey shaped by transport, timetables, and unexpected company.', recommendation: 'Try reading with a map nearby. We kept pausing to ask how the travelers would solve each problem without a portal.' }

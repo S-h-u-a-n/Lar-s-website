@@ -11,7 +11,7 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value))
 const notifyEditing = active => window.dispatchEvent(new CustomEvent('layout-editor-editing', { detail: { active } }))
 const normalizeRotation = value => ((value + 180) % 360 + 360) % 360 - 180
 
-function LayoutEditor({ pageId, externalElements, items, initialItems = items, onChange, referenceImage, draftKey, layoutId = 'layout', hoverEnabled = false, defaultHoverOffsetX = 56, onItemActivate, interactiveWhenClosed = false, renderGroupContent, renderItemOverlay, stage, renderNode, containerRef, stageBoundsRef, editorEnabled = true, canSelectItem = ALWAYS_SELECTABLE, migrateDraft = IDENTITY_DRAFT_MIGRATION }) {
+function LayoutEditor({ pageId, externalElements, items, initialItems = items, onChange, onSelectionChange, referenceImage, referenceItemId, draftKey, layoutId = 'layout', hoverEnabled = false, defaultHoverOffsetX = 56, onItemActivate, interactiveWhenClosed = false, renderGroupContent, renderItemOverlay, stage, fitContent = true, scaleHeightWithWidth = false, renderNode, containerRef, stageBoundsRef, editorEnabled = true, canSelectItem = ALWAYS_SELECTABLE, migrateDraft = IDENTITY_DRAFT_MIGRATION }) {
   const editorId = useId()
   const draftDirty = useRef(false)
   const [, refreshBounds] = useState(0)
@@ -35,7 +35,7 @@ function LayoutEditor({ pageId, externalElements, items, initialItems = items, o
     window.addEventListener('resize', update)
     return () => { observer.disconnect(); window.removeEventListener('resize', update) }
   }, [stageBoundsRef])
-  const fitBounds = stageBoundsRef && contentBounds ? contentBounds : { x: 0, y: 0, width: stage?.width || 1, height: stage?.height || 1 }
+  const fitBounds = stageBoundsRef && fitContent && contentBounds ? contentBounds : { x: 0, y: 0, width: stage?.width || 1, height: stage?.height || 1 }
   const stageScale = stage && stageBounds ? Math.min(stageBounds.width / fitBounds.width, stageBounds.height / fitBounds.height) : stage ? Math.min(viewportWidth / stage.width, viewportHeight / stage.height) : 1
   const unitW = stage ? stage.width : 0
   const unitH = stage ? stage.height : 0
@@ -48,7 +48,7 @@ function LayoutEditor({ pageId, externalElements, items, initialItems = items, o
   // rather than assuming every element remains inside the nominal design rectangle.
   useLayoutEffect(() => {
     const box = stageBoxRef.current
-    if (!stageBoundsRef || !stage || !box) return
+    if (!stageBoundsRef || !stage || !box || !fitContent) return
     const measure = () => {
       const base = box.getBoundingClientRect()
       const scale = base.width / stage.width
@@ -73,7 +73,7 @@ function LayoutEditor({ pageId, externalElements, items, initialItems = items, o
     mutations.observe(box, { subtree: true, attributes: true, childList: true, characterData: true })
     document.fonts?.ready.then(measure)
     return () => { resize.disconnect(); mutations.disconnect() }
-  }, [stageBoundsRef, stage?.width, stage?.height, items])
+  }, [stageBoundsRef, stage?.width, stage?.height, items, fitContent])
   const itemPosition = item => {
     if (externalElements) {
       const rect = externalElements.current.get(item.id)?.getBoundingClientRect()
@@ -115,7 +115,7 @@ function LayoutEditor({ pageId, externalElements, items, initialItems = items, o
     return () => cancelAnimationFrame(frame)
   }, [externalElements, isOpen])
   const [selectedId, setSelectedId] = useState(items[0]?.id)
-  const [referenceVisible, setReferenceVisible] = useState(Boolean(referenceImage))
+  const [referenceVisible, setReferenceVisible] = useState(Boolean(referenceImage || referenceItemId))
   const [referenceOpacity, setReferenceOpacity] = useState(0.3)
   const [copiedConfig, setCopiedConfig] = useState('')
   const [hoveredId, setHoveredId] = useState(null)
@@ -125,12 +125,20 @@ function LayoutEditor({ pageId, externalElements, items, initialItems = items, o
   const itemRefs = useRef({})
   const panelRef = useRef(null)
   const panelDragRef = useRef(null)
-  const selectableItems = items.filter(canSelectItem).filter(item => !externalElements || isEditorTargetVisible(externalElements.current.get(item.id)))
+  const showEditor = import.meta.env.DEV && editorEnabled && isOpen
+  const selectableItems = items.filter(canSelectItem)
+    .filter(item => !item.editorOnly || showEditor)
+    .filter(item => item.id !== referenceItemId || referenceVisible)
+    .filter(item => !externalElements || isEditorTargetVisible(externalElements.current.get(item.id)))
   const selected = selectableItems.find(item => item.id === selectedId) || selectableItems[0]
 
   useEffect(() => {
     if (selected?.id !== selectedId) setSelectedId(selected?.id)
   }, [selected?.id, selectedId])
+
+  useEffect(() => {
+    if (selected) onSelectionChange?.(selected.id)
+  }, [selected?.id, onSelectionChange])
 
   useEffect(() => {
     if (!import.meta.env.DEV || !draftKey) return undefined
@@ -181,9 +189,8 @@ function LayoutEditor({ pageId, externalElements, items, initialItems = items, o
     window.dispatchEvent(new CustomEvent('layout-editor-scope', { detail: { id: layoutId, open: isOpen } }))
   }, [isOpen, layoutId])
 
-  const showEditor = import.meta.env.DEV && editorEnabled && isOpen
-
-  const updateSelected = patch => { draftDirty.current = true; onChange(items.map(item => item.id === selectedId ? { ...item, ...patch } : item)) }
+  const updateItem = (id, patch) => { draftDirty.current = true; onChange(items.map(item => item.id === id ? { ...item, ...patch } : item)) }
+  const updateSelected = patch => { if (selected) updateItem(selected.id, patch) }
   const beginPanelDrag = event => {
     if (event.target.closest('select, button, input, textarea')) return
     const rect = panelRef.current.getBoundingClientRect()
@@ -231,20 +238,24 @@ function LayoutEditor({ pageId, externalElements, items, initialItems = items, o
     const dy = event.clientY - interaction.start.y
     if (interaction.type === 'move' && externalElements) {
       const delta = localDragDelta(externalElements.current.get(interaction.item.id), dx, dy)
-      updateSelected({ x: interaction.item.x + delta.x, y: interaction.item.y + delta.y })
+      updateItem(interaction.item.id, { x: interaction.item.x + delta.x, y: interaction.item.y + delta.y })
     } else if (interaction.type === 'move') {
       const viewportPositioned = stage && interaction.item.coordinateSpace === 'viewport'
       const bounds = containerRect()
-      updateSelected({
+      updateItem(interaction.item.id, {
         x: interaction.item.x + dx / (containerRef ? bounds?.width || 1 : viewportPositioned ? viewportWidth : stage ? stage.width * stageScale : innerWidth) * 100,
         y: interaction.item.y + dy / (containerRef ? bounds?.height || 1 : viewportPositioned ? viewportHeight : stage ? stage.height * stageScale : innerHeight) * 100,
       })
     }
     else if (interaction.type === 'rotate') {
       const angle = Math.atan2(event.clientY - interaction.center.y, event.clientX - interaction.center.x)
-      updateSelected({ rotation: interaction.item.rotation + (angle - interaction.angle) * 180 / Math.PI })
+      updateItem(interaction.item.id, { rotation: interaction.item.rotation + (angle - interaction.angle) * 180 / Math.PI })
     } else {
-      updateSelected({ width: clamp(interaction.item.width * Math.max(0.2, Math.hypot(event.clientX - interaction.center.x, event.clientY - interaction.center.y) / Math.max(20, interaction.distance)), 4, externalElements ? 4000 : 300) })
+      const width = clamp(interaction.item.width * Math.max(0.2, Math.hypot(event.clientX - interaction.center.x, event.clientY - interaction.center.y) / Math.max(20, interaction.distance)), 4, externalElements ? 4000 : 300)
+      updateItem(interaction.item.id, {
+        width,
+        ...(scaleHeightWithWidth && typeof interaction.item.height === 'number' ? { height: interaction.item.height * width / interaction.item.width } : {}),
+      })
     }
   }
   const end = event => {
@@ -285,14 +296,17 @@ function LayoutEditor({ pageId, externalElements, items, initialItems = items, o
       {showEditor && referenceImage && <img className="layout-editor-reference" src={referenceImage} alt="" style={{ opacity: referenceVisible ? referenceOpacity : 0 }} />}
       <div className={`layout-editor-stage${externalElements ? ' layout-editor-stage--external' : ''}${containerRef ? ' layout-editor-stage--contained' : ''}${showEditor ? ' is-open' : ''}${hoverEnabled ? ' has-hover' : ''}${interactiveWhenClosed ? ' interactive-closed' : ''}`}>
         <div ref={stageBoxRef} className={`layout-editor-stage-box${stage?.className ? ` ${stage.className}` : ''}`} style={stage ? { visibility: stageBoundsRef && !stageBounds ? 'hidden' : undefined, position: 'absolute', left: 0, top: 0, width: `${stage.width}px`, height: `${stage.height}px`, transformOrigin: '0 0', transform: `translate(${stageOffsetX}px, ${stageOffsetY}px) scale(${stageScale})` } : { display: 'contents' }}>
-        {(externalElements ? showEditor ? selectableItems : [] : items).map(item => {
+        {(externalElements ? showEditor ? selectableItems : [] : items)
+          .filter(item => !item.editorOnly || showEditor)
+          .filter(item => item.id !== referenceItemId || referenceVisible)
+          .map(item => {
           const selectable = canSelectItem(item)
           const isHovered = hoverEnabled && !showEditor && hoveredId === item.id
           const hoverOffsetX = item.hoverOffsetX ?? defaultHoverOffsetX
           const hoverRotation = clamp(normalizeRotation(item.rotation) * -0.08, -8, 8)
           const position = itemPosition(item)
           if (item.isNode) return <div key={item.id} id={item.id} ref={element => { itemRefs.current[item.id] = element }} className={`layout-editor-item${showEditor && item.id === selectedId ? ' is-selected' : ''}`} data-layout-id={item.id} onPointerDown={showEditor && selectable ? event => { setSelectedId(item.id); beginDrag(event, 'move', item) } : undefined} style={{ ...position, height: externalElements || typeof item.height === 'number' ? itemHeight(item) : 'auto', zIndex: item.zIndex, aspectRatio: item.ratio, borderRadius: typeof item.borderRadius === 'number' ? `${item.borderRadius}%` : undefined, pointerEvents: selectable ? undefined : 'none', transform: externalElements ? 'none' : `rotate(${item.rotation}deg)` }}>{renderNode?.(item)}</div>
-          const itemProps = { id: item.id, ref: element => { itemRefs.current[item.id] = element }, className: `layout-editor-item${showEditor && item.id === selectedId ? ' is-selected' : ''}${isHovered ? ' is-hovered' : ''}`, 'data-layout-id': item.id, 'data-sequence-item-id': item.id, 'data-sequence-fading': item.sequenceFading && !item.groupId ? 'true' : undefined, onPointerEnter: selectable && hoverEnabled && !showEditor ? () => setHoveredId(item.id) : undefined, onPointerLeave: selectable && hoverEnabled && !showEditor ? () => setHoveredId(current => current === item.id ? null : current) : undefined, onClick: selectable && !showEditor && onItemActivate ? event => { event.stopPropagation(); onItemActivate(item.id) } : undefined, onPointerDown: showEditor && selectable ? event => { setSelectedId(item.id); beginDrag(event, 'move', item) } : undefined, style: { ...position, height: item.groupId ? '100%' : 'auto', zIndex: isHovered ? item.zIndex + 100 : item.zIndex, aspectRatio: item.ratio, opacity: item.groupId ? 1 : item.opacity ?? 1, pointerEvents: selectable ? undefined : 'none', transform: item.groupId ? 'none' : `translateX(${isHovered ? hoverOffsetX : 0}px) rotate(${isHovered ? item.rotation + hoverRotation : item.rotation}deg)` } }
+          const itemProps = { id: item.id, ref: element => { itemRefs.current[item.id] = element }, className: `layout-editor-item${showEditor && item.id === selectedId ? ' is-selected' : ''}${isHovered ? ' is-hovered' : ''}`, 'data-layout-id': item.id, 'data-sequence-item-id': item.id, 'data-sequence-fading': item.sequenceFading && !item.groupId ? 'true' : undefined, onPointerEnter: selectable && hoverEnabled && !showEditor ? () => setHoveredId(item.id) : undefined, onPointerLeave: selectable && hoverEnabled && !showEditor ? () => setHoveredId(current => current === item.id ? null : current) : undefined, onClick: selectable && !showEditor && onItemActivate ? event => { event.stopPropagation(); onItemActivate(item.id) } : undefined, onPointerDown: showEditor && selectable ? event => { setSelectedId(item.id); beginDrag(event, 'move', item) } : undefined, style: { ...position, height: item.groupId ? '100%' : 'auto', zIndex: isHovered ? item.zIndex + 100 : item.zIndex, aspectRatio: item.ratio, opacity: item.id === referenceItemId ? referenceOpacity : item.groupId ? 1 : item.opacity ?? 1, pointerEvents: selectable ? undefined : 'none', transform: item.groupId ? 'none' : `translateX(${isHovered ? hoverOffsetX : 0}px) rotate(${isHovered ? item.rotation + hoverRotation : item.rotation}deg)` } }
           const overlay = renderItemOverlay?.(item)
           const image = overlay
             ? <div key={item.id} {...itemProps} className={`${itemProps.className} layout-editor-item-with-overlay`}><img className="layout-editor-item-image" src={item.src} alt="" draggable="false" /><span className="layout-editor-item-overlay">{overlay}</span></div>
@@ -329,7 +343,7 @@ function LayoutEditor({ pageId, externalElements, items, initialItems = items, o
           {[['X', 'x'], ['Y', 'y'], ['Width', 'width'], ...(typeof selected?.height === 'number' ? [['Height', 'height']] : []), ...(typeof selected?.borderRadius === 'number' ? [['Border Radius (%)', 'borderRadius']] : []), ['Rotation', 'rotation'], ['Z-index', 'zIndex']].map(([label, key]) => <label key={key}>{label}<input type="number" step={key === 'zIndex' ? 1 : 0.1} value={selected?.[key] ?? 0} onChange={event => updateSelected({ [key]: key === 'zIndex' ? Math.round(Number(event.target.value)) : Number(event.target.value) })} /></label>)}
           <div className="layout-editor-actions"><button onClick={() => updateSelected({ zIndex: selected.zIndex + 1 })}>Bring Forward</button><button onClick={() => updateSelected({ zIndex: Math.max(stage ? -99 : 1, selected.zIndex - 1) })}>Send Backward</button></div>
           <div className="layout-editor-actions"><button onClick={resetSelected}>Reset Selected</button><button onClick={copyConfig}>Copy Config</button></div>
-          {referenceImage && <><label className="layout-editor-check"><input type="checkbox" checked={referenceVisible} onChange={event => setReferenceVisible(event.target.checked)} /> Reference ON / OFF</label><label>Reference opacity<input type="range" min="0" max="1" step="0.01" value={referenceOpacity} onChange={event => setReferenceOpacity(Number(event.target.value))} /></label></>}
+          {(referenceImage || referenceItemId) && <><label className="layout-editor-check"><input type="checkbox" checked={referenceVisible} onChange={event => setReferenceVisible(event.target.checked)} /> Reference ON / OFF</label><label>Reference opacity<input type="range" min="0" max="1" step="0.01" value={referenceOpacity} onChange={event => setReferenceOpacity(Number(event.target.value))} /></label></>}
           {draftKey && <button onClick={clearDraft}>Clear Draft</button>}
           {copiedConfig && <textarea readOnly value={copiedConfig} aria-label="Copied layout config" />}
         </aside>, document.body)}

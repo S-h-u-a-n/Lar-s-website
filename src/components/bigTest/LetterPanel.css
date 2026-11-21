@@ -2,11 +2,18 @@
    The academy note reuses this panel while standard diary pages keep their layout. */
 .big-test-document-panel.big-test-letter-panel {height:45%;min-height:45%;overflow:hidden;background:var(--letter-paper);}
 .big-test-letter-panel .big-test-letter-cover {min-width:0;min-height:0;overflow:hidden;background:var(--letter-cover);}
+.big-test-letter-panel.is-letter-list {overflow:visible;}
+.big-test-letter-panel.has-letter-artwork .big-test-letter-cover {overflow:visible;}
 .big-test-letter-cover .big-test-document-dots {pointer-events:none;}
-.big-test-letter-cover > .big-test-letter-icon {position:absolute;inset:7%;width:86%;height:86%;object-fit:contain;transform:none;z-index:1;pointer-events:none;user-select:none;}
+.big-test-letter-default-square {position:absolute;left:50%;top:50%;z-index:1;width:54%;aspect-ratio:1;background:#fff;transform:translate(-50%,-50%) rotate(-6deg);pointer-events:none;}
+.big-test-letter-cover .layout-editor-item > .big-test-letter-icon,
+.big-test-letter-default-image {display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none;}
 .big-test-letter-copy {display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:1cqw;min-width:0;min-height:0;overflow:hidden;color:var(--letter-ink);}
 .big-test-letter-copy h2 {margin:0 0 .4cqw;}
 .big-test-letter-panel .big-test-letter-subtitle {margin:0;font:400 clamp(11px,1cqw,16px)/1.4 var(--display);}
+.big-test-letter-artwork-transition {position:absolute;inset:0;z-index:2;transform-origin:center;overflow:visible;}
+.big-test-letter-copy-slot {position:relative;min-width:0;min-height:0;overflow:hidden;}
+.big-test-letter-copy-slot > .big-test-letter-copy {position:absolute;inset:0;width:100%;height:100%;transition:none!important;}
 .big-test-letter-body {min-height:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;scrollbar-width:thin;padding-right:.6cqw;}
 .big-test-letter-panel .big-test-letter-body p {margin:0 0 1em;font:15px/1.9 Georgia,'Songti TC',serif;white-space:pre-line;}
 .big-test-letter-body p:last-child {margin-bottom:0;}
@@ -39,3 +46,7 @@
 .big-test-letter-body .nt-article-body ol {margin:0 0 1em;padding-left:1.5em;}
 .big-test-letter-body .nt-article-body a {color:inherit;text-underline-offset:2px;}
 .big-test-envelope-icon {color:var(--letter-ink);}
+@media(prefers-reduced-motion:reduce) {
+  .big-test-letter-artwork-transition,
+  .big-test-letter-copy-slot > .big-test-letter-copy {transform:none!important;}
+}

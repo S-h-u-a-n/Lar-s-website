@@ -45,6 +45,15 @@ test('astronomy uses reviewed Chinese content and the existing globe route', () 
   assert.equal(Object.values(ARTICLES).filter(a => a.relatedPage).length, 1)
 })
 
+test('astronomy topic labels update without changing topic order or IDs', () => {
+  const astronomy = CATEGORIES.find(c => c.id === 'astronomy')
+  assert.deepEqual(astronomy.entries, ['observational-astronomy', 'stellar-evolution', 'galaxies', 'cosmology', 'space-exploration', 'exoplanets'])
+  assert.equal(ENTRIES.find(entry => entry.id === 'stellar-evolution').chineseName, '恆星與天體演化')
+  assert.equal(ARTICLES['stellar-evolution'].chineseName, '恆星與天體演化')
+  assert.equal(ENTRIES.find(entry => entry.id === 'space-exploration').chineseName, '太空探索與航天科技')
+  assert.equal(ARTICLES['space-exploration'].chineseName, '太空探索與航天科技')
+})
+
 test('every original topic remains represented, with merged paragraphs, sections and sources intact', () => {
   assert.equal(SOURCE_ARTICLES.length, 37)
   assert.deepEqual(new Set(ARTICLE_LIST.flatMap(a => a.topicIds)), new Set(SOURCE_ARTICLES.map(a => a.id)))
@@ -54,7 +63,9 @@ test('every original topic remains represented, with merged paragraphs, sections
     for (const id of merge.ids) {
       const original = SOURCE_ARTICLES.find(a => a.id === id)
       for (const paragraph of original.paragraphs) assert.ok(combined.paragraphs.includes(paragraph), id)
-      for (const section of original.sections) assert.ok(combined.sections.some(s => s.text === section.text), id)
+      for (const section of original.sections) {
+        assert.ok(combined.sections.some(s => s.heading === section.heading && s.paragraphs.includes(section.text)), id)
+      }
       for (const source of original.sources) assert.ok(combined.sources.some(s => s.url === source.url), id)
     }
   }
@@ -62,9 +73,9 @@ test('every original topic remains represented, with merged paragraphs, sections
 
 test('split articles retain the original knowledge sentences and the seasons reference', () => {
   for (const id of ['rocks-minerals', 'rivers-lakes', 'seasons']) {
-    const split = ARTICLE_LIST.filter(a => a.topicIds.includes(id))
+    const split = ARTICLE_LIST.filter(a => a.topicIds.includes(id)).map(a => ARTICLES[a.id])
     assert.equal(split.length, 2, id)
-    const prose = split.flatMap(a => a.sections.map(s => s.text)).join('\n')
+    const prose = split.flatMap(a => a.sections.flatMap(section => section.paragraphs)).join('\n')
     for (const section of SOURCE_ARTICLES.find(a => a.id === id).sections) {
       for (const sentence of section.text.split('。').filter(Boolean)) assert.ok(prose.includes(sentence), `${id}: ${sentence}`)
     }

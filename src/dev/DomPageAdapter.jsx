@@ -1,9 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 import LayoutEditor from './LayoutEditor'
+import { COMPONENT_LAYOUT_SELECTOR, LAYOUT_FIELDS, layoutItem, layoutOverrides, layoutStyles, localSize } from './domLayout'
 import { buildTextStyle, enablePageTextPersistence, registerText, unregisterText, useTextEditorState, getTextEntry } from './textEditorStore'
 import { PAGE_EDITOR_SCOPES, PAGE_LAYOUT_TARGETS, TEXT_CANDIDATES, EDITOR_UI } from './pageEditorRegistry'
+import { GLOBE_LAYOUT_DEFAULTS, GLOBE_LAYOUT_REVISION } from '../components/globeTest/config'
 
 const hash = text => { let n = 2166136261; for (const c of text) n = Math.imul(n ^ c.charCodeAt(0), 16777619); return (n >>> 0).toString(36) }
+const GLOBE_LAYOUT_DEFAULTS_BY_ID = new Map(GLOBE_LAYOUT_DEFAULTS.map(item => [item.id, item]))
+const normalizeSelector = selector => selector.replace(/:nth-of-type\(\d+\)/g, '')
+const GLOBE_LAYOUT_DEFAULTS_BY_SELECTOR = (() => {
+  const grouped = new Map()
+  for (const item of GLOBE_LAYOUT_DEFAULTS) {
+    const key = normalizeSelector(item.selector)
+    grouped.set(key, [...(grouped.get(key) ?? []), item])
+  }
+  return new Map([...grouped].filter(([, items]) => items.length === 1).map(([key, items]) => [key, items[0]]))
+})()
 function selectorFor(element, root) {
   const path = []
   for (let node = element; node; node = node.parentElement) {
@@ -20,8 +32,8 @@ function selectorFor(element, root) {
 const directNodes = element => [...element.childNodes].filter(node => node.nodeType === Node.TEXT_NODE)
 const readOwnText = element => [...element.childNodes].map(n => n.nodeType === Node.TEXT_NODE ? n.textContent : n.nodeName === 'BR' && n.style.display !== 'none' ? '\n' : '').join('')
 
-// Adapt current DOM in place. No source layout is replaced and no old coordinates are imported.
-export default function DomPageAdapter({ pageId }) {
+// Apply published layout defaults and local editor patches to the current DOM.
+export default function DomPageAdapter({ pageId, storage = globalThis.localStorage }) {
   const { data } = useTextEditorState()
   const textRecords = useRef(new Map())
   const elements = useRef(new Map())
@@ -30,15 +42,17 @@ export default function DomPageAdapter({ pageId }) {
   const patches = useRef({})
   const draftReadable = useRef(true)
   const layoutKey = `layout-editor:codex-${pageId}:dom-v1`
+  const layoutRevisionKey = `${layoutKey}:defaults-revision`
   const textPrefix = `codex-${pageId}-dom-`
 
   useEffect(() => {
     const scope = PAGE_EDITOR_SCOPES[pageId] || '.portal-placeholder-page'
     if (!scope) return
     try {
-      const saved = JSON.parse(localStorage.getItem(layoutKey) || '[]')
+      const saved = JSON.parse(storage.getItem(layoutKey) || '[]')
       if (!Array.isArray(saved) || saved.some(item => !item || typeof item.id !== 'string')) throw new Error('Unknown draft format')
-      patches.current = Object.fromEntries(saved.map(item => [item.id, item]))
+      const currentDefaults = pageId !== 'globe-test' || storage.getItem(layoutRevisionKey) === GLOBE_LAYOUT_REVISION
+      patches.current = Object.fromEntries((currentDefaults ? saved : []).map(item => [item.id, item]))
     } catch (error) { draftReadable.current = false; console.warn(`[LayoutEditor] Preserving unreadable draft ${layoutKey}`, error) }
     const stopPersistence = enablePageTextPersistence(`codex-${pageId}`, textPrefix, { readOnly: false })
     let scheduled = 0
@@ -49,11 +63,13 @@ export default function DomPageAdapter({ pageId }) {
       for (const root of document.querySelectorAll(scope)) {
         for (const element of root.querySelectorAll(TEXT_CANDIDATES)) {
           const registeredAncestor = element.closest('[data-text-editor-id]')
-          if (element.closest(EDITOR_UI) || element.closest('[data-dev-text-dynamic]') || registeredAncestor && !registeredAncestor.hasAttribute('data-dom-text-adapter')) continue
+          if (element.closest(COMPONENT_LAYOUT_SELECTOR) || element.closest(EDITOR_UI) || element.closest('[data-dev-text-dynamic]') || registeredAncestor && !registeredAncestor.hasAttribute('data-dom-text-adapter')) continue
           const text = readOwnText(element)
-          if (!text.trim() || element.closest('.wp-world-readings b, .wp-live') || element.matches('.tt-compass > span') || (element.closest('.edition-live-coordinate') && element.localName !== 'i')) continue
-          const selector = selectorFor(element, root)
           let record = textRecords.current.get(element)
+          // Clearing editor text does not unmount its node. Dropping the record
+          // restores the source and starts a clear/restore MutationObserver loop.
+          if ((!text.trim() && !record) || element.closest('.wp-world-readings b, .wp-live') || element.matches('.tt-compass > span') || (element.closest('.edition-live-coordinate') && element.localName !== 'i')) continue
+          const selector = selectorFor(element, root)
           // Dynamic dialogue gets a separate ID for each source string. Never apply
           // one line's text draft to another line sharing the same React element.
           if (record && text !== record.appliedText && text !== record.sourceText) {
@@ -74,19 +90,24 @@ export default function DomPageAdapter({ pageId }) {
         const targets = PAGE_LAYOUT_TARGETS[pageId] ? `${PAGE_LAYOUT_TARGETS[pageId]}, img, svg` : ['comic','t-comic'].includes(pageId) ? null : 'img, svg'
         if (!targets) continue
         for (const element of root.querySelectorAll(targets)) {
-          if (element.closest(EDITOR_UI) || element.matches('canvas') || element.closest('.layout-editor-item')) continue
+          if (element.closest(COMPONENT_LAYOUT_SELECTOR) || element.closest(EDITOR_UI) || element.matches('canvas') || element.closest('.layout-editor-item')) continue
           const selector = selectorFor(element, root)
           const id = `${pageId}-${element.dataset.devLayout || element.dataset.devScope || element.dataset.character || element.localName}-${hash(selector)}`
           seenLayout.add(id); elements.current.set(id, element)
+          const supplied = pageId === 'globe-test'
+            ? GLOBE_LAYOUT_DEFAULTS_BY_ID.get(id) ?? GLOBE_LAYOUT_DEFAULTS_BY_SELECTOR.get(normalizeSelector(selector))
+            : null
           let original = originals.current.get(id)
           if (!original || original.element !== element) {
-            original = { element, styles: new Map(), defaults: { id, selector, label: `${[...element.classList].find(c => !c.startsWith('is-') && !c.startsWith('has-')) || element.localName} · ${id}`, x: 0, y: 0, width: localSize(element, 'width'), height: localSize(element, 'height'), rotation: 0, zIndex: parseInt(getComputedStyle(element).zIndex) || 0, isNode: true, coordinateSpace: 'local-css-px-offset' } }
+            const defaults = { id, selector, label: `${[...element.classList].find(c => !c.startsWith('is-') && !c.startsWith('has-')) || element.localName} · ${id}`, x: 0, y: 0, width: localSize(element, 'width'), height: localSize(element, 'height'), rotation: 0, zIndex: parseInt(getComputedStyle(element).zIndex) || 0, isNode: true, coordinateSpace: 'local-css-px-offset' }
+            original = { element, styles: new Map(), defaults }
             originals.current.set(id, original)
             resized.observe(element)
           }
           const saved = patches.current[id] || {}
-          for (const field of ['width','height']) if (!Number.isFinite(saved[field])) original.defaults[field] = localSize(element, field)
-          nextItems.push({ ...original.defaults, ...Object.fromEntries(['x','y','width','height','rotation','zIndex'].filter(key => Number.isFinite(saved[key])).map(key => [key, saved[key]])) })
+          const overrides = { ...layoutOverrides(supplied), ...layoutOverrides(saved) }
+          for (const field of ['width','height']) if (!(field in overrides)) original.defaults[field] = localSize(element, field)
+          nextItems.push(layoutItem(original.defaults, supplied, saved))
         }
       }
       for (const [element, record] of textRecords.current) if (!seenText.has(element)) {
@@ -101,7 +122,7 @@ export default function DomPageAdapter({ pageId }) {
     scan()
     // Child/character changes include lazy mounts and dynamically opened panels.
     const observer = new MutationObserver(schedule)
-    observer.observe(document.body, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['class','hidden','inert','aria-hidden'] })
+    observer.observe(document.body, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['class','hidden','inert','aria-hidden','data-layout-owned'] })
     document.addEventListener('load', schedule, true)
     window.addEventListener('resize', schedule)
     return () => {
@@ -110,7 +131,7 @@ export default function DomPageAdapter({ pageId }) {
       for (const original of originals.current.values()) restoreStyles(original)
       textRecords.current.clear(); originals.current.clear(); elements.current.clear()
     }
-  }, [pageId, layoutKey, textPrefix])
+  }, [pageId, layoutKey, textPrefix, storage])
 
   useEffect(() => {
     for (const record of textRecords.current.values()) {
@@ -124,13 +145,7 @@ export default function DomPageAdapter({ pageId }) {
     for (const item of items) {
       const original = originals.current.get(item.id)
       if (!original) continue
-      const d = original.defaults, style = {}
-      if (item.x !== d.x || item.y !== d.y) style.translate = `${item.x}px ${item.y}px`
-      if (item.rotation !== d.rotation) style.rotate = `${item.rotation}deg`
-      if (item.width !== d.width) style.width = `${item.width}px`
-      if (item.height !== d.height) style.height = `${item.height}px`
-      if (item.zIndex !== d.zIndex) style.zIndex = item.zIndex
-      applyStyles(original, style)
+      applyStyles(original, layoutStyles(item))
     }
   }, [items])
 
@@ -139,20 +154,28 @@ export default function DomPageAdapter({ pageId }) {
     for (const item of next) {
       const defaults = originals.current.get(item.id)?.defaults
       const patch = { ...patches.current[item.id], id: item.id, selector: item.selector }
-      for (const field of ['x','y','width','height','rotation','zIndex']) {
+      for (const field of LAYOUT_FIELDS) {
         if (item[field] !== defaults?.[field]) patch[field] = item[field]
         else delete patch[field]
       }
+      patch.changedFields = LAYOUT_FIELDS.filter(field => Number.isFinite(patch[field]))
       patches.current[item.id] = patch
     }
-    setItems(next)
-    try { if (!draftReadable.current) throw new Error('Unreadable draft is preserved; changes remain available in Copy Config'); localStorage.setItem(layoutKey, JSON.stringify(Object.values(patches.current))) }
+    setItems(next.map(item => {
+      const original = originals.current.get(item.id)
+      const supplied = pageId === 'globe-test'
+        ? GLOBE_LAYOUT_DEFAULTS_BY_ID.get(item.id) ?? GLOBE_LAYOUT_DEFAULTS_BY_SELECTOR.get(normalizeSelector(item.selector))
+        : null
+      return original ? layoutItem(original.defaults, supplied, patches.current[item.id]) : item
+    }))
+    try {
+      if (!draftReadable.current) throw new Error('Unreadable draft is preserved; changes remain available in Copy Config')
+      storage.setItem(layoutKey, JSON.stringify(Object.values(patches.current)))
+      if (pageId === 'globe-test') storage.setItem(layoutRevisionKey, GLOBE_LAYOUT_REVISION)
+    }
     catch (error) { console.warn(`[LayoutEditor] Cannot save ${layoutKey}`, error) }
   }
   return items.length ? <LayoutEditor externalElements={elements} items={items} initialItems={[...originals.current.values()].map(record => record.defaults)} onChange={changeItems} pageId={pageId} layoutId={`codex-${pageId}:dom-v1`} /> : null
-}
-function localSize(element, field) {
-  return Number.parseFloat(getComputedStyle(element)[field]) || element[field === 'width' ? 'offsetWidth' : 'offsetHeight'] || element.getBoundingClientRect()[field] || 0
 }
 function restoreStyles(record) {
   for (const [key, value] of record.styles) record.element.style[key] = value

@@ -6,7 +6,7 @@ export const TOPIC_MERGES = [
   { ids: ['evolution', 'adaptation'], title: 'EVOLUTION & ADAPTATION', chineseName: '生物演化與適應', description: '族群如何跨世代改變，以及特徵與環境的關係。' },
   { ids: ['ecosystems', 'food-webs'], title: 'ECOSYSTEMS & FOOD WEBS', chineseName: '生態系統與食物網', description: '從環境、能量與物質，到生物之間的攝食連結。' },
   { ids: ['biodiversity', 'conservation'], title: 'BIODIVERSITY & CONSERVATION', chineseName: '生物多樣性與保育', description: '認識生命多樣性的層次，並用證據評估保育。' },
-  { ids: ['stellar-evolution', 'black-holes'], title: 'STELLAR EVOLUTION & BLACK HOLES', chineseName: '恆星演化與黑洞', description: '從恆星形成到殘骸，以觀測檢驗演化與重力。' },
+  { ids: ['stellar-evolution', 'black-holes'], title: 'STELLAR EVOLUTION & BLACK HOLES', chineseName: '恆星與天體演化', description: '從恆星形成到殘骸，以觀測檢驗演化與重力。' },
 ]
 
 export function balanceNaturalArticles(sourceArticles) {

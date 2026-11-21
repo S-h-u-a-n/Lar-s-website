@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { collectReferences, referenceKey } from './references.js'
+import { collectReferences, referenceKey, referenceTextParts } from './references.js'
 
 test('Wikipedia article identity ignores fragments, query strings, mobile host and encoding differences', () => {
   const urls = [
@@ -30,4 +30,15 @@ test('collect all section references in reading order, deduplicate URLs despite 
   assert.equal(result[0].href, sources.a[1])
   assert.equal(result[0].label, '古希臘')
   assert.equal(JSON.stringify({ record, sources }), original)
+})
+
+test('Markdown reference URLs retain their text while deduplicating against Wikipedia URLs', () => {
+  const seen = new Set([referenceKey('https://en.wikipedia.org/wiki/Ancient_Greece')])
+  const parts = referenceTextParts(
+    'Museum +1\nhttps://www.metmuseum.org/example\nhttps://en.wikipedia.org/wiki/Ancient_Greece',
+    seen,
+  )
+  assert.deepEqual(parts.filter(part=>part.href).map(part=>part.href),['https://www.metmuseum.org/example'])
+  assert.ok(parts.some(part=>part.text==='Museum +1\n'))
+  assert.equal(parts.some(part=>part.text==='https://en.wikipedia.org/wiki/Ancient_Greece'),false)
 })

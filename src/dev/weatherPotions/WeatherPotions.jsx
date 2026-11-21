@@ -12,7 +12,7 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
   useParallax()
   const { model, snapshot: world, renderer, start, paint, stop, reset } = useWorld()
   const [selected, setSelected] = useState('rain')
-  const [strength, setStrength] = useState(RULES.defaultStrength)
+  const strength = RULES.defaultStrength
   const [brushSize, setBrushSize] = useState(RULES.defaultBrush)
   const [drag, setDrag] = useState(null), pointer = useRef(null), keyboard = useRef(false)
   const [hints, setHints] = useState(false), [rewinding, setRewinding] = useState(false)
@@ -110,9 +110,11 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
   const status = world.input ? `${POTIONS.find(p => p.id === world.input).name}正在倒入` : world.ending ? '本輪實驗已結束' : '瓶口已關上'
   return <main className={`wp-page ${onBack ? 'is-integrated' : ''} ${world.input ? 'is-painting' : ''}`} aria-label="Bottled Weather 魔法天氣藥水">
     <header className="edition-header wp-header">
-      <a className="edition-wordmark" href="/?edition=main" onClick={event => { if(onHome){event.preventDefault();release();onHome()} }}><span>✧</span><span>The Wizard’s<br /><b>GENESIS</b></span></a>
+      {onBack
+        ? <nav className="wp-back-nav" aria-label="天氣研究頁導覽"><button type="button" onClick={() => {release();onBack()}}>BACK</button></nav>
+        : <a className="edition-wordmark" href="/?edition=main" onClick={event => { if(onHome){event.preventDefault();release();onHome()} }}><span>✧</span><span data-dev-text-dynamic>The Wizard’s<br /><b>GENESIS</b></span></a>}
       <p>CODEX EDITION <i>／</i> 研究手冊</p>
-      <nav aria-label="天氣研究頁導覽"><span>06 / 魔法天氣藥水</span>{onBack ? <button type="button" onClick={() => {release();onBack()}}>↙ 回到研究室</button> : <a href="/?edition=main">世界封面 ↗</a>}</nav>
+      {!onBack && <nav aria-label="天氣研究頁導覽"><span>06 / 魔法天氣藥水</span><a href="/?edition=main">世界封面 ↗</a></nav>}
     </header>
     <section className="wp-layout">
       <aside className="wp-introduction">
@@ -155,7 +157,7 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
             onClick={() => setSelected(p.id)} onPointerDown={event => beginPointer(event, 'bottle', p.id)} onPointerMove={movePointer} onPointerUp={release} onPointerCancel={release} onLostPointerCapture={release}>
             <small>{p.number}</small><Bottle potion={p} /><strong>{p.name}</strong>
           </button>)}</div>
-          <p className="wp-potion-remark" key={selected}><span style={{ background: potion.color }} />{potion.note}</p>
+          {typeof potion?.note === 'string' && potion.note.trim() !== '' && <p className="wp-potion-remark" key={`${selected}:${potion.note}`}><span style={{ background: potion.color }} />{potion.note}</p>}
           <div className="wp-brush-size" role="radiogroup" aria-label="筆刷大小"><span>筆刷大小</span><div className="wp-brush-nodes">{BRUSH_SIZES.map((size,index) => <button key={size.id} type="button" role="radio" aria-label={`${size.label}筆刷`} aria-checked={brushSize===size.id} tabIndex={brushSize===size.id?0:-1} disabled={Boolean(ending) || rewinding} onClick={() => {release();setBrushSize(size.id)}} onKeyDown={event => {
             if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return
             event.preventDefault()
@@ -163,8 +165,6 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
             release();setBrushSize(BRUSH_SIZES[next].id)
             event.currentTarget.parentElement.querySelectorAll('button')[next]?.focus()
           }}><i aria-hidden="true" /><span>{size.label}</span></button>)}</div></div>
-          <div className="wp-strength" role="group" aria-label="倒入份量"><span>倒入份量</span>{[[RULES.defaultStrength, '一小口'],[1, '放手一倒']].map(([value,label]) => <button key={value} type="button" disabled={Boolean(ending) || rewinding} aria-pressed={strength===value} onClick={() => setStrength(value)}>{label}</button>)}</div>
-          <div className="wp-dose-instruction"><span>∞</span><p>可自由重複實驗，並隨時重置世界。</p></div>
         </section>
 
         <div className="wp-lower-controls">

@@ -2,12 +2,17 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
 import { adjacentRecord, makeStripLayout, maskHit, nearestRecord } from './layout.js'
+import { parseHistoryArticle } from './parseArticle.js'
+import referenceIds from './wikipediaReferenceIds.json' with { type: 'json' }
+import sources from './sources.json' with { type: 'json' }
+import { collectReferences } from './references.js'
 
 const placements = JSON.parse(readFileSync(new URL('../../../dev/history/placements.json', import.meta.url))).filter(item=>item.id.startsWith('people-')).sort((a,b)=>Number(a.id.split('-')[1])-Number(b.id.split('-')[1]))
 const geometry = JSON.parse(readFileSync(new URL('../../../dev/history/interactionGeometry.json', import.meta.url)))
 placements.forEach(item=>{item.origin=geometry[item.id].foot})
 const records = JSON.parse(readFileSync(new URL('./records.json', import.meta.url)))
 const directory = new URL('../../../../Art/IntroScreen/history/',import.meta.url)
+const articleDirectory = new URL('../../../../content/history/',import.meta.url)
 
 test('every existing people PNG has one ordered record and full-resolution source',()=>{
   const files=readdirSync(directory).filter(name=>/^people-\d+\.PNG$/.test(name))
@@ -20,7 +25,7 @@ test('every existing people PNG has one ordered record and full-resolution sourc
   }
 })
 test('all opaque silhouettes share a visual height and baseline without stretching or changing sequence',()=>{
-  for(const scale of [.22,.28]){
+  for(const scale of [.22,.28,.38]){
     const layout=makeStripLayout(placements,scale)
     for(let i=0;i<layout.items.length;i++){
       const item=layout.items[i],source=placements[i]
@@ -54,31 +59,37 @@ test('left and right neighbors follow actual horizontal positions, including vis
   assert.equal(adjacentRecord(layout.items,placements.length-1,'left'),null)
   assert.equal(adjacentRecord(layout.items,0,'right'),null)
 })
-test('every era has explanatory sections, source notes and distinct Wikipedia references',()=>{
-  const sources=JSON.parse(readFileSync(new URL('./sources.json',import.meta.url)))
-  for(const record of records){
-    assert.ok(record.summary.length > 0)
-    for(const text of [record.summary,record.sourceNote,...record.sections.flatMap(section=>section.paragraphs)]) assert.doesNotMatch(text,/[；;]/)
-    assert.ok(record.sourceNote.length > 20)
-    assert.ok(record.sections.length >= 4 && record.sections.length <= 6)
-    assert.equal(new Set(record.sections.map(section=>section.title)).size,record.sections.length)
-    for (const section of record.sections) {
-      assert.ok(section.title && section.paragraphs.length)
-      assert.ok(section.paragraphs.every(text=>text.length>30))
-      assert.ok(section.sources.length>0)
-      assert.ok(section.sources.every(id=>record.sources.includes(id)))
-    }
-    assert.deepEqual(record.sources,[...new Set(record.sections.flatMap(section=>section.sources))])
-    for(const field of ['background','developments','significance','detail'])assert.equal(record[field],undefined)
-    assert.match(record.verifiedAt,/^\d{4}-\d{2}-\d{2}$/)
-    assert.ok(record.sources.length>0)
-    for(const key of record.sources){
-      assert.ok(sources[key][0].includes('Wikipedia'))
-      const url=new URL(sources[key][1]);assert.equal(url.hostname,'en.wikipedia.org');assert.ok(url.pathname.startsWith('/wiki/'))
-    }
-  }
-  assert.equal(new Set(records.map(record=>record.sources[0])).size,records.length)
-  assert.deepEqual([...new Set(records.map(record=>record.sections.length))].sort(),[4,5,6])
+test('all 18 ordered Markdown articles provide complete display data and retained illustration notes',()=>{
+  const files=readdirSync(articleDirectory).filter(name=>name.endsWith('.md')).sort()
+  assert.equal(files.length,18)
+  assert.equal(records.length,files.length)
+  files.forEach((file,index)=>{
+    assert.match(file,new RegExp(`^${String(index+1).padStart(2,'0')}-[a-z0-9-]+\\.md$`))
+    assert.equal(records[index].id,`people-${index+1}`)
+    const raw=readFileSync(new URL(file,articleDirectory),'utf8')
+    const blocks=raw.trim().split(/\r?\n[ \t]*\r?\n/).map(block=>block.trim()).filter(Boolean)
+    const referenceIndex=blocks.findIndex((block,blockIndex)=>blockIndex>=5&&/^(參考資料|資料參考|參考網址)/.test(block.split('\n',1)[0].trim()))
+    const article=parseHistoryArticle(raw,file)
+    assert.ok(article.name && article.region && article.date)
+    assert.ok(article.introduction.length)
+    assert.doesNotMatch(article.name,/^\d+\./)
+    assert.deepEqual([article.name,article.region,article.date],[blocks[1],blocks[2],blocks[3]])
+    assert.deepEqual([
+      ...article.introduction,
+      ...article.sections.flatMap(section=>[section.title,...section.paragraphs]),
+    ],blocks.slice(4,referenceIndex))
+    assert.deepEqual(article.references,blocks.slice(referenceIndex))
+    assert.ok(article.sections.length >= 3)
+    assert.equal(new Set(article.sections.map(section=>section.title)).size,article.sections.length)
+    assert.ok(article.sections.every(section=>section.paragraphs.length && section.paragraphs.every(text=>text.length)))
+    assert.ok(article.references.length)
+    assert.ok(article.references.some(block=>/https?:\/\//.test(block)))
+    const wikiReferences=collectReferences({sources:referenceIds[records[index].id]},sources)
+    assert.ok(wikiReferences.length)
+    assert.ok(wikiReferences.every(source=>source.label && new URL(source.href).hostname.endsWith('wikipedia.org')))
+    assert.deepEqual(Object.keys(records[index]).sort(),['id',...(records[index].illustrationNote?['illustrationNote']:[])].sort())
+  })
+  assert.deepEqual(Object.keys(referenceIds).sort(),records.map(record=>record.id).sort())
 })
 test('transparent padding cannot select a person; opaque pixels do at different sizes',()=>{
   const geometry={maskWidth:2,maskHeight:2},bits=Uint8Array.of(0b01000000)

@@ -58,6 +58,55 @@
   inset: 0;
 }
 
+.telescope-location-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.telescope-location-marker-label {
+  max-width: min(240px, 60vw);
+  overflow: hidden;
+  padding: 4px 9px;
+  border: 1px solid #f691a6;
+  border-radius: 12px 3px 12px 3px;
+  background: #fffef8ed;
+  color: #34465a;
+  font: 700 11px/1.35 var(--sans);
+  text-overflow: ellipsis;
+}
+
+.telescope-location-marker-dot {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #fffef8;
+  border-radius: 50%;
+  background: #f691a6;
+  box-shadow: 0 0 0 2px #34465a, 0 0 12px #f691a6cc;
+}
+
+.telescope-location-marker-dot::after {
+  position: absolute;
+  inset: -7px;
+  border: 1px solid #f691a6;
+  border-radius: 50%;
+  content: '';
+  animation: telescope-location-pulse 1.8s ease-out infinite;
+}
+
+@keyframes telescope-location-pulse {
+  from { opacity: .8; transform: scale(.55); }
+  to { opacity: 0; transform: scale(1.35); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .telescope-location-marker-dot::after { animation: none; }
+}
+
 /* Transparent PNG pixels otherwise intercept map gestures too. */
 .telescope-page .layout-editor-stage:not(.is-open) .layout-editor-item {
   pointer-events: none;

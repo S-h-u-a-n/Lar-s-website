@@ -15,13 +15,13 @@ export const RULES = {
   rainbowGain: .28, rainbowDecay: .018,
 }
 export const POTIONS = [
-  { id: 'rain', name: '雨水', english: 'A little rain', color: PIGMENTS.sky, number: '01', mark: 'drop', note: '稍微濕潤一下。對，「稍微」。' },
-  { id: 'sun', name: '陽光', english: 'Borrowed sunshine', color: PIGMENTS.butter, number: '02', mark: 'sun', note: '借一點太陽。記得還。' },
-  { id: 'cold', name: '寒冷', english: 'Winter, bottled', color: PIGMENTS.mint, number: '03', mark: 'snow', note: '冬天很安靜，冰箱也是。' },
-  { id: 'wind', name: '風', english: 'A bottled breeze', color: PIGMENTS.peach, number: '04', mark: 'wind', note: '讓雲散散步，海浪順便伸懶腰。' },
-  { id: 'cloud', name: '多雲', english: 'A little overcast', color: PIGMENTS.lavender, number: '05', mark: 'cloud', note: '替太陽蓋一條不太聽話的棉被。' },
-  { id: 'lava', name: '岩漿', english: 'Warm earth', color: PIGMENTS.strawberry, number: '06', mark: 'lava', note: '倒在海邊看看。小心，這不是番茄湯。' },
-  { id: 'rainbow', name: '彩虹', english: 'A change of colour', color: '#D8DBA9', number: '07', mark: 'rainbow', note: '雨後借一道光，也可以直接借七道。' },
+  { id: 'rain', name: '雨水', english: 'A little rain', color: PIGMENTS.sky, number: '01', mark: 'drop', note: '向指定區域倒入雨水' },
+  { id: 'sun', name: '陽光', english: 'Borrowed sunshine', color: PIGMENTS.butter, number: '02', mark: 'sun', note: '增加光照提高溫度' },
+  { id: 'cold', name: '雪', english: 'Winter, bottled', color: PIGMENTS.mint, number: '03', mark: 'snow', note: '加入白雪！降低溫度' },
+  { id: 'wind', name: '風', english: 'A bottled breeze', color: PIGMENTS.peach, number: '04', mark: 'wind', note: '增強風勢！' },
+  { id: 'cloud', name: '多雲', english: 'A little overcast', color: PIGMENTS.lavender, number: '05', mark: 'cloud', note: '增加雲朵' },
+  { id: 'lava', name: '岩漿', english: 'Warm earth', color: PIGMENTS.strawberry, number: '06', mark: 'lava', note: '就是！岩漿！' },
+  { id: 'rainbow', name: '彩虹', english: 'A change of colour', color: '#D8DBA9', number: '07', mark: 'rainbow', note: '沒什麼用' },
 ]
 export const ENDING_RULES = {
   graceSeconds: 60,

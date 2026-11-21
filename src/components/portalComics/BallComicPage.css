@@ -1,0 +1,212 @@
+.b-comic-page {
+  color: var(--edition-ink, #34465a);
+}
+
+.b-comic-page header {
+  justify-content: space-between;
+}
+
+.b-comic-page header h1 {
+  font: 400 clamp(20px, 2vw, 28px)/1.2 var(--display);
+}
+
+.b-comic-page header > span {
+  width: 1px;
+}
+
+.b-comic-frame {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: visible;
+  border-top: 1px solid var(--edition-line, #34465a33);
+  border-bottom: 1px solid var(--edition-line, #34465a33);
+  background: #fffeff40;
+}
+
+.b-comic-fit {
+  position: absolute;
+  inset: 0;
+}
+
+.b-comic-page .layout-editor-stage {
+  z-index: 1 !important;
+}
+
+.b-comic-page .layout-editor-item {
+  transition: none;
+}
+
+.b-comic-page .layout-editor-item[data-sequence-fading="true"] {
+  transition: opacity var(--b-comic-fade-duration, 560ms) ease;
+}
+
+.b-comic-page .layout-editor-dialogue-group {
+  position: absolute;
+  transform-origin: center;
+  transition: none;
+}
+
+.b-comic-page .layout-editor-dialogue-design-space {
+  position: absolute;
+  top: 0;
+  left: 0;
+  container-type: inline-size;
+  transform-origin: top left;
+}
+
+.b-comic-page .layout-editor-dialogue-design-space > .layout-editor-item {
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+}
+
+.b-comic-page .layout-editor-dialogue-group[data-sequence-fading="true"] {
+  transition: opacity var(--b-comic-fade-duration, 560ms) ease;
+}
+
+.b-comic-dialogue-text {
+  position: absolute;
+  z-index: 1;
+  top: 12%;
+  left: 30%;
+  width: 64%;
+  max-height: 60%;
+  min-height: 1em;
+  color: #1a497a;
+  font: 600 clamp(14px, 5cqw, 26px)/1.2 var(--body);
+  text-align: left;
+  writing-mode: vertical-rl;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+}
+
+.b-comic-dialogue-text[data-text-editor-active] {
+  pointer-events: auto;
+}
+
+.b-comic-dialogue-text[data-text-editor-selected][data-text-editor-resizable]::before,
+.b-comic-dialogue-text[data-text-editor-selected][data-text-editor-resizable]::after {
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 28px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background: #1677ff;
+  box-shadow: 0 0 0 1px #1677ff;
+  content: '';
+  cursor: ew-resize;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.b-comic-dialogue-text[data-text-editor-selected][data-text-editor-resizable] {
+  outline: 1px solid #1677ff;
+  outline-offset: 2px;
+}
+
+.b-comic-dialogue-text[data-text-editor-selected][data-text-editor-resizable]::before {
+  left: -5px;
+}
+
+.b-comic-dialogue-text[data-text-editor-selected][data-text-editor-resizable]::after {
+  right: -5px;
+}
+
+.b-comic-dialogue-resize-handle {
+  display: none;
+}
+
+.b-comic-dialogue-text[data-text-editor-selected] .b-comic-dialogue-resize-handle {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background: #1677ff;
+  box-shadow: 0 0 0 1px #1677ff;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.b-comic-dialogue-resize-handle--top,
+.b-comic-dialogue-resize-handle--bottom {
+  left: 50%;
+  width: 28px;
+  height: 8px;
+  transform: translateX(-50%);
+  cursor: ns-resize;
+}
+
+.b-comic-dialogue-resize-handle--top { top: -5px; }
+.b-comic-dialogue-resize-handle--bottom { bottom: -5px; }
+
+.b-comic-dialogue-resize-handle--top-left,
+.b-comic-dialogue-resize-handle--top-right,
+.b-comic-dialogue-resize-handle--bottom-left,
+.b-comic-dialogue-resize-handle--bottom-right {
+  width: 8px;
+  height: 8px;
+}
+
+.b-comic-dialogue-resize-handle--top-left { top: -5px; left: -5px; cursor: nwse-resize; }
+.b-comic-dialogue-resize-handle--top-right { top: -5px; right: -5px; cursor: nesw-resize; }
+.b-comic-dialogue-resize-handle--bottom-left { bottom: -5px; left: -5px; cursor: nesw-resize; }
+.b-comic-dialogue-resize-handle--bottom-right { right: -5px; bottom: -5px; cursor: nwse-resize; }
+
+.b-comic-page > .portal-comic__continue {
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 500ms ease, visibility 0s linear 500ms, transform 200ms ease;
+}
+
+.b-comic-page > .portal-comic__continue.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.b-comic-page > .portal-comic__continue.is-visible:hover {
+  transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .b-comic-page .layout-editor-item[data-sequence-fading="true"] {
+    transition: none;
+  }
+
+  .b-comic-page .layout-editor-dialogue-group[data-sequence-fading="true"] {
+    transition: none;
+  }
+
+  .b-comic-page > .portal-comic__continue {
+    transition: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .b-comic-page {
+    gap: 12px;
+  }
+
+  .b-comic-page header {
+    gap: 10px;
+  }
+
+  .b-comic-page header h1 {
+    font-size: 17px;
+  }
+
+  .b-comic-page header button,
+  .b-comic-page > .portal-comic__continue {
+    padding: 9px 13px;
+    font-size: 11px;
+  }
+}

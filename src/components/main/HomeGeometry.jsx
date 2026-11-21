@@ -23,6 +23,7 @@ export default function HomeGeometry() {
     const measure = () => {
       const history = host.querySelector('#home-history')
       const characters = host.querySelector('#home-characters')
+      const gallery = host.querySelector('#home-puzzle-gallery')
       const wishbox = host.querySelector('#wishbox')
       const author = host.querySelector('#home-author')
       const w = host.clientWidth, fullHeight = host.offsetHeight, hh = hero.offsetHeight
@@ -54,16 +55,18 @@ export default function HomeGeometry() {
       // .23w / h-.045hh endpoint. Only its entry handle matches the raised
       // loop tangent. Append a tangent continuation beyond the document edge.
       const lower = ` C ${endX - 50 * scale} ${endY + 113 * scale - loopShift * .25}, ${.26*w} ${hh+.52*(h-hh)}, ${.18*w} ${hh+.58*(h-hh)} C ${.10*w} ${hh+.64*(h-hh)}, ${.022*w} ${hh+.60*(h-hh)}, ${.022*w} ${hh+.76*(h-hh)} C ${.022*w} ${hh+.92*(h-hh)}, ${.11*w} ${h-.02*hh}, ${.23*w} ${h-.045*hh}`
-      const characterEnd = wishbox?.offsetTop || fullHeight
+      const characterEnd = gallery?.offsetTop || wishbox?.offsetTop || fullHeight
+      const wishStart = wishbox?.offsetTop || fullHeight
       const cs = characters?.offsetTop || h
       const ch = characterEnd - cs
       const historyHeight = cs - h
-      // Insert a margin-side bridge without stretching the existing Explore
-      // curve or the portrait loop. The interactive strip remains unobscured.
+      // A broad central loop, drawn behind the heading and panorama. Match
+      // the incoming/outgoing tangents without routing around content edges.
       const historyBridge = history
-        ? ` C ${.29*w} ${h-.0575*hh}, ${.03*w} ${h+.08*historyHeight}, ${.025*w} ${h+.22*historyHeight}
-            C ${.015*w} ${h+.55*historyHeight}, ${.04*w} ${h+.85*historyHeight}, ${.18*w} ${cs-.045*hh}
-            C ${.20*w} ${cs-.047*hh}, ${.22*w} ${cs-.043*hh}, ${.23*w} ${cs-.045*hh}` : '' 
+        ? ` C ${.43*w} ${h-.09*hh}, ${.79*w} ${h+.05*historyHeight}, ${.79*w} ${h+.28*historyHeight}
+            C ${.79*w} ${h+.60*historyHeight}, ${.25*w} ${h+.72*historyHeight}, ${.25*w} ${h+.40*historyHeight}
+            C ${.25*w} ${h+.16*historyHeight}, ${.64*w} ${h+.16*historyHeight}, ${.64*w} ${h+.45*historyHeight}
+            C ${.64*w} ${h+.80*historyHeight}, ${.17*w} ${cs-.0325*hh}, ${.23*w} ${cs-.045*hh}` : ''
       // A single continuous stroke loops behind the portrait collection, then
       // passes into the footer. It uses the same scroll-driven drawing loop.
       const continuation = characters
@@ -73,7 +76,15 @@ export default function HomeGeometry() {
             C ${.25*w} ${cs+.28*ch}, ${.10*w} ${cs+.90*ch}, ${.28*w} ${cs+.96*ch}`
         : ` C ${.29*w} ${cs-.0575*hh}, ${.36*w} ${canvasHeight+.02*hh}, ${.36*w} ${canvasHeight+.20*hh}`
       const wishEnd = author?.offsetTop || fullHeight
-      const wh = wishEnd - characterEnd
+      const wh = wishEnd - wishStart
+      // One generous tilted loop crosses the centre of the collection,
+      // passing beneath the frame. Keep the original Wishbox entry tangent.
+      const gh = gallery?.offsetHeight || 0
+      const galleryBridge = gallery
+        ? ` C ${.46*w} ${characterEnd+.02*ch}, ${.80*w} ${characterEnd+.05*gh}, ${.80*w} ${characterEnd+.28*gh}
+            C ${.80*w} ${characterEnd+.56*gh}, ${.38*w} ${characterEnd+.70*gh}, ${.27*w} ${characterEnd+.46*gh}
+            C ${.16*w} ${characterEnd+.22*gh}, ${.46*w} ${characterEnd+.10*gh}, ${.53*w} ${characterEnd+.34*gh}
+            C ${.60*w} ${characterEnd+.58*gh}, ${.025*w} ${wishStart-.20*gh}, ${.025*w} ${wishStart}` : ''
       const terminal = author?.querySelector('.ha-thread-end')?.getBoundingClientRect()
       const terminalX = terminal ? terminal.left + terminal.width / 2 : .36*w
       const terminalY = terminal ? terminal.top + terminal.height / 2 + window.scrollY - homeTop : canvasHeight+.20*hh
@@ -84,14 +95,14 @@ export default function HomeGeometry() {
       // takes a quiet detour left of the letter. End at the author's small seal,
       // leaving future credits/footer content independent of this path's anchors.
       const ending = wishbox
-        ? ` C ${.37*w} ${cs+.99*ch}, ${.43*w} ${characterEnd+.04*wh}, ${.30*w} ${characterEnd+.18*wh}
-            C ${.18*w} ${characterEnd+.33*wh}, ${.12*w} ${characterEnd+.50*wh}, ${.15*w} ${characterEnd+.73*wh}
-            C ${.17*w} ${characterEnd+.91*wh}, ${.28*w} ${wishEnd-.03*wh}, ${.31*w} ${wishEnd+.02*hh}
+        ? ` C ${gallery ? .025*w : .37*w} ${wishStart+(gallery ? .12 : .01)*wh}, ${.43*w} ${wishStart+.04*wh}, ${.30*w} ${wishStart+.18*wh}
+            C ${.18*w} ${wishStart+.33*wh}, ${.12*w} ${wishStart+.50*wh}, ${.15*w} ${wishStart+.73*wh}
+            C ${.17*w} ${wishStart+.91*wh}, ${.28*w} ${wishEnd-.03*wh}, ${.31*w} ${wishEnd+.02*hh}
             ${authorTail}`
         : characters ? ` C ${.37*w} ${cs+.99*ch}, ${.43*w} ${canvasHeight+.02*hh}, ${.43*w} ${canvasHeight+.20*hh}` : ''
       svg.current.setAttribute('viewBox', `0 0 ${w} ${canvasHeight}`)
       lead.current.setAttribute('d', upper)
-      line.current.setAttribute('d', upper + lower + historyBridge + continuation + ending)
+      line.current.setAttribute('d', upper + lower + historyBridge + continuation + galleryBridge + ending)
       total = line.current.getTotalLength()
       // Rebuild from the actual responsive path, including all current sections.
       const samples=Array.from({length:769},(_,index)=>{

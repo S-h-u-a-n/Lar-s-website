@@ -11,6 +11,7 @@ export const PAGE_EDITOR_SCOPES = {
   'ball-test': '.ball-test',
   'bottled-weather': '.wp-page',
   't-comic': '.t-comic-page',
+  'ball-comic': '.b-comic-page',
 }
 export const PAGE_LAYOUT_TARGETS = {
   intro: '.edition-intro-orbit, .intro-squares > *, .intro-content, .intro-replay',

@@ -41,10 +41,9 @@ export default function NaturalTest({ onBack, onNavigate, categories = CATEGORIE
     const panelWidth = Math.min(620, Math.max(320, window.innerWidth * .42))
     const available = Math.max(180, viewport.clientWidth - panelWidth - 30)
     const card = viewport.querySelector(`[data-entry-id="${selection.entry.id}"]`)
-    const photo = viewport.querySelector(`[data-entry-photo="${selection.entry.id}"]`)
     const cardHeight = card?.offsetHeight || 190
-    const groupHeight = photo ? photo.offsetTop - selection.entry.y + photo.offsetHeight : cardHeight
-    const groupWidth = photo ? photo.offsetWidth : 370
+    const groupHeight = cardHeight
+    const groupWidth = card?.offsetWidth || 370
     const scale = Math.min(CAMERA.entryScale, available / (groupWidth + 40), (viewport.clientHeight - 48) / (groupHeight + 16))
     camera.locate({ x: selection.category.x + selection.entry.x + 185, y: selection.category.y + selection.entry.y + groupHeight / 2 }, scale, available / (2 * viewport.clientWidth))
   }, [camera.locate, camera.viewportRef])
@@ -68,8 +67,6 @@ export default function NaturalTest({ onBack, onNavigate, categories = CATEGORIE
     const card = camera.viewportRef.current?.querySelector(`[data-entry-id="${active.entry.id}"]`)
     const observer = new ResizeObserver(resize)
     if (card) observer.observe(card)
-    const photo = camera.viewportRef.current?.querySelector(`[data-entry-photo="${active.entry.id}"]`)
-    if (photo) observer.observe(photo)
     const key = event => { if (event.key === 'Escape') close() }
     window.addEventListener('resize', resize); window.addEventListener('keydown', key)
     return () => { observer.disconnect(); window.removeEventListener('resize', resize); window.removeEventListener('keydown', key) }

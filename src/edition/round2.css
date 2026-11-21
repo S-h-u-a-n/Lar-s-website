@@ -45,7 +45,7 @@ body .main-scene--big-test {background:radial-gradient(ellipse at 68% 64%,#FFF0E
 body .big-test-document-panel {background:var(--edition-white)}body .big-test-document-cover {background:var(--edition-yellow)}
 body .big-test-document-copy button {background:var(--edition-mint)}
 body .comic-intro {background:var(--edition-paper)}
-body .story-reference-circle {background:radial-gradient(circle,#E7F1FC,#E6F5F3)}
+body .story-reference-circle {background:#fffef9}
 .edition-story-page-label .is-current {background:#976039}
 body .gt-disc {background:radial-gradient(circle,#FFFEF8 32%,var(--wash-mint) 80%);border-color:#A2D8DE;box-shadow:0 0 0 15px var(--edition-paper),0 0 0 16px #A2D8DE99}
 body .gt-stripes {opacity:.55}body .gt-yellow-square {opacity:.8}

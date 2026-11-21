@@ -1,0 +1,19 @@
+[
+  { "id": "b-comic-reference", "x": -10.14, "y": -11.94, "width": 120.71, "height": 122.59341337219495, "rotation": 0, "zIndex": 0 },
+  { "id": "b-comic-1", "x": 73.64, "y": 2.04, "width": 32.8, "height": 44.550703261879235, "rotation": 0, "zIndex": 5 },
+  { "id": "b-comic-2", "x": 73.69, "y": 45.38, "width": 32.81, "height": 53.03968566595979, "rotation": 0, "zIndex": 2 },
+  { "id": "b-comic-3", "x": 36.59, "y": 2.63, "width": 32.71, "height": 68.08397703926717, "rotation": 0, "zIndex": 3 },
+  { "id": "b-comic-4", "x": 36.7, "y": 69.5, "width": 32.26, "height": 29.687579732622687, "rotation": 0, "zIndex": 4 },
+  { "id": "b-comic-5", "x": -4.24, "y": 1.93, "width": 33.4, "height": 97.25487548055634, "rotation": 0, "zIndex": 1 },
+  { "id": "b-dialog-2", "x": 72.17, "y": -5.17, "width": 15.19, "height": 39.76666921282216, "rotation": 0, "zIndex": 24 },
+  { "id": "b-dialog-3", "x": 69.85, "y": 34.68, "width": 11.68, "height": 26.13623121075334, "rotation": 0, "zIndex": 25 },
+  { "id": "b-dialog-4", "x": 83.21, "y": 46.55, "width": 14, "height": 39.72, "rotation": 0, "zIndex": 22 },
+  { "id": "b-dialog-5", "x": 55.94, "y": -4.74, "width": 17.4, "height": 41.508531794884696, "rotation": 0, "zIndex": 27 },
+  { "id": "b-dialog-6", "x": 29.64, "y": 36.45, "width": 14.52, "height": 34.112548619051836, "rotation": 0, "zIndex": 20 },
+  { "id": "b-dialog-7", "x": 46.95, "y": 60.59, "width": 11.04, "height": 25.413237583366584, "rotation": 0, "zIndex": 25 },
+  { "id": "b-dialog-8", "x": 33.12, "y": 72.37, "width": 9.24, "height": 17.561723633827604, "rotation": 0, "zIndex": 26 },
+  { "id": "b-dialog-10", "x": 19.82, "y": -5.61, "width": 16.26, "height": 56.01477293525159, "rotation": 0, "zIndex": 27 },
+  { "id": "b-dialog-9", "x": -12.76, "y": 3.57, "width": 16.73, "height": 62.648505142355894, "rotation": 0, "zIndex": 28 },
+  { "id": "b-dialog-11", "x": -10.32, "y": 69.61, "width": 12.23, "height": 34.33977029914206, "rotation": 0, "zIndex": 29 },
+  { "id": "b-dialog-1", "x": 99.03, "y": -3.69, "width": 19.36, "height": 45.50925868741607, "rotation": 0, "zIndex": 30 }
+]

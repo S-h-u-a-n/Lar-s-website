@@ -343,10 +343,21 @@ h1 em, h2 em { color: var(--ink); font-style: italic; }
   width: min(100%, 360px);
 }
 
-.orientation-prompt__content p {
+.orientation-prompt__copy {
+  display: grid;
+  gap: 8px;
+}
+
+.orientation-prompt__copy p {
   margin: 0;
   font-size: 18px;
   line-height: 1.8;
+}
+
+.orientation-prompt__copy .orientation-prompt__title {
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 25px;
 }
 
 .orientation-prompt__icon {
@@ -392,6 +403,8 @@ h1 em, h2 em { color: var(--ink); font-style: italic; }
 
 @media (orientation: portrait) and (max-width: 1024px) and (hover: none) and (pointer: coarse) {
   .orientation-prompt { display: flex; }
+  #root > :not(.orientation-prompt) { visibility: hidden; pointer-events: none; }
+  html, body { overflow: hidden; overscroll-behavior: none; touch-action: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

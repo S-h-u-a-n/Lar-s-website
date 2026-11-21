@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect } from 'react'
 import Text from '../main/Text'
 import { enablePageTextPersistence } from '../../dev/textEditorStore'
 import { PORTAL_COMICS } from './config'
+import BallComicPage from './BallComicPage'
 import './ComicPages.css'
 
 function ComicPage({ portalId, onContinue, onBack }) {
@@ -19,7 +20,7 @@ function ComicPage({ portalId, onContinue, onBack }) {
 export function GlobeComicPage(props) { return <ComicPage portalId="globe" {...props} /> }
 export function NaturalComicPage(props) { return <ComicPage portalId="book-open1" {...props} /> }
 export function HumanComicPage(props) { return <ComicPage portalId="book-close1" {...props} /> }
-export function BallComicPage(props) { return <ComicPage portalId="ball" {...props} /> }
+export { BallComicPage }
 export const COMIC_PAGES = { 'globe-comic': GlobeComicPage, 'natural-comic': NaturalComicPage, 'human-comic': HumanComicPage, 'ball-comic': BallComicPage }
 
 // Commit only after the lazy destination resolves. Match Main's existing arrival stage.

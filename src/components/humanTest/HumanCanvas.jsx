@@ -1,9 +1,8 @@
 import { Fragment } from 'react'
-import ReadingPhoto from '../research/ReadingPhoto'
 import HumanIcon from './HumanIcon'
 import ResearchCategoryCircle from '../naturalTest/ResearchCategoryCircle'
 import AtlasLabels from '../../edition/AtlasLabels'
-import { CATEGORIES, entryById, CONTENT } from './data'
+import { CATEGORIES, entryById } from './data'
 import Text from './Text'
 import BilingualTitle from '../research/BilingualTitle'
 export default function HumanCanvas({ camera, onOpen, backgroundSelection, onCategoryActivate, onBlankClick, detailCategory, readingEntryId }) {
@@ -11,6 +10,6 @@ export default function HumanCanvas({ camera, onOpen, backgroundSelection, onCat
     {backgroundSelection?.category.id === category.id && <ResearchCategoryCircle key={backgroundSelection.revision}/>}
     <div className="ht-landmark" aria-hidden="true">{category.landmark}</div><div className="ht-diagram" aria-hidden="true"><HumanIcon kind={category.decoration}/></div><div className="ht-pattern" aria-hidden="true"/>
     <button className="nt-category-title" aria-pressed={backgroundSelection?.category.id === category.id} onClick={() => onCategoryActivate(category)}><h2><BilingualTitle chinese={category.chineseName} english={category.name}/></h2></button><p className="nt-category-intro">{category.introduction}</p>
-    {category.entries.map((id, order) => { const entry = entryById[id]; return <Fragment key={id}><button data-dev-scope={import.meta.env.DEV ? `entry-${id}` : undefined} key={`${id}-${backgroundSelection?.category.id === category.id ? backgroundSelection.revision : "closed"}`} data-entry-id={id} className={`nt-entry${readingEntryId === id ? ' is-reading-entry' : ''}`} style={{ left: entry.x, top: entry.y, '--nt-entry-order': order }} onClick={event => onOpen(entry, category, event.currentTarget)}><span className="nt-entry-icon"><HumanIcon kind={category.decoration}/></span><span className="nt-entry-copy"><strong><BilingualTitle chinese={entry.chineseName} english={entry.title}/></strong><span className="nt-entry-description">{entry.description}</span><span className="nt-entry-detail">{entry.type.toUpperCase()}</span><span className="nt-read"><Text id={`read-${id}`}>READ ↗</Text></span></span></button>{readingEntryId === id && entry.type === 'article' && <ReadingPhoto entry={entry} content={CONTENT[id]}/>}</Fragment> })}
+    {category.entries.map((id, order) => { const entry = entryById[id]; return <Fragment key={id}><button data-dev-scope={import.meta.env.DEV ? `entry-${id}` : undefined} key={`${id}-${backgroundSelection?.category.id === category.id ? backgroundSelection.revision : "closed"}`} data-entry-id={id} className={`nt-entry${readingEntryId === id ? ' is-reading-entry' : ''}`} style={{ left: entry.x, top: entry.y, '--nt-entry-order': order }} onClick={event => onOpen(entry, category, event.currentTarget)}><span className="nt-entry-icon"><HumanIcon kind={category.decoration}/></span><span className="nt-entry-copy"><strong><BilingualTitle chinese={entry.chineseName} english={entry.title}/></strong><span className="nt-entry-description">{entry.description}</span><span className="nt-entry-detail">{entry.type.toUpperCase()}</span><span className="nt-read"><Text id={`read-${id}`}>READ ↗</Text></span></span></button></Fragment> })}
   </section>)}</div><AtlasLabels camera={camera} categories={CATEGORIES} selectedId={backgroundSelection?.category.id} onChoose={onCategoryActivate} showOpenHint={false} renderCardIcon={category => <span className="ht-overview-icon" aria-hidden="true" style={{ '--nt-category-color': category.color, '--ht-icon-width': category.decoration === 'city' ? '400px' : '310px' }}><HumanIcon kind={category.decoration}/></span>}/></div>
 }

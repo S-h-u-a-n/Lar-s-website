@@ -36,9 +36,9 @@ body .edition-header .edition-wordmark {display:flex;align-items:center;gap:14px
 .edition-wordmark>span:first-child {font-size:34px;font-family:var(--body)}
 .edition-wordmark b {font-size:17px;letter-spacing:.08em;font-weight:400}
 .edition-header>p {font:9px var(--sans);letter-spacing:.1em}.edition-header i {padding:0 10px;font-style:normal;opacity:.4}
-.edition-header nav {display:flex;gap:24px}.edition-header nav button {position:relative}
-.edition-header nav button:after {content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s var(--edition-ease)}
-.edition-header nav button:hover:after {transform:scaleX(1)}
+.edition-header nav {display:flex;gap:24px}.edition-header nav button,.edition-back-button {position:relative}
+.edition-header nav button:after,.edition-back-button:after {content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s var(--edition-ease)}
+.edition-header nav button:hover:after,.edition-back-button:hover:after {transform:scaleX(1)}
 body .codex-edition .home-content {background:var(--edition-paper);color:var(--edition-ink)}
 body .codex-edition .home-content .edition-hero {display:grid;grid-template-columns:.75fr 1.5fr;gap:3vw;padding:5vh 5vw 76px;min-height:calc(100dvh - 86px);align-items:center;position:relative}
 .edition-cover-copy {position:relative;z-index:2;padding:16px 0}
@@ -114,11 +114,20 @@ body .big-test-document-copy p {font:15px/1.9 Georgia,'Songti TC',serif}
 .edition-hover-caption {display:block;white-space:nowrap;background:var(--edition-paper);color:var(--edition-ink);padding:9px 13px;border:1px solid var(--edition-line);font:12px var(--body);transform:translate(18px,6px);border-radius:0 12px 0 12px}
 body .big-hover-icon-image {filter:drop-shadow(2px 4px 0 #34465A30)}
 
+@media (orientation:landscape) and (max-height:500px) {
+  .edition-lab-index {top:76px;bottom:48px;width:min(205px,27vw)}
+  .edition-lab-index h2 {font-size:clamp(22px,6vh,30px);line-height:1.05;margin:4px 0 8px}
+  .edition-lab-index nav {flex:1 1 0;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+  .edition-lab-index nav button {padding:4px 5px}
+  .edition-lab-index nav img {width:30px;height:30px}
+  .edition-lab-index nav strong {font-size:12px}
+}
+
 .edition-resource-status {position:absolute;z-index:95;left:50%;top:45%;transform:translate(-30%,-50%) rotate(-2deg);text-align:center;padding:28px;max-width:300px;background:#FFFEF8E6;border:1px solid #34465A33;box-shadow:6px 7px 0 #A2D8DE70;color:var(--edition-ink)}
 .edition-resource-status>span {font-size:35px;display:block;animation:edition-compass 4s ease-in-out infinite}.edition-resource-status>span.is-error {animation:none}.edition-resource-status strong {font:16px var(--body);display:block;margin:12px 0}.edition-resource-status p {font:12px/1.8 var(--body)}.edition-resource-status button {border:1px solid var(--edition-line);padding:9px 15px;background:var(--edition-mint);font:12px var(--body)}
 /* Narration uses generous paper margins and a visible reading rhythm. */
 .edition-story-tools {position:fixed;left:5vw;right:5vw;bottom:26px;z-index:100;display:flex;align-items:center;gap:25px;color:var(--edition-ink);font:11px var(--body)}.edition-story-tools button {background:#FFFEF8;border:1px solid var(--edition-line);padding:10px 15px;font:12px var(--body);border-radius:20px 0 20px 0}.edition-story-tools small {margin-left:auto}
-body .story-reference-circle {background:#E6F5F3;border:1px solid #A3BEAB44}
+body .story-reference-circle {background:#fffef9;border:1px solid #A3BEAB44}
 body .story-narration {font-size:max(18px,1.5vw)!important;font-family:var(--body);color:var(--edition-ink)}
 .edition-comic-controls {position:absolute;left:4vw;right:4vw;top:24px;display:flex;justify-content:space-between;align-items:center;gap:20px;z-index:50;font:11px var(--body);color:var(--edition-ink)}.edition-comic-controls button {border:1px solid var(--edition-line);padding:10px 18px;background:var(--edition-paper);color:inherit;font:12px var(--body);border-radius:20px 0 20px 0}.edition-comic-controls small {position:absolute;top:45px;left:50%;transform:translateX(-50%);white-space:nowrap;opacity:.6}
 body .t-comic-page {background:var(--edition-paper)}body .t-comic-frame {border:0;border-top:1px solid var(--edition-line);border-bottom:1px solid var(--edition-line);border-radius:0;background:#FFFEF840}
@@ -249,3 +258,19 @@ body .comic-intro .story-narration {left:9vw;width:28vw;top:54%;transform:transl
 .edition-lab-index nav { transition: filter .42s var(--edition-ease); }
 .edition-lab-index nav.is-document-blurred { filter: blur(4px); pointer-events: none; }
 @media(prefers-reduced-motion:reduce) { .edition-lab-index nav { transition: none; } }
+
+/* The Ball title shares the left content edge with BACK; categories use their own row on compact screens. */
+@media(max-width:1200px) {
+  body .ball-test .ball-header { height:150px; }
+  body .ball-test .ball-stage { top:150px; }
+}
+@media(max-width:1200px) and (max-height:680px) {
+  body .ball-test .ball-header { height:150px; padding-top:8px; padding-bottom:8px; }
+  body .ball-test .ball-stage { top:150px; }
+}
+@media(max-width:1200px) and (max-height:680px) {
+  body .ball-test .ball-header { height:138px; }
+  body .ball-test .ball-stage { top:138px; }
+  body .ball-test .ball-selector { bottom:133px; }
+  body .ball-test .ball-dialogue { bottom:8px; }
+}

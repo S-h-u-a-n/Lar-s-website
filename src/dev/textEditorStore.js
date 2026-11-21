@@ -69,12 +69,26 @@ export function registerText(id, label, element, type = 'registered', options = 
   elements.set(id, element)
   const existing = state.data[id]
   const defaults = { ...captureDefaults(element), ...existing?.defaults, ...options.defaultValues }
-  const sourceDefaultKeys = [...new Set([...(existing?.sourceDefaultKeys ?? []), ...Object.keys(options.defaultValues ?? {})])]
+  const sourceDefaultKeys = options.sourceDefaultKeys
+    ? [...new Set(options.sourceDefaultKeys)]
+    : [...new Set([...(existing?.sourceDefaultKeys ?? []), ...Object.keys(options.defaultValues ?? {})])]
   const revised = options.sourceRevision && existing?.sourceRevision !== options.sourceRevision
+  let values = existing?.values ?? { ...defaults }
+  if (revised && options.sourceRevisionStrategy === 'replace') {
+    values = { ...defaults }
+  } else if (revised && options.sourceRevisionStrategy === 'preserve-edits') {
+    values = { ...defaults }
+    Object.entries(existing?.values ?? {}).forEach(([key, value]) => {
+      if (existing?.defaults?.[key] !== value) values[key] = value
+    })
+    options.forceDefaultKeys?.forEach(key => { values[key] = defaults[key] })
+  } else if (revised) {
+    values = { ...defaults, ...existing?.values, ...options.defaultValues }
+  }
   setState({
     mounted: state.mounted.includes(id) ? state.mounted : [...state.mounted, id],
     selectedId: state.selectedId ?? id,
-    data: { ...state.data, [id]: { ...existing, type: existing?.type ?? type, label, selector: options.selector ?? existing?.selector, pageId: options.pageId ?? existing?.pageId ?? inferPageId(id), coordinateSpace: existing?.coordinateSpace ?? options.coordinateSpace, sourceRevision: options.sourceRevision ?? existing?.sourceRevision, sourceDefaultKeys, defaults, values: revised ? { ...defaults, ...existing?.values, ...options.defaultValues } : existing?.values ?? { ...defaults } } },
+    data: { ...state.data, [id]: { ...existing, type: existing?.type ?? type, label, selector: options.selector ?? existing?.selector, pageId: options.pageId ?? existing?.pageId ?? inferPageId(id), coordinateSpace: existing?.coordinateSpace ?? options.coordinateSpace, sourceRevision: options.sourceRevision ?? existing?.sourceRevision, sourceRevisionStrategy: options.sourceRevisionStrategy ?? existing?.sourceRevisionStrategy, sourceDefaultKeys, defaults, values } },
   })
 }
 
@@ -119,7 +133,12 @@ export function enablePageTextPersistence(pageId, prefix, { readOnly = !import.m
       // another page cannot replace a draft with the same historical ID.
       const runtimeId = entry.type === 'draft' && /^draft-text-\d+$/.test(id) ? `draft-text-${pageId}-legacy-${id.slice(11)}` : id
       const restored = runtimeId === id ? entry : { ...entry, originalId: id }
-      data[runtimeId] = data[runtimeId] ? { ...data[runtimeId], values: { ...data[runtimeId].defaults, ...entry.values } } : restored
+      const current = data[runtimeId]
+      if (current?.sourceRevisionStrategy === 'replace' && current.sourceRevision !== entry.sourceRevision) {
+        data[runtimeId] = current
+      } else {
+        data[runtimeId] = current ? { ...current, values: { ...current.defaults, ...entry.values } } : restored
+      }
       // Only opt-in, revised source text supersedes an older saved draft.
       // Leave storage and all unspecified fields/other pages intact.
       if (data[runtimeId].sourceRevision && data[runtimeId].sourceRevision !== entry.sourceRevision) {
@@ -167,6 +186,10 @@ export const getTextConfig = pageId => ({
     .filter(([, entry]) => entry.type === 'draft' && entry.pageId === pageId)
     .map(([id, entry]) => ({ id, ...(entry.originalId ? { originalId: entry.originalId } : {}), ...entry.values })),
 })
+
+export const isCenteredPercentCoordinateSpace = coordinateSpace =>
+  coordinateSpace === 'container-percent-center'
+  || coordinateSpace === 'container-percent-center-independent'
 
 let draftCounter = 0
 
@@ -216,9 +239,15 @@ export function deleteDraft(id) {
 export function buildTextStyle(entry) {
   const { defaults: d, values: v } = entry
   const isDraft = entry.type === 'draft'
+  const isPercentCentered = isCenteredPercentCoordinateSpace(entry.coordinateSpace)
   const changed = key => isDraft || entry.sourceDefaultKeys?.includes(key) || v[key] !== d[key]
   const style = {}
-  if (changed('x') || changed('y')) style.translate = `${v.x}px ${v.y}px`
+  if (isPercentCentered) {
+    style.left = `${v.x}%`
+    style.top = `${v.y}%`
+    style['--note-copy-scale'] = String((v.fontScale ?? d.fontScale ?? 100) / 100)
+    return style
+  } else if (changed('x') || changed('y')) style.translate = `${v.x}px ${v.y}px`
   if (changed('rotation')) style.rotate = `${v.rotation}deg`
   if (changed('width')) style.width = v.width == null ? 'auto' : `${v.width}px`
   if (changed('maxWidth')) style.maxWidth = v.maxWidth == null ? 'none' : `${v.maxWidth}px`

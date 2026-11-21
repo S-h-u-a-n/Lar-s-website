@@ -99,6 +99,11 @@ const AUTO_FOLLOW_STEPS = {
 }
 const AUTO_FOLLOW_DELAY_MS = 80
 const DIALOGUE_TEXT_DEFAULTS = Object.fromEntries(Object.entries(subtitleConfig.registered).map(([id, { coordinateSpace, ...values }]) => [Number(id.replace('t-dialog-text-', '')), values]))
+const CONTINUE_TEXT_ID = 'codex-t-comic-dom-button-rqpsuk'
+const CONTINUE_TEXT_DEFAULTS = Object.fromEntries(
+  Object.entries(subtitleConfig.registered[CONTINUE_TEXT_ID]).filter(([key]) => key !== 'selector' && key !== 'coordinateSpace'),
+)
+const CONTINUE_TEXT_STYLE_KEYS = ['fontSize', 'fontFamily', 'fontWeight', 'lineHeight', 'letterSpacing', 'textAlign', 'color']
 
 function DialogueText({ number }) {
   const id = `t-dialog-text-${number}`
@@ -107,6 +112,7 @@ function DialogueText({ number }) {
     label: `Telescope / Dialog ${number}`,
     coordinateSpace: 'dialogue-group',
     sourceRevision: subtitleConfig.revision,
+    sourceRevisionStrategy: 'replace',
     defaultValues: DIALOGUE_TEXT_DEFAULTS[number],
   })
 
@@ -115,6 +121,26 @@ function DialogueText({ number }) {
       {editable.text ?? editable.defaultText ?? DIALOGUE_TEXT_DEFAULTS[number].text}
     </div>
   )
+}
+
+function ContinueText() {
+  const editable = usePersistedEditableText({
+    id: CONTINUE_TEXT_ID,
+    label: 'Telescope / Continue',
+    sourceRevision: subtitleConfig.revision,
+    sourceRevisionStrategy: 'replace',
+    sourceDefaultKeys: CONTINUE_TEXT_STYLE_KEYS,
+    defaultValues: CONTINUE_TEXT_DEFAULTS,
+  })
+  const style = buildTextStyle({
+    defaults: CONTINUE_TEXT_DEFAULTS,
+    values: CONTINUE_TEXT_DEFAULTS,
+    sourceDefaultKeys: CONTINUE_TEXT_STYLE_KEYS,
+  })
+
+  return <span id={CONTINUE_TEXT_ID} ref={editable.ref} {...editable.props} style={{ ...style, ...editable.props.style }}>
+    {editable.text ?? editable.defaultText ?? CONTINUE_TEXT_DEFAULTS.text}
+  </span>
 }
 
 function TComicPage({ onComplete, onBack }) {
@@ -130,6 +156,7 @@ function TComicPage({ onComplete, onBack }) {
   const [visibleThrough, setVisibleThrough] = useState(-1)
   const [activeFadeIndex, setActiveFadeIndex] = useState(null)
   const [completedIndex, setCompletedIndex] = useState(-1)
+  const canContinue = completedIndex === SEQUENCE.length - 1 && activeFadeIndex === null
   const { active } = useDevEditorState()
   const isImageEditorOpen = import.meta.env.DEV && active?.kind === 'img'
   const isTextEditorOpen = import.meta.env.DEV && active?.kind === 'text'
@@ -240,7 +267,14 @@ function TComicPage({ onComplete, onBack }) {
         />
         </div>
       </div>
-      <div className="t-comic-frame-footer" aria-hidden="true" />
+      <button
+        className={`portal-comic__continue t-comic-frame-footer${canContinue ? ' is-visible' : ''}`}
+        onClick={onComplete}
+        onPointerDown={event => event.stopPropagation()}
+        disabled={!canContinue}
+        aria-hidden={!canContinue}
+        tabIndex={canContinue ? 0 : -1}
+      ><ContinueText /></button>
     </main>
   )
 }

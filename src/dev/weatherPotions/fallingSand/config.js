@@ -1,13 +1,14 @@
 // UI colours/bottles are intentionally shared with the saved prototype.
 import { POTIONS as ORIGINAL_POTIONS } from '../config.js'
 export const POTIONS = [...ORIGINAL_POTIONS,
-  { id: 'growth', name: '生長', english: 'Growth', color: '#8DB879', number: '08', mark: 'growth', note: '撒下生長粒子，遇水後在附近合適的地表培育植物。' },
-  { id: 'sand', name: '砂子', english: 'Sand', color: '#DFBF83', number: '09', mark: 'sand', note: '投入真正的砂粒，觀察下落、堆積與搬運。' },
+  { id: 'growth', name: '生長', english: 'Growth', color: '#8DB879', number: '08', mark: 'growth', note: '水、光和溫度都很重要（！）' },
+  { id: 'sand', name: '砂子', english: 'Sand', color: '#DFBF83', number: '09', mark: 'sand', note: '就是！砂子！' },
 ]
 export const WORLD = { width: 840, height: 680, columns: 210, rows: 170, seed: 6307, seaY: .69 }
 export const RULES = {
   fps: 30, uiEvery: .18, maxCatchUp: 3, defaultStrength: .45,
   minTemperature: -35, maxTemperature: 65, ambientTemperature: 18,
+  upperAirCooling: 20,
   climateReturn: .014, sunHeat: 4.2, coldHeat: -4.2,
   rainRate: 350, snowRate: 260, cloudRate: 110, lavaRate: 120,
   growthMaxParticles: 600, growthLifetime: 12, growthActivationRadius: 4,

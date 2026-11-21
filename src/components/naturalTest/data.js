@@ -1,5 +1,6 @@
 import { CARD_DESCRIPTIONS } from '../research/cardDescriptions'
 import { withResearchPhoto } from '../research/photoConfig'
+import { loadArticleMarkdown } from '../research/articleMarkdown'
 import { PIGMENTS } from '../../edition/palette'
 import { MOTION } from '../bigTest/config'
 import { ARTICLES_BY_ID } from './articles'
@@ -25,7 +26,17 @@ export const ENTRIES = CATEGORIES.flatMap(category => category.entries.map((id,i
   const item = ARTICLES_BY_ID[id], [x,y] = entryPosition(index)
   return { id, category:category.id, title:item.title, chineseName:item.chineseName, description:CARD_DESCRIPTIONS.natural[id], detail:'FIELD NOTES', x,y, icon:retainedIcons[id] ?? icons[category.id], article:id, note:id }
 }))
-export const ARTICLES = Object.fromEntries(ENTRIES.map((entry,index) => [entry.article, { ...withResearchPhoto('natural', ARTICLES_BY_ID[entry.article]), subtitle:ARTICLES_BY_ID[entry.article].chineseName, page:String(index+1).padStart(2,'0') }]))
+const articleRecords = ENTRIES.map((entry,index) => ({
+  ...withResearchPhoto('natural', ARTICLES_BY_ID[entry.article]),
+  subtitle:ARTICLES_BY_ID[entry.article].chineseName,
+  page:String(index+1).padStart(2,'0'),
+}))
+const markdownArticles = loadArticleMarkdown(
+  articleRecords,
+  import.meta.glob('/content/natural/*.md', { eager:true, query:'?raw', import:'default' }),
+  'Natural articles',
+)
+export const ARTICLES = Object.fromEntries(articleRecords.map(article => [article.id, markdownArticles[article.id]]))
 // Keep the existing student-note wording for retained subjects. New notes are
 // neutral observation prompts, not newly invented character dialogue.
 const existingTitles = { volcano:'VOLCANO', earthquakes:'EARTHQUAKES', currents:'OCEAN CURRENTS', 'water-cycle':'THE WATER CYCLE', aurora:'AURORA', clouds:'CLOUD WATCHING', ecosystems:'ECOSYSTEMS & FOOD WEBS', pollinators:'POLLINATORS', seasons:'CLIMATE & LONG-TERM PATTERNS' }
