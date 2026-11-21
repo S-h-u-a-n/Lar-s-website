@@ -1,0 +1,130 @@
+[
+  {
+    "id": "t-comic-1",
+    "x": 83.86,
+    "y": 0.68,
+    "width": 37.48,
+    "rotation": 0,
+    "zIndex": 1
+  },
+  {
+    "id": "t-comic-2",
+    "x": 85.26,
+    "y": 68,
+    "width": 30.65,
+    "rotation": 0,
+    "zIndex": 2
+  },
+  {
+    "id": "t-comic-3",
+    "x": 46.49,
+    "y": 6.68,
+    "width": 34.79,
+    "rotation": 0,
+    "zIndex": 3
+  },
+  {
+    "id": "t-comic-4",
+    "x": 11.89,
+    "y": 4.23,
+    "width": 32.62,
+    "rotation": 0,
+    "zIndex": 4
+  },
+  {
+    "id": "t-comic-5",
+    "x": 6.66,
+    "y": 36.96,
+    "width": 39.05,
+    "rotation": 0,
+    "zIndex": 5
+  },
+  {
+    "id": "t-dialog-1",
+    "x": 77.29,
+    "y": -9.83,
+    "width": 22.62,
+    "rotation": 0,
+    "zIndex": 20
+  },
+  {
+    "id": "t-dialog-2",
+    "x": 107.17,
+    "y": 51.53,
+    "width": 14.21,
+    "rotation": 0,
+    "zIndex": 21
+  },
+  {
+    "id": "t-dialog-3",
+    "x": 73.94,
+    "y": 50.85,
+    "width": 19.22,
+    "rotation": 0,
+    "zIndex": 22
+  },
+  {
+    "id": "t-dialog-4",
+    "x": 72.87,
+    "y": 16.16,
+    "width": 8.98,
+    "rotation": 0,
+    "zIndex": 23
+  },
+  {
+    "id": "t-dialog-5",
+    "x": 43.08,
+    "y": -7.18,
+    "width": 28.77,
+    "rotation": 0,
+    "zIndex": 24
+  },
+  {
+    "id": "t-dialog-6",
+    "x": 37.55,
+    "y": -7.96,
+    "width": 11.89,
+    "rotation": 0,
+    "zIndex": 25
+  },
+  {
+    "id": "t-dialog-7",
+    "x": 25.56,
+    "y": -3.92,
+    "width": 8.12,
+    "rotation": 0,
+    "zIndex": 26
+  },
+  {
+    "id": "t-dialog-8",
+    "x": 4.15,
+    "y": 9.33,
+    "width": 14.54,
+    "rotation": 0,
+    "zIndex": 27
+  },
+  {
+    "id": "t-dialog-9",
+    "x": 32.79,
+    "y": 31.38,
+    "width": 18.23,
+    "rotation": 0,
+    "zIndex": 28
+  },
+  {
+    "id": "t-dialog-10",
+    "x": 1.44,
+    "y": 38.46,
+    "width": 18.41,
+    "rotation": 0,
+    "zIndex": 29
+  },
+  {
+    "id": "t-dialog-11",
+    "x": 6.92,
+    "y": 79.16,
+    "width": 16.53,
+    "rotation": 0,
+    "zIndex": 30
+  }
+]

@@ -1,0 +1,25 @@
+/* The same normal/italic font files as styles.css and edition/edition.css.
+   Only scoped typography/letter rules are ported; global entry layout is not imported. */
+@font-face { font-family: 'Playfair Display'; src: url('../../../Font/En-1/PlayfairDisplay-VariableFont_wght.ttf') format('truetype'); font-style: normal; font-weight: 400 900; font-display: swap; }
+@font-face { font-family: 'Playfair Display'; src: url('../../../Font/En-1/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype'); font-style: italic; font-weight: 400 900; font-display: swap; }
+.history-title-playback { font-family: 'Playfair Display', Georgia, serif; font-weight: 400; text-align: left; }
+.history-title .history-title-playback h1 { height: var(--history-heading-em); font-family: inherit; font-size: inherit; font-weight: 400; line-height: 1; }
+.history-title-pre { display: block; font-size: var(--history-pre-ratio); line-height: 1; font-weight: 400; font-style: italic; letter-spacing: normal; }
+.history-title-mainline { display: block; margin-top: var(--history-line-gap); font-size: 1em; line-height: 1.1; letter-spacing: -.045em; }
+.history-title .genesis-letters { display: inline-flex; justify-content: center; isolation: isolate; touch-action: pan-y pinch-zoom; font-size: inherit; font-weight: 400; line-height: 1.1; letter-spacing: -.045em; margin: 0; }
+.history-title-placeholder { display: inline-block; height: 1.1em; line-height: 1.1; }
+/* Exact letter/sticker layout from IntroScreen.css, scoped to the history title. */
+.history-title .genesis-letter { display: inline-block; position: relative; min-width: calc(var(--art-width) + .06em); text-align: center; -webkit-tap-highlight-color: transparent; }
+.history-title .genesis-visual { position: relative; display: block; transition: translate 550ms cubic-bezier(.22,1,.36,1); pointer-events: none; }
+.history-title .genesis-char { display: block; transition: opacity 240ms ease; }
+.history-title .genesis-letter.is-active .genesis-char { opacity: 0; }
+.history-title .genesis-sticker { position: absolute; width: var(--art-width); height: .8em; left: 50%; top: 50%; translate: -50% -50%; opacity: 0; pointer-events: none; z-index: 1; }
+.history-title .genesis-sticker img { position: absolute; left: var(--art-x); top: var(--art-y); width: var(--art-size); height: auto; max-width: none; display: block; user-select: none; }
+/* Original IntroScreen replay control/icon; inverse compensation keeps a usable
+   24px hit area when the existing history title shrinks on narrow windows. */
+.history-title-replay { display: grid; width: calc(24px / var(--history-title-scale)); height: calc(24px / var(--history-title-scale)); margin: calc(12px / var(--history-title-scale)) 0 0; padding: calc(4px / var(--history-title-scale)); place-items: center; border: 0; color: inherit; background: transparent; cursor: pointer; opacity: .65; transition: opacity 220ms ease, transform 220ms ease; }
+.history-title-replay:hover, .history-title-replay:focus-visible { opacity: 1; transform: rotate(30deg); }
+.history-title-replay:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+.history-title-replay:disabled { cursor: default; opacity: .3; }
+.history-title-replay svg { display: block; width: calc(13px / var(--history-title-scale)); height: calc(13px / var(--history-title-scale)); fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.35; }
+@media (prefers-reduced-motion: reduce) { .history-title .genesis-visual, .history-title .genesis-char, .history-title-replay { transition: none; } .history-title .genesis-sticker { display: none; } .history-title .genesis-letter.is-active .genesis-char { opacity: 1; } }

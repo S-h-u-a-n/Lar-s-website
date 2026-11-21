@@ -1,0 +1,11 @@
+/* Shared by natural, human and celestial observation notebooks. */
+.research-photo{display:block;position:relative;box-sizing:border-box;overflow:hidden;min-width:0;max-width:100%;aspect-ratio:4/3;background:#F2EDE363;border:1px solid #34465A20;border-radius:0 16px 0 0;pointer-events:none}
+.research-photo img{display:block;width:100%;height:100%;object-fit:contain}
+:is(.nt-article-photo, .natural-test) .research-photo-info{position:absolute;z-index:8;display:grid;place-items:center;width:23px;height:23px;padding:0;border:1px solid #34465A55;border-radius:50%;background:#FFFEF8E8;color:var(--nt-ink,var(--edition-ink,#34465A));font:17px/1 Georgia,serif;cursor:pointer;box-shadow:0 1px 4px #34465A16}
+:is(.nt-article-photo, .natural-test) .research-photo-info:hover{background:#fffef8}
+.nt-article-photo { position:relative; width:100%; min-width:0; margin:0 0 var(--reading-photo-gap,26px); }
+.nt-article-photo > .research-photo { width:100%; background:#FFFEF8B8; }
+.nt-article-photo .research-photo img { position:absolute; inset:0; display:block; width:100% !important; max-width:100%; height:100% !important; object-fit:contain; transform:none; }
+.nt-article-photo > .research-photo-info { right:8px; bottom:8px; }
+
+.nt-article-photo[data-photo-credit] { cursor:pointer; }

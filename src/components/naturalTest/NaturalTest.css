@@ -1,0 +1,116 @@
+.natural-test{position:fixed;inset:0;z-index:40;overflow:hidden;background:var(--nt-cream);color:var(--nt-ink);font-family:var(--sans)}.natural-test *{box-sizing:border-box}.natural-test button{font:inherit;color:inherit;cursor:pointer;border:0}.natural-test button:focus-visible{outline:3px solid var(--nt-teal);outline-offset:5px}.natural-test [hidden]{display:none!important}
+.nt-header{position:absolute;z-index:5;top:0;left:0;right:0;min-height:105px;padding:18px 30px;display:flex;align-items:center;gap:24px;background:var(--nt-cream);border-bottom:2px solid var(--nt-teal)}.nt-back,.nt-category-navigation>button,.nt-controls button,.nt-reading-top button{background:var(--nt-mint);padding:10px 18px;border-radius:18px;font-size:12px;transition:background var(--nt-duration) var(--nt-easing),scale var(--nt-duration) var(--nt-easing)}.nt-back:hover,.nt-controls button:hover,.nt-category-navigation>button:hover{background:var(--nt-yellow);scale:1.03}.nt-heading h1{font:400 clamp(24px,3vw,42px)/1.1 var(--display);margin:0}.nt-heading p{font:11px/1.5 var(--sans);margin:7px 0 0}.nt-category-navigation{margin-left:auto;position:relative}.nt-category-menu{position:absolute;right:0;top:calc(100% + 15px);width:285px;background:var(--nt-panel);border-radius:22px;padding:12px;border:2px solid var(--nt-teal)}.nt-category-menu button{display:block;width:100%;text-align:left;background:none;padding:16px 10px;font-size:12px;line-height:1.4;border-left:8px solid var(--nt-category-color);margin:7px 0}.nt-category-menu button:hover{background:var(--nt-cream)}
+.nt-viewport{position:absolute;inset:107px 0 75px;overflow:clip;cursor:grab;touch-action:none;user-select:none;isolation:isolate}.nt-viewport.is-dragging,.nt-viewport.is-dragging *{cursor:grabbing!important}.nt-world{position:absolute;left:0;top:0;width:1px;height:1px;transform-origin:0 0;will-change:transform}.nt-category{position:absolute}.nt-category-title{position:relative;display:block;width:95%;background:none;text-align:left;padding:0;z-index:1;animation:nt-arrive 600ms var(--nt-easing) both;animation-delay:calc(var(--nt-order) * 55ms)}.nt-category-title h2{font:400 85px/1.05 var(--display);letter-spacing:-2px;margin:0}.nt-category:nth-child(2) .nt-category-title h2{font-size:100px}.nt-category:nth-child(4) .nt-category-title h2{font-size:90px}.nt-category-number{position:absolute;top:-80px;left:-20px;font:30px var(--sans);opacity:.6}.nt-category-intro{position:relative;z-index:1;font-size:23px;line-height:1.6;width:70%;margin:24px 0;animation:nt-arrive 650ms var(--nt-easing) both;animation-delay:calc(150ms + var(--nt-order) * 55ms)}
+.nt-decoration{position:absolute;pointer-events:none;background-color:var(--nt-category-color);animation:nt-arrive 650ms var(--nt-easing) both;opacity:.9}.nt-decoration-stripes{width:280px;height:280px;top:105px;left:590px;transform:rotate(-12deg);background-image:repeating-linear-gradient(48deg,transparent 0 35px,var(--nt-panel) 35px 43px)}.nt-decoration-circle{width:460px;height:460px;border-radius:50%;left:390px;top:70px;opacity:.65}.nt-decoration-dots{width:440px;height:330px;left:470px;top:125px;transform:rotate(9deg);background-image:radial-gradient(var(--nt-ink) 2px,transparent 2px);background-size:22px 22px}.nt-decoration-grid{width:470px;height:430px;left:580px;top:120px;background-image:linear-gradient(#fffef8 2px,transparent 2px),linear-gradient(90deg,#fffef8 2px,transparent 2px);background-size:35px 35px;transform:rotate(-7deg)}.nt-decoration-orbit{width:500px;height:500px;left:600px;top:40px;border-radius:50%;background:none;border:55px solid var(--nt-category-color)}.nt-decoration-orbit:after{content:'';position:absolute;width:105px;height:105px;background:var(--nt-blue);border-radius:50%;top:-40px;right:15px}
+.nt-entry{position:absolute;width:370px;min-height:150px;padding:14px 10px;background:none;display:flex;gap:20px;text-align:left;z-index:2;border-radius:16px;animation:nt-arrive 600ms var(--nt-easing) both;animation-delay:calc(250ms + var(--nt-order) * 70ms + var(--nt-entry-order) * 100ms)}.nt-entry-copy{display:flex;flex-direction:column;align-items:flex-start;gap:12px}.nt-entry strong{font:400 32px/1.2 var(--display);transition:scale var(--nt-duration) var(--nt-easing);transform-origin:left center}.nt-entry-description,.nt-entry-detail{font:16px/1.65 var(--sans)}.nt-entry-detail{font-size:13px;display:none}.nt-entry-icon{width:60px;height:60px;flex-shrink:0;display:block;background:var(--nt-panel);border-radius:14px;transition:transform var(--nt-duration) var(--nt-easing)}.nt-entry svg{width:100%;height:100%;fill:none;stroke:var(--nt-ink);stroke-width:2;pointer-events:none}.nt-entry:hover strong,.nt-entry:focus-visible strong{scale:1.04}.nt-entry:hover .nt-entry-icon,.nt-entry:focus-visible .nt-entry-icon{transform:translate(-3px,-4px)}.nt-read{font-size:13px;border-bottom:2px solid var(--nt-ink);opacity:0;transition:opacity var(--nt-duration) var(--nt-easing)}.nt-entry:hover .nt-read,.nt-entry:focus-visible .nt-read{opacity:1}.nt-level-overview .nt-entry{visibility:hidden;pointer-events:none}.nt-level-overview .nt-category-intro{opacity:.65}.nt-level-detail .nt-entry-detail{display:block}
+.nt-controls{position:absolute;z-index:5;left:0;right:0;bottom:0;height:75px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 95px 12px 30px;background:var(--nt-cream);border-top:1px solid #56525a25}.nt-controls p{font-size:11px}.nt-controls>div{display:flex;gap:10px}.nt-controls button:last-child{background:var(--nt-yellow)}
+.nt-reading{position:absolute;z-index:7;right:0;top:107px;bottom:75px;width:clamp(320px,42vw,620px);max-width:calc(100vw - 16px);border-radius:28px 0 0 28px;background:var(--nt-panel);overflow:hidden;transform:translateX(103%);visibility:hidden;transition:transform var(--nt-duration) var(--nt-easing),visibility 0s var(--nt-duration);border:2px solid var(--nt-mint);border-right:0;display:flex;flex-direction:column}.nt-reading.is-open{transform:translateX(0);visibility:visible;transition-delay:0s}.nt-reading-dots{position:absolute;inset:0 0 auto;height:155px;background:radial-gradient(var(--nt-pink) 2px,transparent 2px) 0 0/18px 18px;pointer-events:none;opacity:0;transition:opacity var(--nt-duration) var(--nt-easing)}.is-open .nt-reading-dots{opacity:.65;transition-delay:var(--nt-dots-delay)}.nt-reading-top{position:relative;display:flex;justify-content:space-between;align-items:center;padding:20px 25px;font-size:11px}.nt-reading-top button{padding:8px 14px;background:var(--nt-pink)}.nt-reading-scroll{overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;flex:1;min-height:0;min-width:0;scrollbar-gutter:stable;padding:10px 28px 35px;user-select:text}.nt-reading-copy{position:relative;width:100%;max-width:68ch;min-width:0;margin-inline:auto;opacity:0;transform:translateY(12px);transition:opacity var(--nt-duration) var(--nt-easing),transform var(--nt-duration) var(--nt-easing)}.is-open .nt-reading-copy{opacity:1;transform:translateY(0);transition-delay:var(--nt-text-delay)}.nt-page-number{font-size:12px}.nt-reading h2{font:400 clamp(26px,3vw,44px)/1.1 var(--display);margin:20px 0 12px}.nt-reading .nt-subtitle{font-size:12px;margin-bottom:30px}.nt-reading img{width:100%;height:auto;object-fit:contain}.nt-student-note{padding:22px;border-radius:20px;margin-top:28px}.nt-student-note h3{font:400 17px var(--display);margin:0 0 15px}.nt-student-note p{font:13px/1.8 var(--sans)}.nt-student-note small{font-size:10px}
+@keyframes nt-arrive{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}@media(max-height:620px){.nt-header{min-height:80px;padding:12px 22px}.nt-heading h1{font-size:28px}.nt-heading p{margin-top:4px}.nt-viewport{inset:82px 0 60px}.nt-reading{top:82px;bottom:60px}.nt-controls{height:60px;padding:10px 95px 10px 22px}.nt-reading-top{padding:12px 18px}.nt-reading-scroll{padding:0 20px 25px}}@media(max-width:850px){.nt-header{gap:14px;padding-left:18px;padding-right:18px}.nt-heading h1{font-size:25px}.nt-heading p{font-size:9px}.nt-back,.nt-category-navigation>button{padding:9px 12px;font-size:10px}.nt-controls{padding-left:18px;padding-right:95px}.nt-controls button{font-size:10px;padding:9px 12px}.nt-controls p{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.natural-test *{animation:none!important;transition:none!important}}
+/* The existing reveal stays mounted at z=10000 after arrival. Keep only this
+   test page's existing developer tools and orientation prompt above it. */
+body:has(.natural-test) .dev-editor-launcher{z-index:10030}
+body:has(.natural-test) .text-editor-panel{z-index:10020}
+body:has(.natural-test) .text-draft-layer{z-index:10010}
+body:has(.natural-test) .orientation-prompt{z-index:10040}
+body .nt-level-overview .is-entrance-target .nt-category-title,body .nt-level-overview .is-entrance-target .nt-category-intro,body .nt-level-overview .is-entrance-target .nt-category-number,body .nt-level-overview .is-entrance-target .ht-landmark{visibility:visible}
+body .nt-level-overview .is-entrance-target .nt-entry{visibility:visible;pointer-events:auto}
+.natural-test .nt-related-page{padding:10px 14px;background:var(--nt-mint);border:1px solid var(--edition-line);border-radius:0 20px 0 0;font:13px var(--sans)}
+.nt-article-sources{margin-top:28px;font:10px/1.7 var(--sans);opacity:.8;overflow-wrap:anywhere}
+.nt-article-sources h3{font:inherit;letter-spacing:.08em}
+.nt-article-sources a{color:inherit;text-underline-offset:2px}
+/* Edition's generic card rule is relative; atlas coordinates are category-local. */
+.natural-test .nt-category > .nt-entry{position:absolute}
+/* Both title representations own their decoration: the corner anchor moves
+   with the button, including its hover transform. Artwork keeps its world size. */
+.natural-test .nt-category-title,.natural-test .edition-atlas-labels>button{overflow:visible}
+.natural-test .nt-title-decoration{position:absolute;right:12px;top:12px;z-index:2;width:0;height:0;pointer-events:none;overflow:visible}
+.natural-test .nt-title-decoration-art{position:absolute;right:0;top:0;width:0;height:0;overflow:visible}
+body .natural-test .nt-title-decoration .nt-decoration{left:auto;right:0;top:0;animation:none;opacity:1}
+.natural-test .nt-title-decoration--overview .nt-title-decoration-art{scale:var(--atlas-scale,1);transform-origin:100% 0}
+body .natural-test .nt-title-decoration--overview .nt-decoration{translate:50% 0}
+/* Bilingual names use existing Chinese/English fields without changing content. */
+.natural-test .nt-title-zh,.natural-test .nt-title-en{display:block;overflow-wrap:anywhere}
+.natural-test .nt-title-zh{font:inherit;color:inherit}
+.natural-test .nt-title-en{font-family:var(--sans);font-weight:400;letter-spacing:.03em;line-height:1.4;opacity:.68;color:inherit}
+.natural-test .nt-category-title .nt-title-en{font-size:26px;margin-top:12px}
+.natural-test .nt-entry .nt-title-en{font-size:14px;margin-top:8px}
+.natural-test .nt-entry-copy{min-width:0}
+.natural-test .nt-category-menu .nt-title-zh{font-size:14px;line-height:1.5}
+.natural-test .nt-category-menu .nt-title-en{font-size:10px;margin-top:4px}
+.natural-test .nt-category-menu{max-height:calc(100dvh - 170px);overflow-y:auto;overscroll-behavior:contain}
+.natural-test .edition-atlas-labels strong .nt-title-en{font-size:11px;margin-top:6px}
+.natural-test .nt-reading h2[lang="zh-Hant"]{line-height:1.35;overflow-wrap:anywhere}
+.natural-test .nt-reading .nt-subtitle[lang="en"]{opacity:.68;line-height:1.5;overflow-wrap:anywhere}
+/* Match CircularReveal's crisp boundary, 950ms duration and easing. The class
+   is removed on completion, so no clipping surface remains during exploration. */
+.natural-test.nt-is-revealing{animation:nt-page-reveal 950ms cubic-bezier(.22,1,.36,1) both}
+@keyframes nt-page-reveal{from{clip-path:circle(0 at 50% 50%)}to{clip-path:circle(75vmax at 50% 50%)}}
+.natural-test .nt-category-circle{--nt-circle-opacity:.4;position:absolute;z-index:-1;width:1550px;height:1550px;left:130px;top:40px;border-radius:50%;background:var(--nt-category-color);opacity:calc(var(--nt-circle-opacity) * var(--nt-circle-visibility,0));pointer-events:none;transform-origin:38% 35%;animation:nt-category-expand 1600ms cubic-bezier(.22,.75,.25,1) both}
+.natural-test .nt-reading{isolation:isolate}
+.natural-test .nt-reading>.nt-category-circle{--nt-circle-opacity:.35;width:145%;height:auto;aspect-ratio:1;left:22%;top:12%;transform-origin:32% 22%}
+.natural-test .nt-reading-scroll{position:relative}
+@keyframes nt-category-expand{from{transform:scale(.025)}to{transform:scale(1)}}
+.natural-test .nt-reading-outside{position:absolute;inset:0;z-index:6;background:transparent;touch-action:none}
+@media(prefers-reduced-motion:reduce){.natural-test.nt-is-revealing,.natural-test .nt-category-circle{animation:none!important}}
+
+/* Topic contents belong to selection, not camera tier. Their opacity never
+   consumes --nt-circle-visibility, and zooming does not restart the animation. */
+body .natural-test .nt-category[data-expanded="true"]>.nt-entry{visibility:visible;pointer-events:auto;animation:nt-arrive 1100ms var(--nt-easing) both;animation-delay:calc(250ms + var(--nt-entry-order) * 110ms)}
+body .natural-test .nt-category[data-expanded="false"]>.nt-entry{visibility:hidden;pointer-events:none;animation:none}
+body .natural-test .nt-category[data-expanded="true"]>.nt-category-intro{opacity:1}
+@media(prefers-reduced-motion:reduce){body .natural-test .nt-category[data-expanded="true"]>.nt-entry{animation:none!important}}
+/* Compact world-space groups retain the atlas's offset columns. */
+.natural-test .nt-category-intro{width:85%;margin:18px 0;font-size:23px;line-height:1.5}
+.natural-test .nt-category-circle{width:1200px;height:1200px;left:45px;top:20px}
+.natural-test .nt-entry{min-height:190px}
+.natural-test .nt-entry-copy{gap:9px}
+.natural-test .nt-entry strong{font-size:32px}
+.natural-test .nt-entry .nt-title-en{margin-top:5px}
+.natural-test .nt-entry-description{line-height:1.5;color:#687582}
+/* Reading-only label and photo remain separate; category layout stays fixed. */
+.natural-test .nt-entry.is-reading-entry{min-height:0;animation:none}
+.natural-test .nt-entry.is-reading-entry:hover{transform:none}
+.natural-test.has-reading .nt-entry:not(.is-reading-entry){visibility:hidden!important;pointer-events:none!important}
+.natural-test .edition-atlas-labels>button{min-height:148px}
+.natural-test .edition-atlas-labels strong{min-height:72px}
+.natural-test .edition-atlas-labels .nt-title-en{line-height:1.3}
+@media(max-height:620px){
+ .natural-test .edition-atlas-labels>button{min-height:120px;padding:10px 13px}
+ .natural-test .edition-atlas-labels strong{min-height:60px;margin:6px 0;font-size:18px}
+ .natural-test .edition-atlas-labels strong .nt-title-en{font-size:10px;margin-top:4px}
+}
+.natural-test .nt-entry.is-reading-entry strong{font-size:40px}
+.natural-test .nt-entry.is-reading-entry .nt-entry-description{font-size:20px}
+.natural-test .nt-entry.is-reading-entry .nt-title-en{font-size:16px}
+.natural-test .nt-category-number{top:-28px;left:0}
+
+.natural-test .is-reading-entry .nt-read,.natural-test .is-reading-entry .nt-entry-detail{display:none}
+.natural-test .nt-article-heading{display:flex;align-items:center;gap:14px;margin:20px 0 12px}
+.natural-test .nt-article-heading h2{min-width:0;margin:0}
+.natural-test .nt-article-icon{display:block;flex:0 0 1em;width:1em;height:1em;font-size:clamp(26px,3vw,44px)}
+.natural-test .nt-article-icon svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2}
+.human-test .nt-article-icon svg{stroke-width:2}
+/* Artwork shares one foreground layer, outside each transformed label's
+   stacking context. The screen-space anchor and original artwork are retained. */
+.natural-test .atlas-decoration-layer{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:visible}
+.natural-test [data-atlas-decoration]{position:absolute;transform:translateY(-4px);transform-origin:50% 50%;pointer-events:none;overflow:visible}
+
+/* Shared reading surface: retain atlas ornaments in the header, off the prose. */
+.natural-test .nt-reading-dots { height:80px; }
+.natural-test .nt-reading.is-open .nt-reading-dots { opacity:.18; }
+.natural-test .nt-reading > .nt-category-circle { --nt-circle-opacity:.12; }
+.natural-test .nt-reading-scroll { position:relative; z-index:1; background:var(--nt-panel); }
+
+/* Keep the existing title/tagline and controls in two compact rows on phones.
+   All atlas surfaces share the same header boundary, including short viewports. */
+@media (max-width:600px) {
+  .natural-test { --nt-mobile-header:128px; }
+  .natural-test .nt-header { display:grid; grid-template-columns:minmax(0,1fr) auto; align-content:center; gap:6px 12px; height:var(--nt-mobile-header); min-height:var(--nt-mobile-header); padding:12px 18px; }
+  .natural-test .nt-back { justify-self:start; }
+  .natural-test .nt-category-navigation { grid-column:2; grid-row:1; }
+  .natural-test .nt-heading { grid-column:1 / -1; grid-row:2; min-width:0; }
+  .natural-test .nt-heading h1 { font-size:22px; line-height:1.15; }
+  .natural-test .nt-heading p { margin:4px 0 0; font-size:9px; line-height:1.5; overflow-wrap:anywhere; }
+  .natural-test .nt-reading,.natural-test .nt-viewport { top:var(--nt-mobile-header); }
+}

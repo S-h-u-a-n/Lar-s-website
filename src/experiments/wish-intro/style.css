@@ -1,0 +1,49 @@
+@font-face{font-family:WI Sung;src:url('../../../Font/Ch-1/ChironSungHK-VariableFont_wght.ttf') format('truetype');font-weight:100 900;font-display:swap}
+@font-face{font-family:WI Display;src:url('../../../Font/En-1/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');font-weight:400 900;font-display:swap}
+*{box-sizing:border-box}
+body{margin:0;background:#fdf9ee;color:#34465a;font-family:WI Sung,'Songti TC',serif;-webkit-font-smoothing:antialiased}
+.wi-page{position:relative;overflow:clip;isolation:isolate}
+.wi-page p{margin:0;text-wrap:pretty}
+.wi-masthead{position:absolute;top:0;left:6%;right:6%;display:flex;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid #34465a24;font-size:14px;letter-spacing:.08em}
+.wi-masthead span:first-child{font-family:WI Display,serif;font-size:17px;letter-spacing:0}
+.wi-thread{position:absolute;top:140px;bottom:0;left:7%;width:1px;background:linear-gradient(transparent,#987d4c35 8%,#987d4c35 90%,transparent);z-index:-1}
+.wi-page section{position:relative;padding:80px max(9vw,24px);display:flex;align-items:center}
+.wi-copy{position:relative;z-index:2;font-size:clamp(18px,1.8vw,24px);line-height:2.2;letter-spacing:.055em;max-width:760px}
+.wi-opening{min-height:92svh;flex-direction:column;justify-content:center;padding-top:180px!important;gap:54px}
+.wi-opening .wi-copy{max-width:700px;width:100%}
+.wi-opening .wi-lead{font-size:clamp(23px,2.6vw,35px);margin-bottom:36px}
+.wi-earth{position:absolute;right:-90px;top:100px;width:340px;aspect-ratio:1;border:1px solid #987d4c38;border-radius:50%;z-index:-1}
+.wi-earth:before,.wi-earth:after{content:'';position:absolute;inset:16%;border:1px solid #987d4c30;border-radius:50%}
+.wi-earth:after{inset:33%}
+.wi-earth i{position:absolute;left:36px;bottom:30px;width:22px;height:22px;background:#a2d8de;border-radius:50%}
+.wi-scroll{font-size:14px;color:#68756f;letter-spacing:.13em;text-align:center}
+.wi-scroll span{display:block;width:1px;height:45px;background:#987d4c80;margin:18px auto 0}
+.wi-reason{min-height:45svh;justify-content:center}
+.wi-reason .wi-copy{font-size:clamp(18px,1.7vw,22px);max-width:670px}
+.wi-dots{position:absolute;left:-40px;bottom:10%;width:170px;height:170px;border-radius:50%;background:radial-gradient(#987d4c60 1px,transparent 1.5px) 0 0/8px 8px;z-index:-1}
+.wi-turn{min-height:62svh;justify-content:center;text-align:center}
+.wi-turn .wi-copy{font-size:clamp(26px,3vw,43px);padding:35px 0}
+.wi-orbit{position:absolute;width:min(470px,75vw);aspect-ratio:1;border:1px solid #987d4c44;border-radius:50%;transform:rotate(-25deg);z-index:-1}
+.wi-orbit i{position:absolute;inset:12%;border:1px dashed #987d4c44;border-radius:50%}
+.wi-orbit b{position:absolute;right:11%;top:5%;font-size:35px;color:#987d4c;font-weight:400}
+.wi-distance{min-height:76svh;justify-content:flex-end;gap:10vw}
+.wi-distance .wi-copy{max-width:640px;font-size:clamp(28px,3.4vw,46px);line-height:1.9}
+.wi-window{position:relative;flex:0 0 22%;height:310px;border-radius:160px 160px 0 0;background:#a2d8de55;border:1px solid #34465a22;align-self:center}
+.wi-window:before{content:'';position:absolute;width:100px;aspect-ratio:1;border-radius:50%;background:#f691a64d;left:25%;top:20%}
+.wi-window span{position:absolute;bottom:24px;left:15%;right:15%;height:100px;background:radial-gradient(#34465a65 1px,transparent 1.5px) 0 0/7px 7px;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.wi-invitation{min-height:42svh;justify-content:center;text-align:center}
+.wi-so{min-height:28svh;flex-direction:column;justify-content:center;gap:24px;text-align:center;font-size:24px;letter-spacing:.13em;padding-top:30px!important;padding-bottom:30px!important}
+.wi-so span{width:1px;height:75px;background:linear-gradient(#987d4c90,#987d4c10)}
+.wi-wish{min-height:85svh;justify-content:center;text-align:center;background:linear-gradient(transparent,#a2d8de16)}
+.wi-wish .wi-copy{width:100%;max-width:680px}
+.wi-emblem{font-size:34px;color:#987d4c}
+.wi-wish h1{font-weight:400;font-size:clamp(36px,5vw,64px);letter-spacing:.12em;margin:18px 0}
+.wi-wish p{font-size:clamp(17px,1.6vw,21px);letter-spacing:.03em}
+.wi-wish small{font-size:14px;color:#68756f;letter-spacing:.06em}
+.wi-letter{position:relative;width:200px;height:115px;border:1px solid #987d4c66;margin:42px auto 20px;background:#fffef8;transform:rotate(-5deg)}
+.wi-letter span{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 58%);background:#987d4c30}
+.wi-letter i{position:absolute;top:30px;left:80px;font-style:normal;font-size:32px;color:#987d4c}
+.wi-wish-ring{position:absolute;top:10%;left:50%;width:min(90vw,740px);aspect-ratio:1;border:1px solid #987d4c25;border-radius:50%;transform:translateX(-50%);z-index:-1}
+.wi-page footer{display:flex;justify-content:space-between;gap:18px;padding:28px 6%;font-size:14px;border-top:1px solid #34465a20;color:#68756f}
+@media(min-width:800px) and (prefers-reduced-motion:no-preference){.wi-orbit{animation:wi-orbit-drift 20s ease-in-out infinite alternate}@keyframes wi-orbit-drift{to{transform:rotate(-5deg)}}}
+@media(max-width:600px){.wi-masthead{padding:22px 0;font-size:12px}.wi-masthead span:first-child{font-size:14px}.wi-page section{padding-left:9%;padding-right:9%}.wi-opening{min-height:90svh;gap:36px}.wi-earth{width:220px;right:-110px;top:120px}.wi-opening .wi-lead{margin-bottom:28px}.wi-reason{min-height:40svh}.wi-dots{opacity:.5;width:90px;height:90px;left:-50px}.wi-turn{min-height:53svh}.wi-distance{min-height:70svh;flex-direction:column;justify-content:center;gap:32px}.wi-window{flex:none;width:110px;height:150px;align-self:flex-start}.wi-window:before{width:48px}.wi-window span{height:50px;bottom:12px}.wi-distance .wi-copy{font-size:28px}.wi-invitation{min-height:40svh}.wi-so{min-height:26svh}.wi-wish{min-height:80svh}.wi-page footer{flex-direction:column;font-size:12px}}

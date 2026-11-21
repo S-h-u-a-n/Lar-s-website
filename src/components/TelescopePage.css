@@ -1,0 +1,144 @@
+.telescope-page {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  overflow: hidden;
+  background: var(--ivory);
+}
+
+.telescope-page .layout-editor-stage {
+  z-index: 1 !important;
+}
+
+.telescope-page .layout-editor-item[data-layout-id="t-background"] {
+  object-fit: cover;
+}
+
+.telescope-page .layout-editor-item-with-overlay {
+  container-type: inline-size;
+}
+
+.telescope-page .layout-editor-item-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.telescope-page .layout-editor-item-overlay {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.telescope-mode-label {
+  position: absolute;
+  color: #fff;
+  font-size: 15cqw;
+  font-weight: 700;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.telescope-mode-label--map {
+  left: 49.24%;
+  top: 53.19%;
+}
+
+.telescope-mode-label--view {
+  left: 51.39%;
+  top: 44.26%;
+}
+
+/* Fills its layout item; x/y/width/z-index come from the LayoutEditor like every other item. */
+.telescope-map {
+  position: absolute;
+  inset: 0;
+}
+
+.telescope-location-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.telescope-location-marker-label {
+  max-width: min(240px, 60vw);
+  overflow: hidden;
+  padding: 4px 9px;
+  border: 1px solid #f691a6;
+  border-radius: 12px 3px 12px 3px;
+  background: #fffef8ed;
+  color: #34465a;
+  font: 700 11px/1.35 var(--sans);
+  text-overflow: ellipsis;
+}
+
+.telescope-location-marker-dot {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #fffef8;
+  border-radius: 50%;
+  background: #f691a6;
+  box-shadow: 0 0 0 2px #34465a, 0 0 12px #f691a6cc;
+}
+
+.telescope-location-marker-dot::after {
+  position: absolute;
+  inset: -7px;
+  border: 1px solid #f691a6;
+  border-radius: 50%;
+  content: '';
+  animation: telescope-location-pulse 1.8s ease-out infinite;
+}
+
+@keyframes telescope-location-pulse {
+  from { opacity: .8; transform: scale(.55); }
+  to { opacity: 0; transform: scale(1.35); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .telescope-location-marker-dot::after { animation: none; }
+}
+
+/* Transparent PNG pixels otherwise intercept map gestures too. */
+.telescope-page .layout-editor-stage:not(.is-open) .layout-editor-item {
+  pointer-events: none;
+}
+
+.telescope-page .layout-editor-stage:not(.is-open) .layout-editor-item[data-layout-id="map"] {
+  pointer-events: auto;
+  cursor: auto;
+}
+
+.telescope-page .layout-editor-stage:not(.is-open) .layout-editor-item[data-layout-id="t-button1"],
+.telescope-page .layout-editor-stage:not(.is-open) .layout-editor-item[data-layout-id="t-button2"] {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* While editing, the item wrapper receives drags instead of MapLibre. */
+.telescope-page .layout-editor-stage.is-open .telescope-map,
+.telescope-page .layout-editor-stage.is-open .telescope-map * {
+  pointer-events: none !important;
+}
+
+/* Native bottom-left control corner, shared by both modes above the PNG stack. */
+.telescope-attribution {
+  position: absolute;
+  z-index: 2;
+  left: 16px;
+  right: 80px; /* Leave room for the existing development editor launcher. */
+  bottom: 8px;
+  font: 12px/1.4 Helvetica, Arial, sans-serif;
+}
+
+.telescope-attribution:empty {
+  display: none;
+}

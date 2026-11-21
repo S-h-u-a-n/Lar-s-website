@@ -1,0 +1,8 @@
+[
+  { "id": "x", "label": "X (Twitter)", "mark": "X", "url": "https://x.com/remoanpu" },
+  { "id": "instagram", "label": "Instagram", "mark": "ig", "url": "https://www.instagram.com/remoanpu" },
+  { "id": "threads", "label": "Threads", "mark": "@", "url": "https://www.threads.com/@remoanpu" },
+  { "id": "bilibili", "label": "Bilibili", "mark": "B", "url": "https://b23.tv/j1Ltidb" },
+  { "id": "pixiv", "label": "pixiv", "mark": "p", "url": "https://www.pixiv.net/users/90331440" },
+  { "id": "rednote", "label": "REDnote", "mark": "紅", "url": "https://xhslink.cn/o/3ZoGxD9SKe5" }
+]

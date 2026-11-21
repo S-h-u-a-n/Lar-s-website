@@ -1,0 +1,41 @@
+/* Shared atlas controls/panels use NaturalTest's BigTest-derived tokens. */
+.human-test .nt-category-title { width: 96%; padding-top: 110px; }
+.human-test .ht-landmark { position: absolute; top: 0; left: 10px; font-family: var(--display); font-size: 95px; color: var(--nt-category-color); letter-spacing: -.04em; pointer-events: none; }
+.human-test .ht-diagram { position: absolute; right: -15px; bottom: 10px; width: 310px; height: 310px; color: var(--nt-category-color); pointer-events: none; opacity: .85; }
+.human-test .ht-diagram svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 4; }
+.human-test .ht-pattern { position: absolute; left: -35px; top: 270px; width: 270px; height: 360px; background: radial-gradient(circle, var(--nt-category-color) 2px, transparent 2.5px) 0 0 / 18px 18px; opacity: .45; pointer-events: none; }
+.human-test .ht-pages .ht-pattern { background: repeating-linear-gradient(-35deg, transparent 0 14px, var(--nt-category-color) 14px 17px); }
+.human-test .ht-circuit .ht-pattern { background: linear-gradient(var(--nt-category-color) 1px, transparent 1px), linear-gradient(90deg, var(--nt-category-color) 1px, transparent 1px); background-size: 24px 24px; }
+.human-test .ht-city .ht-diagram { width: 400px; }
+.human-test .ht-landmark, .human-test .ht-diagram, .human-test .ht-pattern { animation: nt-arrive 700ms var(--nt-easing) both; animation-delay: calc(var(--nt-order) * 70ms); }
+.human-test .ht-speaker { display: flex; gap: 14px; align-items: center; }
+.human-test .ht-avatar { width: 58px; height: 58px; flex-shrink: 0; border-radius: 18px; display: grid; place-items: center; }
+.human-test .ht-avatar img { width: 100%; height: 100%; object-fit: contain; }
+.human-test .ht-message { margin-top: 18px; background: var(--nt-mint); border-radius: 20px; padding: 22px; line-height: 1.9; min-height: 140px; }
+.human-test .ht-timeline { list-style: none; padding: 0 0 0 22px; border-left: 3px solid var(--nt-teal); }
+.human-test .ht-timeline li { padding: 15px 0 45px; }
+.human-test .ht-timeline li > span { font-family: var(--display); font-size: 35px; }
+.human-test .ht-timeline li > div { width: 85%; height: 85px; background: repeating-linear-gradient(-35deg, var(--nt-yellow) 0 16px, transparent 16px 22px); border-radius: 15px; }
+.human-test .ht-cover { aspect-ratio: 3 / 4; width: min(180px, 70%); display: grid; place-items: center; background: var(--nt-pink); border: 8px solid var(--nt-yellow); border-radius: 14px; }
+.human-test .ht-cover img { width: 100%; height: 100%; object-fit: contain; }
+.human-test .ht-recommendation blockquote { margin: 20px 0; padding: 20px; background: var(--nt-mint); border-radius: 18px; line-height: 1.8; }
+.human-test .nt-student-note { background: var(--nt-yellow); }
+@media (prefers-reduced-motion: reduce) { .human-test .ht-landmark, .human-test .ht-diagram, .human-test .ht-pattern { animation: none; } }
+.human-test .ht-map .ht-landmark { font-size: 75px; }
+.human-test .nt-category-title h2,
+.human-test .nt-category:nth-child(2) .nt-category-title h2,
+.human-test .nt-category:nth-child(4) .nt-category-title h2 { font-size: 60px; }
+/* Keep the existing line drawing in the outer margin of the tighter card group. */
+.human-test .ht-diagram{left:1000px;right:auto;bottom:20px}
+
+/* Overview artwork belongs to its own label, never the world-space diagram. */
+.human-test:not([data-selected-category]) .ht-diagram{visibility:hidden}
+.human-test .edition-atlas-labels>button .ht-overview-icon{
+  position:absolute;right:16px;bottom:14px;left:auto;top:auto;
+  width:min(calc(var(--ht-icon-width,310px) * var(--atlas-scale,.1)),calc(100% - 120px));
+  aspect-ratio:1;display:block;color:var(--nt-category-color);opacity:.65;
+  pointer-events:none;z-index:1;
+}
+.human-test .edition-atlas-labels>button .ht-overview-icon svg{
+  display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:4;
+}

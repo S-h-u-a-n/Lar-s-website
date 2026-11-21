@@ -1,0 +1,51 @@
+/* Notebook composition uses the existing mint rule, brass captions and paper edges.
+   The photograph itself is ReadingPhoto, with no celestial-specific frame styles. */
+.gt-title-row { display:flex; align-items:baseline; gap:12px; }
+.gt-title-row h2 { min-width:0; overflow-wrap:anywhere; }
+.gt-page .gt-scale-info { flex:none; display:grid; place-items:center; width:26px; height:26px; padding:0; border:1px solid var(--edition-line); border-radius:50%; background:var(--gt-cream); color:#346c76; font:19px/1 Georgia,serif; transition:background .2s ease; }
+.gt-page .gt-scale-info:hover { background:var(--gt-teal); }
+.gt-observation-photo { --reading-photo-gap:0px; margin:24px 0 28px; min-width:0; }
+.gt-observation-photo figcaption { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; color:var(--edition-brass); font:9px/1.5 var(--sans); letter-spacing:.12em; }
+.gt-observation-photo figcaption span:last-child { padding:3px 9px; background:var(--gt-yellow); color:var(--gt-ink); letter-spacing:.06em; }
+.gt-science-facts-panel { padding:0 0 20px; border-bottom:1px solid var(--edition-line); }
+.gt-science-introduction h3 { display:flex; align-items:center; gap:10px; }
+.gt-science-introduction h3::before { content:''; flex:none; width:18px; height:3px; background:var(--gt-teal); }
+.gt-science-facts-panel .gt-science-facts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:22px; row-gap:16px; }
+.gt-science-facts-panel .gt-science-facts > div { margin:0; padding-left:12px; border-left:1px solid var(--edition-line); }
+.gt-science-facts-panel dt { color:#346c76; font:600 11px/1.6 var(--sans); }
+.gt-science-facts-panel dd { margin-top:4px; font:14px/1.7 var(--body); }
+.gt-science-introduction { overflow-wrap:anywhere; }
+.gt-science-introduction > .gt-title-row h2 { margin-top:24px; }
+.gt-science-section { margin-top:28px; }
+.gt-science-section p:last-child { margin-bottom:0; }
+.gt-stories-section { margin-top:28px; }
+.gt-continent-list { margin-bottom:20px; }
+.gt-continent-list button { overflow-wrap:anywhere; }
+
+/* Native top layer supplies modality; retained motion layers animate like WorkDialog. */
+.gt-scale-dialog { position:fixed; inset:0; width:100%; height:100%; max-width:none; max-height:none; margin:0; padding:16px; border:0; overflow:hidden; background:transparent; color:var(--gt-ink); box-sizing:border-box; }
+.gt-scale-dialog[open] { display:grid; place-items:center; }
+.gt-scale-dialog::backdrop { background:transparent; }
+.gt-scale-scrim { position:absolute; inset:0; background:#fdf9eeaa; backdrop-filter:blur(5px); }
+.gt-scale-card { --reading-photo-gap:0px; position:relative; width:min(100%,500px); max-height:100%; overflow-y:auto; overscroll-behavior:contain; background:var(--gt-white); border:1px solid var(--edition-line); border-top:5px solid var(--gt-teal); border-radius:0 28px 0 28px; box-shadow:7px 7px 0 #a2d8de40; scrollbar-gutter:stable; }
+.gt-scale-top { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:13px 22px; border-bottom:1px solid var(--edition-line); }
+.gt-scale-top > span { font:8px/1.5 var(--sans); letter-spacing:.12em; }
+.gt-scale-card .gt-scale-close { display:flex; align-items:center; gap:10px; flex:none; padding:4px 0; border:0; border-radius:0; background:transparent; font:11px/1.5 var(--body); }
+.gt-scale-close span { font:22px/1 Georgia,serif; }
+.gt-scale-copy { padding:24px 28px; }
+.gt-scale-tab { display:inline-block; padding:4px 10px; background:var(--gt-yellow); font:11px/1.5 var(--body); letter-spacing:.06em; }
+.gt-scale-copy h2 { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:14px 0; font:400 clamp(24px,4vw,30px)/1.35 var(--display); }
+.gt-scale-copy h2 span { color:var(--edition-brass); font:36px/1 var(--display); }
+.gt-scale-copy p { margin:0 0 20px; font:14px/1.85 var(--body); }
+.gt-scale-footer { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 28px; border-top:1px solid var(--edition-line); font:8px/1.5 var(--sans); letter-spacing:.12em; }
+.gt-scale-footer > span:last-child { color:var(--gt-teal); letter-spacing:5px; }
+.gt-scale-dialog :focus-visible { outline:2px solid #346c76; outline-offset:4px; }
+@media (max-width:650px) {
+  .gt-notes { width:min(380px,calc(100vw - 36px)); min-width:0; }
+  .gt-science-facts-panel .gt-science-facts { column-gap:16px; }
+  .gt-scale-copy { padding:20px; }
+  .gt-scale-top,.gt-scale-footer { padding-inline:20px; }
+}
+@media (max-width:360px) { .gt-scale-top > span { font-size:7px; letter-spacing:.04em; } }
+@media (max-height:600px) { .gt-scale-dialog { padding:12px; } .gt-scale-copy { padding-block:16px; } }
+@media (prefers-reduced-motion:reduce) { .gt-page .gt-scale-info { transition:none; } }

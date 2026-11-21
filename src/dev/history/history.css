@@ -1,0 +1,23 @@
+.history-viewport { z-index: 40; position: fixed; inset: 0; overflow: hidden; touch-action: none; }
+.history-world { position: absolute; left: 0; transform-origin: 0 0; visibility: hidden; }
+.history-viewport[data-ready="true"] .history-world { visibility: visible; }
+.history-item { position: absolute; visibility: hidden; overflow: visible; }
+.history-motion { width:100%; height:100%; transform-origin:inherit; }
+.history-item img { position: relative; display: block; width: 100%; height: 100%; max-width: none; user-select: none; pointer-events: none; }
+.history-person { filter: drop-shadow(var(--history-shadow)); }
+.history-title { position: absolute; transform-origin: 0 0; font-family: 'Times New Roman', serif; white-space: nowrap; text-align: left; z-index: 90; }
+.history-title h1 { margin: 0; font-size: inherit; font-weight: 700; line-height: 1.2; }
+.history-entry-hint { display:block; width:max-content; margin:0; padding:0; border:0; background:none; color:inherit; font:inherit; font-weight:400; line-height:1.2; text-align:inherit; cursor:pointer; pointer-events:none; opacity:0; transition: opacity var(--hint-fade) ease; }
+.history-entry-hint[data-visible="true"] { opacity:1; }
+.history-entry-hint[data-visible="true"]:not(:disabled) { pointer-events:auto; }
+.history-entry-hint:focus-visible { outline:1px solid currentColor; outline-offset:5px; }
+.history-direction { position: fixed; z-index: 100; left: var(--arrow-left); top: var(--arrow-top); font: var(--arrow-size)/1 'Times New Roman', serif; color: #681b0b; pointer-events: none; opacity: 0; transition: opacity var(--arrow-fade) ease; animation: history-arrow-float var(--arrow-cycle) ease-in-out infinite alternate; }
+.history-viewport[data-ready="true"] .history-direction { opacity: .7; }
+.history-viewport[data-ready="true"] .history-direction[data-dismissed="true"] { opacity: 0; }
+@keyframes history-arrow-float { from { transform: translateX(0); } to { transform: translateX(calc(-1 * var(--arrow-travel))); } }
+@media (prefers-reduced-motion: reduce) { .history-direction { animation: none; } .history-entry-hint, .history-direction { transition: none; } }
+
+/* Same App-owned duration/easing as the retired IntroScreen. */
+.history-viewport { opacity: 1; transition: opacity 900ms cubic-bezier(.22,1,.36,1); }
+.history-viewport[data-leaving="true"] { opacity: 0; pointer-events: none; }
+.history-viewport, .history-viewport * { box-sizing: content-box; }

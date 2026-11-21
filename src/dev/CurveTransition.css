@@ -1,0 +1,24 @@
+.curve-test-overlay svg,
+.curve-test-overlay .background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh + 600px);
+  pointer-events: none;
+}
+
+.curve-test-overlay svg {
+  z-index: 9999;
+  overflow: visible;
+}
+
+.curve-test-overlay path {
+  fill: #ff2d55;
+}
+
+.curve-test-overlay .background {
+  z-index: 9998;
+  background-color: black;
+  transition: opacity 0s linear 0.1s;
+}

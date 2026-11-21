@@ -1,0 +1,20 @@
+{
+  "people-1": ["wiki-1", "wiki-afarensis", "laetoli"],
+  "people-2": ["wiki-2", "wiki-oldowan", "erectus"],
+  "people-3": ["wiki-3", "natufian", "domestic"],
+  "people-4": ["wiki-4", "uruk", "sumer-religion", "cuneiform"],
+  "people-5": ["wiki-5", "egypt-farming", "deir", "egypt-religion", "math"],
+  "people-6": ["wiki-6", "hellenistic", "athens", "sparta", "ecclesia", "boule", "greek-economy", "greek-religion"],
+  "people-7": ["wiki-7", "wisdom", "hunayn", "islamic-medicine", "haytham", "khwarizmi"],
+  "people-8": ["wiki-8", "song-economy", "song-society", "songtech", "jiaozi"],
+  "people-9": ["wiki-9", "crusader-states", "fourth"],
+  "people-10": ["wiki-10", "mongol-military", "yam", "mongol-peace"],
+  "people-11": ["wiki-11", "renaissance-art", "humanism", "printing"],
+  "people-12": ["wiki-12", "slave", "wiki-exchange"],
+  "people-13": ["wiki-13", "spirit-law", "encyclopedia"],
+  "people-14": ["wiki-14", "factory", "rail"],
+  "people-15": ["wiki-15", "july", "ww1-home", "armistice"],
+  "people-16": ["wiki-16", "total-war", "holocaust", "un"],
+  "people-17": ["wiki-17", "wiki-space", "apollo"],
+  "people-18": ["wiki-18", "wiki-divide", "internet-history", "social-privacy", "web"]
+}

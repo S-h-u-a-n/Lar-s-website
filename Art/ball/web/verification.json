@@ -1,0 +1,5309 @@
+{
+  "schemaVersion": 1,
+  "verification": "exact integer premultiplied RGBA source-over, zero tolerance",
+  "originals": {
+    "Art/ball/lar/body/叉腰.PNG": "968fe1e1ac1008cc626985735955ea3afb7cbf7e8a06653b0235da5d43c9db1c",
+    "Art/ball/lar/body/右叉腰.PNG": "45c54a574890c8dc4de2f273b80f3c9fb42ae41f3699490f64b0d71260addeb2",
+    "Art/ball/lar/body/左叉腰.PNG": "6811aea1e141e9d8984b10124df305ae0ba6a26eb808df848002efbb9173900a",
+    "Art/ball/lar/body/常規.PNG": "0e4133a3a35e22c1fbcf5cc3ffeab7b0b1e7ea696c9acb0b9c7902f8b6662196",
+    "Art/ball/lar/body/抬手.PNG": "03107e32203e66cacb9fd4fe2f6b8f8ec0a7e2d38b2ed2a8552382cf14a3c2ad",
+    "Art/ball/lar/body/抬手叉腰.PNG": "6c1513d34625405ae3dbeac9fe1a47dd317b18ba8ff4ccaf4eae6f243c89e20b",
+    "Art/ball/lar/body/舉手.PNG": "d00aed610a4f693fc507529f1ec7ac56cc74d87c6481f12efd3798e6fdd9627a",
+    "Art/ball/lar/body/舉手叉腰.PNG": "a0f5e8abe1f5c0353b2996d83b51ab4faa26007e70596d41f99231240e5083c8",
+    "Art/ball/lar/face/1.PNG": "08b61ddf3f2a3e3891356520781f6bedc286a8d5d7424bf3bf6221ae65f6e629",
+    "Art/ball/lar/face/2.PNG": "91eb481b38d0049c718659ffc3a02bab640f3488aeacc280d33255c04385dd02",
+    "Art/ball/lar/face/3.PNG": "4eee780fca7ec30a978675dbc31acc27585973656be4c54cd9f475582d28b7ad",
+    "Art/ball/lar/face/4.PNG": "97c74e0a80b207dfba4cd41142c039410e3fc3b061fd4a4a960851b71455e4a4",
+    "Art/ball/lar/face/5.PNG": "c2677b1b16ec942456cd7b0ded394270f1e978b5513609ab91077ed83d3ab31b",
+    "Art/ball/lar/face/6.PNG": "8f58149d55abee9574c50545bfc267aa6dd6ec5391be0b9425c900bb3b704075",
+    "Art/ball/lar/face/7.PNG": "79ad0261c57d5d3dc74777bc529d1a649229a3426f59ba106cd2c8bd64b78ec3",
+    "Art/ball/lar/face/8.PNG": "403d26131a496bd38334d9b44a078202836f0ee49a57d796f31b0bf28a972e68",
+    "Art/ball/lar/face/9.PNG": "da59e34bed5d4044ee9fcd9ff06248c77e5ecbad7671da657b6c163cbf24a9bf",
+    "Art/ball/lar/face/10.PNG": "1b3aee5f2996323646818c1284c17ffaca7e91e68cb9b576123dc847369b5d9f",
+    "Art/ball/lar/face/11.PNG": "290004929d2747827c5d528a05e86bd5d0fa3f5a732cac4dcf9fd61bf3a9d0d8",
+    "Art/ball/lar/face/12.PNG": "2d30b8507f75b3b5a7995901a1e4a98ce124d58a3bafecd8c2e2d275a65af566",
+    "Art/ball/lar/face/13.PNG": "0e6d069292fa68b1635e3d503094089ab5089f2d44f4ecb9ccac56f545e33c64",
+    "Art/ball/lar/face/14.PNG": "73eaf8896f7be56e6a0de337878d976e95f2101700f4e2da2dd87faa627e14ac",
+    "Art/ball/lar/face/15.PNG": "1d83a09b766f1c5d0feaabf74387591af83b36637b7da450292b0876da7b243b",
+    "Art/ball/lar/face/16.PNG": "7c349f3cdd5c0784a53d8ba05b0afe5cb4a960b12641e78915853111e6e14c26",
+    "Art/ball/lar/face/17.PNG": "fc8d3a44e923ee39cf9ffe19fb9d44a1e605cdb445ada65dc71e6b86c758fa1a",
+    "Art/ball/lar/face/18.PNG": "183b674abc67f76a2f52a9d312e70170da19ed64e3f3ff798e1af35f691b6fcf",
+    "Art/ball/lar/face/19.PNG": "0d9190d2d7cac2a240a2a34535e60cb7dfd31762ae92e229cc324a7def4c53ee",
+    "Art/ball/lar/face/20.PNG": "604de6f6fbd8539c07d5ce480f60cd8a3b0f8cd2fff2f5321da449a4c793efe4",
+    "Art/ball/lar/face/21.PNG": "1b9881120b1ae9a597cc27b6348b5721ce81696d2233ad867a3849b47e7ac507",
+    "Art/ball/lar/face/22.PNG": "a9fb3ab8a04effb0bde7e2eac2c3815179a3bcf681748a08d58d8616cc7c0b61",
+    "Art/ball/lar/face/23.PNG": "f1366e13e1e5e49c8bd5df9616fee68e4151309022ce43ea06b18e0a8a8d1f9c",
+    "Art/ball/lar/face/24.PNG": "1bb33ede2b815faee289cdd843edecce13f76b52257eeb60b86a10658cc6d692",
+    "Art/ball/lar/face/25.PNG": "fe12ddab91968271caefdf052ee03b4d6415725a9967309d6da46dee4c17e8db",
+    "Art/ball/lar/face/26.PNG": "cb79ad36611bdf949b7a3b4b8169aa95ff09417db1a0d4baa6a73bb037f2df14",
+    "Art/ball/lar/face/27.PNG": "8f8cddac805035faffbfd83988292272db648018b441b3ded4dd433fd778583b",
+    "Art/ball/lar/face/28.PNG": "7f8be382769295b191b0b49ed0f946f2241e8cfad86932f43f5c0d2286f29fee",
+    "Art/ball/lar/face/29.PNG": "99b3788c50cbe05d44a839805fb898ad822ac306fa6f8c74e49f3c66c7b2a810",
+    "Art/ball/lar/face/30.PNG": "8dc96b417715bcd5f68a589e25d5b27f2c8f6a1861530a25493b32fb8c994e68",
+    "Art/ball/lar/face/31.PNG": "2bd45861aac57de0494c3d16ff93e5c5f7729ba258a7285e349070542e94ea21",
+    "Art/ball/lar/face/32.PNG": "ea65c9db5440bc6565b1e97e79cfbbb1c1258e07e2b2a7630148fff8d1316f7d",
+    "Art/ball/lar/face/33.PNG": "54974f76e528f708159abbf485a803d47c9681408995ef89dfea42b9357d3678",
+    "Art/ball/lar/face/34.PNG": "66e9947fab3bc9f0ec9fb00813f41116d972540ceed88274156902a16d2c2093",
+    "Art/ball/lar/face/35.PNG": "10eda8597a4ef04b48e031032cd9178a116332a19bb7d16d73ade3334a6f0bdb",
+    "Art/ball/lar/face/36.PNG": "852cf84c0162033f3ac62523aa33e5cb42b7a7fb61f07939547cc6eb24776960",
+    "Art/ball/lar/face/37.PNG": "4418562fd19f3cb504a859e07e7c9bcbcc9d6d027778008417d3bde65b792488",
+    "Art/ball/lar/face/38.PNG": "d460a5bf5250cf76e755d619992fc8fa528220256810d626a69a15b80c0fe655",
+    "Art/ball/lar/face/39.PNG": "3be4b858e83f82e31b60db186487235c4742dd07eb8a06dd83148c6adc96af44",
+    "Art/ball/lar/face/40.PNG": "fd90370ff324aa85b54a415ef08c04d05a9da56a107f086bb0c440c2ed77e889",
+    "Art/ball/lar/face/41.PNG": "29823d3314b8ad17c1d458abaf923005db40afdd3063b00f820eba0071435318",
+    "Art/ball/lar/face/42.PNG": "cabcc3b349653727fde5c0a3c26d61fd19e851894d5e2f240266aef323f4b3dc",
+    "Art/ball/lar/face/43.PNG": "fcf25149cc07fd007ea2f24824ff4d261dda42f3be7bd3ecca09afe63ff2b2b2",
+    "Art/ball/lar/face/44.PNG": "71b2e9615c902b9ce4093799d47d777ba5e5f500d84ce7f979a226bc1da46d67",
+    "Art/ball/lar/face/45.PNG": "74935ed2ac4dfdb3bb24545c7f2fa55ae2f6d57281c01945debbe5defdcf62fd",
+    "Art/ball/lar/face/46.PNG": "0d84b76ba5bea2f6a77cbb83932df6f0afed009701eb628875ab39b8818abb51",
+    "Art/ball/lar/face/47.PNG": "3c849cacafdc9f98ae6ea2d654790f2e3106a07ae4a4f25308abc1efe0a736e7",
+    "Art/ball/lar/face/48.PNG": "b62610e726a090ce4f20c471108b01941506c36ab669e55e9a9ffdbc5d93af07",
+    "Art/ball/lar/face/49.PNG": "0b5f9badbf625c8645527667c945d03122ece8b764aed00022ffec89f4c2be20",
+    "Art/ball/lar/face/50.PNG": "a938f1bd722872f6fe1bac2212e9eb59f2c3fb7b3860206fd3a14dd15ee0ff40",
+    "Art/ball/lar/face/51.PNG": "2a3b10281a59b97636c17b14d6d1cd15411614e4e5a67573b06ac9be3610d7d8",
+    "Art/ball/lar/face/52.PNG": "db9d88c2012ed289670fea5ae3bb572aad0735174442b81592176f03ec40eabe",
+    "Art/ball/lar/face/53.PNG": "6888e8b4f47e2c5e98768be46c3e1248023a7d4142d56d81706c2f53d3c3b0d2",
+    "Art/ball/lar/face/54.PNG": "1c44c4e2e4e0316e0f4dbfffc9f892408f092570b59841eb1d19ef9053de7034",
+    "Art/ball/lar/face/55.PNG": "b637050227420707b139fabe036b9a658300401fd152517c399365e59e0a0011",
+    "Art/ball/lar/face/56.PNG": "e7698be828aaa2886d204dad3120767c6592e245b2c34f15db05486fde42d7b7",
+    "Art/ball/lar/face/57.PNG": "2697a7016e7318d38c88d4118b26169d32c97cd39afc20f5ae3afd4fe6270324",
+    "Art/ball/lar/face/58.PNG": "9cc6361c5d1cd9d4afce2ba93c8bbfb333159af6b998c5fb6b2e9798441568d6",
+    "Art/ball/lar/face/59.PNG": "524c9122fbdeb6531bff1d0e5ea8f4ec5e1f89d70d86fa7bfa420c24605203b2",
+    "Art/ball/lar/face/60.PNG": "0f2f0a24da6a4358688391be972fcb4a15c4736dd8b0d4db398baea2aec0144f",
+    "Art/ball/lar/face/61.PNG": "ad45a24579cfa56b25e842d951e023561ca839446d67f969ac44f0c3fe819691",
+    "Art/ball/lar/face/62.PNG": "0b8a73977f46a12850f5c6e03e8eed2c6f63cd8acd254befac61d44c296ccaed",
+    "Art/ball/lar/face/63.PNG": "9c4155afe6b76cc62376540b9098368e52b71e88b08826a7754501b58bb424b2",
+    "Art/ball/tivbo/body/叉腰.PNG": "2c8af7dd0ab2ea8e4a81e84c216af43cf7b7fe8b7e6e53e76d882d365da9eafe",
+    "Art/ball/tivbo/body/叉腰抬手.PNG": "2702a37e561f59fc7e78f1e467eed1ccb9b711f6cf20e8ad57e3c6edd23892be",
+    "Art/ball/tivbo/body/叉腰舉手.PNG": "1d0f97c7be69f2eecc666032414408fbea18ae82ea8e2e77f7e52e3788611fde",
+    "Art/ball/tivbo/body/右插腰.PNG": "4b844a08502d9c5568f704a6f20b9f94d32eb30c26072d555865591fdbf72d61",
+    "Art/ball/tivbo/body/左插腰.PNG": "4f524f6fb4141b60660c8df22bb35ada2c05bb5e143cf9c73c68344d7987eb45",
+    "Art/ball/tivbo/body/常規.PNG": "c614102838a6f544e48d29363d17ca02f78ea5c49a48213921e1c9085a232e3e",
+    "Art/ball/tivbo/body/抬手.PNG": "a91bcfdada9d8bc6f27a7e3b06d0c612b4c0f771e1e52e02047b9316f37bc1db",
+    "Art/ball/tivbo/body/舉左手.PNG": "57709887cf102e08a184d0fe815c5d9beba4d7851260ad59c7aa2cda896c68f0",
+    "Art/ball/tivbo/face/1.PNG": "d3a05913261acdbd7e5e2bdb8fed30e9c7ae3208b13acc0b2a4034234ec51a6e",
+    "Art/ball/tivbo/face/2.PNG": "582df1ab676f5b43ec2a2a78247628844c009c08d6d5e5ab288f790511b06798",
+    "Art/ball/tivbo/face/3.PNG": "236f10dee28565f6ee755dde7b4991cb2783b049f57e47e4805e96c912bd2630",
+    "Art/ball/tivbo/face/4.PNG": "d3a3acc85f0300c6000ccb5c4e2986181e6b920e4d3d7df93d8851a62a00101e",
+    "Art/ball/tivbo/face/5.PNG": "47fc0432285d3ba6986068b195f7fff7ea6efa598c0f645b0e24ae5ec89a0804",
+    "Art/ball/tivbo/face/6.PNG": "9257635bdaec75429e808f2f7b1a3513e5436ee1c22252b76398c556bbb9a1ed",
+    "Art/ball/tivbo/face/7.PNG": "b58541eab8ca8c72bff559187a8195a0444c59e60a3541f7b8df208c9d2430f9",
+    "Art/ball/tivbo/face/8.PNG": "5021d0bf0bb6a920ca32b04399a3483008a3ebc63d1032d7b8a1c12b9d4ee3f4",
+    "Art/ball/tivbo/face/9.PNG": "5e43d878e89641cde1a09261607a58401c6aeb0939011b129aeb8e1ff0f809ff",
+    "Art/ball/tivbo/face/10.PNG": "eaedc38005dcb8c6eec5db2cb1b869cd90c4c2db3933ea12a97660b9f78c9ccb",
+    "Art/ball/tivbo/face/11.PNG": "015be8a5e11d44669e1f4eedea7f262cdbda4cdc30311727f4bb601aee062fd4",
+    "Art/ball/tivbo/face/12.PNG": "f050235d4e5bbbd9c6356b26925fd77c31dc2cd6fd6580b76fce85c9bd635776",
+    "Art/ball/tivbo/face/13.PNG": "ca4be191fc87fd0563d9be61d68e989b13efc8e8ec36f833a8e6482ede0420ff",
+    "Art/ball/tivbo/face/14.PNG": "ca4be191fc87fd0563d9be61d68e989b13efc8e8ec36f833a8e6482ede0420ff",
+    "Art/ball/tivbo/face/15.PNG": "3084e0321c03391c292ba5e5a24bb744b0d3ef63c5e5cb6a7d13898e9948e866",
+    "Art/ball/tivbo/face/16.PNG": "0183d1d61d0d336ee937c50d91ddfdb8d42569286f22a2f2b1f587b116f4abf3",
+    "Art/ball/tivbo/face/17.PNG": "455f8364298ee2c526df6acd83074bda93ad35c4fff8c8757b0aef3ae03a9083",
+    "Art/ball/tivbo/face/18.PNG": "dea7dc43cf18f1b0838183d4d0e72268a28d1688d66a1161dd77e6fb42ef4f03",
+    "Art/ball/tivbo/face/19.PNG": "c8de5f9a67b4b810d8544e7667e2b4edbde6f3e7cf3b2e606aa5c14a4db8e627",
+    "Art/ball/tivbo/face/20.PNG": "c8de5f9a67b4b810d8544e7667e2b4edbde6f3e7cf3b2e606aa5c14a4db8e627",
+    "Art/ball/tivbo/face/21.PNG": "6755bc02c2e8622a0d9939b50990182cf335f30366c281d7ee3610037abdc52e",
+    "Art/ball/tivbo/face/22.PNG": "80e0b8ed923927bfe1784446ff7d7489b50e39e1dc095f70e3e56948f5b0daaa",
+    "Art/ball/tivbo/face/23.PNG": "6bdea3854203b6255413ed1c8a1669b4964ab5eb7a30c21c77004a36d3cae24a",
+    "Art/ball/tivbo/face/24.PNG": "43cd0686c0bbf86a76a399127d754e4fcf28fd56c8630bd2cadfb3792e207055",
+    "Art/ball/tivbo/face/25.PNG": "574c8fa1bb832eb4900b2a3ce7c12fe1416bec01ffd9ea77709dff6547aa9abb",
+    "Art/ball/tivbo/face/26.PNG": "2f343f955e207f4727801cb4011320b440ff53b19f3b7b6e2d7c78b604df823c",
+    "Art/ball/tivbo/face/27.PNG": "6a2581b784f1c8258a2d097efe2fc2517b1ddea59fcfab2946c0fda6d038a08b",
+    "Art/ball/tivbo/face/28.PNG": "ffaaa2b7f478907afb5e612b48f937f2180a1e3d6e4c4bd7a71ee2763ad388df",
+    "Art/ball/tivbo/face/29.PNG": "40f52b1846555da31bf1e0e4ffca8d4bc241a055a710bbf8719b3857c4c4078f",
+    "Art/ball/tivbo/face/30.PNG": "56c88f4cc953fb7ed6dbdab0be32967357a941e3168b59d42653275634491cea",
+    "Art/ball/tivbo/face/31.PNG": "28117327d76a790a37a3835a4d43f6ab80267afdca5a1fc152e6ae930917030a",
+    "Art/ball/tivbo/face/32.PNG": "3d49f72e6867b3f32b39255cdb70ac5335a917fb2dfdbc0d612d2cd643b2069e",
+    "Art/ball/tivbo/face/33.PNG": "e42b5b40f61a32972ddcdee9dfcd8d01bfba27ff7830a8f089eca6b4fbb6525f",
+    "Art/ball/tivbo/face/34.PNG": "c0e029e0cd328ecf6a8ff3fdd97fe92a310fd0e7dc61cca18c13ebe9233055d4",
+    "Art/ball/tivbo/face/35.PNG": "d5a190b0c9057ddc9bfbf6721eead9f23dcc276d8a64d888ba885bd54c65c234",
+    "Art/ball/tivbo/face/36.PNG": "3269835377540e0960c03e4e3f85e2b2db1dafb1a30050b9ccda110992a80137",
+    "Art/ball/tivbo/face/37.PNG": "c19d2feba9660e4d766df8f834744576840fe09b65ff1e1d8db006ae9bb8fb8d",
+    "Art/ball/tivbo/face/38.PNG": "d148ed7a1f11abefdbb6f01e0b1212057fb0e336e71ce7daf1761eaeddebb781",
+    "Art/ball/tivbo/face/39.PNG": "38b2d02c65fbbc4f88ddbd2d63592a6a19796fb74c6b86b903e778a050a1d19c",
+    "Art/ball/tivbo/face/40.PNG": "a2d9d3b759422f243d760b2eb696aecb1dadec984e8bf91830e41d1f63f6929f",
+    "Art/ball/tivbo/face/41.PNG": "7d83d45baec4f61bd347b994d43a2545f898d3b518a1ad8d6ee3497170161a6c",
+    "Art/ball/tivbo/face/42.PNG": "87a024d44f6b49020e15b791df149f9b029f912a9b42fffa24e51e2676550e0e",
+    "Art/ball/tivbo/face/43.PNG": "1a3aae44f5e230fc55c83db0d9125e73126c82f811229726ab36c871489110e5",
+    "Art/ball/tivbo/face/44.PNG": "8ad303c6d8e740e50a72c2137b3379ca33a62a07988f2bae38450044e40fcd27",
+    "Art/ball/tivbo/face/45.PNG": "a97f7570b3c45361a1805853771e9a44f1d1ea12f36bbf38269329417bbe0360",
+    "Art/ball/tivbo/face/46.PNG": "75e4edccb97c00a8270be29d32d079ea02530c869246b0dfeefae0d2cc46864c",
+    "Art/ball/tivbo/face/47.PNG": "7d8105858399b613d889e032bbe125c31fcd62211cdb88441e430bac225589da",
+    "Art/ball/tivbo/face/48.PNG": "92f578191762d2a60dbd011865bf95533b9b823ea3395e5b1365abc9162560b7",
+    "Art/ball/tivbo/face/49.PNG": "bdffdae8ec982661f9411251d1a89db8678813bd0106e28d539bf7d4971bfde7",
+    "Art/ball/tivbo/face/50.PNG": "5bac6ab8f5f6ab0f004147dcdda6b53babb76bdc939bfec32ddc79af690d7314",
+    "Art/ball/tivbo/face/51.PNG": "fa452be6362f301be33cd9b845afba08a06e3ef01a183f211f476a12f56c43a5",
+    "Art/ball/tivbo/face/52.PNG": "8efb360b6799585ef76a5a4f09e421be056c6fae53ba3cfb26de4fef3314ea7f",
+    "Art/ball/tivbo/face/53.PNG": "43b9160fe72632d94189f9f9c36f37682995ce7d1bab52b593c93006151f6459",
+    "Art/ball/tivbo/face/54.PNG": "b38013525905adc5e320e6c392b56a6c402e54ac63ec34d1dbc28daa0198e86d",
+    "Art/ball/tivbo/face/55.PNG": "91533566cec4a053c6426a0813d6f8cbae0fa646a8e422ba83349aaf8a4ab821",
+    "Art/ball/tivbo/face/56.PNG": "a6d04e60a9005bece7887b8b6a8a0d66953bf4c56b8747994961c0f93e0f40d0",
+    "Art/ball/tivbo/face/57.PNG": "5ebeabd31dcb93ba684d5eed576a34ced3bb7f5d04e688e0786cd081b53d7734",
+    "Art/ball/tivbo/face/58.PNG": "21d3bec05b1d6e943d3886f6ae5c0f23cfd49d50208bb5aea7ff7dd5a65eaffb",
+    "Art/ball/tivbo/face/59.PNG": "be5925abbd97b5273a9c15d2457c4bc02c394ce0d4db9a290e4de29dfac650ef",
+    "Art/ball/tivbo/face/60.PNG": "e78bb9aa71b0500b35ea8f190a6334b505028c61605e7a20a672cf150334319f",
+    "Art/ball/tivbo/face/61.PNG": "4a0580b4bfb23c61502342ec1db96ccbe35cfc9b660df714e1061ee5a3477080",
+    "Art/ball/tivbo/face/62.PNG": "320867ed0159a2458a6ba11a3a7b32ef6d000dc5de8dedb8e0fa8a7d69c2fd4d"
+  },
+  "outputs": {
+    "Art/ball/web/lar/face/1.PNG": "49131f383d72f88a445ff92d333873751e6cc2db0c2f3dececcf4cb090866ee8",
+    "Art/ball/web/lar/face/2.PNG": "cf5d6ac2a09e22a6744776c03355b8b4bf6b3f2b0ca32747c91e2d03590918fb",
+    "Art/ball/web/lar/face/3.PNG": "110c9f9434c0cf5a412a4c188dc11ae10e16e87abfe92d182e84e93b895e13dd",
+    "Art/ball/web/lar/face/4.PNG": "42ba261e00d848f4f523cbf2187f1e9fa4d60c5762341570d1a3a35086b4583b",
+    "Art/ball/web/lar/face/5.PNG": "6a0e77b1562ca7f43bf6ccf2d10abc4719206c2b52a3a508daaeec6007c0e8f1",
+    "Art/ball/web/lar/face/6.PNG": "5c24fc8ac8af73fd66416920f452293d06a43ec8d60ba17e7f7e14f9af7091d5",
+    "Art/ball/web/lar/face/7.PNG": "5fa51865c8054ea5b9aca5b301ab2a779eae98be5f497f059e50f2c6c1446dc4",
+    "Art/ball/web/lar/face/8.PNG": "8d766a05418c986a2d595ae5d449ff54e2cfa3968c30ca4de5f2b82c9a93cb17",
+    "Art/ball/web/lar/face/9.PNG": "ac39026c81580404c8c0c5c8de52abb006090172af29876d369c5fa0717b750a",
+    "Art/ball/web/lar/face/10.PNG": "3ead94d8f5ad696bccb19a7e3539b32ed473a04e06ab296bd24249921da56df2",
+    "Art/ball/web/lar/face/11.PNG": "dd1a7dd8ab1ae57202c2d3f11203d381219b715eaa74ccd7524df57387d07fad",
+    "Art/ball/web/lar/face/12.PNG": "ca1fd056d98584a496ec39fd237d663123ac9ea9a09f6e51430adee1ede7d4ea",
+    "Art/ball/web/lar/face/13.PNG": "93da82c849ee8bef85a526b4b57123020432a7d4c3fe4a133a273052c7699530",
+    "Art/ball/web/lar/face/14.PNG": "d927692354979399a541489c5241203543ac04d44bd75c20865afa7791285c4d",
+    "Art/ball/web/lar/face/15.PNG": "ae19af4b25d57286abc48b69ec9b9fdd56bba07556b8fc0df6e72420695a7dfe",
+    "Art/ball/web/lar/face/16.PNG": "06678c4f320bd1b8548dd51b3511e85355ac23cf5b73f46477bfbe35608b56c9",
+    "Art/ball/web/lar/face/17.PNG": "8da02f9f495212212afae74fb5c1956084a7fb64b36c264dfc85e3478ed98b69",
+    "Art/ball/web/lar/face/18.PNG": "38cba2d8bbbe7ffc0f5aa30aaf26e326cfa5bfb9ffe90f86e22100b05e1f404e",
+    "Art/ball/web/lar/face/19.PNG": "e468fc13b0e3bbce06818b24b68f306c6b41059848b25482d8736b46f4f4a7d9",
+    "Art/ball/web/lar/face/20.PNG": "2b49ad6418096cf19ecf776eb4608cbc72221ab3ce1c694d8d94fc063adfe9c2",
+    "Art/ball/web/lar/face/21.PNG": "bc7cf9217d0b202ebdfc16d2541fffc9b41b6a55c5bdae0b88b1fcef142d7c90",
+    "Art/ball/web/lar/face/22.PNG": "7f15fc8ee98ced510020dc4f5bb55c6b53d208940c149f809b85b7b9083e2616",
+    "Art/ball/web/lar/face/23.PNG": "bbf5baa0b3e44a9e6aa099ffe073f5cc2c884b70eaf397dcf0bfb33061a65652",
+    "Art/ball/web/lar/face/24.PNG": "09cf458dccee5f38b67512c31c33b1d03bb17744f766b7a3d33bbdaf9776a861",
+    "Art/ball/web/lar/face/25.PNG": "91393426df9741400fa45f8eef256fb08d86d1721916cbc4e87a66cb1ca830b3",
+    "Art/ball/web/lar/face/26.PNG": "f2ebb72c2c1d6ece30bec0237e7e39daeb24d5dd78e0652c0a3c59960ff47ace",
+    "Art/ball/web/lar/face/27.PNG": "8ebb7c68405106347ac15579adaeeb499edc3ebbbe6732c03307588bdc9ebe8b",
+    "Art/ball/web/lar/face/28.PNG": "1fc8b7ee2ec2d159d3e98e529fe05a4bf4044a73f4ed69d99a7595bc918af102",
+    "Art/ball/web/lar/face/29.PNG": "0de202c10ba6629ce4c9f7dcf530b4244ec2a9d1820a99a5c4b11c02c9f1a416",
+    "Art/ball/web/lar/face/30.PNG": "7c30569d4f2f7b09a72041b1d9f11a43a9b5a21ac3d1e0a32172a28a0da35a1d",
+    "Art/ball/web/lar/face/31.PNG": "8d4d7fa39f4a309f1c87f9613924ae59b57a75f908ee9c54a3436cae57f19ef0",
+    "Art/ball/web/lar/face/32.PNG": "bf6f32b6c37cd0e567e695b966b18274fbc670f180d4a6e96416abf5d4bada89",
+    "Art/ball/web/lar/face/33.PNG": "8166ed58a52eaaa4bb476e739e262d65b0797192e5ac7c8495b19e172e265835",
+    "Art/ball/web/lar/face/34.PNG": "749c857c3d3a75b95fe0da9773f38d5f39b61c8b5b7400741d934fa49c35e13a",
+    "Art/ball/web/lar/face/35.PNG": "05ded9c0fa5058307d73063566ef08303a83503fd56b38f8739d52db82bf5fc2",
+    "Art/ball/web/lar/face/36.PNG": "4e584e1905c5d55b5f7cb6c032ead59331ebfa45b5d0b0ce19fc58607601a80f",
+    "Art/ball/web/lar/face/37.PNG": "91baede83b961df5eef8ca0df1a738c0ed1204345f921c2162f2f90f5685ab4c",
+    "Art/ball/web/lar/face/38.PNG": "0472bfe0390a9e4127485bd48e7587365ac05c1f77c25800a17ca0e0f3f84541",
+    "Art/ball/web/lar/face/39.PNG": "8a47d3cc943b8f0007cd9a9e0b9e00b8479dc02c0d5fc316309a278a12c201a8",
+    "Art/ball/web/lar/face/40.PNG": "c7b9c5f1cf3ce5d7f6596a9aa6c3384bb26bfe9d1472405043ce75012e5c206c",
+    "Art/ball/web/lar/face/41.PNG": "60065411ca07ab613ef57f83e9bb1d8c0e368475064b8a14a9d39dfed46a4504",
+    "Art/ball/web/lar/face/42.PNG": "48f9bb734abcc49522bb90e2915f582ec5a4cb02f97352d0cd3b28c3abb47672",
+    "Art/ball/web/lar/face/43.PNG": "27409f989b7f95d89152345db0e1fd3dc88c82e867a94e41a941cab033e3fae5",
+    "Art/ball/web/lar/face/44.PNG": "c6f61690f5bd0ea0a52a9b5c837dd6aaa5f13d7f0d85fccb848b9134f7362e7d",
+    "Art/ball/web/lar/face/45.PNG": "f495310d50dd847b89fa2a7d0b3658ef94adc56d5e9b692fa38cafe54b3b408f",
+    "Art/ball/web/lar/face/46.PNG": "3fd25460debdd7b531506640e4eb3f38f48435c0c7759d275d6c801ecf6b1f01",
+    "Art/ball/web/lar/face/47.PNG": "6b5e1326a04310006c9d6c3857add0fc261704dfe3c5a0bfc1525ba1beebf487",
+    "Art/ball/web/lar/face/48.PNG": "5559591252a82283c156938e4d88f86ae00a1c178970b04ca129ab60d63ce23c",
+    "Art/ball/web/lar/face/49.PNG": "605706a66557b420c3b4d5e10f2471cb5e1678e6e59cf06b480e9b0bd7631670",
+    "Art/ball/web/lar/face/50.PNG": "eb45e04f9b740e52b0c71f843e55f3c4bca7ac52b4df8e8b524e8632a602d4da",
+    "Art/ball/web/lar/face/51.PNG": "be39a891bead842255529bac473bf8dffbc7a36b88958b027be4871aabfe7b13",
+    "Art/ball/web/lar/face/52.PNG": "c712808c3e201c42cf2c990f27b183a6faaf80410a2e00d2be9a7f8a08d777e0",
+    "Art/ball/web/lar/face/53.PNG": "311355de21b51f9e99f232caf9f3e0a4c08d9886d7c4c679a854f784f2dd7d79",
+    "Art/ball/web/lar/face/54.PNG": "2784828e7491308bbc0452ac7718de0b6918c7d8193d3eb235e55ec18f0bbcea",
+    "Art/ball/web/lar/face/55.PNG": "4fd623bc220c22e97142cd0dc394e74c0bb58be213e4a8bddf9ef711f0371718",
+    "Art/ball/web/lar/face/56.PNG": "e43e7ae021e8794045f0476308f66f382d035c00aa6e276e51638e110f3a5150",
+    "Art/ball/web/lar/face/57.PNG": "5828ad85f3be2b7e77e2027f1385981507d6ad367d44d27d147480717b0f8fc4",
+    "Art/ball/web/lar/face/58.PNG": "e728aa4cc834d861bffe6b9ecda2ca4b2bee93af0085b15445a47cec5e692c49",
+    "Art/ball/web/lar/face/59.PNG": "09a67ae05df7724cabe9b35664123e7a90d90d75869798058d961a75992e3097",
+    "Art/ball/web/lar/face/60.PNG": "6f7832705ba0bac49ad364d1f15438e0a6a97ecfb48c77d77b08a777cfa63408",
+    "Art/ball/web/lar/face/61.PNG": "86099b499b300fa94b09aad5903a56208da3abe94d4ef68bad2a94e4ff6ad552",
+    "Art/ball/web/lar/face/62.PNG": "12fcada2dac7ddb0fe8649d9a5e9b5dbb93f3893323f41ee1504e0fdcc85f0ab",
+    "Art/ball/web/lar/face/63.PNG": "0a356c78e8aaf6e68cc17112822fc440c07612eb11399625dc775772f0107bb9",
+    "Art/ball/web/tivbo/face/1.PNG": "6b22c45e086464880c5885e4af853d2d56481775b230b96a2f7df8b6aa116d12",
+    "Art/ball/web/tivbo/face/2.PNG": "8c43af14377d19db475f5eada75c36aefe11fb32b05357b02350ce00aba41a06",
+    "Art/ball/web/tivbo/face/3.PNG": "67ce8dc43a830afdfdf51942763a7166bb273ef2075bfafe77aeeedb8659b695",
+    "Art/ball/web/tivbo/face/4.PNG": "dc2ec2a83c3c5a03ade4fd6ba15fa5110967b74933b33f719f1d6501d40a0e2b",
+    "Art/ball/web/tivbo/face/5.PNG": "359152e9805bf5392486308ff33be5993f66d19e1c6858fc0fe4eb4dada67e42",
+    "Art/ball/web/tivbo/face/6.PNG": "eb5614154695bfaf93fa8f5de2caf3796bf9cf00fc629458033a6537d76c3c0b",
+    "Art/ball/web/tivbo/face/7.PNG": "f81b19d40e12314720269627f651d81a64f27ff3e23a1b7e48e9d88948c7c7c5",
+    "Art/ball/web/tivbo/face/8.PNG": "4ee34a87f78af3500fe994317a338c6a98cf15376edac321151328d686f40234",
+    "Art/ball/web/tivbo/face/9.PNG": "ca47ab879173b99fa5c5d76b987e5bfa2f6621d7cb7fb6faddf066c48a7100bc",
+    "Art/ball/web/tivbo/face/10.PNG": "bcdc2b3117440395ce7d5bd82c50469f08ccdc49acc520bff554b487057e0b17",
+    "Art/ball/web/tivbo/face/11.PNG": "0ba8f0c1d74d42e7dabb033e0f408cfdd483c44180492bb184d7e74c7f740271",
+    "Art/ball/web/tivbo/face/12.PNG": "f42b393de032cdc93ffe211ccce8d5e9f97975bf05748f23204869468b96f4dc",
+    "Art/ball/web/tivbo/face/13.PNG": "770c662a67195c5879a190a8d3409c6578c16a77322013ad7ee7d8c957910760",
+    "Art/ball/web/tivbo/face/14.PNG": "770c662a67195c5879a190a8d3409c6578c16a77322013ad7ee7d8c957910760",
+    "Art/ball/web/tivbo/face/15.PNG": "53fcf8ef8a7e284c889693259f6bbac10a0b702bddd4bc261970a2314c9d8519",
+    "Art/ball/web/tivbo/face/16.PNG": "852dbc91726dfc6dd8abbe2318e75158c000ed09c5cdb20046a5b1898400b9de",
+    "Art/ball/web/tivbo/face/17.PNG": "6fca533c968af84e3a06233e090fbe2bebcb580ccb024e7d1677bf206de2b60d",
+    "Art/ball/web/tivbo/face/18.PNG": "d4992a6441f7a365cc07321fe563b0dbfe0e14e71047242cd2c992d3714f8551",
+    "Art/ball/web/tivbo/face/19.PNG": "bf770039bfbcba4c28bf20e3b4538068b68126696262ba24ef8af6d277ac1b0e",
+    "Art/ball/web/tivbo/face/20.PNG": "bf770039bfbcba4c28bf20e3b4538068b68126696262ba24ef8af6d277ac1b0e",
+    "Art/ball/web/tivbo/face/21.PNG": "8a25831d59a8a25bc64f9177122aa0b80665e404334f916daa53081286dcc95c",
+    "Art/ball/web/tivbo/face/22.PNG": "f6d0a6ffc0230a5a2282b62f6589b596a0dcc73eae0482dd7631c9f1054cffe2",
+    "Art/ball/web/tivbo/face/23.PNG": "6df521bf1d2042f13acec16e4876311577ac66ee3b7084c239d763bd09e1703c",
+    "Art/ball/web/tivbo/face/24.PNG": "5353740760c346ba3300e589ce7c82d802fb9df13c5c4e7db5a2ada984419c35",
+    "Art/ball/web/tivbo/face/25.PNG": "0400b310e5aedbfc9185e576944aab6ba573b4566a139ef4c94d43056892e7ee",
+    "Art/ball/web/tivbo/face/26.PNG": "2ccbf34404f89c118469b3ef1635dae741cf14bceae0a71edbd7a2fee73990c0",
+    "Art/ball/web/tivbo/face/27.PNG": "d6674ccd19da6f1eeec789761f43ccc0c060ad53ece2b2c2882cb87e838d4b3e",
+    "Art/ball/web/tivbo/face/28.PNG": "124261b0e2da7faf7caca161a7fe2cf1de740745bb998027b3d8299e5ee07fb3",
+    "Art/ball/web/tivbo/face/29.PNG": "efe874c20a824274107cdd4577b631e04f1e690fb0c17b4805aa3a860841f78c",
+    "Art/ball/web/tivbo/face/30.PNG": "69ff0600c511ee8c150406efe5931f3efd7cbceb765e034460cd9d9e84ef74b2",
+    "Art/ball/web/tivbo/face/31.PNG": "e79a9f535fe883988a3f16560ac5dd862a6519e5c9e4f08f8cb3663b31d49209",
+    "Art/ball/web/tivbo/face/32.PNG": "82b2773f7e4dfdf976749ee07cb44b94beb6bd9f528cd11117a5d04bd6a76505",
+    "Art/ball/web/tivbo/face/33.PNG": "06d88316a7dfb374a0d011df8da2e91945d489952043d606a900643ab7dd96a2",
+    "Art/ball/web/tivbo/face/34.PNG": "b40bc9f35dff5e02d3c1993b7cff46c2d9c8275554443baffa6809e54cd60abd",
+    "Art/ball/web/tivbo/face/35.PNG": "d6a382d3d4089a1ec78a4f41c8d4ca7cafa937e3304d79948fdd402ec12c91a4",
+    "Art/ball/web/tivbo/face/36.PNG": "83fe5eb7df55c10ad8e02d044b734df0c15ef1451a029b64bb61f16c45c95dfe",
+    "Art/ball/web/tivbo/face/37.PNG": "b76279908e06c1247d9f4a060c683fceaf89a0ffedc6072734cad6590b61f583",
+    "Art/ball/web/tivbo/face/38.PNG": "afca87881e5aaec0368be728bd2cda6b0db69478edf9783a663edcc0dabaacff",
+    "Art/ball/web/tivbo/face/39.PNG": "16ab990a82716c0bd3d7a56ee0e491d423af93461c78f1e74f36e68012b07963",
+    "Art/ball/web/tivbo/face/40.PNG": "01a2fd3f48dd82570097c231feff21a6bfd010979d8afec4e6eb535cf637f131",
+    "Art/ball/web/tivbo/face/41.PNG": "73e9dc6d2496ae2b57a306634efffd6d483cb385ba33c24063201c0e31a4a081",
+    "Art/ball/web/tivbo/face/42.PNG": "978688da62fa389035a38f1166e115977bc74b5eec0c140d03d27110212bdce6",
+    "Art/ball/web/tivbo/face/43.PNG": "8ea04e85205329aae582b3951bdffd1f9ac542d125cf7266d6fde790e924e2fd",
+    "Art/ball/web/tivbo/face/44.PNG": "3cdac7370dcf5f4d1c9650019a152015efd585342774de96f811e5f720d9bc12",
+    "Art/ball/web/tivbo/face/45.PNG": "ece0ebae3f84c7c354491ab876bb7628683446ecbf8efae6beaa53462710665a",
+    "Art/ball/web/tivbo/face/46.PNG": "f3b596f8aa84828d84ea6b6afb7eab78912b2f7a2fe139b499d659b32f8518f5",
+    "Art/ball/web/tivbo/face/47.PNG": "b5bc9b4b6f125a53cba38efd23bdb7b82b59f8bede9d00b43eafab954794c3bc",
+    "Art/ball/web/tivbo/face/48.PNG": "c3c67b2dd10d956c938e58f9b62649ee92c0ae8eecf91a72bb835897293369bf",
+    "Art/ball/web/tivbo/face/49.PNG": "922900acc72f1aede3cf0de36a143a1f4e4760f5b0fcef57f0593405110340fa",
+    "Art/ball/web/tivbo/face/50.PNG": "c6a8e2b424408d2acfec3c8411728d535aad9a60c673943691eadd561a5e6ba4",
+    "Art/ball/web/tivbo/face/51.PNG": "63cd9a288a364e460cc89d6b0552ae09a6b2ae6b21074760da8142a4871f912b",
+    "Art/ball/web/tivbo/face/52.PNG": "39f4a35c66bc836bfaeaaf170a90a07380d96090402a8805bce29fcf6ee9a09e",
+    "Art/ball/web/tivbo/face/53.PNG": "68943ed482fb021da18d7f12df32f28a689e462ffe049a63f8fb145f1f628a01",
+    "Art/ball/web/tivbo/face/54.PNG": "3d5a4728ae4a656c479ab32fd34f38f2c50d6d87c1d093ef037e669e16c3716c",
+    "Art/ball/web/tivbo/face/55.PNG": "c77bb01050895daf9c1395cfb8d773ed66248fca2c406144414aea876dd275f4",
+    "Art/ball/web/tivbo/face/56.PNG": "5a83bc5f8abb89613cc7d42c03e5e7558d3988e0e16ddc95f6032312548346e4",
+    "Art/ball/web/tivbo/face/57.PNG": "bca8c3cac5c8ee402b6079ce5a64d9fe5673e7f39d3ae093452704dc292b5ca4",
+    "Art/ball/web/tivbo/face/58.PNG": "234bb43b3883c87f410fd06b40696ae1af5ee6b46079340ead717bb035f9fda2",
+    "Art/ball/web/tivbo/face/59.PNG": "85204c00746ba0645a5f86476898eeb8a4a277d6e28355d7df0159b1e32efa2d",
+    "Art/ball/web/tivbo/face/60.PNG": "c4986a09c8bdd0ed14f93c6b2d9548880d15ed31caada11affea50261077bdc9",
+    "Art/ball/web/tivbo/face/61.PNG": "78d1961804d62abcc10d99962a0b56646249bb2cc5f6520fb87fa9943020565c",
+    "Art/ball/web/tivbo/face/62.PNG": "ed82f662fc452546b47f0e30006f14daa4eea71e1f8106742c90328fdecf93cb"
+  },
+  "characters": {
+    "lar": {
+      "faces": 63,
+      "bodies": 8,
+      "combinations": 504,
+      "sourceBytes": 32273145,
+      "outputBytes": 6931802,
+      "width": 443,
+      "height": 402,
+      "alphaChangesPerFace": 189,
+      "totalAlphaChanges": 11907,
+      "rgbaBytesPerFaceBefore": 3157272,
+      "rgbaBytesPerFaceAfter": 712344,
+      "mismatchedPixels": 0,
+      "checks": [
+        {
+          "face": "1.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "63.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "63.PNG",
+          "body": "右叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "63.PNG",
+          "body": "左叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "63.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "63.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "63.PNG",
+          "body": "抬手叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "63.PNG",
+          "body": "舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "63.PNG",
+          "body": "舉手叉腰.PNG",
+          "mismatchedPixels": 0
+        }
+      ]
+    },
+    "tivbo": {
+      "faces": 62,
+      "bodies": 8,
+      "combinations": 496,
+      "sourceBytes": 28647130,
+      "outputBytes": 5718640,
+      "width": 436,
+      "height": 435,
+      "alphaChangesPerFace": 0,
+      "totalAlphaChanges": 0,
+      "rgbaBytesPerFaceBefore": 4857048,
+      "rgbaBytesPerFaceAfter": 758640,
+      "mismatchedPixels": 0,
+      "checks": [
+        {
+          "face": "1.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "1.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "2.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "3.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "4.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "5.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "6.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "7.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "8.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "9.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "10.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "11.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "12.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "13.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "14.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "15.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "16.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "17.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "18.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "19.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "20.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "21.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "22.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "23.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "24.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "25.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "26.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "27.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "28.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "29.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "30.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "31.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "32.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "33.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "34.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "35.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "36.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "37.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "38.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "39.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "40.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "41.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "42.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "43.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "44.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "45.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "46.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "47.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "48.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "49.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "50.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "51.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "52.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "53.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "54.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "55.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "56.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "57.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "58.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "59.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "60.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "61.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "叉腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "叉腰抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "叉腰舉手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "右插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "左插腰.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "常規.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "抬手.PNG",
+          "mismatchedPixels": 0
+        },
+        {
+          "face": "62.PNG",
+          "body": "舉左手.PNG",
+          "mismatchedPixels": 0
+        }
+      ]
+    }
+  },
+  "totalCombinations": 1000
+}

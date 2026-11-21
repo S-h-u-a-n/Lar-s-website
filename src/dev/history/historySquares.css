@@ -1,0 +1,5 @@
+/* Actual square PNGs and drift/fade/rotation vocabulary from IntroSquares. */
+.history-floating-squares { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; contain: layout paint; }
+.history-floating-squares img { position: absolute; left: 0; top: 0; display: block; max-width: none; opacity: 0; visibility: hidden; pointer-events: none; user-select: none; }
+.history-floating-squares img[data-visible="true"] { will-change: transform, opacity; }
+@media (prefers-reduced-motion: reduce) { .history-floating-squares img[data-visible="true"] { will-change: auto; } }

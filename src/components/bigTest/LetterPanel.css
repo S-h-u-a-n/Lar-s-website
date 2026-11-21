@@ -1,0 +1,52 @@
+/* Keep the original 65% width, 40/60 split, and 45% artboard height.
+   The academy note reuses this panel while standard diary pages keep their layout. */
+.big-test-document-panel.big-test-letter-panel {height:45%;min-height:45%;overflow:hidden;background:var(--letter-paper);}
+.big-test-letter-panel .big-test-letter-cover {min-width:0;min-height:0;overflow:hidden;background:var(--letter-cover);}
+.big-test-letter-panel.is-letter-list {overflow:visible;}
+.big-test-letter-panel.has-letter-artwork .big-test-letter-cover {overflow:visible;}
+.big-test-letter-cover .big-test-document-dots {pointer-events:none;}
+.big-test-letter-default-square {position:absolute;left:50%;top:50%;z-index:1;width:54%;aspect-ratio:1;background:#fff;transform:translate(-50%,-50%) rotate(-6deg);pointer-events:none;}
+.big-test-letter-cover .layout-editor-item > .big-test-letter-icon,
+.big-test-letter-default-image {display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none;}
+.big-test-letter-copy {display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:1cqw;min-width:0;min-height:0;overflow:hidden;color:var(--letter-ink);}
+.big-test-letter-copy h2 {margin:0 0 .4cqw;}
+.big-test-letter-panel .big-test-letter-subtitle {margin:0;font:400 clamp(11px,1cqw,16px)/1.4 var(--display);}
+.big-test-letter-artwork-transition {position:absolute;inset:0;z-index:2;transform-origin:center;overflow:visible;}
+.big-test-letter-copy-slot {position:relative;min-width:0;min-height:0;overflow:hidden;}
+.big-test-letter-copy-slot > .big-test-letter-copy {position:absolute;inset:0;width:100%;height:100%;transition:none!important;}
+.big-test-letter-body {min-height:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;scrollbar-width:thin;padding-right:.6cqw;}
+.big-test-letter-panel .big-test-letter-body p {margin:0 0 1em;font:15px/1.9 Georgia,'Songti TC',serif;white-space:pre-line;}
+.big-test-letter-body p:last-child {margin-bottom:0;}
+.big-test-letter-signature {text-align:right;}
+.big-test-letter-footer {display:flex;align-items:center;justify-content:space-between;gap:1cqw;min-width:0;}
+.big-test-letter-panel .big-test-letter-footer button {margin-top:0;}
+.big-test-letter-pagination {display:flex;justify-content:space-between;align-items:center;width:100%;gap:1cqw;}
+.big-test-letter-list {min-height:0;overflow-y:auto;overscroll-behavior:contain;list-style:none;margin:0;padding:0 .6cqw 0 0;}
+.big-test-letter-list li+li {border-top:1px solid #dcded8;}
+.big-test-letter-panel .big-test-letter-list button {position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:.3em;width:100%;margin:0;padding:.6em 2em .6em 0;border:0;border-radius:0;background:transparent;color:inherit;font:inherit;text-align:left;box-shadow:none;cursor:pointer;}
+.big-test-letter-list button:hover {color:#688d7d;}
+.big-test-letter-list-title {font:500 clamp(14px,1.15cqw,18px)/1.4 var(--body);}
+.big-test-letter-list-meta {font:11px/1.45 var(--sans);opacity:.68;}
+.big-test-letter-list-arrow {position:absolute;right:.4em;top:50%;transform:translateY(-50%);font:16px var(--sans);opacity:.6;}
+.big-test-letter-list-footer > span {font:12px/1.4 var(--sans);opacity:.65;}
+.big-test-letter-stepper {display:flex;align-items:center;justify-content:center;gap:.55cqw;min-width:0;}
+.big-test-letter-stepper .big-test-letter-page-count {white-space:nowrap;}
+.big-test-letter-panel .big-test-letter-pagination button {display:inline-flex;align-items:center;gap:.55em;box-sizing:border-box;width:auto;height:28px;padding:0;border:0;border-radius:0;background:transparent;color:inherit;font:12px/1.4 var(--body);box-shadow:none;}
+.big-test-letter-panel .big-test-letter-pagination button:hover:not(:disabled) {background:transparent;color:#688d7d;}
+.big-test-letter-pagination button:disabled {opacity:.35;cursor:default;}
+
+.big-test-letter-panel .big-test-letter-copy {padding-bottom:12px;}
+.big-test-letter-page-count {font:12px var(--display);opacity:.7;}
+.big-test-letter-body .nt-article-body {font:15px/1.9 Georgia,'Songti TC',serif;color:inherit;}
+.big-test-letter-body .nt-article-body p {margin:0 0 1em;font:inherit;white-space:pre-line;}
+.big-test-letter-body .nt-article-body h2,
+.big-test-letter-body .nt-article-body h3,
+.big-test-letter-body .nt-article-body h4 {margin:1em 0 .55em;font:600 1em/1.5 var(--body);color:inherit;}
+.big-test-letter-body .nt-article-body ul,
+.big-test-letter-body .nt-article-body ol {margin:0 0 1em;padding-left:1.5em;}
+.big-test-letter-body .nt-article-body a {color:inherit;text-underline-offset:2px;}
+.big-test-envelope-icon {color:var(--letter-ink);}
+@media(prefers-reduced-motion:reduce) {
+  .big-test-letter-artwork-transition,
+  .big-test-letter-copy-slot > .big-test-letter-copy {transform:none!important;}
+}

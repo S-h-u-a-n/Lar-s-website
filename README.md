@@ -1,75 +1,14 @@
-# React + TypeScript + Vite
+# The Wizard’s GENESIS — 主開發版本
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+自 2026-10-11 起，這個資料夾承接兩輪 Codex Edition，作為接下來主要開發版本。視覺、互動與原創素材保留。已完成本機 Git 接入，主分支為 `genesis-next`；尚未 push 或部署正式網站。
 
-Currently, two official plugins are available:
+- 開發路徑：`/Users/remoanpu/Desktop/GENESIS-Codex-Edition`
+- 開啟 `GENESIS-Main.code-workspace` 即可在 VS Code 開發，工作區只包含新版本。
+- `npm run dev` → http://127.0.0.1:5186/
+- `npm run build` → dist
+- `npm run preview` → http://127.0.0.1:4186/
+- 已安装依賴，這次不用再安裝。新環境用 `npm ci`，Node 符合 Vite 的 `^20.19.0 || >=22.12.0` 要求。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[目前 Git 接入與日常開發](docs/GIT-INTEGRATION.md) · [接入前交接紀錄](docs/PROJECT-HANDOVER.md) · [兩輪設計及啟動說明](README-CODEX.md) · [第二輪紀錄](docs/Codex-Edition-round2.md)
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+原版保留在 `/Users/remoanpu/Desktop/The Wizard's GENESIS`，包含未提交修改、Git 歷史、素材及開發紀錄；不要在原版進行新開發或清理。第一輪 Edition 封存仍在 `versions/`。

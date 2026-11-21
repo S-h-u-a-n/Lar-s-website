@@ -1,0 +1,217 @@
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { HISTORY_RECORDS } from './historyArchive/data'
+import { makeStripLayout, maskHit, nearestRecord } from './historyArchive/layout'
+import HistoryObservation from './historyArchive/HistoryObservation'
+import HistoryBackdropSquares from './historyArchive/HistoryBackdropSquares'
+import HomeSectionGeometry from './HomeSectionGeometry'
+import worldImage from '../../../Art/Main-art/world.jpg'
+import './HomeHistory.css'
+import useArchiveMotion from './historyArchive/useArchiveMotion'
+import { localPoint } from '../../dev/history/interactionMath'
+import { HISTORY } from '../../dev/history/config'
+
+const placements = HISTORY_RECORDS.map(record=>({...record.placement,origin:record.interaction.foot}))
+const masks = HISTORY_RECORDS.map(record=>Uint8Array.from(atob(record.interaction.bits), char=>char.charCodeAt(0)))
+const withEpilogue = (layout, viewportWidth) => {
+  const endWidth = Math.min(320, viewportWidth)
+  return {
+    ...layout,
+    items: layout.items.map(item => ({ ...item, x: item.x + endWidth })),
+    endStart: 0,
+    endWidth,
+    width: layout.width + endWidth,
+  }
+}
+
+export default function HomeHistory() {
+  const [layout, setLayout] = useState(()=>withEpilogue(makeStripLayout(placements),1000))
+  const [current, setCurrent] = useState(0), [hovered, setHovered] = useState(-1)
+  const [selection, setSelection] = useState(null), [closing,setClosing] = useState(false), [notice,setNotice] = useState('')
+  const [reflectionClosing, setReflectionClosing] = useState(false)
+  const reflectionCloseTimer = useRef(null)
+  const reflection = useRef(null), ending = useRef(null), reflectionShown = useRef(false)
+  const viewport = useRef(null), stage = useRef(null), images = useRef([]), buttons = useRef([]), range = useRef(null)
+  const progress = useRef(0), drag = useRef(null), suppress = useRef(0), opener = useRef(null), busy = useRef(false), alive = useRef(true)
+  const state = useRef(null), hover = useRef(-1), frame = useRef(0)
+  state.current = { layout, selection, closing }
+  const [size,setSize]=useState({width:1000,height:layout.height})
+  const motion = useArchiveMotion({viewport, buttons, state, hover, records:HISTORY_RECORDS})
+  useEffect(()=>{motion.current.wake()},[layout,selection,motion])
+  const close = useCallback(()=>setClosing(true),[])
+  useLayoutEffect(()=>{alive.current=true;return()=>{alive.current=false;cancelAnimationFrame(frame.current)}},[])
+  useLayoutEffect(()=>{
+    const resize = ()=>{
+      const node=viewport.current
+      // Keep the full stage and its controls usable on shorter desktop windows.
+      const scale=node.clientWidth<700?.22:Math.min(.38,Math.max(.22,(window.innerHeight-277)/1060))
+      const next=withEpilogue(makeStripLayout(placements,scale),node.clientWidth)
+      setLayout(next); setSize({width:node.clientWidth,height:next.height})
+    }
+    const observer = new ResizeObserver(resize)
+    observer.observe(viewport.current)
+    window.addEventListener('resize',resize)
+    return()=>{observer.disconnect();window.removeEventListener('resize',resize)}
+  },[])
+  useLayoutEffect(()=>{
+    const node=viewport.current
+    node.scrollLeft=Math.max(0,layout.width-node.clientWidth)*(1-progress.current)
+  },[layout])
+  useEffect(()=>{
+    const node=viewport.current
+    let timer
+    const check=()=>{
+      clearTimeout(timer)
+      if(reflectionShown.current || node.scrollLeft>2 || state.current.selection)return
+      const rect=ending.current.getBoundingClientRect()
+      if(rect.top<0 || rect.bottom>window.innerHeight)return
+      timer=setTimeout(()=>{
+        if(drag.current){check();return}
+        const visible=ending.current.getBoundingClientRect()
+        if(node.scrollLeft>2 || state.current.selection || visible.top<0 || visible.bottom>window.innerHeight)return
+        reflectionShown.current=true
+        reflection.current.showModal()
+      },1400)
+    }
+    const observer=new IntersectionObserver(check,{threshold:1})
+    observer.observe(ending.current)
+    node.addEventListener('scroll',check)
+    return()=>{clearTimeout(timer);observer.disconnect();node.removeEventListener('scroll',check)}
+  },[])
+  const finishReflectionClose = useCallback(()=>{
+    clearTimeout(reflectionCloseTimer.current)
+    reflection.current?.close()
+    setReflectionClosing(false)
+    reflectionCloseTimer.current=null
+  },[])
+  const closeReflection = useCallback(()=>{
+    if(!reflection.current?.open || reflectionCloseTimer.current !== null)return
+    setReflectionClosing(true)
+    // Animation end normally closes the dialog; the timer covers interrupted animations.
+    reflectionCloseTimer.current=setTimeout(finishReflectionClose,400)
+  },[finishReflectionClose])
+  useEffect(()=>()=>clearTimeout(reflectionCloseTimer.current),[])
+  const sync = () => {
+    cancelAnimationFrame(frame.current)
+    frame.current=requestAnimationFrame(()=>{
+      if(!viewport.current || !range.current) return
+      const node=viewport.current, max=Math.max(0,node.scrollWidth-node.clientWidth)
+      progress.current=max?(max-node.scrollLeft)/max:0
+      const index=nearestRecord(state.current.layout.items,node.scrollLeft+node.clientWidth/2)
+      setCurrent(index)
+      range.current.value=String(progress.current*100)
+      range.current.setAttribute('aria-valuetext',`${HISTORY_RECORDS[index].name}附近，已探索 ${Math.round(progress.current*100)}%`)
+    })
+  }
+  const pick = event => {
+    const node=viewport.current, rect=node.getBoundingClientRect()
+    const x=event.clientX-rect.left+node.scrollLeft,y=event.clientY-rect.top
+    const candidates=layout.items.map((item,index)=>({item,index})).sort((a,b)=>
+      (b.index===hover.current?3:(motion.current.pose(b.index)?.scale||1)>1.001?2:1)-
+      (a.index===hover.current?3:(motion.current.pose(a.index)?.scale||1)>1.001?2:1)||b.index-a.index)
+    for(const {item,index} of candidates){
+      const pose=motion.current.pose(index)
+      if(!pose?.entered)continue
+      const [u,v]=localPoint(pose,x,y)
+      if(maskHit(HISTORY_RECORDS[index].interaction,masks[index],u,v,item.width,item.height)) return index
+    }
+    return -1
+  }
+  const setHover = index => {if(hover.current!==index){hover.current=index;setHovered(index);motion.current.wake()}}
+  const originFor = index => {
+    const item=state.current.layout.items[index], pose=motion.current.pose(index)
+    const rect=viewport.current.getBoundingClientRect(), host=stage.current.getBoundingClientRect()
+    return {left:rect.left-host.left-stage.current.clientLeft+item.x-viewport.current.scrollLeft,
+      top:rect.top-host.top-stage.current.clientTop+item.y+(pose?.entryY||0),width:item.width,height:item.height,
+      rotateZ:pose?.rotateZ||0,rotateX:pose?.rotateX||0,scale:pose?.scale||1,transformPerspective:pose?.perspective||728,
+      originX:HISTORY_RECORDS[index].interaction.foot[0]/100,originY:HISTORY_RECORDS[index].interaction.foot[1]/100}
+  }
+  const open = async (index, source) => {
+    if(busy.current || selection || index<0) return
+    busy.current=true;setNotice('')
+    opener.current=source||buttons.current[index]
+    try {
+      if(!images.current[index].complete || !images.current[index].naturalWidth){const image=new Image();image.src=HISTORY_RECORDS[index].src;await image.decode()}
+      if(alive.current){setSelection({index,origin:originFor(index)});setClosing(false);setHover(-1);stage.current.scrollIntoView({block:'nearest',behavior:'instant'})}
+    }catch{if(alive.current)setNotice('這張插畫暫時無法載入，請稍後再試。')}
+    finally{busy.current=false}
+  }
+  const jump = index => {
+    const item=layout.items[Math.max(0,Math.min(HISTORY_RECORDS.length-1,index))]
+    viewport.current.scrollTo({left:item.x+item.width/2-viewport.current.clientWidth/2,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})
+  }
+  const changeRecord = async index => {
+    if(busy.current || state.current.closing || !HISTORY_RECORDS[index]) return
+    const previous=state.current.selection
+    busy.current=true
+    try {
+      const image=new Image();image.src=HISTORY_RECORDS[index].src;await image.decode()
+      if(alive.current && state.current.selection===previous && !state.current.closing) setSelection({...previous,index})
+    } catch { if(alive.current)setNotice('這張插畫暫時無法載入，請稍後再試。') }
+    finally { busy.current=false }
+  }
+  useEffect(()=>{
+    const node=viewport.current
+    const wheel=event=>{
+      if(state.current.selection || !event.shiftKey || event.ctrlKey || Math.abs(event.deltaX)>Math.abs(event.deltaY))return
+      const delta=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?node.clientWidth:1)
+      const next=Math.max(0,Math.min(node.scrollWidth-node.clientWidth,node.scrollLeft+delta))
+      if(next!==node.scrollLeft){event.preventDefault();node.scrollLeft=next}
+    }
+    node.addEventListener('wheel',wheel,{passive:false})
+    return()=>node.removeEventListener('wheel',wheel)
+  },[])
+  const endDrag=event=>{
+    const d=drag.current
+    if(!d||d.id!==event.pointerId)return
+    if(d.moved)suppress.current=Date.now()+350
+    drag.current=null;viewport.current.classList.remove('is-dragging')
+    if(viewport.current.hasPointerCapture(event.pointerId))viewport.current.releasePointerCapture(event.pointerId)
+  }
+  return <section id="home-history" className="home-history" aria-labelledby="hh-title">
+    <HomeSectionGeometry variant="history"/>
+    <header className="hh-heading"><div className="hh-heading-title"><div className="hh-colour-notes home-geometry-swatches" aria-hidden="true">{['#f08fad','#ffdcc9','#f5f1a4','#80b9e5','#a2d8de','#e1d0f2'].map(color=><i key={color} style={{backgroundColor:color}}/>)}</div><div><p className="edition-kicker">HUMAN CIVILIZATION / FIELD RECORDS</p><h2 id="hh-title">地球文明史<em>沿著足跡，觀察世界。</em></h2></div><p className="hh-heading-annotation">※ 目前各歷史階段的角色插畫暫時只有男性版本，女性版本將於日後陸續補充。敬請期待！</p></div><div className="hh-heading-note"><p>大家好不容易按時間一點一滴整理的資料！</p><label>年代索引 <select value={selection?.index ?? current} onChange={event=>jump(Number(event.target.value))} disabled={Boolean(selection)} aria-label="選擇長卷中的時代">{HISTORY_RECORDS.map(record=><option key={record.id} value={record.index}>{String(record.index+1).padStart(2,'0')} / {record.name}</option>)}</select></label></div></header>
+    <div className="hh-display-mat">
+    <div className="hh-scroll-label"><span>THE HUMAN STORY</span><span>文明紀事 <i>✧</i> VOL. 01</span></div>
+    <div ref={stage} className="hh-stage" style={{height:layout.height,'--hh-person-shadow':`${HISTORY.shadow.x*layout.scale}px ${HISTORY.shadow.y*layout.scale}px ${HISTORY.shadow.blur*layout.scale}px ${HISTORY.shadow.color}`}} data-observing={Boolean(selection)}>
+      <HistoryBackdropSquares height={layout.baseline+9}/>
+      <div className="hh-panorama" inert={Boolean(selection)}>
+        <svg className="hh-stage-dots" viewBox="0 0 62 31" aria-hidden="true">{[0,1].flatMap(row=>[0,1,2,3].map(column=><circle key={`${row}-${column}`} cx={column*15.5+4} cy={row*15.5+4} r="1.75" fill="#b98f994f"/>))}</svg>
+        <div ref={viewport} className="hh-viewport" onScroll={sync} onPointerDown={event=>{if(event.button!==0||!event.isPrimary||selection)return;drag.current={id:event.pointerId,x:event.clientX,y:event.clientY,scroll:viewport.current.scrollLeft,moved:false}}} onPointerMove={event=>{
+          motion.current.pointer(event)
+          const d=drag.current
+          if(d){if(d.id!==event.pointerId)return;const dx=event.clientX-d.x;if(!d.moved&&Math.abs(dx)>6){d.moved=true;viewport.current.setPointerCapture(event.pointerId);viewport.current.classList.add('is-dragging');setHover(-1)}if(d.moved)viewport.current.scrollLeft=d.scroll-dx}
+          else setHover(pick(event))
+        }} onPointerUp={endDrag} onPointerCancel={endDrag} onLostPointerCapture={endDrag} onPointerLeave={()=>{if(!drag.current)setHover(-1);motion.current.leave()}} onClick={event=>{if(event.detail!==0 && Date.now()>suppress.current)open(pick(event))}}>
+          <div className="hh-world" style={{width:layout.width,height:layout.height,'--hh-baseline':`${layout.baseline}px`}}><div className="hh-ground" aria-hidden="true"/>{layout.items.map((item,index)=>{
+            const record=HISTORY_RECORDS[index]
+            return <div key={record.id} className={`hh-actor${hovered===index?' is-hovered':''}`} style={{left:item.x,top:item.y,width:item.width,height:item.height}}>
+              <div className="hh-entry"><button style={{transformOrigin:`${record.interaction.foot[0]}% ${record.interaction.foot[1]}%`}} ref={node=>{buttons.current[index]=node}} type="button" className="hh-person-button" aria-label={`觀察${record.name}，${record.date}`} onClick={event=>{if(event.detail===0)open(index,event.currentTarget)}} onFocus={()=>setHover(index)} onBlur={()=>setHover(-1)}>
+                <img ref={node=>{images.current[index]=node}} src={record.src} alt="" width="2109" height="2984" loading="lazy" decoding="async" draggable="false" style={{opacity:selection?.index===index?0:1}}/>
+              </button></div><span className="hh-person-caption" style={{top:layout.height-item.y-28}}><small>{String(index+1).padStart(2,'0')}</small>{record.name}</span>
+              <span className="hh-hover-label" aria-hidden="true">{record.name}<small>{record.date}</small></span>
+            </div>
+          })}<aside ref={ending} className="hh-ending" aria-label="歷史長卷的結尾" style={{left:layout.endStart,width:layout.endWidth,height:layout.height}}>
+            <p>To be continued...</p>
+            <p>地球今後也會繼續誕生出「歷史」！</p>
+          </aside></div>
+        </div>
+        <div className="hh-edge-label" aria-hidden="true">← 朝向更近的年代</div>
+      </div>
+      {selection && <HistoryObservation selection={selection} items={layout.items} size={size} closing={closing} originFor={originFor} onClose={close} onChange={changeRecord} onClosed={()=>{setSelection(null);setClosing(false);requestAnimationFrame(()=>opener.current?.focus({preventScroll:true}))}}/>}
+    </div>
+    <div className="hh-navigation" inert={Boolean(selection)}><button type="button" onClick={()=>{if(current===HISTORY_RECORDS.length-1)viewport.current.scrollTo({left:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});else jump(Math.min(HISTORY_RECORDS.length-1,current+2))}} aria-label="向較近的年代探索"><span className="hh-explore-triangle" aria-hidden="true">◀</span></button><div className="hh-progress"><label htmlFor="hh-progress">{String(current+1).padStart(2,'0')} / {HISTORY_RECORDS.length} <span>{HISTORY_RECORDS[current].name}</span></label><input ref={range} id="hh-progress" type="range" min="0" max="100" step=".1" defaultValue="0" dir="rtl" aria-label="探索歷史長卷的進度" onChange={event=>{const max=viewport.current.scrollWidth-viewport.current.clientWidth;viewport.current.scrollLeft=max*(1-Number(event.target.value)/100)}}/></div><button type="button" onClick={()=>jump(Math.max(0,current-2))} aria-label="向較早的年代探索"><span className="hh-explore-triangle" aria-hidden="true">▶</span></button><p>拖曳長卷 · 橫向滑動 · Shift＋滾輪<br/><span>點擊人物就可以查看大家整理出的資料喔！</span></p></div>
+    <p className="hh-context">各時期與地區的發展可能重疊，圖示間距不代表實際時間比例。</p>
+    </div>
+    <dialog ref={reflection} className="hh-reflection" data-closing={reflectionClosing} aria-label="地球文明史的感想" onCancel={event=>{event.preventDefault();closeReflection()}} onClick={event=>{if(event.target===event.currentTarget)closeReflection()}}>
+      <div className="hh-reflection-panel" tabIndex={-1} autoFocus onAnimationEnd={event=>{if(event.target===event.currentTarget && event.animationName==='hh-reflection-out')finishReflectionClose()}}>
+      <figure className="hh-reflection-image"><img src={worldImage} alt="地球文明史長卷結尾插畫" draggable="false"/></figure>
+      <div className="hh-reflection-copy">
+        <p>大家都很努力，才有了今天。雖然足以改變時代的天才，幾個世紀裡也未必能出現幾位，但總的來說，正是世上每個人的付出，才推動了歷史。</p>
+        <p>一個人的存在，必然會影響到其他人。由無數個蝴蝶效應交織、匯聚，才有了世界。這麼想，就感覺很感動。</p>
+        <p>能夠生活在這樣的世界，真是一件不可思議的事！</p>
+      </div>
+      </div>
+    </dialog>
+    {notice&&<p className="hh-load-error" role="alert">{notice}</p>}
+  </section>
+}

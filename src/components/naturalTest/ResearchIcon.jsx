@@ -1,0 +1,4 @@
+const paths = {
+  mountain: 'M8 52L32 12L56 52ZM23 28L32 36L41 28', fault: 'M5 18H29L22 34H41L34 48H59', waves: 'M4 20Q12 8 20 20T36 20T52 20M4 36Q12 24 20 36T36 36T52 36M4 52Q12 40 20 52T36 52T52 52', drop: 'M32 5C25 18 12 29 12 40A20 20 0 0 0 52 40C52 29 39 18 32 5Z', rays: 'M8 52Q12 8 20 26T32 18T44 30T56 10', cloud: 'M16 46A12 12 0 0 1 16 22A16 16 0 0 1 46 22A12 12 0 1 1 48 46Z', leaf: 'M12 52Q2 10 52 10Q54 56 12 52ZM12 52L40 24', flower: 'M32 20C12 0 0 28 20 32C0 50 28 64 32 44C50 64 64 36 44 32C64 12 36 0 32 20Z', moon: 'M42 8A24 24 0 1 0 56 42A26 26 0 0 1 42 8Z', sun: 'M32 4V12M32 52V60M4 32H12M52 32H60M12 12L18 18M46 46L52 52M12 52L18 46M46 18L52 12',
+}
+export default function ResearchIcon({ type }) { return <svg viewBox="0 0 64 64" aria-hidden="true"><path d={paths[type] || paths.leaf}/>{type === 'sun' && <circle cx="32" cy="32" r="15"/>}</svg> }

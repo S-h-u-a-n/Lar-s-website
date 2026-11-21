@@ -1,0 +1,95 @@
+.home-section-geometry {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  isolation: isolate;
+  pointer-events: none;
+}
+.home-section-geometry .home-geometry-dots,
+.home-section-geometry .home-geometry-stripes,
+.home-section-geometry .home-geometry-grid {
+  z-index: 0;
+  opacity: .8;
+}
+.home-section-geometry .home-geometry-dots {
+  top: var(--geometry-dots-top, 8%);
+  right: var(--geometry-dots-right, 3%);
+  width: var(--geometry-dots-width, 22%);
+  height: var(--geometry-dots-height, 42%);
+}
+.home-section-geometry .home-geometry-stripes {
+  top: var(--geometry-stripes-top, 34%);
+  left: var(--geometry-stripes-left, 2%);
+  width: var(--geometry-stripes-width, 17%);
+  height: var(--geometry-stripes-height, 35%);
+}
+.home-section-geometry .home-geometry-grid {
+  right: var(--geometry-grid-right, 3%);
+  bottom: var(--geometry-grid-bottom, 5%);
+  left: auto;
+  width: var(--geometry-grid-width, 20%);
+  height: var(--geometry-grid-height, 30%);
+}
+.home-section-geometry--history {
+  --geometry-dots-top: 12%;
+  --geometry-dots-right: 1%;
+  --geometry-dots-width: 17%;
+  --geometry-dots-height: 25%;
+  --geometry-stripes-top: 38%;
+  --geometry-stripes-left: 1%;
+  --geometry-stripes-width: 14%;
+  --geometry-stripes-height: 35%;
+  --geometry-grid-right: 2%;
+  --geometry-grid-bottom: 5%;
+  --geometry-grid-width: 17%;
+  --geometry-grid-height: 24%;
+}
+.home-section-geometry--home-characters {
+  --geometry-dots-top: 7%;
+  --geometry-dots-right: 4%;
+  --geometry-dots-width: 22%;
+  --geometry-dots-height: 46%;
+  --geometry-stripes-top: 34%;
+  --geometry-stripes-left: 2%;
+  --geometry-stripes-width: 16%;
+  --geometry-stripes-height: 34%;
+  --geometry-grid-right: 38%;
+  --geometry-grid-bottom: 4%;
+  --geometry-grid-width: 19%;
+  --geometry-grid-height: 24%;
+}
+.home-section-geometry--characters-page {
+  --geometry-dots-top: 8%;
+  --geometry-dots-right: 1%;
+  --geometry-dots-width: 20%;
+  --geometry-dots-height: 40%;
+  --geometry-stripes-top: 36%;
+  --geometry-stripes-left: 1%;
+  --geometry-stripes-width: 15%;
+  --geometry-stripes-height: 32%;
+  --geometry-grid-right: 29%;
+  --geometry-grid-bottom: 1%;
+  --geometry-grid-width: 19%;
+  --geometry-grid-height: 26%;
+}
+@media (max-width: 600px) {
+  .home-section-geometry .home-geometry-dots,
+  .home-section-geometry .home-geometry-stripes,
+  .home-section-geometry .home-geometry-grid { opacity: .58; }
+  .home-section-geometry--history {
+    --geometry-dots-width: 22%;
+    --geometry-stripes-width: 18%;
+    --geometry-grid-width: 22%;
+  }
+  .home-section-geometry--home-characters {
+    --geometry-dots-width: 26%;
+    --geometry-stripes-width: 20%;
+    --geometry-grid-width: 24%;
+  }
+  .home-section-geometry--characters-page {
+    --geometry-dots-width: 25%;
+    --geometry-stripes-width: 19%;
+    --geometry-grid-width: 23%;
+  }
+}

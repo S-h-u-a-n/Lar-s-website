@@ -1,0 +1,94 @@
+/* Round 2 pigment system: paper grounds, coloured instruments, untouched artwork.
+   Every new decorative animation is finite and never intercepts pointer events. */
+:root {
+ --edition-nav-banner:#c8e9e7;
+ --edition-paper:#FDF9EE; --edition-white:#FFFEF8; --edition-ink:#34465A;
+ --edition-rose:#F691A6; --edition-peach:#FFDBCA; --edition-yellow:#F6F0A9;
+ --edition-sky:#7FB9EC; --edition-mint:#A2D8DE; --edition-lavender:#E5DDF5;
+ --edition-brass:#92704B; --edition-line:#34465A33;
+ --wash-mint:#E6F5F3; --wash-sky:#E7F1FC; --wash-rose:#FCE8ED; --wash-peach:#FFF0E6; --wash-yellow:#F9F5CC;
+ --ink:var(--edition-ink);--accent:#9C435E;
+}
+body::before {background:none}
+body .intro-screen {background:radial-gradient(ellipse at 77% 42%,#E6F5F3 0,transparent 50%),radial-gradient(ellipse at 15% 80%,#FFF0E6 0,transparent 44%),var(--edition-paper)}
+body .intro-screen .intro-enter,.edition-enter {background:var(--edition-yellow);color:var(--edition-ink);border:1px solid var(--edition-line);box-shadow:4px 4px 0 #FFDBCA80}
+body .intro-screen .intro-enter:hover,.edition-enter:hover {background:#FFF6CC;color:var(--edition-ink);box-shadow:5px 5px 0 var(--edition-peach)}
+.edition-intro-orbit {background:radial-gradient(circle,#FFFEF8 0 51%,#A2D8DE55 52%,transparent 69%);border-color:#7FB9EC80}
+.edition-intro-orbit:before {border-color:#7FB9EC80}.edition-intro-orbit:after {border-color:#F691A6A0}
+.edition-header {background:linear-gradient(90deg,var(--edition-nav-banner),#ccebe9 70%,#c4e6e4)!important}
+/* Navigation strips only: preserve page grounds, controls and artwork pigments.
+   Natural/Human share nt-header; Weather shares edition-header. */
+body .big-test-banner, body .nt-header, body .ball-header, body .tt-header {background:var(--edition-nav-banner)!important}
+.edition-header nav button:hover {color:#8B3E56}
+.edition-cover-stamp {color:#653549;background:var(--edition-rose);border-color:#8B3E5670}
+.edition-cover-art {box-shadow:12px 16px 0 #A2D8DE55}
+.edition-explore {background:linear-gradient(180deg,var(--edition-paper),#E6F5F360)}
+.edition-tool-cards>button {border-top:5px solid var(--tool-color)}
+.edition-tool-cards>button:hover {box-shadow:6px 12px 0 color-mix(in srgb,var(--tool-color) 45%,transparent)}
+.edition-tool-image {box-shadow:inset 0 0 0 8px #FFFEF844}
+.edition-navigation>button {background:var(--edition-peach);color:var(--edition-ink);border-color:var(--edition-line);box-shadow:3px 3px 0 #F691A650}
+.edition-navigation>button:hover {background:var(--edition-yellow)}
+.edition-navigation>span {background:#FDF9EED9}
+.edition-index-backdrop {background:#FDF9EE99;backdrop-filter:blur(4px)}
+.edition-index {background:linear-gradient(150deg,var(--edition-paper) 55%,#E6F5F3);border-color:var(--edition-line)}
+.edition-index:before {content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#F691A6 0 20%,#FFDBCA 20% 40%,#F6F0A9 40% 60%,#7FB9EC 60% 80%,#A2D8DE 80%)}
+.edition-index .edition-index-tool {border-radius:0 24px 0 0;padding-right:12px;transition:padding .3s var(--edition-ease),background .3s}
+.edition-index-tool:hover {background:color-mix(in srgb,var(--tool-color) 22%,transparent)}
+.edition-index-tool img {transition:transform .4s var(--edition-ease)}
+.edition-index-tool:hover img {transform:rotate(-7deg)}
+body .main-scene--big-test {background:radial-gradient(ellipse at 68% 64%,#FFF0E670,transparent 56%),var(--edition-paper)}
+.edition-lab-index nav button:hover {background:color-mix(in srgb,var(--tool-color) 28%,var(--edition-paper))}
+.edition-lab-documents button:nth-of-type(1) {background:var(--wash-peach)}
+.edition-lab-documents button:nth-of-type(2) {background:var(--wash-yellow)}
+.edition-lab-documents button:nth-of-type(3) {background:var(--wash-sky)}
+
+body .big-test-document-panel {background:var(--edition-white)}body .big-test-document-cover {background:var(--edition-yellow)}
+body .big-test-document-copy button {background:var(--edition-mint)}
+body .comic-intro {background:var(--edition-paper)}
+body .story-reference-circle {background:#fffef9}
+.edition-story-page-label .is-current {background:#976039}
+body .gt-disc {background:radial-gradient(circle,#FFFEF8 32%,var(--wash-mint) 80%);border-color:#A2D8DE;box-shadow:0 0 0 15px var(--edition-paper),0 0 0 16px #A2D8DE99}
+body .gt-stripes {opacity:.55}body .gt-yellow-square {opacity:.8}
+.edition-observation-invitation button:nth-child(1) {background:var(--edition-mint)}
+.edition-observation-invitation button:nth-child(2) {background:var(--edition-peach)}
+.edition-observation-invitation button:nth-child(3) {background:var(--edition-yellow)}
+.edition-star-chart i:nth-child(2) {border-color:#7FB9EC}
+body .gt-note-heading button {background:var(--edition-sky)}
+body .gt-story-dialog {background:var(--edition-white)}
+body .tt-character {background:linear-gradient(130deg,var(--wash-sky),var(--wash-mint))!important;position:relative;overflow:hidden}
+body .tt-window {border-color:var(--edition-mint);box-shadow:0 0 0 1px #34465A50,0 0 0 10px var(--edition-yellow),0 0 0 11px #7FB9EC80}
+body .tt-modes button:first-child {background:var(--wash-sky)}body .tt-modes button:last-child {background:var(--wash-peach)}
+body .tt-modes button[aria-pressed=true] {background:var(--edition-sky);color:var(--edition-ink)}
+body .tt-tabs button[aria-pressed=true] {background:var(--edition-mint);color:var(--edition-ink)}
+body .tt-focus {background:#FDF9EE88;color:var(--edition-ink)}
+.edition-lens-calibration {position:absolute;inset:4%;border:2px solid #F6F0A9CC;border-radius:50%;z-index:5;pointer-events:none;animation:edition-calibration .75s var(--edition-ease) both}
+.edition-lens-calibration:after {content:'';position:absolute;inset:10%;border:1px dashed #A2D8DE;border-radius:50%}
+body .natural-test {background:radial-gradient(ellipse at 72% 55%,#F9F5CC99,transparent 60%),var(--edition-paper)}
+body .human-test {background:radial-gradient(ellipse at 70% 60%,#FFF0E6,transparent 62%),var(--edition-paper)}
+body .nt-category-navigation>button[aria-expanded=true] {background:var(--edition-yellow)}
+body .nt-controls button:hover {background:var(--edition-yellow)}
+body .nt-entry {position:relative;overflow:hidden}
+body .nt-entry:after {content:'';position:absolute;right:0;top:0;width:28px;height:28px;background:linear-gradient(225deg,var(--edition-paper) 49%,var(--edition-peach) 51%);clip-path:polygon(0 0,100% 0,100% 100%);transform:translate(100%,-100%);transition:transform .3s var(--edition-ease);pointer-events:none}
+body .nt-entry:hover:after,body .nt-entry:focus-visible:after {transform:translate(0,0)}
+body .nt-entry:hover {background:var(--edition-white)}
+body .nt-reading,body .gt-notes {border-top:5px solid var(--edition-mint)}
+body .human-test .nt-reading {border-top-color:var(--edition-peach)}
+body .ball-test {background:radial-gradient(ellipse at 17% 48%,#FCE8ED99,transparent 46%),radial-gradient(ellipse at 84% 40%,#E7F1FC99,transparent 45%),var(--edition-paper)}
+body .ball-header nav button[aria-pressed=true] {background:var(--edition-rose);color:var(--edition-ink)}
+body .ball-arrow {background:var(--edition-peach)}
+body .ball-speaker {background:var(--edition-mint);color:var(--edition-ink)}
+body .ball-modal {background:#FDF9EEBB;backdrop-filter:blur(3px)}
+body .ball-work-dialog {border-top:5px solid var(--edition-rose)}
+.edition-character-portrait,body .ball-character[data-state=talking] .edition-character-portrait {filter:none}
+body .ball-reason {background:var(--wash-yellow)}
+@keyframes edition-calibration {0%{transform:scale(.65) rotate(-24deg);opacity:0}25%{opacity:1}100%{transform:scale(1.04) rotate(0deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){.edition-lens-calibration{animation:none;display:none}.nt-entry:after,.edition-index-tool img{transition:none!important}}
+
+/* Reading opens like an unsealed field note, alongside the existing slide. */
+body .nt-reading {clip-path:inset(0 0 0 100%);transition:transform .42s var(--edition-ease),opacity .42s var(--edition-ease),clip-path .42s var(--edition-ease),visibility 0s .42s}
+body .nt-reading.is-open {clip-path:inset(0);transition-delay:0s}
+@media(prefers-reduced-motion:reduce){body .nt-reading{transition:none!important}}
+
+/* Keep atlas pigment stripes above the lazy page's generic button reset. */
+body .edition-atlas-labels>button {background:color-mix(in srgb,var(--category-color) 28%,var(--edition-white));border:1px solid var(--edition-line);border-top:5px solid var(--category-color)}
+body .edition-atlas-labels>button:hover {background:color-mix(in srgb,var(--category-color) 43%,var(--edition-white))}
