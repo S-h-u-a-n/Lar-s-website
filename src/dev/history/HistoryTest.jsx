@@ -2,8 +2,10 @@ import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { ASSETS, HISTORY as C } from './config'
 import { createImageLoader } from './imageLoader'
 import { stepParallax } from './inertiaParallax'
-import { entranceProgress, spring, localPoint, opaqueAt, gestureTravel } from './interactionMath'
+import { entranceProgress, spring, localPoint, opaqueAt } from './interactionMath'
 import { createEntryGesture } from './entryGesture'
+import { HISTORY_LABELS } from './labels'
+import { eraStops, nextEra, createHistoryTouch } from './touchExploration'
 import { openingSettings, warmOpeningActor, startOpeningActor } from './openingAnimation'
 import { createDiagnostics } from './diagnostics'
 import HistoryTitle from './HistoryTitle'
@@ -37,7 +39,7 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
     let alive = true, frame = 0, previous = 0, ready = false, disposed = false, layoutDirty = true
     let camera = 1, target = 1, scale = 1, max = 0, width = 0, height = 0, inputX = 0, inputY = 0
     let titleGeometry = null
-    let lastCamera = NaN, lastScale = NaN, priorityKey = '', lastPointer = null, activeTouch = null
+    let lastCamera = NaN, lastScale = NaN, priorityKey = '', lastPointer = null
     const reduced = matchMedia('(prefers-reduced-motion: reduce)')
     const profile = createDiagnostics(host)
     const traceOpening = new URLSearchParams(location.search).get('profile') === '1'
@@ -51,7 +53,8 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
     const gesture = createEntryGesture(C.entryGesture)
     let openingStart = null, openingSet = new Set(), warming = null, warmCamera = null
     const openingAnimations = new Set(), openingActors = new Map()
-    let hovered = -1, pointerIntent = false
+    let hovered = -1, pointerIntent = false, touchMode = false, touchSelected = -1, ignoreMouseUntil = 0, touchTransition = null
+    const stops = eraStops(ASSETS, HISTORY_LABELS)
     let mouse = null, pointerDX = 0, pointerDY = 0, lastHoverHit = 0, lastWheel = -Infinity, hoverTimer = 0
     let arrowDismissed = false, entryRequested = false
     let initialHint = null
@@ -85,22 +88,27 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
     loader.setBackgroundPaused(!reduced.matches)
     function prioritize() {
       const staging = !reduced.matches && (openingStart === null || performance.now() - openingStart < openingDuration)
-      const indices = required(target, staging ? 40 : Math.max(240, width * .5))
+      const touchMargin = touchTransition ? Math.abs(camera-target)*max+40 : 0
+      const indices = required(target, staging ? 40 : Math.max(240, width * .5, touchMargin))
       const key = indices.join(',')
       if (key !== priorityKey) {
         priorityKey = key
         loader.prioritize(indices, (target * max + width / 2) / scale)
       }
     }
-    function pickHover(time) {
-      if (!mouse || !pointerIntent || time - lastWheel < C.hover.scrollQuietMs) { hovered = -1; return }
+    function pickPerson(x, y) {
       const candidates = ASSETS.map((a, i) => ({ a, i }))
         .filter(({ a, i }) => a.interaction && rendered[i] && poses[i]?.entered)
         .sort((a, b) => (b.i === hovered ? 81 : local[b.i].scale.value > 1.001 ? 80 : b.a.z) - (a.i === hovered ? 81 : local[a.i].scale.value > 1.001 ? 80 : a.a.z) || b.i - a.i)
-      const hit = candidates.find(({ a, i }) => {
-        const [u, v] = localPoint(poses[i], mouse[0], mouse[1])
+      return candidates.find(({ a, i }) => {
+        const [u, v] = localPoint(poses[i], x, y)
         return opaqueAt(a.interaction, masks[i], u, v, poses[i].width, poses[i].height)
       })?.i ?? -1
+    }
+    function pickHover(time) {
+      if (touchMode) { hovered = touchSelected; return }
+      if (!mouse || !pointerIntent || time - lastWheel < C.hover.scrollQuietMs) { hovered = -1; return }
+      const hit = pickPerson(mouse[0],mouse[1])
       if (hit >= 0) lastHoverHit = time
       if (hit === -1 && hovered >= 0 && time - lastHoverHit < 90) return
       if (hit !== hovered && hit >= 0 && !reduced.matches && time - local[hit].lastTrigger >= C.hover.cooldownMs) {
@@ -135,9 +143,14 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       prioritize()
       // Never move into a cold, undecoded viewport. Loads trigger another frame;
       // there is no retry loop or continuous RAF while waiting for I/O.
-      const canPresent = required(target, 40).every(i => ['ready', 'failed'].includes(loader.state[i]))
+      const canPresent = required(target, touchTransition ? Math.abs(camera-target)*max+40 : 40).every(i => ['ready', 'failed'].includes(loader.state[i]))
       if (canPresent) {
-        camera = target
+        if (touchTransition) {
+          touchTransition.at ??= time
+          const p = reduced.matches ? 1 : Math.min(1,(time-touchTransition.at)/C.entrance.layer.duration)
+          camera = touchTransition.from + (target-touchTransition.from)*(1-(1-p)**3)
+          if(p===1) { camera=target;touchTransition=null }
+        } else camera = target
         if (!ready) {
           if (warmCamera !== camera) {
             if (warming) for (const i of openingSet) { items.current[i].style.visibility='hidden';items.current[i].style.willChange='auto' }
@@ -185,7 +198,7 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       let moving = stepParallax(parallax, travel, dt, C.parallaxDynamics, reduced.matches)
       const elapsed = time - openingStart
       const opening = !reduced.matches && elapsed < openingDuration
-      moving ||= opening
+      moving ||= opening || Boolean(touchTransition && canPresent)
       host.dataset.opening = opening ? 'playing' : 'complete'
       loader.setBackgroundPaused(opening)
       if (travel !== 0 && !arrowDismissed) { arrowDismissed = true; arrow.current.dataset.dismissed = 'true' }
@@ -294,7 +307,7 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
     }
     function request() { if (!frame && alive) frame = requestAnimationFrame(render) }
     function resize() {
-      pointerIntent = false; hovered = -1
+      pointerIntent = false; hovered = touchSelected = -1; touchTransition = null
       width = host.clientWidth; height = host.clientHeight
       scale = Math.max(height / C.height, width / C.width)
       max = Math.max(0, C.width * scale - width)
@@ -324,6 +337,8 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       const dx = e.deltaX * unit, dy = e.deltaY * unit
       const travel = Math.abs(dx) > Math.abs(dy) ? dx : -dy
       const now = performance.now()
+      if(touchTransition)target=camera
+      touchMode = false; touchSelected = -1; touchTransition = null
       lastWheel = now; hovered = -1; pointerIntent = false
       if (gesture.input(now, travel < 0, travel)) requestEntry()
       const previousTarget = target
@@ -334,21 +349,10 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       request()
     }
     function pointer(e) {
-      if (activeTouch?.id === e.pointerId) {
-        const dx = e.clientX - activeTouch.x, dy = e.clientY - activeTouch.y
-        activeTouch.x = e.clientX; activeTouch.y = e.clientY
-        if (Math.hypot(e.clientX - activeTouch.startX, e.clientY - activeTouch.startY) >= 6) {
-          const travel = gestureTravel(dx, dy)
-          const now = performance.now()
-          lastWheel = now; hovered = -1; pointerIntent = false
-          if (gesture.input(now, travel < 0, travel)) requestEntry()
-          const previousTarget = target
-          target = max ? clamp(target + travel * C.scroll.gain / max, 0, 1) : 0
-          if (target !== previousTarget && !arrowDismissed) { arrowDismissed = true; arrow.current.dataset.dismissed = 'true' }
-          inputX += clamp(dx, -120, 120)
-          inputY += clamp(dy, -120, 120)
-        }
-      }
+      if(touch.move(e)){touchSelected=hovered=-1;request()}
+      if(e.pointerType !== 'mouse')return
+      if(performance.now()<ignoreMouseUntil)return
+      touchMode=false;touchSelected=-1
       if (e.pointerType === 'mouse') {
         mouse = [e.clientX, e.clientY]; pointerIntent = true
         pointerDX = lastPointer ? e.clientX - lastPointer[0] : 0
@@ -364,26 +368,40 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       lastPointer = [e.clientX, e.clientY]
       request()
     }
-    function leave() { lastPointer = null; mouse = null; pointerIntent = false; hovered = -1; request() }
+    function leave() { lastPointer = null; mouse = null; pointerIntent = false; if(!touchMode)hovered = -1; request() }
+    const touch = createHistoryTouch({
+      tap(x,y) {
+        if(disabledRef.current || !ready)return
+        touchMode=true;ignoreMouseUntil=performance.now()+500
+        touchSelected=pickPerson(x,y);hovered=touchSelected
+        pointerIntent=false;mouse=null
+        request()
+      },
+      swipe(forward,pixels) {
+        if(disabledRef.current || !ready)return
+        const now=performance.now()
+        touchMode=true;touchSelected=hovered=-1;pointerIntent=false;mouse=null
+        ignoreMouseUntil=now+500
+        const destination=nextEra(stops,target,forward)
+        if(destination===target) {
+          if(gesture.input(now,forward,pixels))requestEntry()
+        } else {
+          touchTransition={from:camera,at:null}
+          target=destination
+          if(!arrowDismissed){arrowDismissed=true;arrow.current.dataset.dismissed='true'}
+        }
+        lastWheel=now
+        request()
+      },
+    })
     function touchStart(e) {
-      if (e.pointerType === 'mouse' || e.button !== 0 || e.target.closest('.history-entry-hint')) return
-      if (!e.isPrimary) {
-        activeTouch = null
-        lastPointer = null
-        return
-      }
-      activeTouch = { id: e.pointerId, x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY }
-      lastPointer = [e.clientX, e.clientY]
-      host.setPointerCapture(e.pointerId)
+      if(e.target.closest('.history-entry-hint')){touch.clearClickSuppression();return}
+      if(disabledRef.current)return
+      touch.start(e)
+      if(e.pointerType!=='mouse'){touchMode=true;ignoreMouseUntil=performance.now()+500;lastPointer=null;pointerIntent=false}
     }
-    function touchEnd(e) {
-      if (activeTouch?.id !== e.pointerId) return
-      activeTouch = null
-      lastPointer = null
-      pointerIntent = false
-      hovered = -1
-      request()
-    }
+    function touchEnd(e) { touch.end(e) }
+    function touchCancel(e) { touch.cancel(e) }
     function preference() {
       if (reduced.matches) {
         warming=[]
@@ -400,8 +418,9 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
     host.addEventListener('pointermove', pointer)
     host.addEventListener('pointerleave', leave)
     host.addEventListener('pointerup', touchEnd)
-    host.addEventListener('pointercancel', touchEnd)
-    host.addEventListener('lostpointercapture', touchEnd)
+    host.addEventListener('pointercancel', touchCancel)
+    host.addEventListener('lostpointercapture', touchCancel)
+    host.addEventListener('click', touch.click, true)
     reduced.addEventListener('change', preference)
     request()
     return () => {
@@ -413,8 +432,9 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       host.removeEventListener('pointermove', pointer)
       host.removeEventListener('pointerleave', leave)
       host.removeEventListener('pointerup', touchEnd)
-      host.removeEventListener('pointercancel', touchEnd)
-      host.removeEventListener('lostpointercapture', touchEnd)
+      host.removeEventListener('pointercancel', touchCancel)
+      host.removeEventListener('lostpointercapture', touchCancel)
+      host.removeEventListener('click', touch.click, true)
       reduced.removeEventListener('change', preference)
     }
   }, [])

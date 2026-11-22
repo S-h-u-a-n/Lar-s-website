@@ -24,7 +24,7 @@ export default function HomeAuthor() {
       <div className="ha-content"><header><p className="ha-kicker">A NOTE FROM THE CREATOR</p><h2 id="home-author-name">REMOANPU<span aria-hidden="true">✧</span></h2><p className="ha-intro">{authorIntroduction}</p></header>
         <nav className="ha-socials" aria-label="REMOANPU 的社群連結">{socialLinks.map(platform => {
           const href = externalHref(platform.url)
-          const content = <><span className={`ha-social-mark ha-mark-${platform.id}`} aria-hidden="true">{platform.mark}</span><span>{platform.label}</span><span className="ha-social-arrow" aria-hidden="true">{href ? '↗' : '·'}</span></>
+          const content = <><span className={`ha-social-mark ha-mark-${platform.id}`} aria-hidden="true">{platform.mark}</span><span>{platform.label}</span><span className="ha-social-arrow" aria-hidden="true">{href ? '↗︎' : '·'}</span></>
           return href ? <a className="ha-social" key={platform.id} href={href} target="_blank" rel="noopener noreferrer" aria-label={`${platform.label}（在新分頁開啟）`}>{content}</a> : <button className="ha-social" type="button" key={platform.id} disabled title="社群網址待補充" aria-label={`${platform.label}：網址待補充`}>{content}</button>
         })}</nav>
         <a className="ha-contact" href="mailto:newworldremo@gmail.com">newworldremo@gmail.com</a>

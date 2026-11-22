@@ -1,3 +1,4 @@
+import { createVisibleFrameLoop } from '../lib/visibleFrameLoop'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
@@ -91,7 +92,6 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, onError, i
     let pointerInside = false
     let lastHoverCheck = 0
     let updateCosmosBillboard
-    let frame = 0
     let disposed = false
     let failed = false
     let reportedReady = false
@@ -150,7 +150,8 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, onError, i
       fillRight.setFromMatrixColumn(camera.matrixWorld, 0)
       fillUp.setFromMatrixColumn(camera.matrixWorld, 1)
       fillLight.target.position.copy(controls.target)
-      fillLight.position.copy(camera.position).addScaledVector(fillRight, -0.3 * camera.position.distanceTo(controls.target)).addScaledVector(fillUp, 0.3 * camera.position.distanceTo(controls.target))
+      const fillDistance = 0.3 * camera.position.distanceTo(controls.target)
+      fillLight.position.copy(camera.position).addScaledVector(fillRight, -fillDistance).addScaledVector(fillUp, fillDistance)
       updateCosmosBillboard?.(camera)
       markers?.update(camera)
       if (pointerInside && performance.now() - lastHoverCheck >= 50) {
@@ -171,7 +172,7 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, onError, i
           reset: resetView,
         })
       }
-      frame = requestAnimationFrame(render)
+      rendering.request()
     }
 
     const updatePointer = event => {
@@ -189,6 +190,7 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, onError, i
       }
       return null
     }
+    const rendering = createVisibleFrameLoop(render)
     const pickCelestial = event => {
       if (!root) return null
       updatePointer(event)
@@ -256,6 +258,7 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, onError, i
       canvas.style.cursor = marker || hoveredCelestial ? 'pointer' : ''
     }
     const handlePointerMove = event => {
+      if (event.pointerType === 'touch' && pointerDown && Math.hypot(event.clientX-pointerDown.x,event.clientY-pointerDown.y)>6) pointerDown.moved = true
       pointerInside = true
       updatePointer(event)
       refreshHover(true)
@@ -268,15 +271,17 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, onError, i
     }
     const handlePointerCancel = () => { pointerDown = null; handlePointerLeave() }
     const handlePointerDown = event => {
+      if (event.pointerType === 'touch' && !event.isPrimary) { pointerDown = null; return }
       if (disabledRef.current) return
       pointerDown = { x: event.clientX, y: event.clientY, time: performance.now() }
     }
     const handlePointerUp = event => {
       if (disabledRef.current || !pointerDown) { pointerDown = null; return }
+      const moved = pointerDown.moved
       const distance = Math.hypot(event.clientX - pointerDown.x, event.clientY - pointerDown.y)
       const duration = performance.now() - pointerDown.time
       pointerDown = null
-      if (distance <= 6 && duration <= 500) {
+      if (!moved && distance <= 6 && duration <= 500) {
         updatePointer(event)
         raycaster.setFromCamera(pointer, camera)
         const marker = markers?.pick(raycaster)
@@ -366,12 +371,12 @@ function GlobeViewer({ onSelectionChange, onContinentSelect, onReady, onError, i
     }, undefined, error => {
       reportFailure(error)
     })
-    frame = requestAnimationFrame(render)
+    rendering.request()
     return () => {
       disposed = true
       controlsRef.current = null
       callbacks.current.onReady?.(null)
-      cancelAnimationFrame(frame)
+      rendering.dispose()
       observer.disconnect()
       canvas.removeEventListener('pointermove', handlePointerMove)
       canvas.removeEventListener('pointerdown', handlePointerDown)

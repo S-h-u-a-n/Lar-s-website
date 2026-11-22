@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import './PhotoCredit.css'
+import { textSymbolLabel } from '../../lib/textSymbols'
 
 // Screen-space control stays clickable above the reading dismissal layer.
 export default function PhotoCredit({ photoRef, credit, inline = false, children }) {
@@ -43,7 +44,7 @@ export default function PhotoCredit({ photoRef, credit, inline = false, children
           <p>{credit.title}</p>
           <dl>
             <dt>作者</dt><dd>{credit.author}</dd>
-            <dt>來源</dt><dd><a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer">{credit.sourceLabel || 'Wikimedia Commons 原始檔案頁 ↗'}</a></dd>
+            <dt>來源</dt><dd><a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer">{textSymbolLabel(credit.sourceLabel || 'Wikimedia Commons 原始檔案頁 ↗︎')}</a></dd>
             <dt>授權</dt><dd><a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer">{credit.license}</a></dd>
             <dt>修改</dt><dd>{credit.modifications}</dd>
           </dl>

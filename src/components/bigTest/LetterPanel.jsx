@@ -164,7 +164,7 @@ export default function LetterPanel({ active, onClose, entries = LETTERS, catego
         <button type="button" onClick={() => selectLetter(entryIndex)}>
           <span className="big-test-letter-list-title">{entry.title}</span>
           <span className="big-test-letter-list-meta">{[entry.from && `寄件人：${entry.from}`, entry.to && `收件人：${entry.to}`, entry.date].filter(Boolean).join(' · ')}</span>
-          <span className="big-test-letter-list-arrow" aria-hidden="true">↗</span>
+          <span className="big-test-letter-list-arrow" aria-hidden="true">↗︎</span>
         </button>
       </li>)}
     </ul>

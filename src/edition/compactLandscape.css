@@ -1,0 +1,176 @@
+/* Phone-sized landscape viewports only. Tablets keep their existing layout.
+   No ancestor scaling: canvas coordinates and native scroll surfaces stay real.
+   html body specificity wins over the older, lazy-loaded width-only rules. */
+@media (orientation:landscape) and (max-width:1000px) and (max-height:500px) and (pointer:coarse) {
+  html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+
+  /* Home: retain the desktop's side-by-side compositions and page scrolling. */
+  html body .edition-header { padding:10px 4vw; gap:12px; }
+  html body .edition-header nav { gap:12px; min-width:0; overflow-x:auto; }
+  html body .edition-header nav button { font-size:10px; white-space:nowrap; }
+  html body .codex-edition .home-content .edition-hero { padding:24px 4vw 40px; gap:3vw; }
+  html body .edition-cover-copy { padding:8px 0; }
+  html body .edition-cover-copy #hero-title { font-size:clamp(30px,6vw,48px)!important; }
+  html body .edition-cover-copy #hero-title > span { font-size:clamp(17px,3vw,24px)!important; }
+  html body .edition-cover-copy #hero-title > em { margin-top:12px; font-size:14px!important; letter-spacing:.08em; }
+  html body .edition-cover-art { padding:8px 8px 0; }
+  html body .edition-cover-art figcaption { padding:10px 2px; font-size:8px; }
+  html body #explore > header > h2, html body #explore > header > h2 > em { font-size:clamp(23px,3.7vw,32px)!important; }
+  html body .edition-cover-description { font-size:12px; line-height:1.8; }
+  html body .edition-cover-bottom { padding-right:90px; }
+  html body .edition-tool-cards { grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+  html body .edition-tool-cards > button { padding:12px; }
+  html body .home-characters, html body .home-author, html body .home-history { padding:28px 4vw; }
+  html body .hc-composition { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:4vw; padding:24px 0; }
+  html body .hc-gallery { width:100%; min-width:0; }
+  html body .hc-cards { height:210px; }
+  html body .hc-portrait { width:clamp(110px,17vw,155px); }
+  html body .hc-copy { padding:0; }
+  html body .hc-copy h2 { font-size:26px; }
+  html body .hc-copy h2 em { font-size:15px; }
+  html body .hc-description { font-size:12px; line-height:1.85; margin:16px 0; }
+  html body .hc-caption { padding:8px 4px; }
+  html body .hc-caption > span { font-size:11px; }
+  html body .hc-controls { gap:12px; }
+  html body .hc-controls button { position:relative; width:32px; height:32px; }
+  html body .hc-controls button::before { content:""; position:absolute; inset:-5px; }
+  html body .ha-card { grid-template-columns:105px minmax(0,1fr); gap:20px; padding:22px; }
+  html body .ha-portrait-column { width:auto; }
+  html body .ha-content h2 { font-size:24px; }
+  html body .ha-invitation h3 { font-size:19px; }
+  html body .ha-invitation p { font-size:12px; line-height:1.85; }
+  html body .hh-explanation { font-size:12px; line-height:1.85; }
+  html body .home-wishbox { min-height:0; padding:45px 24px 70px; }
+  html body .wish-letter { width:min(100%,380px); }
+
+  /* Big: compact HTML chrome only; the model/artboard math is unchanged. */
+  html body .edition-lab-index { top:54px; bottom:44px; left:3vw; width:clamp(125px,21vw,165px); display:flex; flex-direction:column; }
+  html body .edition-lab-index h2 { font-size:24px; margin:6px 0; }
+  html body .edition-lab-index nav { min-height:0; overflow-y:auto; }
+  html body .edition-lab-index nav button { padding:4px; gap:6px; }
+  html body .edition-lab-index nav img { width:25px; height:25px; }
+  html body .edition-lab-index nav strong { font-size:11px; }
+  html body .edition-lab-documents { right:2vw; width:80px; }
+  html body .edition-lab-documents button { font-size:10px; padding:7px; }
+  html body .edition-navigation { right:12px; bottom:10px; gap:10px; }
+  html body .edition-navigation > button { font-size:10px; padding:8px 11px; }
+
+  /* Research maps retain their world layout, with more room between chrome. */
+  html body .natural-test .nt-header { min-height:54px; padding:7px 16px; gap:12px; }
+  html body .natural-test .nt-heading h1 { font-size:23px; }
+  html body .natural-test .nt-heading p { font-size:9px; margin:3px 0 0; }
+  html body .natural-test .nt-viewport { top:56px; bottom:46px; }
+  html body .natural-test .nt-controls { height:44px; padding:6px 120px 6px 16px; }
+  html body .natural-test .nt-controls button, html body .natural-test .nt-back,
+  html body .natural-test .nt-category-navigation > button { font-size:10px; padding:7px 10px; }
+  html body .natural-test .nt-reading { top:56px; bottom:46px; width:min(54vw,420px); }
+  html body .natural-test .nt-reading-top { padding:10px 15px; }
+  html body .natural-test .nt-reading-scroll { padding:6px 16px 24px; }
+  html body .natural-test .nt-reading-copy { font-size:13px; line-height:1.8; }
+  html body .natural-test .nt-reading h2 { font-size:23px; margin:10px 0; }
+  html body .natural-test .nt-category-menu { max-height:calc(100dvh - 100px); width:min(260px,65vw); }
+  html body .gt-page .gt-header { top:12px; left:16px; right:16px; }
+  html body .gt-page .gt-header h1 { font-size:25px; margin-top:8px; }
+  html body .gt-page .gt-model { top:86px; bottom:48px; }
+  html body .gt-page .gt-notes { top:86px; bottom:48px; min-width:0; width:min(40vw,340px); right:14px; }
+  html body .gt-page .gt-body-picker { left:14px; bottom:12px; max-width:calc(100% - 28px); }
+  html body .gt-page .edition-observation-invitation h2 { font-size:22px; }
+
+  /* Telescope: undo the narrow-width single column, retain both instruments. */
+  html body .telescope-test { padding:8px 3vw; overflow-y:auto; }
+  html body .telescope-test .tt-header { height:44px; gap:10px; }
+  html body .telescope-test .tt-header h1 { font-size:22px; }
+  html body .telescope-test .tt-layout { height:auto; min-height:calc(100dvh - 68px); grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:3vw; padding:10px 0; }
+  html body .telescope-test .tt-window-anchor { width:min(100%,calc(100dvh - 126px)); margin-inline:auto; }
+  html body .telescope-test .tt-window { width:100%; }
+  html body .telescope-test .tt-mentor { min-width:0; gap:6px; padding-bottom:0; }
+  html body .telescope-test .tt-mentor-stage { width:100%; margin-left:0; grid-template-columns:30px minmax(0,1fr); gap:8px; }
+  html body .telescope-test .tt-mentor-stage .tt-observation-tools { width:30px; gap:16px; }
+  html body .telescope-test .tt-yuta-scene { --tt-scene-height:clamp(95px,27dvh,135px); --tt-model-size:110px; --tt-model-top:18px; --tt-small-size:90px; }
+  html body .telescope-test .tt-dialogue-bubble { min-height:80px; padding:9px 12px 25px; font-size:12px; line-height:1.5; }
+  html body .telescope-test .tt-modes { margin-top:10px; gap:8px; }
+  html body .telescope-test .tt-modes button { min-width:0; font-size:10px; padding:8px 10px; }
+  html body .telescope-test .tt-drawer { width:min(60vw,460px); padding:16px; }
+
+  /* Favorites: reserve real height for all three covers and both bubbles. */
+  html body .ball-test .ball-header { height:72px; padding:7px 4%; grid-template-columns:auto minmax(0,1fr); grid-template-rows:auto auto; gap:4px 12px; }
+  html body .ball-test .ball-header .ball-back { grid-column:1; grid-row:1; font-size:10px; }
+  html body .ball-test .ball-header h1 { grid-column:2; grid-row:1; font-size:23px; }
+  html body .ball-test .ball-header-tools { grid-column:1/-1; grid-row:2; width:100%; gap:6px; }
+  html body .ball-test .ball-header nav { justify-content:flex-start; gap:4px; }
+  html body .ball-test .ball-header nav button { padding:5px 9px; font-size:10px; }
+  html body .ball-test .ball-index-trigger { padding:5px 7px!important; font-size:9px; }
+  html body .ball-test .ball-stage { top:72px; }
+  html body .ball-test .ball-selector { top:8px; bottom:112px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:minmax(0,1fr) auto; gap:6px; }
+  html body .ball-test .ball-selector-content { grid-column:1/-1; grid-row:1; min-width:0; }
+  html body .ball-test .ball-selector > .ball-arrow:first-child { grid-column:1; grid-row:2; }
+  html body .ball-test .ball-selector > .ball-arrow:last-child { grid-column:2; grid-row:2; }
+  html body .ball-test .ball-arrow { min-width:0; padding:6px 12px; font-size:10px; }
+  html body .ball-test .ball-portrait { top:8px; bottom:112px; }
+  html body .ball-test .ball-character-dialogue-slot { height:96px; bottom:8px; }
+  html body .ball-test button.ball-character-dialogue { padding:8px 12px 6px; gap:3px; }
+  html body .ball-test .ball-character-dialogue-heading strong { font-size:16px; padding:2px 9px; }
+  html body .ball-test .ball-character-dialogue-text { font-size:12px; line-height:1.5; }
+  html body .ball-test .ball-cover-overlay strong { font-size:clamp(10px,1.55vw,14px); padding:3px 7px; }
+  html body .ball-test .ball-work-scroll { padding:15px; gap:16px; }
+
+  /* Bottled Weather: preserve three columns instead of a giant title row. */
+  html body .wp-page .wp-header { min-height:52px; padding:9px 3vw; }
+  html body .wp-page .wp-layout { display:grid; grid-template-columns:minmax(110px,.75fr) minmax(0,1.6fr) minmax(165px,1fr); gap:12px; padding:20px 3vw 28px; }
+  html body .wp-page .wp-introduction { display:block; grid-column:auto; padding-bottom:0; }
+  html body .wp-page .wp-introduction h1 { font-size:clamp(26px,4vw,38px); margin:12px 0; }
+  html body .wp-page .wp-introduction h1 > span, html body .wp-page .wp-introduction h1 > em { display:block; margin-left:0; }
+  html body .wp-page .wp-introduction h1 > small { font-size:13px; }
+  html body .wp-page .wp-description { display:block; font-size:11px; line-height:1.8; }
+  html body .wp-page .wp-lead { margin:10px 0; font-size:12px; }
+  html body .wp-page .wp-orbit { display:block; width:min(100%,110px); }
+  html body .wp-page .wp-margin-note { display:flex; margin:12px 0; }
+  html body .wp-page .wp-margin-note p { font-size:10px; }
+  html body .wp-page .wp-world-column { padding-top:0; }
+  html body .wp-page .wp-world-plate { padding:9px 8px 0; }
+  html body .wp-page .wp-research { width:auto; grid-template-columns:minmax(0,1fr); gap:12px; }
+  html body .wp-page .wp-potion-paper { padding:12px 8px; }
+  html body .wp-page .wp-potions { gap:5px; }
+  html body .wp-page .wp-bottle-art { max-width:42px; }
+  html body .wp-page .wp-potions strong { font-size:10px; }
+  html body .wp-page .wp-ending-paper { max-height:calc(100% - 12px); overflow-y:auto; }
+
+  /* Collection / character files keep their horizontal two-panel structure. */
+  html body .pg-gallery { padding:25px 4vw; gap:16px; }
+  html body .pg-heading { flex-direction:row; align-items:center; gap:18px; }
+  html body .pg-heading h2, html body .pg-heading h2 small { font-size:26px; }
+  html body .pg-gallery-intro { max-width:42%; padding:10px 14px; }
+  html body .pg-gallery-intro p { font-size:12px; }
+  html body .pg-stage { grid-template-columns:32px minmax(0,1fr) 32px; gap:12px; min-height:150px; }
+  html body .pg-game { padding:8px 3vw; }
+  html body .pg-game-identity h1 { font-size:23px; }
+  html body .pg-toolbar { gap:8px; flex-wrap:wrap; }
+  html body .pg-table-wrap { min-height:130px; }
+  html body .pg-art-copy { grid-template-columns:minmax(0,1fr) minmax(0,1.4fr); gap:18px; padding-top:18px; }
+  html body .cw-page .cw-header { min-height:48px; margin:0 18px; }
+  html body .cw-page .cw-heading { padding:10px 20px; }
+  html body .cw-page .cw-heading h1 { font-size:26px; }
+  html body .cw-page .cw-footer { padding:8px 18px; font-size:9px; }
+  html body .cw-file-scroll { display:grid; grid-template-columns:40% 60%; height:calc(100dvh - 112px); overflow:hidden; }
+  html body .cw-file-visual { min-height:0; padding:36px 18px 12px; }
+  html body .cw-file-visual figure { max-width:min(100%,calc(100dvh - 170px)); }
+  html body .cw-file-copy { padding:14px 20px; }
+  html body .cw-file-copy h2 { font-size:25px; }
+  html body .cw-file-section { grid-template-columns:90px minmax(0,1fr); gap:8px; }
+  html body .cw-file-section p { font-size:12px; line-height:1.7; }
+  html body .cw-file-footer { padding:8px 18px; }
+  html body .portal-comic, html body .t-comic-page { padding:12px 3vw; gap:10px; }
+  html body .portal-comic h1 { font-size:23px; }
+  html body .portal-comic > .portal-comic__continue { padding:8px 13px; font-size:11px; }
+
+  @media (max-height:360px) {
+    html body .ball-test .ball-header { height:64px; padding-block:5px; }
+    html body .ball-test .ball-header h1 { font-size:20px; }
+    html body .ball-test .ball-stage { top:64px; }
+    html body .ball-test .ball-selector, html body .ball-test .ball-portrait { bottom:92px; }
+    html body .ball-test .ball-character-dialogue-slot { height:76px; }
+    html body .ball-test button.ball-character-dialogue { padding:5px 10px; gap:2px; }
+    html body .ball-test .ball-character-dialogue-heading strong { font-size:14px; }
+    html body .ball-test .ball-character-dialogue-text { font-size:11px; line-height:1.45; }
+  }
+}

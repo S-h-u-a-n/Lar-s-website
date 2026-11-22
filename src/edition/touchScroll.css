@@ -1,0 +1,12 @@
+/* Native reading surfaces only. Do not override the gesture ownership of
+   OrbitControls, MapLibre, puzzle canvases or the weather brush/bottles. */
+:where(.nt-reading-scroll, .nt-category-menu, .ball-work-scroll,
+  .ball-work-content-scroll, .ball-work-scroll--markdown > div:last-child,
+  .ball-index-content, .ball-character-dialogue-text, .tt-drawer,
+  .big-test-letter-body, .big-test-letter-list, .earth-checklist-items,
+  .hh-detail-scroll, .hh-reflection-panel, .wp-letter-scroll,
+  .wp-ending-paper, .pg-art-scroll, .pg-dialog-paper, .edition-lab-index nav,
+  .wp-page.is-integrated, .telescope-test) {
+  touch-action:pan-y pinch-zoom;
+  -webkit-overflow-scrolling:touch;
+}

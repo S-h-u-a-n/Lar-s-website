@@ -56,7 +56,7 @@ function IntroScreen({ onEnter, onExplore }) {
           <span>打開創世故事</span>
           <span className="intro-enter-arrow" aria-hidden="true">→</span>
         </button>
-        <button className="edition-intro-shortcut" onClick={onExplore}>直接走進研究室 ↗</button>
+        <button className="edition-intro-shortcut" onClick={onExplore}>直接走進研究室 ↗︎</button>
         <p className="edition-intro-caption">魔法師們創造了一個沒有魔法的世界。<br/>我們邀請你，成為下一位觀測者。</p>
       </div>
       <div className="edition-intro-bottom"><span>NO MAGIC. ENDLESS WONDER.</span><span>移動滑鼠，讓字母說故事。</span></div>

@@ -10,6 +10,7 @@ import { Bottle, WeatherIllustration } from './LineArt'
 import EndingCard from './EndingCard'
 import useWorld from './useWorld'
 import WorldCanvas from './WorldCanvas'
+import DragBottle from './DragBottle'
 
 export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
   useParallax()
@@ -19,7 +20,8 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
   const letterButton = useRef(null)
   const strength = RULES.defaultStrength
   const [brushSize, setBrushSize] = useState(RULES.defaultBrush)
-  const [drag, setDrag] = useState(null), pointer = useRef(null), keyboard = useRef(false)
+  const dragBottle = useRef(null), pointer = useRef(null), keyboard = useRef(false)
+  const setDrag = value => dragBottle.current?.set(value)
   const [hints, setHints] = useState(false), [rewinding, setRewinding] = useState(false)
   const canvas = useRef(null), replayButton = useRef(null), rewindTimer = useRef(null), endingKeyHeld = useRef(false)
   const worldPlate = useRef(null), worldFrame = useRef(null)
@@ -136,8 +138,7 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
     }
   }, [])
 
-  function location(event) {
-    const rect = canvas.current?.getBoundingClientRect()
+  function location(event, rect = canvas.current?.getBoundingClientRect()) {
     if (!rect || event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) return null
     return pickWorld(model.current, { x: (event.clientX - rect.left) / rect.width * WORLD.width, y: (event.clientY - rect.top) / rect.height * WORLD.height })
   }
@@ -157,8 +158,9 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
     if (active?.id !== event.pointerId) return
     event.preventDefault()
     const samples=event.nativeEvent?.getCoalescedEvents?.() || []
+    const bounds = canvas.current?.getBoundingClientRect()
     for(const sample of samples.length?samples:[event]) {
-      const spot=location(sample)
+      const spot=location(sample, bounds)
       if(spot) {
         paint(active.type,active.last,spot,active.strength,!active.last,active.brushSize)
         start(active.type,{...spot,mode:'brush',brushSize:active.brushSize},active.strength)
@@ -229,7 +231,7 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
         ? <nav className="wp-back-nav" aria-label="天氣研究頁導覽"><button type="button" onClick={() => {release();onBack()}}>BACK</button></nav>
         : <a className="edition-wordmark" href="/?edition=main" onClick={event => { if(onHome){event.preventDefault();release();onHome()} }}><span>✧</span><span data-dev-text-dynamic>The Wizard’s<br /><b>GENESIS</b></span></a>}
       <p>CODEX EDITION <i>／</i> 研究手冊</p>
-      {!onBack && <nav aria-label="天氣研究頁導覽"><span>06 / 魔法天氣藥水</span><a href="/?edition=main">世界封面 ↗</a></nav>}
+      {!onBack && <nav aria-label="天氣研究頁導覽"><span>06 / 魔法天氣藥水</span><a href="/?edition=main">世界封面 ↗︎</a></nav>}
     </header>
     <section className="wp-layout">
       <aside className="wp-introduction">
@@ -238,8 +240,8 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
         <p className="wp-lead">試著用不同的藥水，改變眼前的世界吧！</p>
         <p className="wp-description">不同的藥水會對環境產生不同影響。可以自由組合，也可以觀察地形與氣候的變化。</p>
         <WeatherIllustration />
-        <div className="wp-margin-note"><span>✳</span><p>因為是生態箱不是地球<br />所以盡情使用也沒有關係的喔！（？）</p></div>
-        <button ref={letterButton} type="button" className="wp-letter-reopen" aria-haspopup="dialog" title="重新閱讀「不知道多久以前的信件」" onClick={() => { release(); setLetterOpen(true) }}><span aria-hidden="true">✉</span>重讀信件</button>
+        <div className="wp-margin-note"><span>✳︎</span><p>因為是生態箱不是地球<br />所以盡情使用也沒有關係的喔！（？）</p></div>
+        <button ref={letterButton} type="button" className="wp-letter-reopen" aria-haspopup="dialog" title="重新閱讀「不知道多久以前的信件」" onClick={() => { release(); setLetterOpen(true) }}><span aria-hidden="true">✉︎</span>重讀信件</button>
         <p className="wp-chapter">FIELD EXPERIMENT / 06<br /><span>所有氣候變化皆為模擬實驗結果。</span></p>
       </aside>
 
@@ -267,7 +269,7 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
 
       <aside className="wp-research">
         <section className="wp-potion-paper">
-          <div className="wp-paper-heading"><span className="edition-kicker">01 / CHOOSE YOUR WEATHER</span><span>↙</span></div>
+          <div className="wp-paper-heading"><span className="edition-kicker">01 / CHOOSE YOUR WEATHER</span><span>↙︎</span></div>
           <h2>選擇實驗藥水</h2>
           <div className="wp-potions" aria-label="天氣藥水選擇">{POTIONS.map(p => <button type="button" key={p.id} disabled={Boolean(ending) || rewinding} className={selected === p.id ? 'is-selected' : ''} aria-label={`選擇${p.name}藥水`} aria-pressed={selected === p.id} style={{ '--bottle-color': p.color }}
             onClick={() => setSelected(p.id)} onPointerDown={event => beginPointer(event, 'bottle', p.id)} onPointerMove={movePointer} onPointerUp={release} onPointerCancel={release} onLostPointerCapture={release}>
@@ -330,6 +332,6 @@ export default function WeatherPotions({ onBack, onHome, onReady } = {}) {
     </footer>
 
     <AnimatePresence>{letterOpen && <WeatherLetter key="weather-letter" onClose={() => setLetterOpen(false)} returnFocus={letterButton} />}</AnimatePresence>
-    {drag && <div className={`wp-drag-bottle ${drag.over ? 'is-pouring' : ''}`} style={{ left: drag.x, top: drag.y }} aria-hidden="true"><Bottle potion={POTIONS.find(p => p.id === drag.type)} pouring={drag.over} /></div>}
+    <DragBottle ref={dragBottle}/>
   </main>
 }

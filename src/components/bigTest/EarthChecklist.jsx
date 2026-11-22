@@ -47,11 +47,11 @@ export default function EarthChecklist({ ready, claimWelcome }) {
         <ul className="earth-checklist-items" aria-label="探索事項">
           {CHECKLIST_ITEMS.map(item => {
             const done = progress.completed.includes(item.id)
-            return <li key={item.id}><span className="earth-checklist-check" role="img" aria-label={done ? '已完成' : '未完成'}>{done ? '☑' : '☐'}</span><span>{item.name}</span></li>
+            return <li key={item.id}><span className="earth-checklist-check" role="img" aria-label={done ? '已完成' : '未完成'}>{done ? '☑︎' : '☐'}</span><span>{item.name}</span></li>
           })}
         </ul>
       </>}
-      {showList && <button className="earth-checklist-close" type="button" onClick={() => setMode('stowed')}>收起紙條 ↗</button>}
+      {showList && <button className="earth-checklist-close" type="button" onClick={() => setMode('stowed')}>收起紙條 ↗︎</button>}
     </div>
   </aside></>
 }

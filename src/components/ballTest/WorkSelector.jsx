@@ -2,11 +2,12 @@
  * https://skiper-ui.com/v1/skiper53 — free personal/commercial use and modification;
  * attribution required. Original demo artwork and unused Swiper imports are omitted.
  */
-import { forwardRef, useLayoutEffect, useRef, useState } from 'react'
+import { forwardRef, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { photoUrl } from '../research/photoUrl.js'
 import { AnimatePresence, motion, useIsPresent, useReducedMotion } from 'framer-motion'
 import { SELECTOR } from './data'
 import Text from './Text'
+import { createListTouchGesture } from './listTouchGesture'
 import { visibleWorkEntries, wrapWorkIndex } from './workNavigation'
 export function Cover({ work, mode = 'preview' }) {
   const poster = mode === 'detail' ? work.posterDetail : work.posterPreview || work.cover
@@ -34,6 +35,9 @@ const SlidingWorkCard = forwardRef(function SlidingWorkCard({ work, selected, he
 })
 
 export default function WorkSelector({ works, start, direction, expandedWorkId, onStep, onSelectWindow, onOpen }) {
+  const stepRef = useRef(onStep)
+  stepRef.current = onStep
+  const touch = useMemo(() => createListTouchGesture({ onStep: direction => stepRef.current(direction) }), [])
   const ref = useRef(null), [height, setHeight] = useState(300), reduced = useReducedMotion()
   useLayoutEffect(() => {
     const measure = () => setHeight(ref.current.clientHeight)
@@ -50,7 +54,7 @@ export default function WorkSelector({ works, start, direction, expandedWorkId, 
   return <section className="ball-selector" aria-label="Work selector">
     <button className="ball-arrow" onClick={() => onStep(-1)}><Text id="previous">↑ PREVIOUS</Text></button>
     <div className="ball-selector-content">
-      <div className="ball-cover-window" ref={ref} style={{ gap: SELECTOR.gap }}>
+      <div className="ball-cover-window" {...touch} ref={ref} style={{ gap: SELECTOR.gap }}>
         <AnimatePresence initial={false} mode="popLayout" custom={direction}>{visible.map(({work,position}) => {
           const selected = expandedWorkId === work.id
           const cardHeight = expanded ? selected ? available * (count === 1 ? 1 : SELECTOR.expandedRatio) : available * (1 - SELECTOR.expandedRatio) / Math.max(1,count - 1) : available / count

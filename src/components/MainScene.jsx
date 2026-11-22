@@ -1,3 +1,4 @@
+import { createVisibleFrameLoop } from '../lib/visibleFrameLoop'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
@@ -376,7 +377,6 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
     let magglassObjects = new WeakSet()
     let miniCosmos
     let updateCosmosBillboard
-    let frame = 0
     let disposed = false, failed = false, readyToPresent = false
     const manager = new THREE.LoadingManager()
     const loadController = new AbortController()
@@ -415,13 +415,15 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
     const updateMotionPreference=()=>{reducedMotion=motionPreference.matches}
     motionPreference.addEventListener('change',updateMotionPreference)
 
+    let hostHasSize = false
     let renderWidth = 0, renderHeight = 0
     let horizontalFraming = 0
 
     const resize = () => {
       const width = viewportAspect && !fitViewport ? Math.min(host.clientWidth, host.clientHeight * viewportAspect) : host.clientWidth
       const height = viewportAspect && !fitViewport ? width / viewportAspect : host.clientHeight
-      if (!width || !height) return
+      hostHasSize = Boolean(width && height)
+      if (!hostHasSize) return
       const pixelRatio = Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO)
       const sizeChanged = width !== renderWidth || height !== renderHeight
       const pixelRatioChanged = pixelRatio !== renderer.getPixelRatio()
@@ -690,6 +692,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
     }
 
     const handlePointerMove = event => {
+      if (event.pointerType === 'touch' && pointerDown && Math.hypot(event.clientX-pointerDown.x,event.clientY-pointerDown.y)>6) pointerDown.moved = true
       const intersections = getRaycastIntersections(event)
       const entry = resolveInteractionHit(intersections)
       const interactionId = entry?.id || null
@@ -728,6 +731,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
     }
     if (import.meta.env.DEV) window.addEventListener('model-editor-transform-change', handleEditorTransform)
     const handlePointerDown = event => {
+      if (event.pointerType === 'touch' && !event.isPrimary) { pointerDown = null; return }
       if (import.meta.env.DEV && document.body.dataset.devEditing === '3d') return
       pointerIsDown = true
       hoveredIconTargetId = resolveHoverIconTarget(getRaycastIntersections(event))?.id || null
@@ -745,10 +749,11 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
       suppressedHoverTargetId = hoveredIconTargetId
       hideHoverIcon()
       if (!pointerDown) return
+      const moved = pointerDown.moved
       const distance = Math.hypot(event.clientX - pointerDown.x, event.clientY - pointerDown.y)
       const duration = performance.now() - pointerDown.time
       pointerDown = null
-      if (distance <= 6 && duration <= 500) {
+      if (!moved && distance <= 6 && duration <= 500) {
         const entry = resolveInteractionHit(intersections)
         if (entry?.type === 'portal') {
           if (FUNCTIONAL_PORTAL_IDS.has(entry.id)) {
@@ -796,18 +801,19 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
       // again before drawing: layout or DPR may have changed while GLB/GPU work
       // was pending, without its ResizeObserver callback having run yet.
       if (readiness.pending) resize()
-      if (!readyToPresent || !host.clientWidth || !host.clientHeight) {
-        frame = requestAnimationFrame(render)
+      if (!readyToPresent || !hostHasSize) {
+        rendering.request()
         return
       }
       const delta=previousTime?Math.min((now-previousTime)/1000,.1):0
       elapsed += delta
       previousTime = now
       // Only complete tool roots react. The table and multipart globe stay anchored.
+      const reactionFollow = 1-Math.exp(-TOOL_REACTION.damping*delta)
       for(const reaction of toolReactions){
         if (import.meta.env.DEV && document.body.dataset.devEditing === '3d') continue
         const target=!reducedMotion&&!pointerIsDown&&!focusedInteractionId&&hoveredInteractionId===reaction.id?1:0
-        reaction.amount += (target-reaction.amount)*(1-Math.exp(-TOOL_REACTION.damping*delta))
+        reaction.amount += (target-reaction.amount)*reactionFollow
         if(reducedMotion||pointerIsDown||focusedInteractionId)reaction.amount=0
         reaction.root.position.y=reaction.y+reaction.lift*reaction.amount
         reaction.root.rotation.z=reaction.z+Math.sin(elapsed*2)*TOOL_REACTION.tiltRadians*reaction.amount
@@ -875,9 +881,10 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
         if (readiness.pending) readiness.fail(error); else reportFailure(error)
         return
       }
-      frame = requestAnimationFrame(render)
+      rendering.request()
     }
 
+    const rendering = createVisibleFrameLoop(render, { onResume: () => { previousTime = 0 } })
     const observer = new ResizeObserver(resize)
     observer.observe(host)
     window.addEventListener('resize', resize)
@@ -964,13 +971,13 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
       } catch (error) { if (!disposed) readiness.fail(error) }
     }).catch(error => { if (!disposed) readiness.fail(error) })
 
-    frame = requestAnimationFrame(render)
+    rendering.request()
 
     return () => {
       disposed = true
       readiness.dispose()
       canvas.removeEventListener('webglcontextlost', contextLost)
-      cancelAnimationFrame(frame)
+      rendering.dispose()
       observer.disconnect()
       window.removeEventListener('resize', resize)
       canvas.removeEventListener('pointermove', handlePointerMove)
