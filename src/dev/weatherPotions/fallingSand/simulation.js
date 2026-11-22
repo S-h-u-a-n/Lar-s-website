@@ -4,17 +4,17 @@ import { climate, inject } from './weather.js'
 import { updateMaterials } from './materials.js'
 import { evaluateEnding } from './endings.js'
 export { setInput, stopInput } from './weather.js'
-export const WORLD_VERSION = 8
+export const WORLD_VERSION = 10
 
 export function createWorld({ columns=WORLD.columns, rows=WORLD.rows }={}) {
   const size=columns*rows
   const world={
     version:WORLD_VERSION,columns,rows,
     material:new Uint8Array(size),temperatureGrid:new Float32Array(size),moisture:new Float32Array(size),
-    snowRestTicks:new Uint16Array(size),
+    snowRestTicks:new Uint16Array(size),lavaHeat:new Uint8Array(size),
     thermalOffset:new Float32Array(size),thermalTick:new Uint32Array(size),
     tint:new Uint8Array(size),origin:new Uint8Array(size),age:new Uint16Array(size),exposure:new Uint16Array(size),updated:new Uint32Array(size),
-    initialSurface:new Int16Array(columns),dryColumns:new Uint8Array(columns),counts:new Uint32Array(Object.keys(M).length),
+    initialSurface:new Int16Array(columns),maxRetreatedSurface:new Int16Array(columns),surfaceHeight:new Int16Array(columns),surfaceProfileTick:-1,dryColumns:new Uint8Array(columns),counts:new Uint32Array(Object.keys(M).length),
     plantRoot:new Uint32Array(size),plantParent:new Uint32Array(size),plantDepth:new Uint8Array(size),plantStress:new Float32Array(size),sandHeat:new Uint16Array(size),
     temperature:18,light:55,time:0,tick:0,paintRevision:0,remainder:0,random:WORLD.seed, input:null,emission:0,
     ending:null,endingTimers:{},disasters:new Set(),
@@ -23,16 +23,17 @@ export function createWorld({ columns=WORLD.columns, rows=WORLD.rows }={}) {
     rainAdded:0,snowAdded:0,lavaAdded:0,cloudAdded:0,steamCreated:0,basaltCreated:0,
     growthAdded:0,growthConsumed:0,growthExpired:0,sandAdded:0,plantsSeeded:0,plantsGrown:0,plantsWilted:0,sandWaterMoves:0,sandWindMoves:0,sandSintered:0,
     naturalRain:0,evaporated:0,condensed:0,frozen:0,melted:0,moves:0,windMoves:0,injected:0,eroded:0,fractured:0,
-    seaLevel:0,riseRate:0,metrics:{moisture:.62,ice:0,snow:0,desert:0,erosion:0,damage:0,lostLand:0,flood:0,liquidRemaining:1},
+    seaLevel:0,riseRate:0,metrics:{moisture:.62,ice:0,snow:0,desert:0,erosion:0,damage:0,floodedLand:0,permanentLandLoss:0,flood:0,liquidRemaining:1},
   }
   makeTerrain(world)
+  world.maxRetreatedSurface.set(world.initialSurface)
   for(const kind of world.material)world.counts[kind]++
   measureWorld(world,true)
   return world
 }
 export function measureWorld(world,initial=false) {
   const w=world.columns,h=world.rows,mat=world.material
-  let lost=0,snow=0,soil=0,dry=0,wet=0,surfaceSum=0,seaColumns=0
+  let flooded=0,permanentLoss=0,snow=0,soil=0,dry=0,wet=0,surfaceSum=0,seaColumns=0
   for(let x=0;x<w;x++) {
     let surface=h,waterSurface=h
     for(let y=0;y<h;y++) {
@@ -43,7 +44,10 @@ export function measureWorld(world,initial=false) {
     }
     if(x>w*.73){surfaceSum+=waterSurface;seaColumns++}
     if(world.dryColumns[x]) {
-      if(waterSurface<world.initialSurface[x]-2 || surface>world.initialSurface[x]+Math.max(5,(world.initialSeaRow-world.initialSurface[x])*.2))lost++
+      if(waterSurface<surface-2)flooded++
+      world.maxRetreatedSurface[x]=Math.max(world.maxRetreatedSurface[x],surface)
+      const retreatLimit=Math.max(5,(world.initialSeaRow-world.initialSurface[x])*.2)
+      if(world.maxRetreatedSurface[x]>world.initialSurface[x]+retreatLimit)permanentLoss++
       const top=Math.max(0,surface-1)
       if(mat[top*w+x]===M.SNOW || mat[top*w+x]===M.ICE)snow++
     }
@@ -59,7 +63,8 @@ export function measureWorld(world,initial=false) {
   world.metrics={
     moisture:wet/Math.max(1,soil),desert:dry/Math.max(1,soil),snow:snow/world.initialLandColumns,
     ice:world.counts[M.ICE]/Math.max(1,waterFamily),erosion:clamp(world.eroded/world.initialFragile),damage:clamp(world.fractured/world.initialFragile),
-    lostLand:lost/world.initialLandColumns,flood:clamp((world.initialSeaRow-seaRow)/h),liquidRemaining:world.counts[M.WATER]/world.initialWater,
+    floodedLand:flooded/world.initialLandColumns,permanentLandLoss:permanentLoss/world.initialLandColumns,
+    flood:clamp((world.initialSeaRow-seaRow)/h),liquidRemaining:world.counts[M.WATER]/world.initialWater,
   }
   if(world.metrics.ice>.35)world.disasters.add('freeze')
   const availableWater=world.counts[M.WATER]+world.counts[M.ICE]+world.counts[M.SNOW]

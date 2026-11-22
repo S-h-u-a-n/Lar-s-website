@@ -1,0 +1,124 @@
+.field-comic-page {
+  isolation: isolate;
+}
+
+.field-comic-page .field-comic-frame {
+  position: relative;
+  display: block;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 0;
+  border-top: 1px solid var(--edition-line, #34465a33);
+  border-bottom: 1px solid var(--edition-line, #34465a33);
+  border-radius: 0;
+  background: #fffeff40;
+}
+
+.field-comic-page .field-comic-fit {
+  position: absolute;
+  inset: 0;
+}
+
+.field-comic-page .layout-editor-stage {
+  z-index: 1 !important;
+}
+
+.field-comic-page .layout-editor-item {
+  transition: none;
+}
+
+.field-comic-page .layout-editor-item[data-sequence-fading="true"] {
+  transition: opacity var(--field-comic-fade-duration, 560ms) ease;
+}
+
+.field-comic-page .layout-editor-dialogue-group {
+  position: absolute;
+  transform-origin: center;
+  transition: none;
+}
+
+.field-comic-page .layout-editor-dialogue-design-space {
+  position: absolute;
+  top: 0;
+  left: 0;
+  container-type: inline-size;
+  transform-origin: top left;
+}
+
+.field-comic-page .layout-editor-dialogue-design-space > .layout-editor-item {
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+}
+
+.field-comic-page .layout-editor-dialogue-group[data-sequence-fading="true"] {
+  transition: opacity var(--field-comic-fade-duration, 560ms) ease;
+}
+
+.field-comic-page .layout-editor-item-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.field-comic-dialogue {
+  position: absolute;
+  z-index: 1;
+  top: 12%;
+  left: 30%;
+  width: 64%;
+  max-height: none;
+  min-height: 1em;
+  margin: 0;
+  color: #1a497a;
+  font: 600 clamp(14px, 5cqw, 26px)/1.2 var(--sans);
+  text-align: left;
+  writing-mode: vertical-rl;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+}
+
+.field-comic-dialogue[data-text-editor-active] {
+  pointer-events: auto;
+}
+
+.field-comic-page > .portal-comic__continue {
+  align-self: center;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 500ms ease, visibility 0s linear 500ms, transform 200ms ease;
+}
+
+.field-comic-page > .portal-comic__continue.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.field-comic-page > .portal-comic__continue.is-visible:hover {
+  transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field-comic-page .layout-editor-item[data-sequence-fading="true"],
+  .field-comic-page .layout-editor-dialogue-group[data-sequence-fading="true"],
+  .field-comic-page > .portal-comic__continue {
+    transition: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .field-comic-page > .portal-comic__continue {
+    padding: 9px 13px;
+    font-size: 11px;
+  }
+}

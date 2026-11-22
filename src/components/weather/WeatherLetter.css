@@ -1,0 +1,87 @@
+/* A single piece of correspondence, with the conversation outside the sheet. */
+.wp-letter-overlay {
+  --wp-letter-gutter:clamp(18px,4vh,44px);
+  position:fixed; inset:0; box-sizing:border-box; width:100%; max-width:none;
+  height:100dvh; max-height:none; margin:0; padding:var(--wp-letter-gutter) clamp(14px,4vw,48px);
+  border:0; color:var(--edition-ink); background:#fdf9ee99; backdrop-filter:blur(3px);
+  overflow:hidden; overscroll-behavior:contain;
+}
+.wp-letter-overlay[open] { display:grid; place-items:center; }
+.wp-letter-overlay::backdrop { background:transparent; }
+.wp-letter-composition {
+  position:relative; display:flex; min-width:0; min-height:0; width:min(100%,760px);
+  max-height:calc(100dvh - 2 * var(--wp-letter-gutter)); transform-origin:center top;
+}
+.wp-letter-scroll {
+  flex:1; min-width:0; min-height:0; overflow-y:auto; overscroll-behavior:contain;
+  scrollbar-width:thin; scrollbar-color:#d9ceba66 transparent; padding:14px 12px 4px;
+}
+.wp-letter-paper {
+  position:relative; isolation:isolate; box-sizing:border-box; padding:44px 64px 34px;
+  border:1px solid #b5a58b66; border-radius:2px 18px 2px 2px;
+  background:linear-gradient(180deg,transparent 49.7%,#987d4c09 50%,#fffef866 50.4%,transparent 51%),var(--edition-paper,#fdf9ee);
+  box-shadow:0 2px 0 #e9e1cf,0 6px 0 -3px #fdf9ee99,0 18px 48px #14232b33;
+}
+/* Echo the live homepage's soft geometric marks, rather than adding artwork. */
+.wp-letter-paper::before {
+  content:''; position:absolute; left:28px; top:40px; bottom:38px; width:1px;
+  background:linear-gradient(transparent,#d8b2bd66 20%,#d8b2bd66 80%,transparent); pointer-events:none;
+}
+.wp-letter-stationery { position:absolute; top:24px; left:24px; display:flex; align-items:center; gap:5px; pointer-events:none; }
+.wp-letter-stationery i { display:block; width:6px; height:6px; background:#a2d8de80; transform:rotate(-6deg); }
+.wp-letter-stationery i:nth-child(2) { width:9px; height:9px; background:#f691a63b; transform:rotate(9deg); }
+.wp-letter-stationery i:nth-child(3) { width:4px; height:4px; background:#b79a5c55; }
+.wp-letter-heading { margin:0 0 30px; text-align:center; }
+.wp-letter-emblem { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:17px; color:var(--edition-brass,#987d4c); }
+.wp-letter-emblem::before,.wp-letter-emblem::after { content:''; width:48px; height:1px; background:#b79a5c40; }
+.wp-letter-emblem span { font:25px/1 var(--display); }
+.wp-letter-heading h2 { margin:0; color:var(--edition-ink); font:400 clamp(24px,2.4vw,31px)/1.65 var(--body); letter-spacing:.07em; text-wrap:balance; }
+.wp-letter-body { color:#49584f; font:15.5px/2.05 var(--body); letter-spacing:.025em; overflow-wrap:anywhere; }
+.wp-letter-body p { margin:0; white-space:pre-line; }
+.wp-letter-body p+p { margin-top:18px; }
+.wp-letter-signature { display:flex; align-items:center; justify-content:flex-end; gap:15px; margin-top:27px; padding-top:8px; color:#697369; font:17px/1.8 var(--body); letter-spacing:.16em; }
+.wp-letter-signature::before { content:''; width:27px; height:1px; background:#b79a5c66; }
+.wp-letter-discussion {
+  position:relative; display:grid; gap:7px; box-sizing:border-box;
+  width:min(calc(100% - 36px),560px); margin:-12px 18px 26px auto; padding:24px 28px 22px;
+  background:#fffefd; border-radius:1px 3px 2px 1px; box-shadow:0 5px 16px #14232b24;
+  transform:rotate(-3deg); transform-origin:center top; text-align:left;
+}
+.wp-letter-discussion::before {
+  content:''; position:absolute; width:58px; height:15px; left:calc(50% - 29px); top:-7px;
+  background:#e5ddf5a6; border-inline:1px dashed #a299b84d;
+  transform:rotate(3deg); pointer-events:none;
+}
+.wp-letter-discussion p { margin:0; color:#7b827c; font:12.5px/1.9 var(--body); letter-spacing:.015em; overflow-wrap:anywhere; }
+.wp-letter-composition .wp-letter-close {
+  position:absolute; z-index:1; right:26px; top:27px; display:grid; place-items:center;
+  width:34px; height:34px; padding:0; border:0; border-radius:50%;
+  background:transparent; color:#8b8b7c; font:24px/1 var(--body); cursor:pointer;
+  transition:background .2s,color .2s;
+}
+.wp-letter-composition .wp-letter-close:hover { background:#f691a620; color:var(--edition-ink); }
+.wp-letter-close:focus-visible { outline:2px solid #987d4c; outline-offset:2px; }
+.wp-letter-reopen { display:inline-flex; align-items:center; gap:7px; margin:0 0 16px; padding:4px 0; border:0; border-bottom:1px solid #b79a5c66; background:transparent; color:inherit; font:11px/1.8 var(--body); cursor:pointer; }
+.wp-letter-reopen>span { color:#987d4c; font-size:16px; }
+.wp-letter-reopen:hover { border-color:#987d4c; }
+@media(max-height:700px) {
+  .wp-letter-overlay { --wp-letter-gutter:14px; }
+  .wp-letter-paper { padding:30px 52px 26px; }
+  .wp-letter-heading { margin-bottom:23px; }.wp-letter-emblem { margin-bottom:10px; }
+  .wp-letter-heading h2 { font-size:26px; }
+  .wp-letter-body { font-size:14.5px; line-height:1.95; }.wp-letter-body p+p { margin-top:15px; }
+  .wp-letter-signature { margin-top:20px; }.wp-letter-discussion { margin-top:-5px; padding:20px 26px; }
+}
+@media(max-width:600px) {
+  .wp-letter-overlay { padding-inline:8px; }
+  .wp-letter-scroll { padding-inline:8px; }
+  .wp-letter-paper { padding:38px 28px 26px; }
+  .wp-letter-paper::before { left:13px; top:56px; bottom:25px; }
+  .wp-letter-stationery { left:17px; top:19px; }
+  .wp-letter-heading h2 { font-size:23px; letter-spacing:.035em; }.wp-letter-heading { margin-bottom:23px; }
+  .wp-letter-emblem { gap:12px; }.wp-letter-emblem::before,.wp-letter-emblem::after { width:32px; }
+  .wp-letter-body { font-size:14px; line-height:2; }.wp-letter-body p+p { margin-top:16px; }
+  .wp-letter-discussion { width:calc(100% - 28px); margin-top:-10px; margin-inline:14px; padding:22px 18px 20px; }.wp-letter-discussion p { font-size:12px; }
+  .wp-letter-composition .wp-letter-close { right:18px; top:24px; }
+}
+@media(prefers-reduced-motion:reduce) { .wp-letter-composition .wp-letter-close { transition:none; } }

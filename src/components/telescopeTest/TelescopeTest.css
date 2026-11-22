@@ -124,11 +124,11 @@ body .telescope-test .tt-compass{width:max-content;align-self:flex-end;translate
 .tt-recommendation-visit>div{display:grid;grid-template-columns:64px minmax(0,1fr);gap:8px;font-size:11px;line-height:1.6}
 .tt-recommendation-visit dt{color:#34465ab8;font-weight:700}
 .tt-recommendation-visit dd{margin:0;overflow-wrap:anywhere}
-.tt-recommendation-photo{position:relative;display:grid;place-items:center;min-height:110px;aspect-ratio:16/7;overflow:hidden;border:1px dashed #4cabbc88;border-radius:14px;background:linear-gradient(135deg,#adecf544,#f691a622),repeating-linear-gradient(135deg,#fffef8 0 12px,#fdf9ee 12px 24px);color:#34465a88}
+.tt-recommendation-photo{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,max-content) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,max-content) minmax(0,1fr);place-items:center;min-height:110px;aspect-ratio:16/7;overflow:hidden;border:1px dashed #4cabbc88;border-radius:14px;background:linear-gradient(135deg,#adecf544,#f691a622),repeating-linear-gradient(135deg,#fffef8 0 12px,#fdf9ee 12px 24px);color:#34465a88}
 .tt-recommendation-photo::after{position:absolute;inset:8px;border:1px solid #4cabbc33;border-radius:9px;content:'';pointer-events:none}
 .tt-recommendation-photo>span{font-size:24px;line-height:1}
 .tt-recommendation-photo>p{margin:5px 0 0;font-size:10px;line-height:1.4}
-.tt-recommendation-photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 180ms ease}
+.tt-recommendation-photo>img{grid-area:2/2;display:block;position:static;border-radius:12px;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity 180ms ease}
 .tt-recommendation-photo[data-photo-loaded=true]>img{opacity:1}
 .tt-recommendation-photo[data-photo-loaded=true]>span,.tt-recommendation-photo[data-photo-loaded=true]>p{display:none}
 .tt-recommendation-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
@@ -178,3 +178,10 @@ body .telescope-test .tt-compass{width:max-content;align-self:flex-end;translate
   .telescope-test .tt-dialogue-next{right:14px;bottom:7px}
 }
 .tt-log-layer{overflow:clip}.tt-log-layer .tt-drawer{position:absolute}.telescope-test .tt-header::before{inset:0}
+
+/* Recommendation photos share the reading-photo background and credit control. */
+.tt-recommendation-photo[data-photo-available=true]{background:#FFFEF8B8;border-color:transparent}
+.tt-recommendation-photo[data-photo-available=true]::after{display:none}
+.tt-drawer .tt-recommendation-photo .research-photo-info{grid-area:2/2;place-self:end;position:relative;right:8px;bottom:8px;z-index:1;display:grid;place-items:center;width:23px;height:23px;margin:0;padding:0;border:1px solid #34465A55;border-radius:50%;background:#FFFEF8E8;color:#34465A;font:17px/1 Georgia,serif;cursor:pointer;box-shadow:0 1px 4px #34465A16}
+.tt-drawer .tt-recommendation-photo .research-photo-info:hover{background:#fffef8}
+.tt-drawer .tt-recommendation-photo-note{margin:6px 0 0;color:#34465ab8;font-size:11px;line-height:1.6}

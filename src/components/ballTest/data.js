@@ -1,9 +1,8 @@
 import { PIGMENTS } from '../../edition/palette'
 import { MOTION } from '../bigTest/config'
-import deadpoolPosterPreview from '../../../Art/ball/poster/DEADPOOL/notitle.jpg'
-import deadpoolPosterDetail from '../../../Art/ball/poster/DEADPOOL/all.jpg'
-import persona3ReloadPosterPreview from '../../../Art/ball/poster/persona3reload/notitle.jpg'
-import persona3ReloadPosterDetail from '../../../Art/ball/poster/persona3reload/all.jpg'
+import posterSources from './posterSources.json'
+import characterManifest from '../../../Art/ball/web/characters.json'
+import { buildDialogueCatalog } from './dialogueMarkdown'
 const workMarkdownFiles = import.meta.glob('/content/ball/*.md', { eager: true, query: '?raw', import: 'default' })
 export const WORK_MARKDOWN = Object.fromEntries(Object.entries(workMarkdownFiles).map(([path, markdown]) => {
   const id = path.match(/\/([^/]+)\.md$/)?.[1]
@@ -15,44 +14,18 @@ export const SELECTOR = { visibleCount: 3, gap: 8, expandedRatio: .66, duration:
 export const CHARACTERS = [
   { id: 'lar', name: '拉爾', side: 'right', defaultBody: '叉腰.PNG', defaultFace: 1,
     framing: { width: 1288, height: 2102, transform: 'translate(-670 -280) scale(1) rotate(2.5 1252.5 1200)', outlineRadius: 22 } },
-  { id: 'tivbo', name: '緹芙波', side: 'left', defaultBody: '叉腰舉手.PNG', defaultFace: 4,
+  { id: 'tivbo', name: '緹芙波', side: 'left', defaultBody: 6, defaultFace: 2,
     framing: { width: 1291, height: 2138, transform: 'translate(-475 -285) scale(0.92) rotate(-2 1152.5 1200)', outlineRadius: 18 } },
 ]
-// All works are fictional placeholders; replace covers with your own image paths.
+// Keep category order and music unchanged; selected posters load from local public assets.
 export const CATEGORIES = [
-  { id: 'movies', name: '電影', works: ['deadpool', 'paper-moon', 'last-train', 'summer-window'] },
-  { id: 'games', name: '遊戲', works: ['lantern-quest', 'tiny-orbits', 'persona-3-reload', 'garden-loop'] },
-  { id: 'anime', name: '動漫', works: ['cloud-post', 'little-comet', 'blue-kite'] },
-  { id: 'novels', name: '小說', works: ['room-seven', 'quiet-street', 'weekend-club'] },
-  { id: 'performing-arts', name: '表演藝術', works: ['midnight-stage', 'city-chorus', 'turn-the-page'] },
+  { id: 'movies', name: '電影', works: ['the-big-short', 'the-parent-trap', 'deadpool'] },
+  { id: 'games', name: '遊戲', works: ['persona-3-reload', 'raging-loop', 'fate-grand-order'] },
+  { id: 'anime', name: '動漫', works: ['hunter-x-hunter', 'witch-watch', 'monthly-girls-nozaki-kun'] },
+  { id: 'novels', name: '文學', works: ['old-poverty-chronicles', 'okay-for-now', 'all-tomorrows'] },
+  { id: 'performing-arts', name: '表演藝術', works: ['hamilton', 'come-from-away', 'next-to-normal'] },
   // Matching WORKS entries use the existing poster/cover fields plus artist, releaseYear, markdown, and optional spotifyEmbedUrl.
   { id: 'music', name: '音樂', works: ['tattoo', 'sayonara-mata-itsuka', 'naizou-arimasuka', 'rubia', 'haru-wa-tokete', 'yuureigai-to-gyakusetsu'] },
-]
-const TITLES = {
-  'lantern-quest': 'Lantern Quest',
-  'tiny-orbits': 'Tiny Orbits',
-  'garden-loop': 'Garden Loop',
-  'paper-moon': 'Paper Moon',
-  'last-train': 'The Last Train',
-  'summer-window': 'Summer Window',
-  'cloud-post': 'Cloud Post',
-  'little-comet': 'Little Comet',
-  'blue-kite': 'The Blue Kite',
-  'room-seven': 'Room Seven',
-  'quiet-street': 'Quiet Street',
-  'weekend-club': 'Weekend Club',
-  'midnight-stage': 'Midnight Stage',
-  'city-chorus': 'City Chorus',
-  'turn-the-page': 'Turn the Page',
-}
-const PLACEHOLDER_DIALOGUE = name => [
-  { speaker: 'lar', text: `I saved a place for ${name} on our favorites shelf.`, expression: 'happy', motion: 'greet' },
-  { speaker: 'tivbo', text: 'Our shelf is getting bigger. Again.', expression: 'amused', motion: null },
-  { speaker: 'lar', text: 'That just means we need a longer afternoon!', expression: 'happy', motion: null },
-]
-const PLACEHOLDER_DESCRIPTION = [
-  'This fictional work is a placeholder for a future student recommendation. Its cover, description, and conversation can all be replaced in the data file.',
-  'We collect works that make us curious, make us laugh, or give us something to discuss on the way back to the laboratory.',
 ]
 const MUSIC_WORKS = [
   { id: 'tattoo', name: 'TATTOO', artist: 'Official髭男dism', spotifyEmbedUrl: 'https://open.spotify.com/track/13ZIDAvNsxw1vL7p24Qc7Z' },
@@ -76,31 +49,30 @@ const MUSIC_WORKS = [
   description: [],
   recommendation: '',
   illustration: null,
-  dialogue: PLACEHOLDER_DIALOGUE(song.name),
 }])
-const placeholderWorks = CATEGORIES.flatMap(category => category.works
-  .filter(id => !['deadpool', 'persona-3-reload'].includes(id))
-  .map((id, index) => {
-    const name = TITLES[id]
-    return [id, {
-      id, name, originalTitle: name, category: category.id, cover: null, posterPreview: null, posterDetail: null, color: [THEME.pink, THEME.blue, THEME.yellow][index % 3], pattern: ['circle', 'stripes', 'grid'][index % 3],
-      summary: 'A small discovery from our shared shelf of favorites.',
-      description: PLACEHOLDER_DESCRIPTION,
-      recommendation: 'Best enjoyed with a friend who asks completely different questions.', illustration: null,
-      dialogue: PLACEHOLDER_DIALOGUE(name),
-    }]
-  }))
-export const WORKS = Object.fromEntries([
-  ...placeholderWorks,
+const ORIGINAL_TITLES = {
+  'witch-watch': 'ウィッチウォッチ',
+  'raging-loop': 'レイジングループ',
+}
+const newWorks = Object.values(posterSources)
+  .filter(source => !['deadpool', 'persona-3-reload'].includes(source.id))
+  .map((source, index) => [source.id, {
+    id: source.id, name: source.workTitle, originalTitle: ORIGINAL_TITLES[source.id] || source.workTitle, category: source.category,
+    cover: null, posterPreview: null, posterDetail: null,
+    color: [THEME.pink, THEME.blue, THEME.yellow][index % 3], pattern: ['circle', 'stripes', 'grid'][index % 3],
+    summary: '', description: [], recommendation: '', illustration: null,
+  }])
+const workRecords = Object.fromEntries([
+  ...newWorks,
   ...MUSIC_WORKS,
   ['persona-3-reload', {
     id: 'persona-3-reload',
     name: 'PERSONA 3 RELOAD',
-    originalTitle: '女神異聞錄3 Reload',
+    originalTitle: 'ペルソナ３ リロード',
     category: 'games',
     cover: null,
-    posterPreview: persona3ReloadPosterPreview,
-    posterDetail: persona3ReloadPosterDetail,
+    posterPreview: null,
+    posterDetail: null,
     posterPreviewTitle: 'PERSONA 3 RELOAD',
     markdown: 'persona3reload',
     color: THEME.blue,
@@ -109,7 +81,6 @@ export const WORKS = Object.fromEntries([
     description: [],
     recommendation: '',
     illustration: null,
-    dialogue: PLACEHOLDER_DIALOGUE('PERSONA 3 RELOAD'),
   }],
   ['deadpool', {
     id: 'deadpool',
@@ -117,8 +88,8 @@ export const WORKS = Object.fromEntries([
     originalTitle: 'Deadpool',
     category: 'movies',
     cover: null,
-    posterPreview: deadpoolPosterPreview,
-    posterDetail: deadpoolPosterDetail,
+    posterPreview: null,
+    posterDetail: null,
     posterPreviewTitle: 'DEADPOOL',
     posterPreviewPosition: '50% 40%',
     posterHoverPosition: '50% 40%',
@@ -129,6 +100,25 @@ export const WORKS = Object.fromEntries([
     description: [],
     recommendation: '',
     illustration: null,
-    dialogue: PLACEHOLDER_DIALOGUE('DEADPOOL'),
   }],
 ])
+
+// Existing work information and poster metadata remain separate from dialogue.
+export const WORKS = Object.fromEntries(Object.entries(workRecords).map(([id, work]) => {
+  const source = posterSources[id]
+  return [id, source?.localPath ? {
+    ...work,
+    cover: source.localPath,
+    posterPreview: source.localPath,
+    posterDetail: source.localPath,
+    posterPreviewTitle: null,
+  } : work]
+}))
+
+
+const dialogueFiles = import.meta.glob('/content/ball/dialogue/*.md', { eager: true, query: '?raw', import: 'default' })
+export const DIALOGUE_MARKDOWN = Object.fromEntries(Object.entries(dialogueFiles).map(([path,source]) => [path.split('/').at(-1),source]))
+export const DIALOGUE_CATALOG = buildDialogueCatalog(DIALOGUE_MARKDOWN,CATEGORIES,WORKS,characterManifest.characters)
+export const OPENING_DIALOGUE = DIALOGUE_CATALOG.opening
+for (const [id,work] of Object.entries(WORKS)) work.dialogue = DIALOGUE_CATALOG.byWorkId[id]
+if (DIALOGUE_CATALOG.diagnostics.length) console.warn('[Ball dialogue] Markdown authoring issues',DIALOGUE_CATALOG.diagnostics)

@@ -1,27 +1,32 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
-import { entranceProgress, localPoint, opaqueAt, spring } from './interactionMath.js'
+import { entranceProgress, gestureTravel, localPoint, opaqueAt, spring } from './interactionMath.js'
 import { createEntryGesture } from './entryGesture.js'
 const settings = { quietMs: 650, dwellMs: 650, gestureWindowMs: 400, thresholdPx: 60 }
 
 test('arrival plus one continuous momentum stream cannot enter; fresh gesture enters only once', () => {
   const gate = createEntryGesture(settings)
-  assert.equal(gate.wheel(0, true, 10000), false)
+  assert.equal(gate.input(0, true, 10000), false)
   gate.arrive(16)
-  for (let time = 30; time <= 5000; time += 30) assert.equal(gate.wheel(time, true, 15), false)
-  assert.equal(gate.wheel(6000, true, 25), false)
-  assert.equal(gate.wheel(6030, true, 40), true)
-  assert.equal(gate.wheel(8000, true, 100), false)
+  for (let time = 30; time <= 5000; time += 30) assert.equal(gate.input(time, true, 15), false)
+  assert.equal(gate.input(6000, true, 25), false)
+  assert.equal(gate.input(6030, true, 40), true)
+  assert.equal(gate.input(8000, true, 100), false)
 })
 test('reverse and leave cancel entry intent, and early input does not arm', () => {
   const gate = createEntryGesture(settings)
   gate.arrive(0)
-  assert.equal(gate.wheel(200, true, 100), false)
-  assert.equal(gate.wheel(1000, true, 30), false)
-  assert.equal(gate.wheel(1010, false, 100), false)
-  assert.equal(gate.wheel(1020, true, 100), false)
-  gate.leave(); assert.equal(gate.wheel(2000, true, 100), false)
+  assert.equal(gate.input(200, true, 100), false)
+  assert.equal(gate.input(1000, true, 30), false)
+  assert.equal(gate.input(1010, false, 100), false)
+  assert.equal(gate.input(1020, true, 100), false)
+  gate.leave(); assert.equal(gate.input(2000, true, 100), false)
+})
+test('touch swipes map dominant horizontal or vertical motion to panorama travel', () => {
+  assert.equal(gestureTravel(-24, -10), -24)
+  assert.equal(gestureTravel(8, -24), -24)
+  assert.equal(gestureTravel(9, 24), 24)
 })
 test('entrances overlap in specified order, overshoot gently and end at exact originals', () => {
   const map = { delay: 0, duration: 620, overshoot: .65 }

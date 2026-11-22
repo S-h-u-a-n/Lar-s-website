@@ -1,6 +1,57 @@
 import { MATERIAL as M, RULES as R } from './config.js'
-import { environmentTemperature, precipitationTemperature, precipitationMaterial, snowProbability, random, windAt } from './weather.js'
+import { cloudCapacity, environmentTemperature, precipitationTemperature, precipitationMaterial, snowProbability, random, windAt } from './weather.js'
 import { activateGrowth, updatePlant } from './plants.js'
+
+const LAVA_HEAT_KERNEL = []
+for(let dy=-R.lavaHeatRadius;dy<=R.lavaHeatRadius;dy++)for(let dx=-R.lavaHeatRadius;dx<=R.lavaHeatRadius;dx++) {
+  const distanceSquared=dx*dx+dy*dy
+  if(distanceSquared<=1 || distanceSquared>R.lavaHeatRadius*R.lavaHeatRadius)continue
+  const heat=Math.round(R.lavaHeatBoost*(1-Math.sqrt(distanceSquared)/(R.lavaHeatRadius+1)))
+  if(heat>0)LAVA_HEAT_KERNEL.push([dx,dy,heat])
+}
+
+function spreadLavaHeat(world) {
+  const { columns:w,rows:h,material,lavaHeat }=world
+  lavaHeat.fill(0)
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++) {
+    if(material[y*w+x]!==M.LAVA)continue
+    for(const [dx,dy,heat] of LAVA_HEAT_KERNEL) {
+      const nx=x+dx,ny=y+dy
+      if(nx<0||ny<0||nx>=w||ny>=h)continue
+      const i=ny*w+nx
+      if(heat>lavaHeat[i])lavaHeat[i]=heat
+    }
+  }
+}
+
+function updateSurfaceProfile(world) {
+  const {columns:w,rows:h,material,surfaceHeight}=world
+  for(let x=0;x<w;x++) {
+    let surface=h
+    for(let y=0;y<h;y++) {
+      const kind=material[y*w+x]
+      if(kind===M.SOIL||kind===M.ROCK||kind===M.SAND) {surface=y;break}
+    }
+    surfaceHeight[x]=surface
+  }
+  world.surfaceProfileTick=world.tick
+}
+
+function slopeAt(world,x) {
+  if(x<=0||x>=world.columns-1)return 0
+  const center=world.surfaceHeight[x]
+  return Math.min(1,Math.max(
+    Math.abs(world.surfaceHeight[x-1]-center),
+    Math.abs(world.surfaceHeight[x+1]-center),
+  )/R.slopeScale)
+}
+
+function downhillDirection(world,x) {
+  if(x<=0||x>=world.columns-1)return 0
+  const center=world.surfaceHeight[x],left=world.surfaceHeight[x-1],right=world.surfaceHeight[x+1]
+  if(left<=center&&right<=center)return 0
+  return right-center>left-center?1:-1
+}
 
 export function change(world, i, material) {
   const old = world.material[i]
@@ -48,7 +99,10 @@ function fluid(world, i, x, y, material, slow = false) {
     if (move(world,i,x+drift,y+lift,material)) { world.windMoves++; return }
   }
   if (material === M.WATER && y+2<world.rows && lighter(world.material[i+world.columns],material) && move(world,i,x,y+2,material)) return
-  if (move(world,i,x,y+1,material) || move(world,i,x+direction,y+1,material) || move(world,i,x-direction,y+1,material)) return
+  if(move(world,i,x,y+1,material))return
+  const slopeDirection=material===M.WATER?downhillDirection(world,x):0
+  if(slopeDirection && (move(world,i,x+slopeDirection,y+1,material)||move(world,i,x+slopeDirection,y,material)))return
+  if(move(world,i,x+direction,y+1,material) || move(world,i,x-direction,y+1,material))return
   // Search the full path, so fluids cannot tunnel through a wall.
   const reach = slow ? 2 : 5
   for (const sign of [direction,-direction]) {
@@ -106,12 +160,14 @@ function updateSand(world, i, x, y, temp, lavaNeighbor) {
       world.sandWindMoves++;return
     }
   }
-  if(wet && random(world)<.10) {
-    const sign=world.wind>.2?direction:random(world)<.5?-1:1
+  const slopeDirection=downhillDirection(world,x),slope=slopeAt(world,x)
+  if(wet && random(world)<R.sandWaterTransportChance*(1+slope*R.sandSlopeTransportGain)) {
+    const sign=slopeDirection|| (world.wind>.2?direction:random(world)<.5?-1:1)
     if(move(world,i,x+sign,y,M.SAND)){world.sandWaterMoves++;return}
   }
   const sign=random(world)<.5?-1:1
-  for(const dx of [0,sign,-sign]) {
+  const rollDirection=slopeDirection||sign
+  for(const dx of [0,rollDirection,-rollDirection]) {
     const to=target(world,x+dx,y+1)
     // Falling sand can bury plants; it never replaces rock, soil, ice or water.
     if(to>=0 && world.material[to]===M.PLANT){change(world,to,M.AIR);world.plantsWilted++;}
@@ -122,6 +178,9 @@ function updateSand(world, i, x, y, temp, lavaNeighbor) {
 
 export function updateMaterials(world) {
   const w=world.columns,h=world.rows
+  const cloudLimit=cloudCapacity(world)
+  if(world.surfaceProfileTick<0||world.tick-world.surfaceProfileTick>=R.surfaceRefreshTicks)updateSurfaceProfile(world)
+  spreadLavaHeat(world)
   // A moved/converted particle is stamped, so it runs once per fixed step.
   // Alternate each row's horizontal direction to remove scan bias.
   for(let y=h-1;y>=0;y--) {
@@ -134,10 +193,12 @@ export function updateMaterials(world) {
       const below=i+w<world.material.length?world.material[i+w]:M.ROCK
       const fallingRain=material===M.WATER && world.origin[i]===4 && [M.AIR,M.STEAM,M.CLOUD].includes(below)
       const precipitation=fallingRain || material===M.SNOW || material===M.CLOUD
-      const air=precipitation?precipitationTemperature(world,x,y):0
+      const lavaHeat=world.lavaHeat[i]
+      const air=precipitation?precipitationTemperature(world,x,y)+lavaHeat:0
       const env=precipitation?air:material===M.WATER || material===M.ICE ? world.temperature : environmentTemperature(world,y)
       const lavaNeighbor=neighbor(world,x,y,M.LAVA)
       world.temperatureGrid[i]+=(env-world.temperatureGrid[i])*(material===M.LAVA?.002:.035)
+      if(lavaHeat&&!precipitation&&lavaNeighbor<0)world.temperatureGrid[i]+=lavaHeat*R.lavaHeatTransfer
       if(lavaNeighbor>=0 && material!==M.LAVA)world.temperatureGrid[i]+=(world.temperatureGrid[lavaNeighbor]-world.temperatureGrid[i])*.07
       const temp=world.temperatureGrid[i],above=target(world,x,y-1)
       // Resolve either side of a contact before movement, independent of scan order.
@@ -195,7 +256,7 @@ export function updateMaterials(world) {
         }
         fluid(world,i,x,y,material,true)
       } else if(material===M.STEAM) {
-        if(temp<19 && world.age[i]>45 && random(world)<R.condensation*(1+(19-temp)/10)) {
+        if(world.counts[M.CLOUD]<cloudLimit && temp<19 && world.age[i]>45 && random(world)<R.condensation*(1+(19-temp)/10)) {
           change(world,i,M.CLOUD);world.condensed++;continue
         }
         const velocity=windAt(world,x,y),sign=world.wind>.2?(Math.sign(velocity.x)||1):(random(world)<.5?-1:1)
@@ -207,7 +268,8 @@ export function updateMaterials(world) {
       } else if(material===M.CLOUD) {
         let crowd=0
         for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const at=target(world,x+dx,y+dy);if(at>=0 && world.material[at]===M.CLOUD)crowd++}
-        if(world.age[i]>300 && crowd>=4 && random(world)<.007*(1+world.storm)) {
+        const rainChance=R.cloudRainChance+world.storm*R.cloudStormRainChance
+        if(world.age[i]>R.cloudRainMinAge && crowd>=4 && random(world)<rainChance) {
           change(world,i,precipitationMaterial(world,air));world.temperatureGrid[i]=air;world.origin[i]=4;world.naturalRain++;continue
         }
         if(random(world)>.07+world.wind*.65)continue
@@ -219,7 +281,9 @@ export function updateMaterials(world) {
       } else if(material===M.SOIL || material===M.ROCK) {
         const water=neighbor(world,x,y,M.WATER)
         if(material===M.SOIL) {
-          world.moisture[i]=Math.max(0,Math.min(1,world.moisture[i]+(water>=0?.035:-Math.max(0,temp-23)*.000085)))
+          const exposed=world.surfaceHeight[x]===y
+          const drying=Math.max(0,temp-23)*.000085+(exposed?world.wind*R.windSoilDrying:0)
+          world.moisture[i]=Math.max(0,Math.min(1,world.moisture[i]+(water>=0?.035:-drying)))
           if(temp>180) {change(world,i,M.LAVA);world.temperatureGrid[i]=280;continue}
           const sign=random(world)<.5?-1:1
           if(move(world,i,x,y+1,material))continue
@@ -238,9 +302,13 @@ export function updateMaterials(world) {
           if(temp>230) {breakRock(world,i,'fracture');continue}
           if(world.origin[i]===2 && y<world.initialSeaRow+h*.1) {
             if(world.stress>.1 && random(world)<R.fracture*world.stress) {breakRock(world,i,'fracture');continue}
-            if(water>=0 && world.metrics.flood>.045 && world.temperature>2)world.exposure[i]=Math.min(65535,world.exposure[i]+1)
+            const runoff=world.metrics.flood>.045||world.rainMemory>.08||world.storm>.25||
+              (water>=0&&world.origin[water]===4)
+            const slope=slopeAt(world,x)
+            if(water>=0 && runoff && world.temperature>2)world.exposure[i]=Math.min(65535,world.exposure[i]+1+slope*R.erosionExposureSlopeGain)
             else world.exposure[i]=Math.max(0,world.exposure[i]-1)
-            if(world.exposure[i]>120 && random(world)<R.erosion) {breakRock(world,i,'erode');continue}
+            const erosionChance=R.erosion*(1+slope*R.erosionSlopeGain+world.storm*R.erosionStormGain+world.rainMemory*R.erosionRainGain)
+            if(world.exposure[i]>120 && random(world)<erosionChance) {breakRock(world,i,'erode');continue}
           }
         }
       }

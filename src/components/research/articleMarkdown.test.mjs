@@ -265,6 +265,7 @@ test('every natural and human image appears inside the scrolling article after i
   ]) {
     const data = await server.ssrLoadModule(`/src/components/${dataPath}`)
     const {default:Panel} = await server.ssrLoadModule(`/src/components/${panelPath}`)
+    const { photoUrl } = await server.ssrLoadModule('/src/components/research/photoUrl.js')
     for (const entry of data.ENTRIES) {
       const content = data[collection][entry.article ?? entry.content]
       const html = renderToStaticMarkup(createElement(Panel,{entry,open:true,onClose(){}}))
@@ -274,7 +275,7 @@ test('every natural and human image appears inside the scrolling article after i
         assert.ok(photo > html.indexOf('class="nt-reading-scroll"'),entry.id)
         assert.ok(photo > html.indexOf(`id="${titleId}"`),entry.id)
         assert.ok(photo < html.indexOf('class="nt-article-body"'),entry.id)
-        assert.ok(html.slice(photo).includes(`src="${content.image}"`),entry.id)
+        assert.ok(html.slice(photo).includes(`src="${photoUrl(content.image)}"`),entry.id)
       } else {
         assert.ok(!html.includes('class="nt-article-photo"'),entry.id)
       }

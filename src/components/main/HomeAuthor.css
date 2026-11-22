@@ -24,3 +24,12 @@
 @media (prefers-reduced-motion:reduce) { .ha-portrait, .ha-social, .ha-social-arrow { transition: none; }.ha-portrait-column:hover .ha-portrait { transform: rotate(-3deg); } }
 
 .ha-contact { display: inline-block; margin-top: 10px; color: #6e7e74; font: 11px/1.8 var(--body); text-decoration: underline; text-decoration-color: #b79a5c88; text-underline-offset: 4px; }.ha-contact:hover { color: var(--edition-ink); }
+
+.ha-invitation { display: flow-root; grid-column: 1 / -1; min-width: 0; padding-top: 28px; border-top: 1px solid #b79a5c44; overflow-wrap: anywhere; }
+.ha-invitation h3 { margin: 0 0 20px; color: var(--edition-ink); font: 400 clamp(20px,2.4vw,26px)/1.5 var(--body); letter-spacing: .04em; }
+.ha-invitation p { margin: 0 0 16px; color: #6e7e74; font: 13px/1.9 var(--body); }
+.ha-invitation .ha-contact { margin-top: 0; max-width: 100%; }
+/* Share the closing paragraphs' space instead of creating a tall footer row. */
+.ha-invitation-illustration { display: block; float: right; width: clamp(140px,20vw,200px); max-width: 38%; height: auto; margin: 0 0 0 24px; pointer-events: none; }
+@media (max-width:760px) { .ha-invitation-illustration { width: 160px; margin-left: 18px; } }
+@media (max-width:540px) { .ha-invitation { padding-top: 24px; }.ha-invitation p { font-size: 12px; } }

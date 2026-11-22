@@ -2,11 +2,12 @@ import { useEffect, useRef } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { CATEGORIES, SELECTOR, WORK_MARKDOWN } from './data'
 import { Cover } from './WorkSelector'
+import { WorkPosterCredit } from './PosterCopyright'
 import Text from './Text'
 import WorkMarkdown from './WorkMarkdown'
 import { getSpotifyEmbed } from './spotifyEmbed'
 export default function WorkDialog({ work, onClose }) {
-  const panel = useRef(null), previous = useRef(null), reduced = useReducedMotion()
+  const panel = useRef(null), previous = useRef(null), posterFrame = useRef(null), reduced = useReducedMotion()
   useEffect(() => {
     if (!work) return
     previous.current = document.activeElement
@@ -38,7 +39,7 @@ export default function WorkDialog({ work, onClose }) {
         <motion.section ref={panel} className={`ball-work-dialog${work.category === 'music' ? ' ball-work-dialog--music' : ''}`}  style={{ transformPerspective: 1100, transformOrigin: 'left center' }} role="dialog" aria-modal="true" aria-labelledby="ball-work-title" initial={{ opacity: 0, y: 24, scale: .98, rotateY: reduced ? 0 : -12 }} animate={{ opacity: 1, y: 0, scale: 1, rotateY: 0 }} exit={{ opacity: 0, y: 16, scale: .98, rotateY: reduced ? 0 : 6 }} transition={{ duration: reduced ? 0 : SELECTOR.duration, ease: SELECTOR.easing }}>
           <header><Text id="details">ON OUR SHELF</Text><button onClick={onClose}><Text id="close">CLOSE ×</Text></button></header>
           <div className={`ball-work-scroll${work.markdown || spotifyEmbed ? ' ball-work-scroll--markdown' : ''}`}>
-            {work.category !== 'music' && <motion.div key={`art-${work.id}`} className="ball-work-art" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : SELECTOR.duration, ease: SELECTOR.easing }}><Cover work={work} mode="detail"/></motion.div>}
+            {work.category !== 'music' && <motion.div ref={posterFrame} key={`art-${work.id}`} className="ball-work-art" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : SELECTOR.duration, ease: SELECTOR.easing }}><Cover work={work} mode="detail"/><WorkPosterCredit work={work} photoRef={posterFrame}/></motion.div>}
             <motion.div key={`content-${work.id}`} className={work.markdown || spotifyEmbed ? 'ball-work-content-scroll' : undefined} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : SELECTOR.duration, delay: reduced ? 0 : .04, ease: SELECTOR.easing }}>
               {work.category === 'music' ? <>
                 <WorkMarkdown markdown={musicOverview}/>

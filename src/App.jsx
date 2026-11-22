@@ -250,7 +250,8 @@ function App() {
   function openPortal(portalId, revealOrigin, { skipStory = false, replayStory = false } = {}) {
     const comic = PORTAL_COMICS[portalId]
     const shouldReplayStory = replayStory && comic?.replayableStory
-    const shouldSkipComic = comic && !shouldReplayStory && (skipStory || (portalId !== 'ball' && (comic.panels?.length === 0 || visitedRef.current.includes(portalId))))
+    const hasComicContent = Boolean(comic?.story || comic?.panels?.length || comic?.replayableStory)
+    const shouldSkipComic = comic && !shouldReplayStory && (skipStory || (portalId !== 'ball' && (!hasComicContent || visitedRef.current.includes(portalId))))
     const destination = shouldSkipComic ? comic.destination : comic?.screen || getPortalDestination(portalId)
     if (!destination || portalRevealLocked.current || portalCurveRef.current || comicHomePhaseRef.current !== 'idle') return false
     failedExplorationDestinations.current.delete(destination)

@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import './PhotoCredit.css'
 
 // Screen-space control stays clickable above the reading dismissal layer.
-export default function PhotoCredit({ photoRef, credit, inline = false }) {
+export default function PhotoCredit({ photoRef, credit, inline = false, children }) {
   const [host, setHost] = useState(null), [open, setOpen] = useState(false)
   const button = useRef(null), dialog = useRef(null)
   useEffect(() => { setHost(photoRef.current?.closest('.natural-test') ?? null) }, [photoRef])
@@ -39,15 +39,15 @@ export default function PhotoCredit({ photoRef, credit, inline = false }) {
       <div className="research-photo-license-copy">
         <button className="research-photo-license-close" aria-label="關閉圖片來源" onClick={close}>×</button>
         <h2 id="research-photo-license-title">{isOriginalPhoto ? '圖片版權資訊' : '圖片來源與授權'}</h2>
-        {isOriginalPhoto ? <p>{credit.attribution}</p> : <>
+        {children ?? (isOriginalPhoto ? <p>{credit.attribution}</p> : <>
           <p>{credit.title}</p>
           <dl>
             <dt>作者</dt><dd>{credit.author}</dd>
-            <dt>來源</dt><dd><a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer">Wikimedia Commons 原始檔案頁 ↗</a></dd>
+            <dt>來源</dt><dd><a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer">{credit.sourceLabel || 'Wikimedia Commons 原始檔案頁 ↗'}</a></dd>
             <dt>授權</dt><dd><a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer">{credit.license}</a></dd>
             <dt>修改</dt><dd>{credit.modifications}</dd>
           </dl>
-        </>}
+        </>)}
       </div>
     </dialog>, document.body)}
   </>

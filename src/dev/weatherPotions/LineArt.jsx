@@ -1,3 +1,5 @@
+import potionIllustration from '../../../Art/potion/potion.png'
+
 // Match the actual filename to the potion ID; unmatched IDs retain the SVG.
 const potionImages = Object.fromEntries(Object.entries(import.meta.glob(
   '../../../Art/potion/*-potion.png', { eager: true, query: '?url', import: 'default' },
@@ -28,14 +30,10 @@ export function Bottle({ potion, pouring = false }) {
     {potion.mark === 'rainbow' && <g fill="none" strokeWidth="1"><path d="M29 89A9 9 0 0 1 47 89" stroke="#a57289" /><path d="M32 89A6 6 0 0 1 44 89" stroke="#b4a25e" /><path d="M35 89A3 3 0 0 1 41 89" stroke="#729787" /></g>}
   </svg>
 }
-export function WeatherOrbit() {
-  return <svg viewBox="0 0 230 175" className="wp-orbit" aria-hidden="true">
-    <circle cx="111" cy="86" r="59" fill="none" stroke="#A2D8DE" /><circle cx="111" cy="86" r="73" fill="none" stroke="#34465A" strokeOpacity=".25" strokeDasharray="2 8" />
-    <ellipse cx="111" cy="86" rx="99" ry="23" fill="none" stroke="#92704B" strokeOpacity=".65" transform="rotate(-28 111 86)" />
-    <path d="M109 58L118 80L140 87L118 94L109 116L102 94L80 87L102 80Z" fill="#F6F0A9" stroke="#92704B" strokeWidth=".8" />
-    <rect x="173" y="25" width="19" height="19" rx="0" fill="#F691A6" transform="rotate(14 180 30)" /><circle cx="50" cy="131" r="9" fill="#7FB9EC" />
-    <path d="M192 112L192 130M183 121H201" stroke="#34465A" strokeWidth=".8" />
-  </svg>
+export function WeatherIllustration() {
+  return <div className="wp-orbit" aria-hidden="true">
+    <img src={potionIllustration} alt="" draggable={false} />
+  </div>
 }
 export function EndingMark({ type }) {
   return <svg viewBox="0 0 100 90" aria-hidden="true" className="wp-ending-mark"><g fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">

@@ -41,6 +41,9 @@ export function windAt(world,x,y) {
   const radius=Math.max(8,Math.hypot(dx,dy))
   return {x:base*.35-dy/radius*world.storm*1.7,y:dx/radius*world.storm*.9}
 }
+export function cloudCapacity(world) {
+  return Math.min(R.cloudMaxParticles,Math.max(1,Math.floor(world.material.length*R.cloudMaxFraction)))
+}
 export function climate(world, dt) {
   const type = world.input?.type, strength = world.input?.strength || 0
   const dose=strength*(world.input?.brushSize?brushSettings(type,strength,world.input.brushSize).power:1)
@@ -70,6 +73,7 @@ export function spawnAt(world,type,x,y,brush=false) {
   if(world.ending || !['rain','cold','cloud','lava','sand','growth'].includes(type) || !world.counts[M.AIR])return false
   x=clamp(Math.round(x),1,world.columns-2);y=clamp(Math.round(y),1,world.rows-2)
   if(type==='growth' && world.counts[M.GROWTH]>=Math.min(R.growthMaxParticles,world.material.length*.02))return false
+  if(type==='cloud' && world.counts[M.CLOUD]>=cloudCapacity(world))return false
   if(type==='cloud')y=Math.min(y,Math.round(world.rows*.42))
   if(brush || type==='lava' || type==='sand' || type==='growth')while(y>1 && !freeAt(world,x,y))y--
   if(!freeAt(world,x,y))return false

@@ -1,0 +1,919 @@
+{
+  "verifiedAt": "2026-11-21",
+  "images": [
+    {
+      "characterId": "ral",
+      "characterName": "拉爾",
+      "image": "/images/telescope/recommendations/ral-svalbard.jpg",
+      "imageAlt": "挪威・斯瓦爾巴全球種子庫：Svalbard Global Seed Vault Exterior 2020.jpg",
+      "photoCredit": {
+        "title": "Svalbard Global Seed Vault Exterior 2020.jpg",
+        "author": "Cierra Martin for Crop Trust",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Svalbard_Global_Seed_Vault_Exterior_2020.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseVersion": "2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1280,
+        "height": 913
+      },
+      "provider": "Wikimedia Commons",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Svalbard_Global_Seed_Vault_Exterior_2020.jpg/1280px-Svalbard_Global_Seed_Vault_Exterior_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Svalbard_Global_Seed_Vault_Exterior_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "originalWidth": 7517,
+      "originalHeight": 5359,
+      "originalBytes": 8926451,
+      "sourcePageRevision": 921852706,
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2021-06-20 02:58:15",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Svalbard Global Seed Vault Exterior 2020",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Svalbard Global Seed Vault|2020 in Svalbard|Flickr images reviewed by FlickreviewR 2|Norway photographs taken on 2020-02-25",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Photograph of exterior of Svalbard Global Seed Vault taken in February 2020",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2020-02-25",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.flickr.com/photos/croptrust/49655222751/in/album-72157713472825676/\">https://www.flickr.com/photos/croptrust/49655222751/in/album-72157713472825676/</a>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "Cierra Martin for Crop Trust",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 2.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 2.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/2.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-2.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "sourceWikitext": "\n=={{int:filedesc}}==\n{{Information\n|description={{en|1=Photograph of exterior of Svalbard Global Seed Vault taken in February 2020}}\n|date=2020-02-25\n|source=https://www.flickr.com/photos/croptrust/49655222751/in/album-72157713472825676/\n|author=Cierra Martin for Crop Trust\n|permission=\n|other versions=\n}}\n\n=={{int:license-header}}==\n{{cc-by-sa-2.0}}{{FlickreviewR|status=passed_changed|author=Global Crop Diversity Trust|sourceurl=https://flickr.com/photos/39052611@N05/49655222751|archive=|reviewdate=2021-06-20 02:58:16|reviewlicense=cc-by-sa-2.0|reviewer=FlickreviewR 2|uploadlicense=cc-by-2.0}}\n\n[[Category:Svalbard Global Seed Vault]]\n[[Category:2020 in Svalbard]]\n[[Category:Norway photographs taken on 2020-02-25]]",
+      "bytes": 345849,
+      "assetSha256": "3514d4606ff689bef0b68899a77237a3b3cf4225b33b29b32b01f7ab01657dc8",
+      "requestedSourceUrl": "https://commons.wikimedia.org/wiki/File:Svalbard_Global_Seed_Vault_Exterior_2020.jpg"
+    },
+    {
+      "characterId": "il",
+      "characterName": "伊爾",
+      "image": "/images/telescope/recommendations/il-keelung.jpg",
+      "imageAlt": "台灣・基隆港：基隆市",
+      "photoCredit": {
+        "title": "基隆市",
+        "author": "Alix Lee",
+        "sourceUrl": "https://www.pexels.com/zh-tw/photo/26065891/",
+        "sourceLabel": "Pexels 原始照片頁 ↗",
+        "license": "Pexels License",
+        "licenseVersion": null,
+        "licenseUrl": "https://www.pexels.com/license/",
+        "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1200,
+        "height": 800
+      },
+      "provider": "Pexels",
+      "photoId": "26065891",
+      "photographerUrl": "https://www.pexels.com/zh-tw/@alix-lee-43379071/",
+      "verification": "Photographer, free license link, dimensions and official image ID confirmed on original photo page in native Chrome.",
+      "originalWidth": 3600,
+      "originalHeight": 2401,
+      "downloadUrl": "https://images.pexels.com/photos/26065891/pexels-photo-26065891.jpeg?auto=compress&cs=tinysrgb&w=1200&fit=max",
+      "bytes": 161702,
+      "assetSha256": "f4ecbae397d54c32ffefe1751533c4d763246f1142ec1b7732739fcb9c7e7037",
+      "requestedSourceUrl": "https://www.pexels.com/zh-tw/photo/26065891/"
+    },
+    {
+      "characterId": "ost",
+      "characterName": "俄斯塔",
+      "image": "/images/telescope/recommendations/ost-british-museum.jpg",
+      "imageAlt": "英國・大英博物館：British Museum at night 2024-12-20.jpg",
+      "photoCredit": {
+        "title": "British Museum at night 2024-12-20.jpg",
+        "author": "Andy Li",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:British_Museum_at_night_2024-12-20.jpg",
+        "license": "CC0 1.0",
+        "licenseVersion": "1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1280,
+        "height": 964
+      },
+      "provider": "Wikimedia Commons",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/British_Museum_at_night_2024-12-20.jpg/1280px-British_Museum_at_night_2024-12-20.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a9/British_Museum_at_night_2024-12-20.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "originalWidth": 8160,
+      "originalHeight": 6144,
+      "originalBytes": 12362458,
+      "sourcePageRevision": 1225420141,
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2024-12-27 04:58:00",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "British Museum at night 2024-12-20",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "CC-Zero|Self-published work|London photographs taken on 2024-12-20|Files with coordinates missing SDC location of creation (51° N, 1° W)|Central portico on the southern elevation of the British Museum|British Museum at night|British Museum in 2024",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "GPSLatitude": {
+          "value": "51.518681",
+          "source": "commons-desc-page"
+        },
+        "GPSLongitude": {
+          "value": "-0.126050",
+          "source": "commons-desc-page"
+        },
+        "GPSMapDatum": {
+          "value": "WGS-84",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "British Museum at night",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2024-12-20 20:36:43",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:Onthewings\" title=\"User:Onthewings\">Andy Li</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Zero, Public Domain Dedication",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "false",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "sourceWikitext": "=={{int:filedesc}}==\n{{Information\n|description={{en|1=British Museum at night}}\n|date=2024-12-20 20:36:43\n|source={{own}}\n|author=[[User:Onthewings|Andy Li]]\n|permission=\n|other versions=\n}}\n{{Location|51.518681|-0.12605|heading:238}}\n\n=={{int:license-header}}==\n{{self|cc-zero}}\n\n[[Category:British Museum at night]]\n[[Category:Central portico on the southern elevation of the British Museum]]\n[[Category:London photographs taken on 2024-12-20]]\n[[Category:British Museum in 2024]]",
+      "bytes": 313824,
+      "assetSha256": "1b6a1a850177378aeb64ada28968a1951f03577148d4f501bf9e3818e91052c9",
+      "requestedSourceUrl": "https://commons.wikimedia.org/wiki/File:British_Museum_at_night_2024-12-20.jpg"
+    },
+    {
+      "characterId": "yuta",
+      "characterName": "尤塔",
+      "image": "/images/telescope/recommendations/yuta-providence.jpg",
+      "imageAlt": "美國・普羅維登斯：秋季羅德島州普羅維登斯市的城市天際線",
+      "photoCredit": {
+        "title": "秋季羅德島州普羅維登斯市的城市天際線",
+        "author": "Beth Fitzpatrick",
+        "sourceUrl": "https://www.pexels.com/zh-tw/photo/34571466/",
+        "sourceLabel": "Pexels 原始照片頁 ↗",
+        "license": "Pexels License",
+        "licenseVersion": null,
+        "licenseUrl": "https://www.pexels.com/license/",
+        "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1200,
+        "height": 800
+      },
+      "provider": "Pexels",
+      "photoId": "34571466",
+      "photographerUrl": "https://www.pexels.com/zh-tw/@beth-fitzpatrick-742222899/",
+      "verification": "Photographer, free license link, dimensions and official image ID confirmed on original photo page in native Chrome.",
+      "originalWidth": 5944,
+      "originalHeight": 3963,
+      "downloadUrl": "https://images.pexels.com/photos/34571466/pexels-photo-34571466.jpeg?auto=compress&cs=tinysrgb&w=1200&fit=max",
+      "bytes": 196768,
+      "assetSha256": "609a4bf6b6004eab0b4086c6dd7804b1b7661657c2c59e938aed0a4bc0e32bc1",
+      "requestedSourceUrl": "https://www.pexels.com/zh-tw/photo/34571466/"
+    },
+    {
+      "characterId": "reed",
+      "characterName": "里德",
+      "image": "/images/telescope/recommendations/reed-fushimi-inari.jpg",
+      "imageAlt": "日本・伏見稻荷大社：伏見稻荷大社絢麗多彩的鳥居",
+      "photoCredit": {
+        "title": "伏見稻荷大社絢麗多彩的鳥居",
+        "author": "Bruna Santos",
+        "sourceUrl": "https://www.pexels.com/zh-tw/photo/39195537/",
+        "sourceLabel": "Pexels 原始照片頁 ↗",
+        "license": "Pexels License",
+        "licenseVersion": null,
+        "licenseUrl": "https://www.pexels.com/license/",
+        "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1200,
+        "height": 800
+      },
+      "provider": "Pexels",
+      "photoId": "39195537",
+      "photographerUrl": "https://www.pexels.com/zh-tw/@brunafisantos/",
+      "verification": "Photographer, free license link, dimensions and official image ID confirmed on original photo page in native Chrome.",
+      "originalWidth": 5340,
+      "originalHeight": 3560,
+      "downloadUrl": "https://images.pexels.com/photos/39195537/pexels-photo-39195537.jpeg?auto=compress&cs=tinysrgb&w=1200&fit=max",
+      "bytes": 162753,
+      "assetSha256": "183b7ad315524b7aba457d2faf446ba93571f780cf4182836b1285525b65119a",
+      "requestedSourceUrl": "https://www.pexels.com/zh-tw/photo/39195537/"
+    },
+    {
+      "characterId": "anpu",
+      "characterName": "安普",
+      "image": "/images/telescope/recommendations/anpu-el-qeis.jpg",
+      "imageAlt": "阿努比斯木雕小像（古埃及新王國時期），作為古犬城文化背景的文物參考",
+      "photoCredit": {
+        "title": "木雕阿努比斯像.jpg",
+        "author": "丘崈",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:%E6%9C%A8%E9%9B%95%E9%98%BF%E5%8A%AA%E6%AF%94%E6%96%AF%E5%83%8F.jpg",
+        "license": "CC0 1.0",
+        "licenseVersion": "1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1280,
+        "height": 1280
+      },
+      "note": "此處以古埃及新王國時期的阿努比斯木雕小像，呈現古犬城與阿努比斯信仰的文化連結；照片為文物參考，並非埃爾凱斯遺址實景。",
+      "provider": "Wikimedia Commons",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/%E6%9C%A8%E9%9B%95%E9%98%BF%E5%8A%AA%E6%AF%94%E6%96%AF%E5%83%8F.jpg/1280px-%E6%9C%A8%E9%9B%95%E9%98%BF%E5%8A%AA%E6%AF%94%E6%96%AF%E5%83%8F.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/%E6%9C%A8%E9%9B%95%E9%98%BF%E5%8A%AA%E6%AF%94%E6%96%AF%E5%83%8F.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "originalWidth": 3072,
+      "originalHeight": 3072,
+      "originalBytes": 3743291,
+      "sourcePageRevision": 1300706516,
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2026-09-27 14:47:26",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "木雕阿努比斯像",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "CC-Zero|Recumbent canine (hieroglyph)|Self-published work|2026 photographs of Taipei|Interior of the National Museum of History, Taipei|Statues of Anubis|Statues of the Egyptian New Kingdom|Ancient Egyptian statues in the Museo archeologico nazionale (Florence)",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "He was particularly venerated in the city of Cynopolis (\"City of Dogs\") in Middle Egypt.",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2026-09-25 16:01:44",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:%E4%B8%98%E5%B4%88&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:丘崈 (page does not exist)\">丘崈</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Zero, Public Domain Dedication",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "false",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "sourceWikitext": "=={{int:filedesc}}==\n{{Information\n|description={{zh|1=阿努比斯小雕像（Statuette Depicting Anubis，新王國）}}\n{{en|1=The god Anubis was depicted in the form of a jackal, or in human with a jackal's head. From the earliest times he was considered the deity in charge of embalming the bodies of the dead and is often depicted in the act of performing this operation.}}\n{{en|1=Anubis also had the task of accompanying the souls of the dead to the Afterlife. The \"Book of the Dead\" shows him holding the deceased's soul by the hand as the heart is weighed during the judgement before Osiris. He was also worshipped as a guardian of necropolises, a role that probably derived from the observation of jackals at Egyptian necropolises in desert locations.}}\n{{en|1=He was particularly venerated in the city of Cynopolis (\"City of Dogs\") in Middle Egypt.}}\n|date=2026-09-25 16:01:44\n|source={{own}}\n|author=[[User:丘崈|丘崈]]\n|permission=\n|other versions=\n}}\n\n=={{int:license-header}}==\n{{self|cc-zero}}\n\n[[Category:Statues of Anubis]]\n[[Category:Recumbent canine (hieroglyph)]]\n[[Category:Statues of the Egyptian New Kingdom]]\n[[Category:Ancient Egyptian statues in the Museo archeologico nazionale (Florence)]]\n[[Category:Interior of the National Museum of History, Taipei]]\n[[Category:2026 photographs of Taipei]]",
+      "bytes": 208667,
+      "assetSha256": "76cba32e268734f95781301ad0337e507dedd3622a53b220b485d537321effe0",
+      "requestedSourceUrl": "https://commons.wikimedia.org/wiki/File:%E6%9C%A8%E9%9B%95%E9%98%BF%E5%8A%AA%E6%AF%94%E6%96%AF%E5%83%8F.jpg"
+    },
+    {
+      "characterId": "harriet",
+      "characterName": "哈里特",
+      "image": "/images/telescope/recommendations/harriet-american-airlines-center.jpg",
+      "imageAlt": "美國・美國航空中心：American Airlines Center (6246886325) cropped.jpg",
+      "photoCredit": {
+        "title": "American Airlines Center (6246886325) cropped.jpg",
+        "author": "Jeff Attaway",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:American_Airlines_Center_(6246886325)_cropped.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。來源檔本身為原作者／上傳者提供的裁切版本；下載圖檔保留此指定版本的完整構圖。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1280,
+        "height": 1040
+      },
+      "provider": "Wikimedia Commons",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/American_Airlines_Center_%286246886325%29_cropped.jpg/1280px-American_Airlines_Center_%286246886325%29_cropped.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/American_Airlines_Center_%286246886325%29_cropped.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "originalWidth": 1819,
+      "originalHeight": 1478,
+      "originalBytes": 944392,
+      "sourcePageRevision": 889971744,
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2020-03-30 10:39:16",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "American Airlines Center (6246886325) cropped",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "American Airlines Center|Files with coordinates missing SDC location of creation",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "GPSLatitude": {
+          "value": "32.791333",
+          "source": "commons-desc-page"
+        },
+        "GPSLongitude": {
+          "value": "-96.812667",
+          "source": "commons-desc-page"
+        },
+        "GPSMapDatum": {
+          "value": "WGS-84",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "American Airlines Center",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2011-09-30 12:35:43",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/File:American_Airlines_Center_(6246886325).jpg\" title=\"File:American Airlines Center (6246886325).jpg\">File:American_Airlines_Center_(6246886325).jpg</a>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "Jeff Attaway",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 4.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/4.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-4.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "sourceWikitext": "=={{int:filedesc}}==\n{{Information\n|description={{en|1=American Airlines Center}}\n|date=2011-09-30 12:35:43\n|source=[[:File:American_Airlines_Center_(6246886325).jpg]]\n|author=Jeff Attaway\n|permission=\n|other versions=\n}}\n{{Location|32.791333|-96.812667}}\n\n=={{int:license-header}}==\n{{cc-by-sa-4.0}}\n\n[[Category:American Airlines Center]]",
+      "bytes": 387866,
+      "assetSha256": "6d52cb1433dcc480d37d8013c6af14b9caa8bf6e8e76fe7d436aed8fb92f049d",
+      "requestedSourceUrl": "https://commons.wikimedia.org/wiki/File:American_Airlines_Center_(6246886325)_cropped.jpg"
+    },
+    {
+      "characterId": "kane",
+      "characterName": "凱恩",
+      "image": "/images/telescope/recommendations/kane-grand-canyon.jpg",
+      "imageAlt": "美國・大峽谷：壯闊的峽谷風景",
+      "photoCredit": {
+        "title": "壯闊的峽谷風景",
+        "author": "Amber Stevens",
+        "sourceUrl": "https://www.pexels.com/zh-tw/photo/4228971/",
+        "sourceLabel": "Pexels 原始照片頁 ↗",
+        "license": "Pexels License",
+        "licenseVersion": null,
+        "licenseUrl": "https://www.pexels.com/license/",
+        "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1200,
+        "height": 800
+      },
+      "provider": "Pexels",
+      "photoId": "4228971",
+      "photographerUrl": "https://www.pexels.com/zh-tw/@aiamkay/",
+      "verification": "Photographer, free license link, dimensions and official image ID confirmed on original photo page in native Chrome.",
+      "originalWidth": 6000,
+      "originalHeight": 4000,
+      "downloadUrl": "https://images.pexels.com/photos/4228971/pexels-photo-4228971.jpeg?auto=compress&cs=tinysrgb&w=1200&fit=max",
+      "bytes": 205881,
+      "assetSha256": "a724bf947293fcfd227eac35272fd4d2acf38b4a54dfb27336fc35fe1662b0fb",
+      "requestedSourceUrl": "https://www.pexels.com/zh-tw/photo/4228971/"
+    },
+    {
+      "characterId": "seth",
+      "characterName": "賽斯",
+      "image": "/images/telescope/recommendations/seth-grand-bazaar.jpg",
+      "imageAlt": "土耳其・伊斯坦堡大市集：伊斯坦堡大巴扎充滿活力的內部景象",
+      "photoCredit": {
+        "title": "伊斯坦堡大巴扎充滿活力的內部景象",
+        "author": "Tayssir Kadamany",
+        "sourceUrl": "https://www.pexels.com/zh-tw/photo/37687962/",
+        "sourceLabel": "Pexels 原始照片頁 ↗",
+        "license": "Pexels License",
+        "licenseVersion": null,
+        "licenseUrl": "https://www.pexels.com/license/",
+        "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1200,
+        "height": 800
+      },
+      "provider": "Pexels",
+      "photoId": "37687962",
+      "photographerUrl": "https://www.pexels.com/zh-tw/@sirokad/",
+      "verification": "Photographer, free license link, dimensions and official image ID confirmed on original photo page in native Chrome.",
+      "originalWidth": 8192,
+      "originalHeight": 5461,
+      "downloadUrl": "https://images.pexels.com/photos/37687962/pexels-photo-37687962.jpeg?auto=compress&cs=tinysrgb&w=1200&fit=max",
+      "bytes": 272627,
+      "assetSha256": "ac5ff61e0e61d1b7ccc4af8b8890912b3216d1d974fec452ec5d806aae6b178c",
+      "requestedSourceUrl": "https://www.pexels.com/zh-tw/photo/37687962/"
+    },
+    {
+      "characterId": "laike",
+      "characterName": "檑恪楒",
+      "image": "/images/telescope/recommendations/laike-galapagos.jpg",
+      "imageAlt": "厄瓜多・加拉巴哥群島：加拉帕戈斯陸龜在自然栖息地",
+      "photoCredit": {
+        "title": "加拉帕戈斯陸龜在自然栖息地",
+        "author": "Lloyd Douglas",
+        "sourceUrl": "https://www.pexels.com/zh-tw/photo/26381580/",
+        "sourceLabel": "Pexels 原始照片頁 ↗",
+        "license": "Pexels License",
+        "licenseVersion": null,
+        "licenseUrl": "https://www.pexels.com/license/",
+        "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1200,
+        "height": 800
+      },
+      "provider": "Pexels",
+      "photoId": "26381580",
+      "photographerUrl": "https://www.pexels.com/zh-tw/@photations/",
+      "verification": "Photographer, free license link, dimensions and official image ID confirmed on original photo page in native Chrome.",
+      "originalWidth": 3888,
+      "originalHeight": 2592,
+      "downloadUrl": "https://images.pexels.com/photos/26381580/pexels-photo-26381580.jpeg?auto=compress&cs=tinysrgb&w=1200&fit=max",
+      "bytes": 164968,
+      "assetSha256": "5e4e206a4231111bc3c7ddd1f7420b9373534eba09e17d08dbce1e76cab3279b",
+      "requestedSourceUrl": "https://www.pexels.com/zh-tw/photo/26381580/"
+    },
+    {
+      "characterId": "pato",
+      "characterName": "帕托",
+      "image": "/images/telescope/recommendations/pato-nazca-lines.jpg",
+      "imageAlt": "秘魯・納斯卡線：秘魯著名的納斯卡線條鳥瞰圖",
+      "photoCredit": {
+        "title": "秘魯著名的納斯卡線條鳥瞰圖",
+        "author": "Radha Daehne",
+        "sourceUrl": "https://www.pexels.com/zh-tw/photo/40692070/",
+        "sourceLabel": "Pexels 原始照片頁 ↗",
+        "license": "Pexels License",
+        "licenseVersion": null,
+        "licenseUrl": "https://www.pexels.com/license/",
+        "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1200,
+        "height": 675
+      },
+      "provider": "Pexels",
+      "photoId": "40692070",
+      "photographerUrl": "https://www.pexels.com/zh-tw/@radha-daehne-1340577771/",
+      "verification": "Photographer, free license link, dimensions and official image ID confirmed on original photo page in native Chrome.",
+      "originalWidth": 8160,
+      "originalHeight": 4592,
+      "downloadUrl": "https://images.pexels.com/photos/40692070/pexels-photo-40692070.jpeg?auto=compress&cs=tinysrgb&w=1200&fit=max",
+      "bytes": 133453,
+      "assetSha256": "6857d5de2eea01214958ee98962c384cbabd6f21be63cea13c3718a3983cd08f",
+      "requestedSourceUrl": "https://www.pexels.com/zh-tw/photo/40692070/"
+    },
+    {
+      "characterId": "arena",
+      "characterName": "阿瑞娜",
+      "image": "/images/telescope/recommendations/arena-glastonbury-tor.jpg",
+      "imageAlt": "英國・格拉斯頓伯里山丘：Glastonbury tor (the final climb) arp (cropped).jpg",
+      "photoCredit": {
+        "title": "Glastonbury tor (the final climb) arp (cropped).jpg",
+        "author": "Adrian Pingstone (Arpingstone)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Glastonbury_tor_(the_final_climb)_arp_(cropped).jpg",
+        "license": "Public domain",
+        "licenseVersion": null,
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Glastonbury_tor_(the_final_climb)_arp_(cropped).jpg#Licensing",
+        "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。來源檔本身為原作者／上傳者提供的裁切版本；下載圖檔保留此指定版本的完整構圖。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1280,
+        "height": 768
+      },
+      "provider": "Wikimedia Commons",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Glastonbury_tor_%28the_final_climb%29_arp_%28cropped%29.jpg/1280px-Glastonbury_tor_%28the_final_climb%29_arp_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Glastonbury_tor_%28the_final_climb%29_arp_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "originalWidth": 1320,
+      "originalHeight": 792,
+      "originalBytes": 1308967,
+      "sourcePageRevision": 1274090000,
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2019-09-11 11:05:02",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Glastonbury tor (the final climb) arp (cropped)",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "PD-user|Glastonbury Tor|St Michael's Tower, Glastonbury Tor|Extracted images",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "The final part of the walk up the 518-foot-high Glastonbury Tor, Glastonbury, Somerset",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "Taken on 2nd August 2010",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "This image has been <b>extracted</b> from another file",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "Adrian Pingstone (<a href=\"//commons.wikimedia.org/wiki/User:Arpingstone\" title=\"User:Arpingstone\">Arpingstone</a>)",
+          "source": "commons-desc-page"
+        },
+        "Permission": {
+          "value": "<table class=\"licensetpl\" style=\"display:none\">\n<tbody><tr>\n<td><span class=\"licensetpl_short\">Public domain</span><span class=\"licensetpl_long\">Public domain</span><span class=\"licensetpl_link_req\">false</span><span class=\"licensetpl_attr_req\">false</span>\n</td></tr></tbody></table>\n<table style=\"width: 100%; clear: both; margin: 0.5em auto; background-color: var(--background-color-progressive-subtle, #f7f8ff); color: var(--color-base, #202122); border: var(--border-subtle, 2px solid #8888aa); border-spacing: 8px; padding: 0px;\" dir=\"ltr\" class=\"layouttemplate\" lang=\"en\">\n<tbody><tr>\n<td><span typeof=\"mw:File\"><span title=\"Public domain\"><img alt=\"Public domain\" src=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/PD-icon.svg/120px-PD-icon.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"64\" height=\"64\" class=\"mw-file-element\" srcset=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/PD-icon.svg/250px-PD-icon.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"196\" data-file-height=\"196\"></span></span>\n</td>\n<td>This work has been released into the <b><a href=\"https://en.wikipedia.org/wiki/en:public_domain\" class=\"extiw\" title=\"w:en:public domain\">public domain</a></b> by its author, <b><span class=\"licensetpl_attr\"><a href=\"//commons.wikimedia.org/wiki/User:Arpingstone\" title=\"User:Arpingstone\">Arpingstone</a></span></b>. This applies worldwide.<br>\n<p><small>In some countries this may not be legally possible; if so:</small><br>\n<i><span class=\"licensetpl_attr\"><a href=\"//commons.wikimedia.org/wiki/User:Arpingstone\" title=\"User:Arpingstone\">Arpingstone</a></span> grants anyone the right to use this work <b>for any purpose</b>, without any conditions, unless such conditions are required by law.</i>\n</p>\n</td></tr></tbody></table>",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseShortName": {
+          "value": "Public domain",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Public domain",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "false",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Copyrighted": {
+          "value": "False",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "pd",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "sourceWikitext": "== {{int:filedesc}} ==\n{{Information\n|description = {{en|The final part of the walk up the 518-foot-high Glastonbury Tor, Glastonbury, Somerset}}\n|date        = Taken on 2nd August 2010 \n|source      = {{extracted from|Glastonbury tor (the final climb) arp.jpg}}\n|author      = Adrian Pingstone ([[User:Arpingstone|Arpingstone]])\n|permission  = {{PD-user|Arpingstone}}\n}}\n\n[[Category:Glastonbury Tor]]\n[[Category:St Michael's Tower, Glastonbury Tor]]",
+      "bytes": 230838,
+      "assetSha256": "865def1ef9f86175c9c9784533a8d6d939942973a11f647c937cd7fa9b5aa2ab",
+      "requestedSourceUrl": "https://commons.wikimedia.org/wiki/File:Glastonbury_tor_(the_final_climb)arp(cropped).jpg",
+      "sourceResolution": "The supplied link omits spaces around arp and (cropped). Commons title search identified the same named crop as File:Glastonbury tor (the final climb) arp (cropped).jpg; no replacement image used."
+    },
+    {
+      "characterId": "dioscuri",
+      "characterName": "德俄斯庫里",
+      "image": "/images/telescope/recommendations/dioscuri-pephnos.jpg",
+      "imageAlt": "希臘・佩夫諾斯小島：Pefnos egg.jpg",
+      "photoCredit": {
+        "title": "Pefnos egg.jpg",
+        "author": "Kavouras55",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pefnos_egg.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseVersion": "4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1280,
+        "height": 830
+      },
+      "provider": "Wikimedia Commons",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Pefnos_egg.jpg/1280px-Pefnos_egg.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/80/Pefnos_egg.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "originalWidth": 2889,
+      "originalHeight": 1873,
+      "originalBytes": 2653060,
+      "sourcePageRevision": 857252195,
+      "sourceMetadata": {
+        "DateTime": {
+          "value": "2020-08-14 17:55:04",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Pefnos egg",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Self-published work|Egg of Helen (Pephnos)",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Stone egg sculptured on Pefnos island of Agios Dimitrios (West Mani-Peloponnese) depicting the union of Swan/Zeus with Leda.",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2020-08-04",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Kavouras55&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Kavouras55 (page does not exist)\">Kavouras55</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 4.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/4.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-4.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "sourceWikitext": "== {{int:filedesc}} ==\n{{Information\n|description={{en|1=Stone egg sculptured on Pefnos island of Agios Dimitrios (West Mani-Peloponnese) depicting the union of Swan/Zeus with Leda.}}\n|date=2020-08-04\n|source={{own}}\n|author=[[User:Kavouras55|Kavouras55]]\n}}\n\n== {{int:license-header}} ==\n{{self|cc-by-sa-4.0}}\n\n[[Category:Egg of Helen (Pephnos)]]",
+      "bytes": 253953,
+      "assetSha256": "7dcfa40950bb3441bfaaf06616001524dfe6bf6f2945b7514ee98ca2245884fd",
+      "requestedSourceUrl": "https://commons.wikimedia.org/wiki/File:Pefnos_egg.jpg"
+    },
+    {
+      "characterId": "farenai",
+      "characterName": "法雷奈",
+      "image": "/images/telescope/recommendations/farenai-kennedy-space-center.jpg",
+      "imageAlt": "美國・甘迺迪太空中心：美國佛羅里達州太空中心的宇宙飛船",
+      "photoCredit": {
+        "title": "美國佛羅里達州太空中心的宇宙飛船",
+        "author": "john mckenna",
+        "sourceUrl": "https://www.pexels.com/zh-tw/photo/13228960/",
+        "sourceLabel": "Pexels 原始照片頁 ↗",
+        "license": "Pexels License",
+        "licenseVersion": null,
+        "licenseUrl": "https://www.pexels.com/license/",
+        "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1200,
+        "height": 800
+      },
+      "provider": "Pexels",
+      "photoId": "13228960",
+      "photographerUrl": "https://www.pexels.com/zh-tw/@johnboy/",
+      "verification": "Photographer, free license link, dimensions and official image ID confirmed on original photo page in native Chrome.",
+      "originalWidth": 5472,
+      "originalHeight": 3648,
+      "downloadUrl": "https://images.pexels.com/photos/13228960/pexels-photo-13228960.jpeg?auto=compress&cs=tinysrgb&w=1200&fit=max",
+      "bytes": 174469,
+      "assetSha256": "76f0636209fd56a6ccace97cf5e44b21f45cbafc008533cd16641b90f19eca6c",
+      "requestedSourceUrl": "https://www.pexels.com/zh-tw/photo/13228960/"
+    },
+    {
+      "characterId": "isis",
+      "characterName": "伊西斯",
+      "image": "/images/telescope/recommendations/isis-library-of-congress.jpg",
+      "imageAlt": "美國・美國國會圖書館（暫定）：國會圖書館內部的優雅建築",
+      "photoCredit": {
+        "title": "國會圖書館內部的優雅建築",
+        "author": "Quang Vuong",
+        "sourceUrl": "https://www.pexels.com/zh-tw/photo/36623370/",
+        "sourceLabel": "Pexels 原始照片頁 ↗",
+        "license": "Pexels License",
+        "licenseVersion": null,
+        "licenseUrl": "https://www.pexels.com/license/",
+        "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+        "verifiedAt": "2026-11-21",
+        "width": 1200,
+        "height": 800
+      },
+      "provider": "Pexels",
+      "photoId": "36623370",
+      "photographerUrl": "https://www.pexels.com/zh-tw/@quang-vuong-724225078/",
+      "verification": "Photographer, free license link, dimensions and official image ID confirmed on original photo page in native Chrome.",
+      "originalWidth": 8256,
+      "originalHeight": 5504,
+      "downloadUrl": "https://images.pexels.com/photos/36623370/pexels-photo-36623370.jpeg?auto=compress&cs=tinysrgb&w=1200&fit=max",
+      "bytes": 259671,
+      "assetSha256": "73a553ecbebe6265c3f56d6448ff8077a0d95e52554f4a8dfcbfd489cfae2927",
+      "requestedSourceUrl": "https://www.pexels.com/zh-tw/photo/36623370/"
+    }
+  ]
+}

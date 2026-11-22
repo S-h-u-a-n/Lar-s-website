@@ -5,6 +5,7 @@ import subtitleConfig from './tComicTextConfig.json'
 import { useDevEditorState } from '../dev/devEditorStore'
 import { usePersistedEditableText } from '../dev/useEditableText'
 import { buildTextStyle, enablePageTextPersistence } from '../dev/textEditorStore'
+import EditionComicControls from './portalComics/EditionComicControls'
 import './TComicPage.css'
 import './portalComics/ComicPages.css'
 import comic1 from '../../Art/telescope/t-comic/t-comic1.PNG'
@@ -249,8 +250,14 @@ function TComicPage({ onComplete, onBack }) {
 
   return (
     <main className="t-comic-page" aria-label="Telescope comic transition" aria-busy={activeFadeIndex !== null} data-reading-step={completedIndex} tabIndex={0} onKeyDown={event=>{if(event.target!==event.currentTarget)return;if(event.key==='Enter'||event.key===' '){event.preventDefault();handleStageClick(event)}if(event.key==='Escape')onBack?.()}} onClick={handleStageClick} onTransitionEnd={handleFadeComplete} style={{ '--t-comic-fade-duration': `${FADE_DURATION_MS}ms` }}>
-      <div className="edition-comic-controls" onClick={event=>event.stopPropagation()}><button onClick={onBack}>↙ 回研究室</button><div className="t-comic-title"><h1>望遠鏡的故事</h1><p lang="en">The Story of the Telescope</p></div><button onClick={onComplete}>開始觀測 ↗</button></div><div className="t-comic-frame-heading" aria-hidden="true" />
-      <div className="portal-comic__panels t-comic-frame">
+      <EditionComicControls
+        onBack={onBack}
+        onStart={onComplete}
+        startLabel="開始觀測"
+        title={<div className="t-comic-title"><h1>望遠鏡的故事</h1><p lang="en">The Story of the Telescope</p></div>}
+      />
+      <div className="edition-comic-frame-heading" aria-hidden="true" />
+      <div className="portal-comic__panels edition-comic-frame t-comic-frame">
         <div ref={frameRef} className="t-comic-fit">
         <LayoutEditor
           items={visibleItems}
@@ -268,7 +275,7 @@ function TComicPage({ onComplete, onBack }) {
         </div>
       </div>
       <button
-        className={`portal-comic__continue t-comic-frame-footer${canContinue ? ' is-visible' : ''}`}
+        className={`portal-comic__continue edition-comic-frame-footer${canContinue ? ' is-visible' : ''}`}
         onClick={onComplete}
         onPointerDown={event => event.stopPropagation()}
         disabled={!canContinue}

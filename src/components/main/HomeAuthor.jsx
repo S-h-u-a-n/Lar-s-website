@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import portrait from '../../../Art/Main-art/REMOANPU.jpg'
+import invitationIllustration from '../../../Art/Main-art/REMOANPU.png'
 import socialLinks from './authorLinks.json'
 import './HomeAuthor.css'
 
@@ -29,6 +30,17 @@ export default function HomeAuthor() {
         <a className="ha-contact" href="mailto:newworldremo@gmail.com">newworldremo@gmail.com</a>
         {socialLinks.some(platform => !externalHref(platform.url)) && <p className="ha-link-note">社群連結整理中，之後會在這裡與你見面。</p>}
       </div>
+      <section className="ha-invitation" aria-labelledby="ha-invitation-title">
+        <h3 id="ha-invitation-title">一起研究這個世界吧！</h3>
+        <p>《The Wizard’s GENESIS》目前由個人獨立製作，但地球實在太大了，還有許多值得探索的知識與故事！</p>
+        <p>未來希望能邀請更多不同領域的夥伴參與，一起完善這座小小的研究室。</p>
+        <p>如果你喜歡這個故事與企劃理念，對某個領域有一定程度的認識，並且擅長查找可靠資料、將複雜的知識整理成清晰易懂的文字，非常歡迎透過電子郵件與我聯絡！一起讓大家知道地球的美好吧！</p>
+        <img className="ha-invitation-illustration" src={invitationIllustration} alt="" width="918" height="929" loading="lazy" />
+        <p>因為目前資金為0（倒貼中），所以我最多能回饋的⋯是畫畫TvT</p>
+        <p>無論是協助撰寫科普內容、檢查現有資料、提出新的研究方向，或是有其他有趣的構想，都歡迎來信討論！</p>
+        <p>期待有一天，這座研究室能聚集更多對世界充滿好奇的人！</p>
+        <a className="ha-contact" href="mailto:newworldremo@gmail.com">newworldremo@gmail.com</a>
+      </section>
       <span className="ha-corner-mark" aria-hidden="true">New WorlD!!<br/><em>THANKS FOR VISITING</em></span>
     </motion.div>
   </section>

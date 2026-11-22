@@ -1,0 +1,27 @@
+/* Everything here is limited to the DEV test route; production Ball is untouched. */
+.ball-intro-test { position:fixed; inset:0; background:var(--edition-paper); }
+.ball-intro-test[data-phase=preparing] .ball-page,
+.ball-intro-test[data-phase=preparing] .bit-accents { visibility:hidden; }
+.ball-intro-test .ball-portrait,
+.ball-intro-test .ball-background,
+.ball-intro-test .ball-selector,
+.ball-intro-test .ball-dialogue-message { animation:none!important; }
+.ball-intro-test[data-phase=playing] .ball-cover-window { overflow:visible; }
+.ball-intro-test:not([data-phase=complete]) .ball-character-dev { visibility:hidden; }
+.bit-accents { position:fixed; inset:0; z-index:45; pointer-events:none; overflow:hidden; }
+.bit-seal { position:absolute; width:180px; height:180px; left:calc(50% - 90px); top:calc(48% - 90px); color:#b79a5c; opacity:0; }
+.bit-seal svg { width:100%; height:100%; fill:none; stroke:currentColor; stroke-width:1; }
+.bit-seal circle:nth-child(2) { stroke:#a2d8de; stroke-dasharray:3 8; }
+.bit-seal path { fill:#f6f0a938; stroke:#b79a5c88; }
+.bit-spark { position:absolute; opacity:0; color:#b79a5c; font:38px/1 var(--display); }
+.bit-spark-1,.bit-spark-3 { color:#e39bab; }.bit-spark-2,.bit-spark-4 { color:#80aeb1; }
+.bit-controls { position:fixed; z-index:11000; bottom:12px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:12px; padding:9px 14px; border:1px solid #34465a26; border-radius:6px 18px 6px 6px; box-shadow:3px 4px 0 #a2d8de33; background:#fffef8ed; backdrop-filter:blur(8px); color:var(--edition-ink); white-space:nowrap; font:11px/1.4 var(--body); }
+.bit-label { font:9px/1.4 var(--sans); letter-spacing:.08em; }.bit-label i { margin-left:7px; color:#987d4c; font-style:normal; }
+.bit-status { font-size:10px; color:#7d857c; min-width:60px; }
+.bit-controls button { border:0; background:none; padding:4px 0; color:inherit; font:inherit; cursor:pointer; }
+.bit-controls button:hover,.bit-controls a:hover { color:#8d7048; }
+.bit-controls button:disabled { opacity:.35; cursor:default; }
+.bit-controls a { color:inherit; font:10px/1.4 var(--body); text-decoration:none; border-bottom:1px solid #b79a5c66; }
+.bit-controls :focus-visible { outline:2px solid #987d4c; outline-offset:3px; }
+.bit-error { position:fixed; z-index:11000; left:50%; bottom:65px; transform:translateX(-50%); width:min(90vw,600px); margin:0; padding:8px 12px; background:var(--edition-paper); border:1px solid #b79a5c55; color:var(--edition-ink); font:12px/1.7 var(--body); }
+@media(max-width:760px) { .bit-controls { gap:9px; max-width:calc(100vw - 16px); padding:8px 10px; }.bit-label { display:none; }.bit-controls a { font-size:9px; } }

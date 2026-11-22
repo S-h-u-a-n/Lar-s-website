@@ -21,7 +21,7 @@ test('validates coordinates, zooms, links, and existing portrait paths', () => {
     assert.ok(place.zoom >= 1 && place.zoom <= 16, place.id)
     assert.equal(new URL(place.website).protocol, 'https:')
     assert.ok(existsSync(new URL(`../../../${place.avatarPath}`, import.meta.url)), place.avatarPath)
-    assert.match(place.photoPath, /^\/places\/telescope-recommendations\/.+\.webp$/)
+    assert.match(place.photoPath, /^\/images\/telescope\/recommendations\/.+\.jpg$/)
   }
 })
 

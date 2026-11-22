@@ -37,9 +37,13 @@
 
 https://asia.sega.com/p3r/cht/
 
-**海報插畫：**
+**目前海報來源：**
 
-© REMOANPU｜非官方自繪二次創作
+MobyGames（指定版本，本地儲存）
+
+https://cdn.mobygames.com/covers/18191503-persona-3-reload-windows-apps-front-cover.jpg
+
+原有 © REMOANPU 非官方自繪二次創作素材保留於專案，未刪除；目前顯示為本次指定海報。詳細來源及既有權利查核資訊見圖片旁 ⓘ。
 
 **原作權利：**
 

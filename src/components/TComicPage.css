@@ -74,11 +74,7 @@
 .t-comic-page .layout-editor-dialogue-design-space > .layout-editor-item[data-sequence-fading="true"] {
   transition: none !important;
 }
-/* Reuse the exact placeholder frame rules; the stage fits its inner bounds. */
-.t-comic-frame-heading { flex: 0 0 clamp(28px, 5vw, 64px); }
-.t-comic-frame-footer {
-  flex: 0 0 48px;
-}
+/* The shared frame spacer and footer keep comic pages on one viewport rhythm. */
 .t-comic-page > .portal-comic__continue {
   align-self: center;
   margin: 0;
@@ -102,15 +98,6 @@
 }
 .t-comic-page > .portal-comic__continue.is-visible:hover {
   transform: scale(1.03);
-}
-.t-comic-frame { width: 100%; }
-
-/* Telescope only: symmetric inset, preserving the existing frame height. */
-.t-comic-frame {
-  position: relative;
-  width: 96%;
-  align-self: center;
-  overflow: visible;
 }
 .t-comic-fit {
   position: absolute;

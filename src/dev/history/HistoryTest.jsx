@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { ASSETS, HISTORY as C } from './config'
 import { createImageLoader } from './imageLoader'
 import { stepParallax } from './inertiaParallax'
-import { entranceProgress, spring, localPoint, opaqueAt } from './interactionMath'
+import { entranceProgress, spring, localPoint, opaqueAt, gestureTravel } from './interactionMath'
 import { createEntryGesture } from './entryGesture'
 import { openingSettings, warmOpeningActor, startOpeningActor } from './openingAnimation'
 import { createDiagnostics } from './diagnostics'
@@ -37,7 +37,7 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
     let alive = true, frame = 0, previous = 0, ready = false, disposed = false, layoutDirty = true
     let camera = 1, target = 1, scale = 1, max = 0, width = 0, height = 0, inputX = 0, inputY = 0
     let titleGeometry = null
-    let lastCamera = NaN, lastScale = NaN, priorityKey = '', lastPointer = null
+    let lastCamera = NaN, lastScale = NaN, priorityKey = '', lastPointer = null, activeTouch = null
     const reduced = matchMedia('(prefers-reduced-motion: reduce)')
     const profile = createDiagnostics(host)
     const traceOpening = new URLSearchParams(location.search).get('profile') === '1'
@@ -325,7 +325,7 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       const travel = Math.abs(dx) > Math.abs(dy) ? dx : -dy
       const now = performance.now()
       lastWheel = now; hovered = -1; pointerIntent = false
-      if (gesture.wheel(now, travel < 0, travel)) requestEntry()
+      if (gesture.input(now, travel < 0, travel)) requestEntry()
       const previousTarget = target
       target = max ? clamp(target + travel * C.scroll.gain / max, 0, 1) : 0
       if (target !== previousTarget && !arrowDismissed) { arrowDismissed = true; arrow.current.dataset.dismissed = 'true' }
@@ -334,6 +334,21 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       request()
     }
     function pointer(e) {
+      if (activeTouch?.id === e.pointerId) {
+        const dx = e.clientX - activeTouch.x, dy = e.clientY - activeTouch.y
+        activeTouch.x = e.clientX; activeTouch.y = e.clientY
+        if (Math.hypot(e.clientX - activeTouch.startX, e.clientY - activeTouch.startY) >= 6) {
+          const travel = gestureTravel(dx, dy)
+          const now = performance.now()
+          lastWheel = now; hovered = -1; pointerIntent = false
+          if (gesture.input(now, travel < 0, travel)) requestEntry()
+          const previousTarget = target
+          target = max ? clamp(target + travel * C.scroll.gain / max, 0, 1) : 0
+          if (target !== previousTarget && !arrowDismissed) { arrowDismissed = true; arrow.current.dataset.dismissed = 'true' }
+          inputX += clamp(dx, -120, 120)
+          inputY += clamp(dy, -120, 120)
+        }
+      }
       if (e.pointerType === 'mouse') {
         mouse = [e.clientX, e.clientY]; pointerIntent = true
         pointerDX = lastPointer ? e.clientX - lastPointer[0] : 0
@@ -350,6 +365,25 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       request()
     }
     function leave() { lastPointer = null; mouse = null; pointerIntent = false; hovered = -1; request() }
+    function touchStart(e) {
+      if (e.pointerType === 'mouse' || e.button !== 0 || e.target.closest('.history-entry-hint')) return
+      if (!e.isPrimary) {
+        activeTouch = null
+        lastPointer = null
+        return
+      }
+      activeTouch = { id: e.pointerId, x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY }
+      lastPointer = [e.clientX, e.clientY]
+      host.setPointerCapture(e.pointerId)
+    }
+    function touchEnd(e) {
+      if (activeTouch?.id !== e.pointerId) return
+      activeTouch = null
+      lastPointer = null
+      pointerIntent = false
+      hovered = -1
+      request()
+    }
     function preference() {
       if (reduced.matches) {
         warming=[]
@@ -362,8 +396,12 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
     observer.observe(host)
     entryHint.current.addEventListener('click', requestEntry)
     host.addEventListener('wheel', wheel, { passive: false })
+    host.addEventListener('pointerdown', touchStart)
     host.addEventListener('pointermove', pointer)
     host.addEventListener('pointerleave', leave)
+    host.addEventListener('pointerup', touchEnd)
+    host.addEventListener('pointercancel', touchEnd)
+    host.addEventListener('lostpointercapture', touchEnd)
     reduced.addEventListener('change', preference)
     request()
     return () => {
@@ -371,8 +409,12 @@ export default function HistoryTest({ onEnter, disabled = false, leaving = false
       disposed = true; alive = false; openingAnimations.forEach(a=>a.cancel());openingAnimations.clear();openingActors.clear(); clearTimeout(hoverTimer); cancelAnimationFrame(frame); observer.disconnect(); loader.dispose(); profile.dispose()
       entryHint.current?.removeEventListener('click', requestEntry)
       host.removeEventListener('wheel', wheel)
+      host.removeEventListener('pointerdown', touchStart)
       host.removeEventListener('pointermove', pointer)
       host.removeEventListener('pointerleave', leave)
+      host.removeEventListener('pointerup', touchEnd)
+      host.removeEventListener('pointercancel', touchEnd)
+      host.removeEventListener('lostpointercapture', touchEnd)
       reduced.removeEventListener('change', preference)
     }
   }, [])

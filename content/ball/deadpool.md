@@ -34,9 +34,13 @@
 
 https://www.20thcenturystudios.com/movies/deadpool
 
-**海報插畫：**
+**目前海報來源：**
 
-© REMOANPU｜非官方自繪二次創作
+TMDB（指定版本，本地儲存）
+
+https://image.tmdb.org/t/p/original/3E53WEZJqP6aM84D8CckXx4pIHw.jpg
+
+原有 © REMOANPU 非官方自繪二次創作素材保留於專案，未刪除；目前顯示為本次指定海報。詳細來源及既有權利查核資訊見圖片旁 ⓘ。
 
 **原作權利：**
 

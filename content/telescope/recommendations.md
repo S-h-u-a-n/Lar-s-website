@@ -3,7 +3,7 @@
 <!--
 編輯方式：
 - 新增角色時，複製一個 `## character-id` 區塊並填入下列欄位；角色 ID 請保持唯一。
-- 角色頭像填入 `Art/avatar/檔名.jpg`；照片放到 `public/places/telescope-recommendations/`，再填寫以 `/places/` 開頭的路徑。
+- 角色頭像填入 `Art/avatar/檔名.jpg`；照片放到 `public/images/telescope/recommendations/`，再填寫以 `/images/telescope/recommendations/` 開頭的路徑；來源與授權維護於 `src/components/telescopeTest/recommendationPhotos.json`。
 - latitude / longitude 使用 WGS84 十進位格式；`zoom` 是可選的觀測縮放值，數字越大視野越近，建議介於 6 到 16。
 - 代表點或約略座標請在 `coordinateNote` 說明。儲存本檔後 Vite 會自動更新頁面。
 -->
@@ -22,7 +22,7 @@
 - zoom: 10
 - website: https://www.seedvault.no/
 - avatarPath: Art/avatar/拉爾.jpg
-- photoPath: /places/telescope-recommendations/ral-svalbard.webp
+- photoPath: /images/telescope/recommendations/ral-svalbard.jpg
 
 ## il
 - characterId: il
@@ -38,7 +38,7 @@
 - zoom: 14
 - website: https://www.twport.com.tw/
 - avatarPath: Art/avatar/伊爾.jpg
-- photoPath: /places/telescope-recommendations/il-keelung.webp
+- photoPath: /images/telescope/recommendations/il-keelung.jpg
 
 ## ost
 - characterId: ost
@@ -54,7 +54,7 @@
 - zoom: 15
 - website: https://www.britishmuseum.org/
 - avatarPath: Art/avatar/俄斯塔.jpg
-- photoPath: /places/telescope-recommendations/ost-british-museum.webp
+- photoPath: /images/telescope/recommendations/ost-british-museum.jpg
 
 ## yuta
 - characterId: yuta
@@ -70,7 +70,7 @@
 - zoom: 13
 - website: https://www.goprovidence.com/
 - avatarPath: Art/avatar/尤塔.jpg
-- photoPath: /places/telescope-recommendations/yuta-providence.webp
+- photoPath: /images/telescope/recommendations/yuta-providence.jpg
 
 ## reed
 - characterId: reed
@@ -86,7 +86,7 @@
 - zoom: 15
 - website: https://inari.jp/
 - avatarPath: Art/avatar/里德.jpg
-- photoPath: /places/telescope-recommendations/reed-fushimi-inari.webp
+- photoPath: /images/telescope/recommendations/reed-fushimi-inari.jpg
 
 ## anpu
 - characterId: anpu
@@ -103,7 +103,7 @@
 - zoom: 12
 - website: https://egymonuments.gov.eg/
 - avatarPath: Art/avatar/安普.jpg
-- photoPath: /places/telescope-recommendations/anpu-el-qeis.webp
+- photoPath: /images/telescope/recommendations/anpu-el-qeis.jpg
 
 ## harriet
 - characterId: harriet
@@ -119,7 +119,7 @@
 - zoom: 15
 - website: https://www.americanairlinescenter.com/
 - avatarPath: Art/avatar/哈里特.jpg
-- photoPath: /places/telescope-recommendations/harriet-american-airlines-center.webp
+- photoPath: /images/telescope/recommendations/harriet-american-airlines-center.jpg
 
 ## kane
 - characterId: kane
@@ -136,7 +136,7 @@
 - zoom: 9
 - website: https://www.nps.gov/grca/
 - avatarPath: Art/avatar/凱恩.jpg
-- photoPath: /places/telescope-recommendations/kane-grand-canyon.webp
+- photoPath: /images/telescope/recommendations/kane-grand-canyon.jpg
 
 ## seth
 - characterId: seth
@@ -152,7 +152,7 @@
 - zoom: 15
 - website: https://visit.istanbul/grand-bazaar
 - avatarPath: Art/avatar/賽斯.jpg
-- photoPath: /places/telescope-recommendations/seth-grand-bazaar.webp
+- photoPath: /images/telescope/recommendations/seth-grand-bazaar.jpg
 
 ## laike
 - characterId: laike
@@ -169,7 +169,7 @@
 - zoom: 7
 - website: https://galapagos.gob.ec/
 - avatarPath: Art/avatar/檑恪楒.jpg
-- photoPath: /places/telescope-recommendations/laike-galapagos.webp
+- photoPath: /images/telescope/recommendations/laike-galapagos.jpg
 
 ## pato
 - characterId: pato
@@ -186,7 +186,7 @@
 - zoom: 10
 - website: https://whc.unesco.org/en/list/700/
 - avatarPath: Art/avatar/帕托.jpg
-- photoPath: /places/telescope-recommendations/pato-nazca-lines.webp
+- photoPath: /images/telescope/recommendations/pato-nazca-lines.jpg
 
 ## arena
 - characterId: arena
@@ -202,7 +202,7 @@
 - zoom: 13
 - website: https://www.nationaltrust.org.uk/visit/somerset/glastonbury-tor
 - avatarPath: Art/avatar/阿瑞娜.jpg
-- photoPath: /places/telescope-recommendations/arena-glastonbury-tor.webp
+- photoPath: /images/telescope/recommendations/arena-glastonbury-tor.jpg
 
 ## dioscuri
 - characterId: dioscuri
@@ -219,7 +219,7 @@
 - zoom: 13
 - website: https://www.theoi.com/Cult/DioskouroiCult.html
 - avatarPath: Art/avatar/德俄斯庫里.jpg
-- photoPath: /places/telescope-recommendations/dioscuri-pephnos.webp
+- photoPath: /images/telescope/recommendations/dioscuri-pephnos.jpg
 
 ## farenai
 - characterId: farenai
@@ -236,7 +236,7 @@
 - zoom: 12
 - website: https://www.kennedyspacecenter.com/
 - avatarPath: Art/avatar/法雷奈.jpg
-- photoPath: /places/telescope-recommendations/farenai-kennedy-space-center.webp
+- photoPath: /images/telescope/recommendations/farenai-kennedy-space-center.jpg
 
 ## isis
 - characterId: isis
@@ -252,4 +252,4 @@
 - zoom: 15
 - website: https://www.loc.gov/
 - avatarPath: Art/avatar/伊西斯.jpg
-- photoPath: /places/telescope-recommendations/isis-library-of-congress.webp
+- photoPath: /images/telescope/recommendations/isis-library-of-congress.jpg
