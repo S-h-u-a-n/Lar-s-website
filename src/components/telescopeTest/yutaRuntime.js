@@ -1,3 +1,4 @@
+import { createVisibleFrameLoop } from '../../lib/visibleFrameLoop'
 import { chooseIdleMotion, chooseDialogueIdle, isDialogueMotion } from './dialogue/motionPolicy'
 import { YUTA_ASSETS, YUTA_MOTIONS, resolveYutaMotion } from './yutaAssets'
 let corePromise, frameworkInitialized = false
@@ -46,11 +47,17 @@ export async function createYuta(canvas, signal, onMotion, { autoOpening = true 
   const textures = []
   const motions = new Map()
   let registered = false
-  let frame = 0, disposed = false, current = '', pending = null, immediate = null, transition = null, time = 0, previous = 0, dialogueActive = false, lastInteraction = performance.now()
+  let rendering = null, resizeObserver = null, disposed = false, current = '', pending = null, immediate = null, transition = null, time = 0, previous = 0, dialogueActive = false, lastInteraction = performance.now()
+  function resizeCanvas() {
+    const size = Math.round(Math.min(devicePixelRatio || 1, 2) * canvas.clientWidth)
+    if (size && canvas.width !== size) canvas.width = canvas.height = size
+  }
   function dispose() {
     if (disposed) return
     disposed = true
-    cancelAnimationFrame(frame)
+    rendering?.dispose()
+    resizeObserver?.disconnect()
+    window.removeEventListener('resize', resizeCanvas)
     queue.release()
     motions.forEach(motion => motion.release())
     user.release()
@@ -143,17 +150,20 @@ export async function createYuta(canvas, signal, onMotion, { autoOpening = true 
         if (progress === 1) transition = null
       }
       user.getModel().update()
-      const size = Math.round(Math.min(devicePixelRatio || 1, 2) * canvas.clientWidth)
-      if (size && canvas.width !== size) canvas.width = canvas.height = size
       gl.viewport(0, 0, canvas.width, canvas.height)
       gl.clearColor(0, 0, 0, 0)
       gl.clear(gl.COLOR_BUFFER_BIT)
       renderer.setMvpMatrix(matrix)
       renderer.setRenderState(null, [0, 0, canvas.width, canvas.height])
       renderer.drawModel()
-      frame = requestAnimationFrame(draw)
+      rendering.request()
     }
-    frame = requestAnimationFrame(draw)
+    rendering = createVisibleFrameLoop(draw, { onResume: () => { previous = 0; resizeCanvas() } })
+    resizeObserver = new ResizeObserver(resizeCanvas)
+    resizeObserver.observe(canvas)
+    window.addEventListener('resize', resizeCanvas)
+    resizeCanvas()
+    rendering.request()
     return {
       play(name) {
         const resolved = resolveYutaMotion(name)

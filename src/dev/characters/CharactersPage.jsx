@@ -37,7 +37,7 @@ export default function CharactersPage({ onBack }) {
         {characters?.length === 0 && <p className="cw-loading" role="status">目前沒有可載入的肖像。</p>}
         <span className="cw-corner cw-corner-tl" aria-hidden="true">+</span><span className="cw-corner cw-corner-br" aria-hidden="true">+</span>
       </section>
-      <footer className="cw-footer"><span><b>{String(characters?.length || 0).padStart(2, '0')}</b> 位成員 <i>・</i> 持續收錄中</span><span className="cw-instruction">↔ 自由拖曳 <i>/</i> 滾輪漫遊 <i>/</i> 點擊翻閱檔案</span></footer>
+      <footer className="cw-footer"><span><b>{String(characters?.length || 0).padStart(2, '0')}</b> 位成員 <i>・</i> 持續收錄中</span><span className="cw-instruction">↔︎ 自由拖曳 <i>/</i> 滾輪漫遊 <i>/</i> 點擊翻閱檔案</span></footer>
     </div>
     {character && <CharacterFile character={character} characters={characters} onSelect={setSelected} onClose={close}/>}
   </main>

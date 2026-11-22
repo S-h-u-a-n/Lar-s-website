@@ -51,7 +51,7 @@ export default function BallIntroTest() {
       <span className="bit-status" role="status">{phase==='preparing'?'素材準備中':phase==='playing'?'魔法組裝中':'開場完成'}</span>
       <button type="button" onClick={replay}>↻ 重新播放</button>
       <button type="button" onClick={()=>active.current?.()} disabled={phase==='complete'}>跳過</button>
-      <a href={formalUrl}>正常頁面 ↗</a>
+      <a href={formalUrl}>正常頁面 ↗︎</a>
     </nav>
     {error && <p className="bit-error" role="alert">{error}</p>}
   </div>

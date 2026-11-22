@@ -6,13 +6,16 @@ import vm from 'node:vm'
 // Exercise the production render callback without WebGL, including its async
 // preparation boundary. Geometry/framing stays in Three.js unchanged.
 const source = readFileSync(new URL('../MainScene.jsx', import.meta.url), 'utf8')
-const renderSource = source.slice(source.indexOf('    const render = now => {'), source.indexOf('    const observer = new ResizeObserver(resize)'))
+const renderSource = source.slice(source.indexOf('    const render = now => {'), source.indexOf('    const rendering = createVisibleFrameLoop'))
 function mount(width, height) {
   const events = []
   const context = {
     disposed: false, failed: false, readyToPresent: false,
     host: { clientWidth: width, clientHeight: height },
-    resize: () => events.push('measure'),
+    resize: () => { context.hostHasSize = Boolean(context.host.clientWidth && context.host.clientHeight); events.push('measure') },
+    hostHasSize: false,
+    rendering: { request: () => events.push('schedule') },
+    TOOL_REACTION: { damping: 1 },
     requestAnimationFrame: () => { events.push('schedule'); return 1 },
     frame: 0, previousTime: 0, elapsed: 0, toolReactions: [],
     miniCosmos: null, focusAnimation: null, transitionHandoff: null,
@@ -70,4 +73,17 @@ test('a failed draw never releases the first-frame gate', () => {
   frame()
   assert.ok(events.includes('failure'))
   assert.ok(!events.includes('present'))
+})
+
+test('steady-state frames do not read host layout again after first presentation', () => {
+  const { context, events, frame } = mount(1440, 900)
+  context.readyToPresent = true
+  frame()
+  for (const key of ['clientWidth','clientHeight']) {
+    Object.defineProperty(context.host,key,{get(){ throw new Error('Unexpected steady-state layout read') }})
+  }
+  events.length = 0
+  frame()
+  assert.ok(events.includes('draw'))
+  assert.ok(!events.includes('measure'))
 })

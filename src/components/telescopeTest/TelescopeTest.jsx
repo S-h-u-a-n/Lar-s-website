@@ -53,7 +53,7 @@ export function RecommendationCard({ place, selected, canVisit, onVisit, onOpenC
       <button type="button" className="tt-recommendation-visit-button" disabled={!canVisit} onClick={() => onVisit(place)}>
         {selected ? '正在觀測' : '前往觀測'}
       </button>
-      <a href={place.website} target="_blank" rel="noopener noreferrer">{'官方／相關資料 ↗'}</a>
+      <a href={place.website} target="_blank" rel="noopener noreferrer">{'官方／相關資料 ↗︎'}</a>
     </div>
   </article>
 }

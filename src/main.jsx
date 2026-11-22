@@ -4,6 +4,9 @@ import { lazy, Suspense } from 'react'
 import './styles.css'
 import './edition/edition.css'
 import './edition/round2.css'
+import './edition/touchScroll.css'
+import './edition/textSymbols.css'
+import './edition/compactLandscape.css'
 
 // Development experiments are loaded separately; the normal App stays unchanged.
 const experiment = import.meta.env.DEV ? new URLSearchParams(location.search).get('dev') : null

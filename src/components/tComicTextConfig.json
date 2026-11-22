@@ -235,7 +235,7 @@
       "coordinateSpace": "dialogue-group"
     },
     "codex-t-comic-dom-button-1rjpfzc": {
-      "text": "↙ 回研究室",
+      "text": "↙︎ 回研究室",
       "x": 0,
       "y": 0,
       "width": null,
@@ -301,7 +301,7 @@
       "selector": "main.t-comic-page:nth-of-type(1) > div.edition-comic-controls:nth-of-type(1) > div.t-comic-title:nth-of-type(1) > p:nth-of-type(1)"
     },
     "codex-t-comic-dom-button-ho84cz": {
-      "text": "開始觀測 ↗",
+      "text": "開始觀測 ↗︎",
       "x": 0,
       "y": 0,
       "width": null,

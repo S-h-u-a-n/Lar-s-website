@@ -8,7 +8,7 @@ function ExploreCard({ index, title, subtitle, description, symbol, textEditable
       <Text enabled={textEditable} id={`home-card-${index}-index`} className="card-index">{`0${index} / ${subtitle}`}</Text>
       <Text enabled={textEditable} id={`home-card-${index}-title`} className="card-title">{title}</Text>
       <Text enabled={textEditable} id={`home-card-${index}-description`} className="card-description">{description}</Text>
-      <span className="card-arrow" aria-hidden="true">↗</span>
+      <span className="card-arrow" aria-hidden="true">↗︎</span>
     </a>
   )
 }

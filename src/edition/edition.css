@@ -1,7 +1,7 @@
 @font-face {font-family:'Playfair Display';src:url('../../Font/En-1/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');font-style:italic;font-weight:400 900;font-display:swap}
 /* Codex Edition: paper, instrument brass and a mint / rose / ink palette.
    Live content remains in the existing page components. */
-:root { --edition-paper:#FDF9EE; --edition-white:#FFFEF8; --edition-ink:#34465A; --edition-mint:#A2D8DE; --edition-rose:#F691A6; --edition-brass:#987D4C; --edition-line:#34465A33; --edition-ease:cubic-bezier(.22,.75,.25,1); --pointer-x:0;--pointer-y:0; --body:'Chiron Sung','Songti TC',serif; }
+:root { --edition-paper:#FDF9EE; --edition-white:#FFFEF8; --edition-ink:#34465A; --edition-mint:#A2D8DE; --edition-rose:#F691A6; --edition-brass:#987D4C; --edition-line:#34465A33; --edition-ease:cubic-bezier(.22,.75,.25,1); --pointer-x:0;--pointer-y:0; --body:'Chiron Sung','Songti TC','Apple Symbols','Segoe UI Symbol','Noto Sans Symbols 2',serif; }
 body { background:var(--edition-paper);color:var(--edition-ink); }
 button { cursor:pointer; }
 button:focus-visible,a:focus-visible { outline:2px solid var(--edition-ink);outline-offset:5px; }

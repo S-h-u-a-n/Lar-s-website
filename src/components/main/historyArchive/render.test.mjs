@@ -28,7 +28,7 @@ test('all 18 detail views render variable sections, citations, illustrations and
       }
       assert.equal((markup.match(/class="hh-explanation"/g)||[]).length,record.sections.flatMap(section=>section.paragraphs).length)
       assert.equal((markup.match(/class="hh-research-section hh-note"/g)||[]).length,record.sections.filter(section=>section.special).length)
-      assert.ok(markup.includes('<summary>參考資料 · Wikipedia ↗</summary>'))
+      assert.ok(markup.includes('<summary>參考資料 · Wikipedia ↗\uFE0E</summary>'))
       assert.ok(markup.includes(record.sourceNote))
       const expectedLinks=[]
       const seen=new Set()

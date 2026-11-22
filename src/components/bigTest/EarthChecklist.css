@@ -14,7 +14,7 @@
 .earth-checklist-count {margin:8px 0;font-variant-numeric:tabular-nums}
 .earth-checklist-items {overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;min-height:0;margin:0;padding:0 6px 0 0;list-style:none;text-align:left;scrollbar-width:thin;}
 .earth-checklist-items li {display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #34465A20;font:13px/1.5 var(--body)}
-.earth-checklist-check {display:inline-flex;align-items:center;justify-content:center;flex:0 0 1.25em;width:1.25em;height:1.25em;line-height:1;font-family:Arial,sans-serif;}
+.earth-checklist-check {display:inline-flex;align-items:center;justify-content:center;flex:0 0 1.25em;width:1.25em;height:1.25em;line-height:1;font-family:Arial,'Apple Symbols','Segoe UI Symbol','Noto Sans Symbols 2',sans-serif;}
 .earth-checklist-close {flex-shrink:0;margin-top:14px}
 @media(prefers-reduced-motion:reduce){.earth-checklist.edition-resource-status{transition-duration:.01ms}.earth-checklist.is-stowed .earth-checklist-body{transition-delay:0s}}
 

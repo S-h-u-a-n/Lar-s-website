@@ -26,9 +26,9 @@
   --line: rgba(7, 83, 106, 0.27);
   --gold: #b79a5c;
   --accent: #c86d76;
-  --display: 'Playfair Display', Georgia, serif;
-  --body: 'Chiron Sung', 'Songti SC', serif;
-  --sans: 'Julius Sans', 'Helvetica Neue', sans-serif;
+  --display: 'Playfair Display', Georgia, 'Apple Symbols', 'Segoe UI Symbol', 'Noto Sans Symbols 2', serif;
+  --body: 'Chiron Sung', 'Songti SC', 'Apple Symbols', 'Segoe UI Symbol', 'Noto Sans Symbols 2', serif;
+  --sans: 'Julius Sans', 'Helvetica Neue', 'Apple Symbols', 'Segoe UI Symbol', 'Noto Sans Symbols 2', sans-serif;
 }
 
 * { box-sizing: border-box; }

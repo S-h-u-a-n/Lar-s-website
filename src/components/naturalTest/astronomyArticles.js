@@ -41,4 +41,4 @@ export const ASTRONOMY_ARTICLES = [
     ]),
 ].map(item => ({ ...item, sources: item.sources.map(source => ({ ...source, accessedAt: ASTRONOMY_REVIEWED_AT })) }))
 
-ASTRONOMY_ARTICLES.find(item => item.id === 'space-exploration').relatedPage = { route: 'globe', label: '前往天體觀測 ↗' }
+ASTRONOMY_ARTICLES.find(item => item.id === 'space-exploration').relatedPage = { route: 'globe', label: '前往天體觀測 ↗︎' }

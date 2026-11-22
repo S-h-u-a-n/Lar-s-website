@@ -18,7 +18,7 @@ export default function GenesisCoverTest() {
           <h1><span>The Wizard’s</span>GENESIS<span className="gc-title-zh">創 世 圖 冊</span></h1>
           <div className="gc-rule"><span>✦</span></div>
           <p className="gc-description">從一個好奇的念頭，走進世界的起點。<br/>翻閱時間的痕跡，探索自然、人類與想像的交界。</p>
-          <button ref={entryButton} className="gc-enter" aria-expanded={opened} aria-controls={opened ? 'gc-leaf' : undefined} onClick={() => setOpened(true)}><span className="gc-enter-icon">↗</span><span>進入世界<small>OPEN THE ATLAS</small></span><span className="gc-enter-line" /></button>
+          <button ref={entryButton} className="gc-enter" aria-expanded={opened} aria-controls={opened ? 'gc-leaf' : undefined} onClick={() => setOpened(true)}><span className="gc-enter-icon">↗︎</span><span>進入世界<small>OPEN THE ATLAS</small></span><span className="gc-enter-line" /></button>
           <p className="gc-caption">每一次探索，都是新的一頁。</p>
         </div>
         <div className="gc-observation gc-print" aria-hidden="true">

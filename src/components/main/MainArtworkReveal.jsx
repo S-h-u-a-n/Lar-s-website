@@ -93,8 +93,7 @@ export default function MainArtworkReveal({ enabled, onComplete }) {
     if (!element) return undefined
     const stopScroll = event => event.preventDefault()
     element.addEventListener('wheel', stopScroll, { passive: false })
-    element.addEventListener('touchmove', stopScroll, { passive: false })
-    return () => { element.removeEventListener('wheel', stopScroll); element.removeEventListener('touchmove', stopScroll) }
+    return () => { element.removeEventListener('wheel', stopScroll) }
   }, [enabled, Boolean(geometry), phase === 'complete'])
 
   const fillTo = (ripple, target, duration) => new Promise(resolve => {

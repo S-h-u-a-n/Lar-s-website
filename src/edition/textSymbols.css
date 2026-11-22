@@ -1,0 +1,10 @@
+/* Opt in only actual ornaments, never article/dialogue text or intentional
+   content emoji. FE0E in UI strings remains the portable baseline. */
+:where(.hc-control-triangle, .earth-checklist-check, .wp-margin-note > span,
+  .wp-letter-reopen > span, .intro-enter-arrow, .footer-constellation,
+  .edition-star-chart > span, .wp-letter-emblem > span,
+  .ball-character-dialogue-cue, .tt-dialogue-next > span) {
+  font-variant-emoji:text;
+}
+.big-introduction-stack__copy h2::before,
+.big-introduction-stack__copy h2::after { font-variant-emoji:text; }

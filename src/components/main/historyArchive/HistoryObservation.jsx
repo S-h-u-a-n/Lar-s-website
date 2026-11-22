@@ -38,8 +38,8 @@ export default function HistoryObservation({ selection, items, size, closing, or
       <motion.img className="hh-observed-person" key={record.id} src={record.src} alt={`${record.name}時代意象插畫`} initial={first.current ? { ...selection.origin, opacity: 1 } : { ...target, opacity: 0 }} animate={{ ...destination, opacity: 1 }} exit={{opacity:0}} transition={{ duration: reduced ? 0 : .55, ease: [.22,.75,.25,1] }} onAnimationComplete={() => { if (closing) onClosed() }}/>
     </AnimatePresence>
     <nav className="hh-figure-nav" aria-label="人物旁時代切換" style={{opacity:closing?0:1}}>
-      <motion.button type="button" aria-label="左側人物" disabled={closing||leftIndex===null} onClick={()=>onChange(leftIndex)} whileHover={reduced?{}:{x:-3}} whileTap={reduced?{}:{scale:.9}}>◀</motion.button>
-      <motion.button type="button" aria-label="右側人物" disabled={closing||rightIndex===null} onClick={()=>onChange(rightIndex)} whileHover={reduced?{}:{x:3}} whileTap={reduced?{}:{scale:.9}}>▶</motion.button>
+      <motion.button type="button" aria-label="左側人物" disabled={closing||leftIndex===null} onClick={()=>onChange(leftIndex)} whileHover={reduced?{}:{x:-3}} whileTap={reduced?{}:{scale:.9}}>◀︎</motion.button>
+      <motion.button type="button" aria-label="右側人物" disabled={closing||rightIndex===null} onClick={()=>onChange(rightIndex)} whileHover={reduced?{}:{x:3}} whileTap={reduced?{}:{scale:.9}}>▶︎</motion.button>
     </nav>
     <motion.div className="hh-detail-panel" initial={{ opacity: 0, x: reduced ? 0 : 16 }} animate={{ opacity: closing ? 0 : 1, x: 0 }} transition={{ duration: reduced ? 0 : .35, delay: closing || reduced ? 0 : .12 }}>
       <span className="hh-detail-tape ha-tape" aria-hidden="true"/>
@@ -52,9 +52,9 @@ export default function HistoryObservation({ selection, items, size, closing, or
             {section.paragraphs.map((text, index) => <p className="hh-explanation" key={index}>{text}</p>)}
           </section>)}
           <p className="hh-illustration-note">{record.illustrationNote}</p>
-          <details className="hh-sources" key={record.id}><summary>參考資料 · Wikipedia ↗</summary><div>
+          <details className="hh-sources" key={record.id}><summary>參考資料 · Wikipedia ↗︎</summary><div>
             <p className="hh-source-note">{record.sourceNote}（核對：{record.verifiedAt}）</p>
-            {record.wikipediaReferences.map(source=><a key={source.id} href={source.href} target="_blank" rel="noopener noreferrer">{source.label} ↗</a>)}
+            {record.wikipediaReferences.map(source=><a key={source.id} href={source.href} target="_blank" rel="noopener noreferrer">{source.label} ↗︎</a>)}
             {(() => {
               const seen = new Set(record.wikipediaReferences.map(source=>referenceKey(source.href)))
               return record.references.map((text,index)=><p className="hh-reference-entry" key={index}>{referenceTextParts(text,seen).map((part,partIndex)=>part.href

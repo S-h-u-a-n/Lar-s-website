@@ -163,7 +163,7 @@ export default function HomeHistory() {
   const endDrag=event=>{
     const d=drag.current
     if(!d||d.id!==event.pointerId)return
-    if(d.moved)suppress.current=Date.now()+350
+    if(d.moved || (d.native && event.type==='pointercancel'))suppress.current=Date.now()+350
     drag.current=null;viewport.current.classList.remove('is-dragging')
     if(viewport.current.hasPointerCapture(event.pointerId))viewport.current.releasePointerCapture(event.pointerId)
   }
@@ -176,10 +176,10 @@ export default function HomeHistory() {
       <HistoryBackdropSquares height={layout.baseline+9}/>
       <div className="hh-panorama" inert={Boolean(selection)}>
         <svg className="hh-stage-dots" viewBox="0 0 62 31" aria-hidden="true">{[0,1].flatMap(row=>[0,1,2,3].map(column=><circle key={`${row}-${column}`} cx={column*15.5+4} cy={row*15.5+4} r="1.75" fill="#b98f994f"/>))}</svg>
-        <div ref={viewport} className="hh-viewport" onScroll={sync} onPointerDown={event=>{if(event.button!==0||!event.isPrimary||selection)return;drag.current={id:event.pointerId,x:event.clientX,y:event.clientY,scroll:viewport.current.scrollLeft,moved:false}}} onPointerMove={event=>{
+        <div ref={viewport} className="hh-viewport" onScroll={sync} onPointerDown={event=>{if(event.button!==0||!event.isPrimary||selection)return;drag.current={id:event.pointerId,x:event.clientX,y:event.clientY,scroll:viewport.current.scrollLeft,moved:false,native:event.pointerType==='touch'}}} onPointerMove={event=>{
           motion.current.pointer(event)
           const d=drag.current
-          if(d){if(d.id!==event.pointerId)return;const dx=event.clientX-d.x;if(!d.moved&&Math.abs(dx)>6){d.moved=true;viewport.current.setPointerCapture(event.pointerId);viewport.current.classList.add('is-dragging');setHover(-1)}if(d.moved)viewport.current.scrollLeft=d.scroll-dx}
+          if(d){if(d.id!==event.pointerId)return;const dx=event.clientX-d.x;if(d.native){if(Math.hypot(dx,event.clientY-d.y)>6)d.moved=true;return}if(!d.moved&&Math.abs(dx)>6){d.moved=true;viewport.current.setPointerCapture(event.pointerId);viewport.current.classList.add('is-dragging');setHover(-1)}if(d.moved)viewport.current.scrollLeft=d.scroll-dx}
           else setHover(pick(event))
         }} onPointerUp={endDrag} onPointerCancel={endDrag} onLostPointerCapture={endDrag} onPointerLeave={()=>{if(!drag.current)setHover(-1);motion.current.leave()}} onClick={event=>{if(event.detail!==0 && Date.now()>suppress.current)open(pick(event))}}>
           <div className="hh-world" style={{width:layout.width,height:layout.height,'--hh-baseline':`${layout.baseline}px`}}><div className="hh-ground" aria-hidden="true"/>{layout.items.map((item,index)=>{
@@ -199,7 +199,7 @@ export default function HomeHistory() {
       </div>
       {selection && <HistoryObservation selection={selection} items={layout.items} size={size} closing={closing} originFor={originFor} onClose={close} onChange={changeRecord} onClosed={()=>{setSelection(null);setClosing(false);requestAnimationFrame(()=>opener.current?.focus({preventScroll:true}))}}/>}
     </div>
-    <div className="hh-navigation" inert={Boolean(selection)}><button type="button" onClick={()=>{if(current===HISTORY_RECORDS.length-1)viewport.current.scrollTo({left:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});else jump(Math.min(HISTORY_RECORDS.length-1,current+2))}} aria-label="向較近的年代探索"><span className="hh-explore-triangle" aria-hidden="true">◀</span></button><div className="hh-progress"><label htmlFor="hh-progress">{String(current+1).padStart(2,'0')} / {HISTORY_RECORDS.length} <span>{HISTORY_RECORDS[current].name}</span></label><input ref={range} id="hh-progress" type="range" min="0" max="100" step=".1" defaultValue="0" dir="rtl" aria-label="探索歷史長卷的進度" onChange={event=>{const max=viewport.current.scrollWidth-viewport.current.clientWidth;viewport.current.scrollLeft=max*(1-Number(event.target.value)/100)}}/></div><button type="button" onClick={()=>jump(Math.max(0,current-2))} aria-label="向較早的年代探索"><span className="hh-explore-triangle" aria-hidden="true">▶</span></button><p>拖曳長卷 · 橫向滑動 · Shift＋滾輪<br/><span>點擊人物就可以查看大家整理出的資料喔！</span></p></div>
+    <div className="hh-navigation" inert={Boolean(selection)}><button type="button" onClick={()=>{if(current===HISTORY_RECORDS.length-1)viewport.current.scrollTo({left:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});else jump(Math.min(HISTORY_RECORDS.length-1,current+2))}} aria-label="向較近的年代探索"><span className="hh-explore-triangle" aria-hidden="true">◀︎</span></button><div className="hh-progress"><label htmlFor="hh-progress">{String(current+1).padStart(2,'0')} / {HISTORY_RECORDS.length} <span>{HISTORY_RECORDS[current].name}</span></label><input ref={range} id="hh-progress" type="range" min="0" max="100" step=".1" defaultValue="0" dir="rtl" aria-label="探索歷史長卷的進度" onChange={event=>{const max=viewport.current.scrollWidth-viewport.current.clientWidth;viewport.current.scrollLeft=max*(1-Number(event.target.value)/100)}}/></div><button type="button" onClick={()=>jump(Math.max(0,current-2))} aria-label="向較早的年代探索"><span className="hh-explore-triangle" aria-hidden="true">▶︎</span></button><p>拖曳長卷 · 橫向滑動 · Shift＋滾輪<br/><span>點擊人物就可以查看大家整理出的資料喔！</span></p></div>
     <p className="hh-context">各時期與地區的發展可能重疊，圖示間距不代表實際時間比例。</p>
     </div>
     <dialog ref={reflection} className="hh-reflection" data-closing={reflectionClosing} aria-label="地球文明史的感想" onCancel={event=>{event.preventDefault();closeReflection()}} onClick={event=>{if(event.target===event.currentTarget)closeReflection()}}>
