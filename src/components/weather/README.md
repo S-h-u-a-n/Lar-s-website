@@ -10,6 +10,8 @@ npm run dev
 
 ## 整合位置
 
+進場信件由 `WeatherLetter.jsx`、`WeatherLetter.css` 與 `letterContent.js` 負責，`WeatherPotions.jsx` 透過 `letterSession.js` 判定本次頁面載入期間是否已顯示；狀態只存在 JavaScript 模組記憶體中，因此 SPA 頁面切換返回時不會重複自動開啟，重新整理後則會重新顯示。信件實際開啟後才標記為已顯示。左側介紹中的小型「✉ 重讀信件」入口會先停止倒入，再重新開啟，不受自動顯示紀錄限制。遮罩沿用 Big 文件彈窗的 `#fdf9ee99` 與 3px 模糊。使用既有 Framer Motion 緩動與原生 `dialog.showModal()`：背景維持 inert 到淡出卸載完成，關閉按鈕／背景點擊／Escape 皆走同一個退出流程，最後將焦點送回重讀入口。信件改為獨立紙張構圖：置中標題、四段原文與右下署名；研究室對話放在主信紙下方獨立的白色小紙條，以淡紫膠帶、輕微傾斜與小字區分，三句仍統一靠左，沒有聊天氣泡。使用現行首頁的米白、淡粉、薄荷與細線設計元素，未加入圖片。短視窗可捲動整份來信與紙外討論，關閉入口保持可用，遵循 reduced-motion。不修改 Canvas 的準備 callback、模擬迴圈或藥水規則。
+
 - `src/App.jsx`：正式頁 lazy import、直達網址、portal destination、返回；預載 weather 模組／CSS，再啟動既有 CircularReveal。
 - `src/components/weather/WeatherPage.jsx`：正式頁薄包裝，既有沙盒元件接收 App 的返回／世界封面 callback。
 - `src/components/bigInteractionRegistry.js`、`MainScene.jsx`：沿用實際 `potion-*` mesh 群組／raycast，首次及重訪均走 portal。

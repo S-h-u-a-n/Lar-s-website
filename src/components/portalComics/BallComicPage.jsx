@@ -3,6 +3,8 @@ import LayoutEditor from '../../dev/LayoutEditor'
 import { usePersistedEditableText } from '../../dev/useEditableText'
 import { buildTextStyle, enablePageTextPersistence, selectText } from '../../dev/textEditorStore'
 import { useDevEditorState } from '../../dev/devEditorStore'
+import { finishComicSequence } from './comicSequence'
+import EditionComicControls from './EditionComicControls'
 import layoutDefaults from '../ballComicLayout.json'
 import textDefaults from '../ballComicTextConfig.json'
 import referenceImage from '../../../Art/ball/b-comic/comic.JPG'
@@ -174,6 +176,7 @@ export default function BallComicPage({ onContinue, onBack }) {
   const busyRef = useRef(false)
   const requestFrameRef = useRef(null)
   const timersRef = useRef(new Set())
+  const finishedRef = useRef(false)
   const onContinueRef = useRef(onContinue)
   const { active } = useDevEditorState()
   const isImageEditorOpen = import.meta.env.DEV && active?.kind === 'img'
@@ -199,7 +202,7 @@ export default function BallComicPage({ onContinue, onBack }) {
   }, [])
 
   const revealStep = index => {
-    if (busyRef.current || index >= SEQUENCE.length) return
+    if (finishedRef.current || busyRef.current || index >= SEQUENCE.length) return
     busyRef.current = true
     setActiveFadeIndex(index)
     requestFrameRef.current = window.requestAnimationFrame(() => {
@@ -224,7 +227,7 @@ export default function BallComicPage({ onContinue, onBack }) {
 
   useEffect(() => {
     const nextIndex = AUTO_FOLLOW_STEPS.get(completedIndex)
-    if (nextIndex === undefined || isItemEditorOpen) return undefined
+    if (finishedRef.current || nextIndex === undefined || isItemEditorOpen) return undefined
     const delay = completedIndex === 0 ? INITIAL_DIALOG_DELAY_MS : AUTO_FOLLOW_DELAY_MS
     const timer = window.setTimeout(() => {
       revealStep(nextIndex)
@@ -246,17 +249,33 @@ export default function BallComicPage({ onContinue, onBack }) {
   }, [activeFadeIndex, isItemEditorOpen])
 
   const handleFadeComplete = event => {
-    if (event.propertyName !== 'opacity' || activeFadeIndex === null) return
+    if (finishedRef.current || event.propertyName !== 'opacity' || activeFadeIndex === null) return
     if (event.target.dataset.sequenceItemId !== SEQUENCE[activeFadeIndex]) return
     setCompletedIndex(activeFadeIndex)
     setActiveFadeIndex(null)
     busyRef.current = false
   }
 
+  const finishComic = () => {
+    const finished = finishComicSequence({
+      finishedRef,
+      busyRef,
+      requestFrameRef,
+      timersRef,
+      cancelFrame: id => window.cancelAnimationFrame(id),
+      clearTimer: id => window.clearTimeout(id),
+    })
+    if (!finished) return
+    setVisibleThrough(SEQUENCE.length - 1)
+    setCompletedIndex(SEQUENCE.length - 1)
+    setActiveFadeIndex(null)
+    onContinueRef.current?.()
+  }
+
   const handleStageClick = event => {
-    if (isItemEditorOpen || busyRef.current || event.target.closest('.layout-editor-panel, .text-editor-panel, .dev-editor-launcher, button')) return
+    if (finishedRef.current || isItemEditorOpen || busyRef.current || event.target.closest('.layout-editor-panel, .text-editor-panel, .dev-editor-launcher, button')) return
     if (completedIndex === SEQUENCE.length - 1) {
-      onContinueRef.current?.()
+      finishComic()
       return
     }
     if (completedIndex < 1 || AUTO_FOLLOW_STEPS.has(completedIndex)) return
@@ -298,12 +317,14 @@ export default function BallComicPage({ onContinue, onBack }) {
     onTransitionEnd={handleFadeComplete}
     style={{ '--b-comic-fade-duration': `${FADE_DURATION_MS}ms` }}
   >
-    <header>
-      <button onClick={onBack} onPointerDown={event => event.stopPropagation()}><ConfiguredBallText id="ball-comic-back" /></button>
-      <ConfiguredBallText as="h1" id="ball-comic-title" />
-      <span aria-hidden="true" />
-    </header>
-    <section ref={node => { frameRef.current = node }} className="b-comic-frame" aria-label="Ball comic artwork">
+    <EditionComicControls
+      onBack={onBack}
+      onStart={finishComic}
+      startLabel="開始探索"
+      title={<div className="b-comic-title"><ConfiguredBallText as="h1" id="ball-comic-title" /></div>}
+    />
+    <div className="edition-comic-frame-heading" aria-hidden="true" />
+    <section ref={node => { frameRef.current = node }} className="b-comic-frame edition-comic-frame" aria-label="Ball comic artwork">
       <div className="b-comic-fit">
         <LayoutEditor
           pageId="ball-comic"
@@ -325,7 +346,7 @@ export default function BallComicPage({ onContinue, onBack }) {
       </div>
     </section>
     <button
-      className={`portal-comic__continue${canContinue ? ' is-visible' : ''}`}
+      className={`portal-comic__continue edition-comic-frame-footer${canContinue ? ' is-visible' : ''}`}
       onClick={onContinue}
       onPointerDown={event => event.stopPropagation()}
       disabled={!canContinue}

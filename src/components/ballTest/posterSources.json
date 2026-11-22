@@ -1,0 +1,763 @@
+{
+  "the-big-short": {
+    "id": "the-big-short",
+    "workTitle": "The Big Short",
+    "category": "movies",
+    "sourcePlatform": "TMDB",
+    "requestedImageUrl": "https://image.tmdb.org/t/p/original/znvo8sEcGSHaZ9C59dqQLYf0YAC.jpg",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://www.paramount.com/movies/the-big-short",
+    "originalImagePublisher": null,
+    "originTrace": "指定 TMDB 圖與官方素材版本的同一性及海報設計權歸屬尚待確認。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "Paramount Pictures",
+        "role": "官方電影發行／介紹來源",
+        "sourceUrl": "https://www.paramount.com/movies/the-big-short",
+        "officialNotice": null
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "平台 API 提供有條件的非商業使用方案與署名要求，但明示不擁有圖片；尚未確認指定海報權利人授權及本地重新託管範圍，未將 API 存取條款當成海報權利人的授權。",
+    "policyUrls": [
+      "https://developer.themoviedb.org/docs/faq"
+    ],
+    "localPath": "/images/recommendations/movies/the-big-short.jpg",
+    "plannedLocalPath": "/images/recommendations/movies/the-big-short.jpg",
+    "downloaded": true,
+    "bytes": 213841,
+    "transformations": [
+      "使用同一 TMDB 海報檔名的官方 w780 等比例版本。",
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 213841,
+    "downloadUrl": "https://image.tmdb.org/t/p/w780/znvo8sEcGSHaZ9C59dqQLYf0YAC.jpg",
+    "width": 780,
+    "height": 1170,
+    "downloadWidth": 780,
+    "downloadHeight": 1170,
+    "assetSha256": "bb999331268a578b2412817a27bdc080ef30d6542762ca2501b965b3a60c7959",
+    "downloadSha256": "bb999331268a578b2412817a27bdc080ef30d6542762ca2501b965b3a60c7959",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "the-parent-trap": {
+    "id": "the-parent-trap",
+    "workTitle": "The Parent Trap",
+    "category": "movies",
+    "sourcePlatform": "TMDB",
+    "requestedImageUrl": "https://image.tmdb.org/t/p/original/p4dGmi8u9W0HHyVXcgWPoiFfKTF.jpg",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://movies.disney.com/the-parent-trap-1998",
+    "originalImagePublisher": null,
+    "originTrace": "以 1998 年電影官方頁為作品參考；指定圖的版本與權利鏈尚待確認。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "Disney／Walt Disney Pictures",
+        "role": "1998 年電影的官方發行／介紹來源",
+        "sourceUrl": "https://movies.disney.com/the-parent-trap-1998",
+        "officialNotice": null
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "平台 API 提供有條件的非商業使用方案與署名要求，但明示不擁有圖片；尚未確認指定海報權利人授權及本地重新託管範圍，未將 API 存取條款當成海報權利人的授權。",
+    "policyUrls": [
+      "https://developer.themoviedb.org/docs/faq"
+    ],
+    "localPath": "/images/recommendations/movies/the-parent-trap.jpg",
+    "plannedLocalPath": "/images/recommendations/movies/the-parent-trap.jpg",
+    "downloaded": true,
+    "bytes": 137745,
+    "transformations": [
+      "使用同一 TMDB 海報檔名的官方 w780 等比例版本。",
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 137745,
+    "downloadUrl": "https://image.tmdb.org/t/p/w780/p4dGmi8u9W0HHyVXcgWPoiFfKTF.jpg",
+    "width": 780,
+    "height": 1171,
+    "downloadWidth": 780,
+    "downloadHeight": 1171,
+    "assetSha256": "7a854c747b0678c09a56ebb105a6193f7ff339c75a8661d61c9816d476a36c4b",
+    "downloadSha256": "7a854c747b0678c09a56ebb105a6193f7ff339c75a8661d61c9816d476a36c4b",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "deadpool": {
+    "id": "deadpool",
+    "workTitle": "Deadpool",
+    "category": "movies",
+    "sourcePlatform": "TMDB",
+    "requestedImageUrl": "https://image.tmdb.org/t/p/original/3E53WEZJqP6aM84D8CckXx4pIHw.jpg",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://www.20thcenturystudios.com/movies/deadpool",
+    "originalImagePublisher": null,
+    "originTrace": "依使用者指示整合指定 TMDB 圖；原有 REMOANPU 自繪素材保留於專案，現改用本次指定海報。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "20th Century Studios",
+        "role": "電影官方發行／介紹來源",
+        "sourceUrl": "https://www.20thcenturystudios.com/movies/deadpool",
+        "officialNotice": null
+      },
+      {
+        "name": "Marvel",
+        "role": "角色相關權利；依既有作品資訊，不代表海報設計權歸屬",
+        "sourceUrl": "https://www.20thcenturystudios.com/movies/deadpool",
+        "officialNotice": null
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "平台 API 提供有條件的非商業使用方案與署名要求，但明示不擁有圖片；尚未確認指定海報權利人授權及本地重新託管範圍，未將 API 存取條款當成海報權利人的授權。",
+    "policyUrls": [
+      "https://developer.themoviedb.org/docs/faq"
+    ],
+    "localPath": "/images/recommendations/movies/deadpool.jpg",
+    "plannedLocalPath": "/images/recommendations/movies/deadpool.jpg",
+    "downloaded": true,
+    "bytes": 157400,
+    "transformations": [
+      "使用同一 TMDB 海報檔名的官方 w780 等比例版本。",
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 157400,
+    "downloadUrl": "https://image.tmdb.org/t/p/w780/3E53WEZJqP6aM84D8CckXx4pIHw.jpg",
+    "width": 780,
+    "height": 1170,
+    "downloadWidth": 780,
+    "downloadHeight": 1170,
+    "assetSha256": "134e202e5fe9db08ea0f61262dcb8017b0168c057631a54a0998ca24eb03b46f",
+    "downloadSha256": "134e202e5fe9db08ea0f61262dcb8017b0168c057631a54a0998ca24eb03b46f",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "hunter-x-hunter": {
+    "id": "hunter-x-hunter",
+    "workTitle": "HUNTER × HUNTER",
+    "category": "anime",
+    "sourcePlatform": "TMDB",
+    "requestedImageUrl": "https://image.tmdb.org/t/p/original/pAmBHolwskLDOsQlPSAevsToQpw.jpg",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://www.ntv.co.jp/hunterhunter/caststaff/index.html",
+    "originalImagePublisher": null,
+    "originTrace": "作品另有 1999 年動畫版本；未確認指定圖的動畫年分／版本，不把 2011 年製作名單當成指定圖的唯一權利人。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "冨樫義博／集英社",
+        "role": "原作者／出版方",
+        "sourceUrl": "https://www.ntv.co.jp/hunterhunter/caststaff/index.html",
+        "officialNotice": null
+      },
+      {
+        "name": "バップ、日本テレビ、集英社、マッドハウス",
+        "role": "2011 年動畫官方列示的製作著作相關方",
+        "sourceUrl": "https://www.ntv.co.jp/hunterhunter/caststaff/index.html",
+        "officialNotice": null
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "平台 API 提供有條件的非商業使用方案與署名要求，但明示不擁有圖片；尚未確認指定海報權利人授權及本地重新託管範圍，未將 API 存取條款當成海報權利人的授權。",
+    "policyUrls": [
+      "https://developer.themoviedb.org/docs/faq"
+    ],
+    "localPath": "/images/recommendations/anime/hunter-x-hunter.jpg",
+    "plannedLocalPath": "/images/recommendations/anime/hunter-x-hunter.jpg",
+    "downloaded": true,
+    "bytes": 267882,
+    "transformations": [
+      "使用同一 TMDB 海報檔名的官方 w780 等比例版本。",
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 267882,
+    "downloadUrl": "https://image.tmdb.org/t/p/w780/pAmBHolwskLDOsQlPSAevsToQpw.jpg",
+    "width": 780,
+    "height": 1170,
+    "downloadWidth": 780,
+    "downloadHeight": 1170,
+    "assetSha256": "be1a9df3ed12189b8c802a6fe49197fa226553677dedf59626e276b2f94da94a",
+    "downloadSha256": "be1a9df3ed12189b8c802a6fe49197fa226553677dedf59626e276b2f94da94a",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "witch-watch": {
+    "id": "witch-watch",
+    "workTitle": "WITCH WATCH",
+    "category": "anime",
+    "sourcePlatform": "TMDB",
+    "requestedImageUrl": "https://image.tmdb.org/t/p/original/6thVm2QGuRqCdiT4nZ6tSFLoYc4.jpg",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://witchwatch-anime.com/",
+    "originalImagePublisher": null,
+    "originTrace": "官方頁可追溯作品權利相關方；未確認指定 TMDB 版本的海報再利用許可。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "篠原健太／集英社・ウィッチウォッチ製作委員会・MBS",
+        "role": "動畫官方版權列示",
+        "sourceUrl": "https://witchwatch-anime.com/",
+        "officialNotice": "©篠原健太／集英社・ウィッチウォッチ製作委員会・MBS"
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "平台 API 提供有條件的非商業使用方案與署名要求，但明示不擁有圖片；尚未確認指定海報權利人授權及本地重新託管範圍，未將 API 存取條款當成海報權利人的授權。",
+    "policyUrls": [
+      "https://developer.themoviedb.org/docs/faq"
+    ],
+    "localPath": "/images/recommendations/anime/witch-watch.jpg",
+    "plannedLocalPath": "/images/recommendations/anime/witch-watch.jpg",
+    "downloaded": true,
+    "bytes": 233650,
+    "transformations": [
+      "使用同一 TMDB 海報檔名的官方 w780 等比例版本。",
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 233650,
+    "downloadUrl": "https://image.tmdb.org/t/p/w780/6thVm2QGuRqCdiT4nZ6tSFLoYc4.jpg",
+    "width": 780,
+    "height": 1103,
+    "downloadWidth": 780,
+    "downloadHeight": 1103,
+    "assetSha256": "97e77c1d2ce95382340287a6e4afc4396bd121c4b70ced14ca787edcf92f8e94",
+    "downloadSha256": "97e77c1d2ce95382340287a6e4afc4396bd121c4b70ced14ca787edcf92f8e94",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "monthly-girls-nozaki-kun": {
+    "id": "monthly-girls-nozaki-kun",
+    "workTitle": "月刊少女野崎くん",
+    "category": "anime",
+    "sourcePlatform": "TMDB",
+    "requestedImageUrl": "https://image.tmdb.org/t/p/original/4842Nau95xD3D2G2vgmFxiVIFP8.jpg",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://www.kadokawa.co.jp/product/video2565/",
+    "originalImagePublisher": null,
+    "originTrace": "官方作品頁不等於指定海報的重新託管授權。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "椿いづみ／スクウェアエニックス・「月刊少女野崎くん」製作委員会",
+        "role": "動畫官方版權列示",
+        "sourceUrl": "https://www.kadokawa.co.jp/product/video2565/",
+        "officialNotice": "©椿いづみ／スクウェアエニックス・「月刊少女野崎くん」製作委員会"
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "平台 API 提供有條件的非商業使用方案與署名要求，但明示不擁有圖片；尚未確認指定海報權利人授權及本地重新託管範圍，未將 API 存取條款當成海報權利人的授權。",
+    "policyUrls": [
+      "https://developer.themoviedb.org/docs/faq"
+    ],
+    "localPath": "/images/recommendations/anime/monthly-girls-nozaki-kun.jpg",
+    "plannedLocalPath": "/images/recommendations/anime/monthly-girls-nozaki-kun.jpg",
+    "downloaded": true,
+    "bytes": 251787,
+    "transformations": [
+      "使用同一 TMDB 海報檔名的官方 w780 等比例版本。",
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 251787,
+    "downloadUrl": "https://image.tmdb.org/t/p/w780/4842Nau95xD3D2G2vgmFxiVIFP8.jpg",
+    "width": 780,
+    "height": 1103,
+    "downloadWidth": 780,
+    "downloadHeight": 1103,
+    "assetSha256": "d498b4c7534460d8c30f329f7707ef51a8da9e8181830ed85800da53998cbcef",
+    "downloadSha256": "d498b4c7534460d8c30f329f7707ef51a8da9e8181830ed85800da53998cbcef",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "old-poverty-chronicles": {
+    "id": "old-poverty-chronicles",
+    "workTitle": "老窮奇幻紀事",
+    "category": "novels",
+    "sourcePlatform": "博客來",
+    "requestedImageUrl": "https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/E05/021/28/E050212894.jpg&v=66135f72k&w=348&h=348",
+    "sourcePageUrl": "https://www.books.com.tw/products/E050212894",
+    "officialWorkUrl": "https://www.mirrorfiction.com/news/1000",
+    "originalImagePublisher": null,
+    "originTrace": "可追溯官方出版社對同名書的介紹；指定電子書封面的設計者／攝影者與授權鏈仍待確認。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "呂苡榕",
+        "role": "作者",
+        "sourceUrl": "https://www.mirrorfiction.com/news/1000",
+        "officialNotice": null
+      },
+      {
+        "name": "鏡文學",
+        "role": "出版社",
+        "sourceUrl": "https://www.mirrorfiction.com/news/1000",
+        "officialNotice": null
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "平台聲明網站圖片由博客來或其他權利人享有權利；未取得此版本封面的本地展示許可。",
+    "policyUrls": [
+      "https://www.books.com.tw/data/qanda/servicepolicy.htm"
+    ],
+    "localPath": "/images/recommendations/literature/old-poverty-chronicles.webp",
+    "plannedLocalPath": "/images/recommendations/literature/old-poverty-chronicles.webp",
+    "downloaded": true,
+    "bytes": 11336,
+    "transformations": [
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "bookCredits": {
+      "author": "呂苡榕",
+      "publisher": "鏡文學",
+      "coverDesigner": "尚待確認",
+      "coverIllustrator": "尚待確認",
+      "edition": "指定來源版本尚待確認；作者、出版社與封面設計／插畫權利分別記錄。"
+    },
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 11336,
+    "downloadUrl": "https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/E05/021/28/E050212894.jpg&v=66135f72k&w=348&h=348",
+    "width": 348,
+    "height": 348,
+    "downloadWidth": 348,
+    "downloadHeight": 348,
+    "assetSha256": "794c56c661102919d30980f09c71aab10ef1e9bed10bdb35d8e197e4d6df4704",
+    "downloadSha256": "794c56c661102919d30980f09c71aab10ef1e9bed10bdb35d8e197e4d6df4704",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "okay-for-now": {
+    "id": "okay-for-now",
+    "workTitle": "Okay for Now",
+    "category": "novels",
+    "sourcePlatform": "Google 圖片快取",
+    "requestedImageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrBCjJLEQ3BDxy6TOOxujZHc2qG2wMru3dg20_HUIe4g&s=10",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://www.nationalbook.org/books/okay-for-now/",
+    "originalImagePublisher": null,
+    "originTrace": "有多種版本；不得將其他版次的封面插畫署名套用到此快取圖。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "Gary D. Schmidt",
+        "role": "作者",
+        "sourceUrl": "https://www.nationalbook.org/books/okay-for-now/",
+        "officialNotice": null
+      },
+      {
+        "name": "Clarion Books／HarperCollins",
+        "role": "出版相關方，未確認指定封面版次",
+        "sourceUrl": "https://www.harpercollins.com/products/okay-for-now-gary-d-schmidt",
+        "officialNotice": null
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "Google 僅提供搜尋／快取，並非封面權利人；指定快取 ID 搜尋未找到可核實的原始發布頁、版次及授權。",
+    "policyUrls": [
+      "https://support.google.com/websearch/answer/29508"
+    ],
+    "localPath": "/images/recommendations/literature/okay-for-now.jpg",
+    "plannedLocalPath": "/images/recommendations/literature/okay-for-now.jpg",
+    "downloaded": true,
+    "bytes": 13973,
+    "transformations": [
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "bookCredits": {
+      "author": "Gary D. Schmidt",
+      "publisher": "Clarion Books／HarperCollins",
+      "coverDesigner": "尚待確認",
+      "coverIllustrator": "尚待確認",
+      "edition": "指定來源版本尚待確認；作者、出版社與封面設計／插畫權利分別記錄。"
+    },
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 13973,
+    "downloadUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrBCjJLEQ3BDxy6TOOxujZHc2qG2wMru3dg20_HUIe4g&s=10",
+    "width": 300,
+    "height": 450,
+    "downloadWidth": 300,
+    "downloadHeight": 450,
+    "assetSha256": "31dcf82295bdadb7f129d850dfee8ef8d07089012738ce0f1321412549c9d3dc",
+    "downloadSha256": "31dcf82295bdadb7f129d850dfee8ef8d07089012738ce0f1321412549c9d3dc",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "all-tomorrows": {
+    "id": "all-tomorrows",
+    "workTitle": "All Tomorrows",
+    "category": "novels",
+    "sourcePlatform": "Google 圖片快取",
+    "requestedImageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqfTkwjwYun7CygmFF-EB1B3n6qs1fujOjzsxtGnpl6w&s",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://cmkosemen.com/books.html",
+    "originalImagePublisher": null,
+    "originTrace": "作者官方書目可核對作者及出版方，但指定快取圖未能追溯原頁；不能因原作曾免費提供閱讀便推定封面可轉載。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "C. M. Kösemen",
+        "role": "作者與插畫創作者",
+        "sourceUrl": "https://cmkosemen.com/books.html",
+        "officialNotice": null
+      },
+      {
+        "name": "Wilton Square Books",
+        "role": "作者書目列示的英語實體版出版方；不代表此快取圖的版次",
+        "sourceUrl": "https://cmkosemen.com/books.html",
+        "officialNotice": null
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "Google 僅提供搜尋／快取，並非封面權利人；指定快取 ID 搜尋未找到可核實的原始發布頁、版次及授權。",
+    "policyUrls": [
+      "https://support.google.com/websearch/answer/29508"
+    ],
+    "localPath": "/images/recommendations/literature/all-tomorrows.jpg",
+    "plannedLocalPath": "/images/recommendations/literature/all-tomorrows.jpg",
+    "downloaded": true,
+    "bytes": 9024,
+    "transformations": [
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "bookCredits": {
+      "author": "C. M. Kösemen",
+      "publisher": "Wilton Square Books",
+      "coverDesigner": "尚待確認",
+      "coverIllustrator": "尚待確認",
+      "edition": "指定來源版本尚待確認；作者、出版社與封面設計／插畫權利分別記錄。"
+    },
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 9024,
+    "downloadUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqfTkwjwYun7CygmFF-EB1B3n6qs1fujOjzsxtGnpl6w&s",
+    "width": 189,
+    "height": 267,
+    "downloadWidth": 189,
+    "downloadHeight": 267,
+    "assetSha256": "7934d20a0aa2e72133d9b010ef0d729257c97135b0a39f495ff497e524cd48f3",
+    "downloadSha256": "7934d20a0aa2e72133d9b010ef0d729257c97135b0a39f495ff497e524cd48f3",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "hamilton": {
+    "id": "hamilton",
+    "workTitle": "Hamilton",
+    "category": "performing-arts",
+    "sourcePlatform": "TMDB",
+    "requestedImageUrl": "https://image.tmdb.org/t/p/original/h1B7tW0t399VDjAcWJh8m87469b.jpg",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://hamiltonmusical.com/london/cast-creative/",
+    "originalImagePublisher": null,
+    "originTrace": "舞台作品、2020 年影像及特定海報美術的權利須區分；此 TMDB 圖的製作版本及美術權利人尚待確認。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "Lin-Manuel Miranda",
+        "role": "音樂劇劇本、作曲與作詞",
+        "sourceUrl": "https://hamiltonmusical.com/london/cast-creative/",
+        "officialNotice": null
+      },
+      {
+        "name": "Disney",
+        "role": "2020 年影像發行相關方",
+        "sourceUrl": "https://thewaltdisneycompany.com/news/hamilton-film-coming-exclusively-to-disney-beginning-july-3/",
+        "officialNotice": null
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "平台 API 提供有條件的非商業使用方案與署名要求，但明示不擁有圖片；尚未確認指定海報權利人授權及本地重新託管範圍，未將 API 存取條款當成海報權利人的授權。",
+    "policyUrls": [
+      "https://developer.themoviedb.org/docs/faq"
+    ],
+    "localPath": "/images/recommendations/performing-arts/hamilton.jpg",
+    "plannedLocalPath": "/images/recommendations/performing-arts/hamilton.jpg",
+    "downloaded": true,
+    "bytes": 207190,
+    "transformations": [
+      "使用同一 TMDB 海報檔名的官方 w780 等比例版本。",
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 207190,
+    "downloadUrl": "https://image.tmdb.org/t/p/w780/h1B7tW0t399VDjAcWJh8m87469b.jpg",
+    "width": 780,
+    "height": 1170,
+    "downloadWidth": 780,
+    "downloadHeight": 1170,
+    "assetSha256": "22502c7f699267ab612f8e310b3461825eca5d287f3c879088da1a811a48c584",
+    "downloadSha256": "22502c7f699267ab612f8e310b3461825eca5d287f3c879088da1a811a48c584",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "come-from-away": {
+    "id": "come-from-away",
+    "workTitle": "Come From Away",
+    "category": "performing-arts",
+    "sourcePlatform": "TMDB",
+    "requestedImageUrl": "https://image.tmdb.org/t/p/original/9hAdtFyiRPyUYtWHzlPIDVsIUQ2.jpg",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://www.mtishows.com/come-from-away",
+    "originalImagePublisher": null,
+    "originTrace": "Apple 官方提供 Key Art 入口，但未核實與指定 TMDB 圖相同，也未確認本站符合該宣傳素材使用條件；不另行替換或下載。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "Irene Sankoff／David Hein",
+        "role": "音樂劇編劇、作曲與作詞",
+        "sourceUrl": "https://www.mtishows.com/come-from-away",
+        "officialNotice": null
+      },
+      {
+        "name": "Apple；eOne／Junkyard Dog Productions／RadicalMedia／Alchemy Production Group",
+        "role": "2021 年影像發行及製作相關方",
+        "sourceUrl": "https://www.apple.com/tv-pr/originals/come-from-away/",
+        "officialNotice": null
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "平台 API 提供有條件的非商業使用方案與署名要求，但明示不擁有圖片；尚未確認指定海報權利人授權及本地重新託管範圍，未將 API 存取條款當成海報權利人的授權。",
+    "policyUrls": [
+      "https://developer.themoviedb.org/docs/faq"
+    ],
+    "localPath": "/images/recommendations/performing-arts/come-from-away.jpg",
+    "plannedLocalPath": "/images/recommendations/performing-arts/come-from-away.jpg",
+    "downloaded": true,
+    "bytes": 342264,
+    "transformations": [
+      "使用同一 TMDB 海報檔名的官方 w780 等比例版本。",
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 342264,
+    "downloadUrl": "https://image.tmdb.org/t/p/w780/9hAdtFyiRPyUYtWHzlPIDVsIUQ2.jpg",
+    "width": 780,
+    "height": 1170,
+    "downloadWidth": 780,
+    "downloadHeight": 1170,
+    "assetSha256": "ea189036bffcd1daa141fb77d6be119dad70ad11a44d59c39a7dff45c24e3020",
+    "downloadSha256": "ea189036bffcd1daa141fb77d6be119dad70ad11a44d59c39a7dff45c24e3020",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "next-to-normal": {
+    "id": "next-to-normal",
+    "workTitle": "Next to Normal",
+    "category": "performing-arts",
+    "sourcePlatform": "TMDB",
+    "requestedImageUrl": "https://image.tmdb.org/t/p/original/whKyzehrdUDDhhseHTvuttHZUkH.jpg",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://www.mtishows.com/next-to-normal",
+    "originalImagePublisher": null,
+    "originTrace": "MTI 舞台演出／宣傳方案不代表此 TMDB 海報已有許可；指定海報的演出版本、攝影與設計者待確認。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "Tom Kitt",
+        "role": "作曲",
+        "sourceUrl": "https://www.mtishows.com/next-to-normal",
+        "officialNotice": null
+      },
+      {
+        "name": "Brian Yorkey",
+        "role": "劇本與歌詞",
+        "sourceUrl": "https://www.mtishows.com/next-to-normal",
+        "officialNotice": null
+      },
+      {
+        "name": "Music Theatre International",
+        "role": "所查舞台版本的演出授權窗口，非據此認定為海報權利人",
+        "sourceUrl": "https://www.mtishows.com/next-to-normal",
+        "officialNotice": null
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "平台 API 提供有條件的非商業使用方案與署名要求，但明示不擁有圖片；尚未確認指定海報權利人授權及本地重新託管範圍，未將 API 存取條款當成海報權利人的授權。",
+    "policyUrls": [
+      "https://developer.themoviedb.org/docs/faq"
+    ],
+    "localPath": "/images/recommendations/performing-arts/next-to-normal.jpg",
+    "plannedLocalPath": "/images/recommendations/performing-arts/next-to-normal.jpg",
+    "downloaded": true,
+    "bytes": 275023,
+    "transformations": [
+      "使用同一 TMDB 海報檔名的官方 w780 等比例版本。",
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 275023,
+    "downloadUrl": "https://image.tmdb.org/t/p/w780/whKyzehrdUDDhhseHTvuttHZUkH.jpg",
+    "width": 780,
+    "height": 1170,
+    "downloadWidth": 780,
+    "downloadHeight": 1170,
+    "assetSha256": "2e2a6a3c302f321c168da72e92e009e4231cfc0706c7355e9d00bfcbe25f4107",
+    "downloadSha256": "2e2a6a3c302f321c168da72e92e009e4231cfc0706c7355e9d00bfcbe25f4107",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "persona-3-reload": {
+    "id": "persona-3-reload",
+    "workTitle": "Persona 3 Reload",
+    "category": "games",
+    "sourcePlatform": "MobyGames",
+    "requestedImageUrl": "https://cdn.mobygames.com/covers/18191503-persona-3-reload-windows-apps-front-cover.jpg",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://asia.sega.com/p3r/cht/",
+    "originalImagePublisher": null,
+    "originTrace": "來源檔名標示 Windows Apps front cover；尚未核實掃描／上傳者及封面再利用許可。實況或遊戲截圖規範不等於包裝封面授權。原有 REMOANPU 自繪素材保留於專案，現改用本次指定海報。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "ATLUS／SEGA",
+        "role": "官方權利標示",
+        "sourceUrl": "https://asia.sega.com/p3r/cht/",
+        "officialNotice": "©ATLUS ©SEGA All rights reserved."
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "MobyGames FAQ 明確允許附署名使用最多 20 張遊戲截圖；該段未明確將此授權擴及指定的包裝封面。條款全文與 FAQ 直接讀取回傳 403，已核對搜尋索引的官方 FAQ 內容；此封面的重新託管權限仍需確認。",
+    "policyUrls": [
+      "https://www.mobygames.com/info/terms/",
+      "https://www.mobygames.com/info/faq6/"
+    ],
+    "localPath": "/images/recommendations/games/persona-3-reload.jpg",
+    "plannedLocalPath": "/images/recommendations/games/persona-3-reload.jpg",
+    "downloaded": true,
+    "bytes": 93337,
+    "transformations": [
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 93337,
+    "downloadUrl": "https://cdn.mobygames.com/covers/18191503-persona-3-reload-windows-apps-front-cover.jpg",
+    "width": 533,
+    "height": 800,
+    "downloadWidth": 533,
+    "downloadHeight": 800,
+    "assetSha256": "c0526ad70432892aefa0d6a3d5fe0fd58554368aaa4cebe9655278d68cc2d095",
+    "downloadSha256": "c0526ad70432892aefa0d6a3d5fe0fd58554368aaa4cebe9655278d68cc2d095",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "raging-loop": {
+    "id": "raging-loop",
+    "workTitle": "人狼村之謎（Raging Loop／レイジングループ）",
+    "category": "games",
+    "sourcePlatform": "MobyGames",
+    "requestedImageUrl": "https://cdn.mobygames.com/7bb5839a-abfc-11ed-82af-02420a000136.webp",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://www.kemco.jp/applipage/ps/top.html",
+    "originalImagePublisher": null,
+    "originTrace": "不以 2024 年官方產品標示推定此指定圖的發行地區、平台、年份或美術權利鏈；原始 MobyGames 圖片頁未確認。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "KEMCO／dwango",
+        "role": "官方遊戲版權列示，年份依版本而異",
+        "sourceUrl": "https://www.kemco.jp/applipage/ps/top.html",
+        "officialNotice": "© 2015-2024 KEMCO\n©2015-2024 dwango"
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "MobyGames FAQ 明確允許附署名使用最多 20 張遊戲截圖；該段未明確將此授權擴及指定的包裝封面。條款全文與 FAQ 直接讀取回傳 403，已核對搜尋索引的官方 FAQ 內容；此封面的重新託管權限仍需確認。",
+    "policyUrls": [
+      "https://www.mobygames.com/info/terms/",
+      "https://www.mobygames.com/info/faq6/"
+    ],
+    "localPath": "/images/recommendations/games/raging-loop.webp",
+    "plannedLocalPath": "/images/recommendations/games/raging-loop.webp",
+    "downloaded": true,
+    "bytes": 36026,
+    "transformations": [
+      "保持下載版本原始比例；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 36026,
+    "downloadUrl": "https://cdn.mobygames.com/7bb5839a-abfc-11ed-82af-02420a000136.webp",
+    "width": 440,
+    "height": 440,
+    "downloadWidth": 440,
+    "downloadHeight": 440,
+    "assetSha256": "36c198e1d48311ea967d0aba10bdd45e4b8406e8e876bd33f9f401fa8d5ef671",
+    "downloadSha256": "36c198e1d48311ea967d0aba10bdd45e4b8406e8e876bd33f9f401fa8d5ef671",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  },
+  "fate-grand-order": {
+    "id": "fate-grand-order",
+    "workTitle": "Fate/Grand Order",
+    "category": "games",
+    "sourcePlatform": "巴哈姆特",
+    "requestedImageUrl": "https://p2.bahamut.com.tw/B/2KU/36/0001206836.JPG",
+    "sourcePageUrl": null,
+    "officialWorkUrl": "https://www.fate-go.jp/",
+    "originalImagePublisher": null,
+    "originTrace": "指定巴哈 CDN 圖的新聞／發布頁及所對應的官方素材未能追溯，不把平台當成著作權人。",
+    "posterRightsHolder": "尚待確認",
+    "workRightsParties": [
+      {
+        "name": "TYPE-MOON／FGO PROJECT",
+        "role": "遊戲官方版權列示",
+        "sourceUrl": "https://www.fate-go.jp/",
+        "officialNotice": "©TYPE-MOON / FGO PROJECT"
+      }
+    ],
+    "permissionStatus": "pending-permission",
+    "permissionSummary": "來源條款限制未經書面授權的轉載及展示；尚未追溯此 CDN 圖至原始文章、發布者或官方素材包。",
+    "policyUrls": [
+      "https://user.gamer.com.tw/help/detail.php?sn=294"
+    ],
+    "localPath": "/images/recommendations/games/fate-grand-order.jpg",
+    "plannedLocalPath": "/images/recommendations/games/fate-grand-order.jpg",
+    "downloaded": true,
+    "bytes": 377424,
+    "transformations": [
+      "等比例縮小至寬 1200px，使用系統 JPEG 品質 65 適度壓縮；未裁切、未拉伸。卡片沿用 cover，詳情沿用 contain。"
+    ],
+    "reviewedAt": "2026-11-21",
+    "requiredAction": "確認此指定圖的原始發布者及權利鏈，取得涵蓋非營利網站本地託管、公開展示、網頁縮圖／裁切的許可，記錄署名與期限後才可上架。",
+    "currentDisplay": "目前顯示指定海報的本地版本；來源、作品相關方與既有權利查核資料保留。",
+    "downloadBytes": 497199,
+    "downloadUrl": "https://p2.bahamut.com.tw/B/2KU/36/0001206836.JPG",
+    "width": 1200,
+    "height": 1154,
+    "downloadWidth": 1400,
+    "downloadHeight": 1347,
+    "assetSha256": "23b70a449d5dfccd0d9292a6cf57418c05980046121d394c47bbc82459e3909e",
+    "downloadSha256": "6b46e30b989e4b2255349e3f4c819b5c1ff29d77829361249d8c16716f5db1b7",
+    "integrationStatus": "local-integrated-by-user-request",
+    "integrationRequestedAt": "2026-11-21"
+  }
+}

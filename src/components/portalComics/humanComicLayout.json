@@ -1,0 +1,35 @@
+[
+  {
+    "id": "human-comic-panel",
+    "pageId": "human-comic",
+    "layoutId": "human-comic",
+    "coordinateSpace": "stage-percent",
+    "x": 21.09,
+    "y": 4.4,
+    "width": 58,
+    "rotation": 0,
+    "zIndex": 1
+  },
+  {
+    "id": "human-comic-dialog-1",
+    "pageId": "human-comic",
+    "layoutId": "human-comic",
+    "coordinateSpace": "stage-percent",
+    "x": 80.27,
+    "y": 4.8,
+    "width": 26.41,
+    "rotation": -1,
+    "zIndex": 2
+  },
+  {
+    "id": "human-comic-dialog-2",
+    "pageId": "human-comic",
+    "layoutId": "human-comic",
+    "coordinateSpace": "stage-percent",
+    "x": -7.6,
+    "y": 5.66,
+    "width": 27.04,
+    "rotation": 0.87,
+    "zIndex": 2
+  }
+]

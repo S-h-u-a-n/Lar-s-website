@@ -2,7 +2,7 @@
 
 圖片與逐張作者、原始檔案頁、授權連結、修改方式，統一記錄於 `src/components/globeTest/solarPhotos.json`。2026-11-15 透過 Wikimedia Commons imageinfo / extmetadata 核對，木星另核對檔案頁的 Licensing 段落（JPL Image 使用條款，非自行推定為 CC 授權）。目前沒有缺少必要授權欄位的圖片。
 
-照片位於 `public/solar-photos/`。天王星原始 TIFF 轉 JPEG；太陽與天王星等比例縮小至最長邊 1280，其餘採 Commons 1280px 縮圖。所有圖片完整顯示於 4:3 框，沒有裁切。
+照片現位於 `public/images/solar/`（2026-11-21 統一整理；沿用既有檔案，沒有重新下載或轉檔）。最新逐張核對資料見 `docs/ResearchImageLicenses.json`，圖片引用由共用 `photoUrl` 套用 Vite `BASE_URL`。天王星原始 TIFF 轉 JPEG；太陽與天王星等比例縮小至最長邊 1280，其餘採 Commons 1280px 縮圖。所有圖片完整顯示於 4:3 框，沒有裁切。
 
 照片直接使用自然／人文閱讀頁的 `ReadingPhoto` → `ResearchPhoto` + `PhotoCredit`，原來限於自然頁的圖框、留白及右下角資訊按鈕樣式已抽到 `research/ResearchPhoto.css`，由三個頁面共用。移除 `SolarPhoto` 與底部授權列；共用 ReadingPhoto 也支援直接點擊圖片，鍵盤使用右下角資訊按鈕。原生版權 dialog 維持同一元件，關閉後先解除原生模態再返回按鈕焦點。
 

@@ -1,6 +1,6 @@
 {
   "moon": {
-    "image": "/solar-photos/moon.jpg",
+    "image": "/images/solar/moon.jpg",
     "imageAlt": "FullMoon2010.jpg",
     "photoCredit": {
       "title": "FullMoon2010.jpg",
@@ -11,12 +11,13 @@
       "modifications": "使用 Commons 等比例縮圖，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 1216,
-      "verifiedAt": "2026-11-15",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/1280px-FullMoon2010.jpg"
+      "verifiedAt": "2026-11-21",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/1280px-FullMoon2010.jpg",
+      "licenseVersion": "3.0"
     }
   },
   "mars": {
-    "image": "/solar-photos/mars.jpg",
+    "image": "/images/solar/mars.jpg",
     "imageAlt": "Mars Valles Marineris EDIT.jpg",
     "photoCredit": {
       "title": "Mars Valles Marineris EDIT.jpg",
@@ -27,12 +28,13 @@
       "modifications": "使用 Commons 等比例縮圖，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 1280,
-      "verifiedAt": "2026-11-15",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Mars_Valles_Marineris_EDIT.jpg/1280px-Mars_Valles_Marineris_EDIT.jpg"
+      "verifiedAt": "2026-11-21",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Mars_Valles_Marineris_EDIT.jpg/1280px-Mars_Valles_Marineris_EDIT.jpg",
+      "licenseVersion": null
     }
   },
   "mercury": {
-    "image": "/solar-photos/mercury.jpg",
+    "image": "/images/solar/mercury.jpg",
     "imageAlt": "Mercury in color - Prockter07 centered.jpg",
     "photoCredit": {
       "title": "Mercury in color - Prockter07 centered.jpg",
@@ -43,12 +45,13 @@
       "modifications": "使用 Commons 等比例縮圖，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 1269,
-      "verifiedAt": "2026-11-15",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Mercury_in_color_-_Prockter07_centered.jpg/1280px-Mercury_in_color_-_Prockter07_centered.jpg"
+      "verifiedAt": "2026-11-21",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Mercury_in_color_-_Prockter07_centered.jpg/1280px-Mercury_in_color_-_Prockter07_centered.jpg",
+      "licenseVersion": null
     }
   },
   "earth": {
-    "image": "/solar-photos/earth.jpg",
+    "image": "/images/solar/earth.jpg",
     "imageAlt": "NASA Earth America 2002.jpg",
     "photoCredit": {
       "title": "NASA Earth America 2002.jpg",
@@ -59,12 +62,13 @@
       "modifications": "使用 Commons 等比例縮圖，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 1280,
-      "verifiedAt": "2026-11-15",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/NASA_Earth_America_2002.jpg/1280px-NASA_Earth_America_2002.jpg"
+      "verifiedAt": "2026-11-21",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/NASA_Earth_America_2002.jpg/1280px-NASA_Earth_America_2002.jpg",
+      "licenseVersion": null
     }
   },
   "neptune": {
-    "image": "/solar-photos/neptune.jpg",
+    "image": "/images/solar/neptune.jpg",
     "imageAlt": "Neptune Full.jpg",
     "photoCredit": {
       "title": "Neptune Full.jpg",
@@ -75,12 +79,13 @@
       "modifications": "使用 Commons 等比例縮圖，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 1280,
-      "verifiedAt": "2026-11-15",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Neptune_Full.jpg/1280px-Neptune_Full.jpg"
+      "verifiedAt": "2026-11-21",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Neptune_Full.jpg/1280px-Neptune_Full.jpg",
+      "licenseVersion": null
     }
   },
   "venus": {
-    "image": "/solar-photos/venus.jpg",
+    "image": "/images/solar/venus.jpg",
     "imageAlt": "PIA00252.jpg",
     "photoCredit": {
       "title": "PIA00252.jpg",
@@ -91,12 +96,13 @@
       "modifications": "使用 Commons 等比例縮圖，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 1280,
-      "verifiedAt": "2026-11-15",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/PIA00252.jpg/1280px-PIA00252.jpg"
+      "verifiedAt": "2026-11-21",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/PIA00252.jpg/1280px-PIA00252.jpg",
+      "licenseVersion": null
     }
   },
   "jupiter": {
-    "image": "/solar-photos/jupiter.jpg",
+    "image": "/images/solar/jupiter.jpg",
     "imageAlt": "PIA22946-Jupiter-RedSpot-JunoSpacecraft-20190212.jpg",
     "photoCredit": {
       "title": "PIA22946-Jupiter-RedSpot-JunoSpacecraft-20190212.jpg",
@@ -107,12 +113,12 @@
       "modifications": "使用 Commons 等比例縮圖，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 1280,
-      "verifiedAt": "2026-11-15",
+      "verifiedAt": "2026-11-21",
       "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/PIA22946-Jupiter-RedSpot-JunoSpacecraft-20190212.jpg/1280px-PIA22946-Jupiter-RedSpot-JunoSpacecraft-20190212.jpg"
     }
   },
   "pluto": {
-    "image": "/solar-photos/pluto.jpg",
+    "image": "/images/solar/pluto.jpg",
     "imageAlt": "Pluto-01 Stern 03 Pluto Color TXT.jpg",
     "photoCredit": {
       "title": "Pluto-01 Stern 03 Pluto Color TXT.jpg",
@@ -123,12 +129,13 @@
       "modifications": "使用 Commons 等比例縮圖，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 1280,
-      "verifiedAt": "2026-11-15",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Pluto-01_Stern_03_Pluto_Color_TXT.jpg/1280px-Pluto-01_Stern_03_Pluto_Color_TXT.jpg"
+      "verifiedAt": "2026-11-21",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Pluto-01_Stern_03_Pluto_Color_TXT.jpg/1280px-Pluto-01_Stern_03_Pluto_Color_TXT.jpg",
+      "licenseVersion": null
     }
   },
   "saturn": {
-    "image": "/solar-photos/saturn.jpg",
+    "image": "/images/solar/saturn.jpg",
     "imageAlt": "Saturn during Equinox.jpg",
     "photoCredit": {
       "title": "Saturn during Equinox.jpg",
@@ -139,28 +146,30 @@
       "modifications": "使用 Commons 等比例縮圖，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 620,
-      "verifiedAt": "2026-11-15",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/1280px-Saturn_during_Equinox.jpg"
+      "verifiedAt": "2026-11-21",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/1280px-Saturn_during_Equinox.jpg",
+      "licenseVersion": null
     }
   },
   "solar-system": {
-    "image": "/solar-photos/solar-system.png",
+    "image": "/images/solar/solar-system.png",
     "imageAlt": "太陽系天體真實色彩及相對大小比例圖",
     "photoCredit": {
       "title": "Solar System True Color EN.png",
-      "author": "Omarius257；原素材署名：CactiStaccingCrane, Łukasz Dziedzic (Lato font), MotloAstro, Ardenau4, Grevera, NASA / ESA / ISRO / ISSDC / Justin Cowart / Gordan Ugarković",
+      "author": "Omarius257",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Solar_System_True_Color_EN.png",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
       "modifications": "使用 Commons 等比例縮圖，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 720,
-      "verifiedAt": "2026-11-15",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Solar_System_True_Color_EN.png/1280px-Solar_System_True_Color_EN.png"
+      "verifiedAt": "2026-11-21",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Solar_System_True_Color_EN.png/1280px-Solar_System_True_Color_EN.png",
+      "licenseVersion": "4.0"
     }
   },
   "sun": {
-    "image": "/solar-photos/sun.jpg",
+    "image": "/images/solar/sun.jpg",
     "imageAlt": "The Sun by the Atmospheric Imaging Assembly of NASA's Solar Dynamics Observatory - 20100819.jpg",
     "photoCredit": {
       "title": "The Sun by the Atmospheric Imaging Assembly of NASA's Solar Dynamics Observatory - 20100819.jpg",
@@ -171,12 +180,13 @@
       "modifications": "使用原檔等比例縮小並轉為 JPEG，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 1221,
-      "verifiedAt": "2026-11-15",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/1280px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg"
+      "verifiedAt": "2026-11-21",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/1280px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg",
+      "licenseVersion": null
     }
   },
   "uranus": {
-    "image": "/solar-photos/uranus.jpg",
+    "image": "/images/solar/uranus.jpg",
     "imageAlt": "Uranus as seen by NASA's Voyager 2.tif",
     "photoCredit": {
       "title": "Uranus as seen by NASA's Voyager 2.tif",
@@ -187,8 +197,9 @@
       "modifications": "使用原檔等比例縮小並轉為 JPEG，完整顯示；本站未裁切、未調色。",
       "width": 1280,
       "height": 1280,
-      "verifiedAt": "2026-11-15",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Uranus_as_seen_by_NASA%27s_Voyager_2.tif/lossy-page1-1280px-Uranus_as_seen_by_NASA%27s_Voyager_2.tif.jpg"
+      "verifiedAt": "2026-11-21",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Uranus_as_seen_by_NASA%27s_Voyager_2.tif/lossy-page1-1280px-Uranus_as_seen_by_NASA%27s_Voyager_2.tif.jpg",
+      "licenseVersion": null
     }
   }
 }

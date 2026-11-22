@@ -1,5 +1,6 @@
 import { MATERIAL as M, PALETTE as P, POTIONS, RULES as R, WORLD } from './config.js'
 import { brushSettings } from './brushSettings.js'
+import { paintPlantFlowers } from './flowers.js'
 
 export function createRenderer() {
   const layer=document.createElement('canvas'),context=layer.getContext('2d',{alpha:false})
@@ -51,6 +52,7 @@ export function createRenderer() {
         }
         data[offset]=r;data[offset+1]=g;data[offset+2]=b;data[offset+3]=255
       }
+      paintPlantFlowers(world,data)
       context.putImageData(pixels,0,0);lastWorld=world;lastTick=world.tick;lastPaint=world.paintRevision
     }
     ctx.clearRect(0,0,WORLD.width,WORLD.height);ctx.imageSmoothingEnabled=false

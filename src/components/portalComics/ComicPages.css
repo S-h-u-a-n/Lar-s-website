@@ -1,9 +1,12 @@
 .portal-comic, .t-comic-page { position: fixed; inset: 0; background: #fdf9ee; color: #56525a; font-family: inherit; display: flex; flex-direction: column; gap: clamp(16px, 3vh, 32px); padding: clamp(20px, 4vw, 64px); }
 .portal-comic header { display: flex; align-items: center; gap: 24px; }
 .portal-comic h1 { margin: 0; font-size: clamp(24px, 4vw, 56px); font-weight: 800; }
-.portal-comic button { border: 0; border-radius: 12px; background: #91d9df; color: #56525a; padding: 14px 24px; font: inherit; font-weight: 800; cursor: pointer; transition: transform 200ms ease; }
-.portal-comic button:hover { transform: scale(1.03); }
+.portal-comic button:not(.edition-comic-controls button) { border: 0; border-radius: 12px; background: #91d9df; color: #56525a; padding: 14px 24px; font: inherit; font-weight: 800; cursor: pointer; transition: transform 200ms ease; }
+.portal-comic button:not(.edition-comic-controls button):hover { transform: scale(1.03); }
 .portal-comic__panels { flex: 1; min-height: 0; overflow: auto; border-radius: 24px; border: 2px dashed #91d9df; display: grid; place-items: center; font-weight: 800; }
 .portal-comic__panels img { max-width: 100%; height: auto; }
 .portal-comic__continue { align-self: center; }
+.edition-comic-frame-heading { flex: 0 0 clamp(28px, 5vw, 64px); }
+.edition-comic-frame { position: relative; flex: 1; min-height: 0; width: 96%; align-self: center; overflow: visible; }
+.edition-comic-frame-footer { flex: 0 0 48px; }
 .portal-page-arrival { animation: home-page-arrive 700ms ease both; }

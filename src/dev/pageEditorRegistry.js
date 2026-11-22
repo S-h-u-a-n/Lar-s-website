@@ -12,6 +12,8 @@ export const PAGE_EDITOR_SCOPES = {
   'bottled-weather': '.wp-page',
   't-comic': '.t-comic-page',
   'ball-comic': '.b-comic-page',
+  'natural-comic': '.field-comic-page',
+  'human-comic': '.field-comic-page',
 }
 export const PAGE_LAYOUT_TARGETS = {
   intro: '.edition-intro-orbit, .intro-squares > *, .intro-content, .intro-replay',

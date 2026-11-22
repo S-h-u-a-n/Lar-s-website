@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { CATEGORIES, WORKS } from './data'
+import { PosterCopyrightNotice } from './PosterCopyright'
 
 const INDEXED_WORKS = CATEGORIES.flatMap(category => category.works.map(id => {
   const work = WORKS[id]
@@ -62,6 +63,7 @@ export default function WorkIndexDialog({ open, onClose, onSelect }) {
         {filteredWorks.length ? <ul className="ball-index-list">{filteredWorks.map(({ work, category }) => <li key={work.id}>
           <button onClick={() => onSelect(work)}><span>{work.name}</span><small>{category.name}</small></button>
         </li>)}</ul> : <p className="ball-index-empty">找不到符合條件的作品。</p>}
+        <details className="ball-poster-rights"><summary>圖片來源與權利聲明</summary><PosterCopyrightNotice/></details>
       </div>
     </motion.section>
     </motion.div>}

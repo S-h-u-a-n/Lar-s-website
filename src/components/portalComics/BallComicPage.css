@@ -6,9 +6,8 @@
   justify-content: space-between;
 }
 
-.b-comic-page header h1 {
-  font: 400 clamp(20px, 2vw, 28px)/1.2 var(--display);
-}
+.b-comic-title { min-width:0; text-align:center; color:var(--edition-ink); }
+.b-comic-page .b-comic-title h1 { margin:0; font:400 clamp(20px,2vw,28px)/1.2 var(--display); }
 
 .b-comic-page header > span {
   width: 1px;
@@ -192,10 +191,6 @@
 }
 
 @media (max-width: 600px) {
-  .b-comic-page {
-    gap: 12px;
-  }
-
   .b-comic-page header {
     gap: 10px;
   }

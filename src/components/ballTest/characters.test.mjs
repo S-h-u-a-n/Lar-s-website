@@ -40,9 +40,14 @@ test('correct sides and all 1000 SVG combinations use manifest placement, optimi
   try {
     const {CHARACTERS}=await server.ssrLoadModule('/src/components/ballTest/data.js')
     const {CHARACTER_ASSETS,characterAssetState,characterDecoration}=await server.ssrLoadModule('/src/components/ballTest/characterAssets.js')
+    const {dialoguePortraits}=await server.ssrLoadModule('/src/components/ballTest/dialogueCues.js')
     const {CharacterScene}=await server.ssrLoadModule('/src/components/ballTest/CharacterPortrait.jsx')
     assert.equal(CHARACTERS.find(c=>c.id==='tivbo').side,'left')
     assert.equal(CHARACTERS.find(c=>c.id==='lar').side,'right')
+    const tivbo=CHARACTERS.find(c=>c.id==='tivbo')
+    assert.equal(tivbo.defaultBody,6)
+    assert.equal(tivbo.defaultFace,2)
+    assert.deepEqual(dialoguePortraits([{speaker:'tivbo',body:3,face:34}],0).tivbo,{body:3,face:34,transition:0,cueIndex:0})
     let count=0
     for(const character of CHARACTERS) {
       const spec=CHARACTER_ASSETS[character.id],decoration=characterDecoration(character.id)
@@ -65,5 +70,44 @@ test('correct sides and all 1000 SVG combinations use manifest placement, optimi
       }
     }
     assert.equal(count,1000)
+  } finally { await server.close() }
+})
+
+test('whole portrait wrapper contains the frame, while the cream cover stays inside the real content mask', async()=>{
+  const server=await createServer({cacheDir:'/tmp/genesis-ball-layer-cache',server:{middlewareMode:true,hmr:false,ws:false},appType:'custom'})
+  try {
+    const {CHARACTERS}=await server.ssrLoadModule('/src/components/ballTest/data.js')
+    const {characterAssetState}=await server.ssrLoadModule('/src/components/ballTest/characterAssets.js')
+    const {CharacterScene}=await server.ssrLoadModule('/src/components/ballTest/CharacterPortrait.jsx')
+    for(const character of CHARACTERS) {
+      const markup=renderToStaticMarkup(createElement(CharacterScene,{character,displayed:characterAssetState(character.id,1,1)}))
+      const stack=[]
+      let covers=0,frames=0,shadows=0,bodySeen=false,backingSeen=false
+      const hasClass=(node,name)=>new RegExp(`class="[^"]*\\b${name}\\b`).test(node.attributes)
+      for(const match of markup.matchAll(/<(\/)?([\w-]+)\b([^>]*)>/g)) {
+        const [,closing,tag,attributes]=match
+        if(closing){assert.equal(stack.pop().tag,tag);continue}
+        const node={tag,attributes}
+        if(hasClass(node,'ball-portrait-backing'))backingSeen=true
+        if(attributes.includes('data-layer="body"'))bodySeen=true
+        if(hasClass(node,'ball-portrait-flash')) {
+          covers++
+          assert.ok(bodySeen && backingSeen,'cover must be above both character and internal background')
+          assert.ok(stack.some(parent=>hasClass(parent,'ball-portrait-content') && /mask="url\(#ball-mask-/.test(parent.attributes)))
+          assert.ok(!stack.some(parent=>hasClass(parent,'ball-portrait-person')),'cover must not use body framing coordinates')
+          assert.match(attributes,/fill="#fffdf9"/)
+          assert.match(attributes,/opacity="0"/,'cancelling WAAPI restores the hidden base overlay')
+          assert.match(attributes,new RegExp(`width="${character.framing.width}" height="${character.framing.height}"`))
+        }
+        if(hasClass(node,'ball-portrait-frame') || hasClass(node,'ball-portrait-shadow')) {
+          assert.ok(stack.some(parent=>hasClass(parent,'ball-portrait-component')),'whole-component motion must include frame and shadow')
+          assert.ok(!stack.some(parent=>hasClass(parent,'ball-portrait-content')),'frame and external shadow must not flash')
+          if(hasClass(node,'ball-portrait-frame')){frames++;assert.equal(covers,1,'frame stays above the cream overlay')}
+          else shadows++
+        }
+        if(!/\/\s*$/.test(attributes))stack.push(node)
+      }
+      assert.equal(covers,1);assert.equal(frames,1);assert.equal(shadows,1);assert.equal(stack.length,0)
+    }
   } finally { await server.close() }
 })

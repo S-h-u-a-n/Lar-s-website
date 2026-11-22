@@ -2,8 +2,8 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { MATERIAL as M, RULES as R } from './config.js'
 import { createWorld, setInput, stepWorld } from './simulation.js'
-import { spawnAt, precipitationTemperature, precipitationMaterial, snowProbability, applyLocalTemperature } from './weather.js'
-import { change } from './materials.js'
+import { spawnAt, precipitationTemperature, precipitationMaterial, snowProbability, applyLocalTemperature, cloudCapacity } from './weather.js'
+import { change, updateMaterials } from './materials.js'
 import { paintStroke } from './brush.js'
 
 function empty(){
@@ -63,6 +63,31 @@ test('cloud precipitation uses live air rather than its stale particle temperatu
     else assert.equal(w.counts[M.SNOW],0)
     assert.equal(mass(w),before)
   }
+})
+test('cloud injection has a world-scaled cap and does not add water beyond that limit',()=>{
+  const w=empty(),limit=cloudCapacity(w)
+  for(let n=0;n<limit;n++) {
+    const x=1+n%(w.columns-2),y=1+Math.floor(n/(w.columns-2))
+    change(w,y*w.columns+x,M.CLOUD)
+  }
+  const massBefore=mass(w)
+  assert.equal(w.counts[M.CLOUD],limit)
+  assert.equal(spawnAt(w,'cloud',30,10,true),false)
+  assert.equal(w.counts[M.CLOUD],limit)
+  assert.equal(mass(w),massBefore)
+})
+test('steam waits as vapor while the cloud layer is full',()=>{
+  const w=empty(),limit=cloudCapacity(w)
+  for(let n=0;n<limit;n++) {
+    const x=1+n%(w.columns-2),y=1+Math.floor(n/(w.columns-2))
+    change(w,y*w.columns+x,M.CLOUD)
+  }
+  const vapor=20*w.columns+30
+  change(w,vapor,M.STEAM);w.age[vapor]=100;w.tick=1
+  w.updated.fill(w.tick);w.updated[vapor]=0
+  updateMaterials(w)
+  assert.equal(w.counts[M.CLOUD],limit)
+  assert.equal(w.counts[M.STEAM],1)
 })
 test('airborne rain becomes snow in cold air without freezing the sky into ice',()=>{
   const w=empty();w.temperature=-25

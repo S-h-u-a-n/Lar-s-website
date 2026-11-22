@@ -1,0 +1,252 @@
+{
+  "ral": {
+    "image": "/images/telescope/recommendations/ral-svalbard.jpg",
+    "imageAlt": "挪威・斯瓦爾巴全球種子庫：Svalbard Global Seed Vault Exterior 2020.jpg",
+    "photoCredit": {
+      "title": "Svalbard Global Seed Vault Exterior 2020.jpg",
+      "author": "Cierra Martin for Crop Trust",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Svalbard_Global_Seed_Vault_Exterior_2020.jpg",
+      "license": "CC BY-SA 2.0",
+      "licenseVersion": "2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1280,
+      "height": 913
+    }
+  },
+  "il": {
+    "image": "/images/telescope/recommendations/il-keelung.jpg",
+    "imageAlt": "台灣・基隆港：基隆市",
+    "photoCredit": {
+      "title": "基隆市",
+      "author": "Alix Lee",
+      "sourceUrl": "https://www.pexels.com/zh-tw/photo/26065891/",
+      "sourceLabel": "Pexels 原始照片頁 ↗",
+      "license": "Pexels License",
+      "licenseVersion": null,
+      "licenseUrl": "https://www.pexels.com/license/",
+      "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1200,
+      "height": 800
+    }
+  },
+  "ost": {
+    "image": "/images/telescope/recommendations/ost-british-museum.jpg",
+    "imageAlt": "英國・大英博物館：British Museum at night 2024-12-20.jpg",
+    "photoCredit": {
+      "title": "British Museum at night 2024-12-20.jpg",
+      "author": "Andy Li",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:British_Museum_at_night_2024-12-20.jpg",
+      "license": "CC0 1.0",
+      "licenseVersion": "1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1280,
+      "height": 964
+    }
+  },
+  "yuta": {
+    "image": "/images/telescope/recommendations/yuta-providence.jpg",
+    "imageAlt": "美國・普羅維登斯：秋季羅德島州普羅維登斯市的城市天際線",
+    "photoCredit": {
+      "title": "秋季羅德島州普羅維登斯市的城市天際線",
+      "author": "Beth Fitzpatrick",
+      "sourceUrl": "https://www.pexels.com/zh-tw/photo/34571466/",
+      "sourceLabel": "Pexels 原始照片頁 ↗",
+      "license": "Pexels License",
+      "licenseVersion": null,
+      "licenseUrl": "https://www.pexels.com/license/",
+      "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1200,
+      "height": 800
+    }
+  },
+  "reed": {
+    "image": "/images/telescope/recommendations/reed-fushimi-inari.jpg",
+    "imageAlt": "日本・伏見稻荷大社：伏見稻荷大社絢麗多彩的鳥居",
+    "photoCredit": {
+      "title": "伏見稻荷大社絢麗多彩的鳥居",
+      "author": "Bruna Santos",
+      "sourceUrl": "https://www.pexels.com/zh-tw/photo/39195537/",
+      "sourceLabel": "Pexels 原始照片頁 ↗",
+      "license": "Pexels License",
+      "licenseVersion": null,
+      "licenseUrl": "https://www.pexels.com/license/",
+      "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1200,
+      "height": 800
+    }
+  },
+  "anpu": {
+    "image": "/images/telescope/recommendations/anpu-el-qeis.jpg",
+    "imageAlt": "阿努比斯木雕小像（古埃及新王國時期），作為古犬城文化背景的文物參考",
+    "photoCredit": {
+      "title": "木雕阿努比斯像.jpg",
+      "author": "丘崈",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%E6%9C%A8%E9%9B%95%E9%98%BF%E5%8A%AA%E6%AF%94%E6%96%AF%E5%83%8F.jpg",
+      "license": "CC0 1.0",
+      "licenseVersion": "1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1280,
+      "height": 1280
+    },
+    "note": "此處以古埃及新王國時期的阿努比斯木雕小像，呈現古犬城與阿努比斯信仰的文化連結；照片為文物參考，並非埃爾凱斯遺址實景。"
+  },
+  "harriet": {
+    "image": "/images/telescope/recommendations/harriet-american-airlines-center.jpg",
+    "imageAlt": "美國・美國航空中心：American Airlines Center (6246886325) cropped.jpg",
+    "photoCredit": {
+      "title": "American Airlines Center (6246886325) cropped.jpg",
+      "author": "Jeff Attaway",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:American_Airlines_Center_(6246886325)_cropped.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseVersion": "4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。來源檔本身為原作者／上傳者提供的裁切版本；下載圖檔保留此指定版本的完整構圖。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1280,
+      "height": 1040
+    }
+  },
+  "kane": {
+    "image": "/images/telescope/recommendations/kane-grand-canyon.jpg",
+    "imageAlt": "美國・大峽谷：壯闊的峽谷風景",
+    "photoCredit": {
+      "title": "壯闊的峽谷風景",
+      "author": "Amber Stevens",
+      "sourceUrl": "https://www.pexels.com/zh-tw/photo/4228971/",
+      "sourceLabel": "Pexels 原始照片頁 ↗",
+      "license": "Pexels License",
+      "licenseVersion": null,
+      "licenseUrl": "https://www.pexels.com/license/",
+      "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1200,
+      "height": 800
+    }
+  },
+  "seth": {
+    "image": "/images/telescope/recommendations/seth-grand-bazaar.jpg",
+    "imageAlt": "土耳其・伊斯坦堡大市集：伊斯坦堡大巴扎充滿活力的內部景象",
+    "photoCredit": {
+      "title": "伊斯坦堡大巴扎充滿活力的內部景象",
+      "author": "Tayssir Kadamany",
+      "sourceUrl": "https://www.pexels.com/zh-tw/photo/37687962/",
+      "sourceLabel": "Pexels 原始照片頁 ↗",
+      "license": "Pexels License",
+      "licenseVersion": null,
+      "licenseUrl": "https://www.pexels.com/license/",
+      "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1200,
+      "height": 800
+    }
+  },
+  "laike": {
+    "image": "/images/telescope/recommendations/laike-galapagos.jpg",
+    "imageAlt": "厄瓜多・加拉巴哥群島：加拉帕戈斯陸龜在自然栖息地",
+    "photoCredit": {
+      "title": "加拉帕戈斯陸龜在自然栖息地",
+      "author": "Lloyd Douglas",
+      "sourceUrl": "https://www.pexels.com/zh-tw/photo/26381580/",
+      "sourceLabel": "Pexels 原始照片頁 ↗",
+      "license": "Pexels License",
+      "licenseVersion": null,
+      "licenseUrl": "https://www.pexels.com/license/",
+      "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1200,
+      "height": 800
+    }
+  },
+  "pato": {
+    "image": "/images/telescope/recommendations/pato-nazca-lines.jpg",
+    "imageAlt": "秘魯・納斯卡線：秘魯著名的納斯卡線條鳥瞰圖",
+    "photoCredit": {
+      "title": "秘魯著名的納斯卡線條鳥瞰圖",
+      "author": "Radha Daehne",
+      "sourceUrl": "https://www.pexels.com/zh-tw/photo/40692070/",
+      "sourceLabel": "Pexels 原始照片頁 ↗",
+      "license": "Pexels License",
+      "licenseVersion": null,
+      "licenseUrl": "https://www.pexels.com/license/",
+      "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1200,
+      "height": 675
+    }
+  },
+  "arena": {
+    "image": "/images/telescope/recommendations/arena-glastonbury-tor.jpg",
+    "imageAlt": "英國・格拉斯頓伯里山丘：Glastonbury tor (the final climb) arp (cropped).jpg",
+    "photoCredit": {
+      "title": "Glastonbury tor (the final climb) arp (cropped).jpg",
+      "author": "Adrian Pingstone (Arpingstone)",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Glastonbury_tor_(the_final_climb)_arp_(cropped).jpg",
+      "license": "Public domain",
+      "licenseVersion": null,
+      "licenseUrl": "https://commons.wikimedia.org/wiki/File:Glastonbury_tor_(the_final_climb)_arp_(cropped).jpg#Licensing",
+      "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。來源檔本身為原作者／上傳者提供的裁切版本；下載圖檔保留此指定版本的完整構圖。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1280,
+      "height": 768
+    }
+  },
+  "dioscuri": {
+    "image": "/images/telescope/recommendations/dioscuri-pephnos.jpg",
+    "imageAlt": "希臘・佩夫諾斯小島：Pefnos egg.jpg",
+    "photoCredit": {
+      "title": "Pefnos egg.jpg",
+      "author": "Kavouras55",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pefnos_egg.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseVersion": "4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "modifications": "使用 Wikimedia Commons 官方等比例縮圖；圖檔未再次裁切、拉伸、調色或轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1280,
+      "height": 830
+    }
+  },
+  "farenai": {
+    "image": "/images/telescope/recommendations/farenai-kennedy-space-center.jpg",
+    "imageAlt": "美國・甘迺迪太空中心：美國佛羅里達州太空中心的宇宙飛船",
+    "photoCredit": {
+      "title": "美國佛羅里達州太空中心的宇宙飛船",
+      "author": "john mckenna",
+      "sourceUrl": "https://www.pexels.com/zh-tw/photo/13228960/",
+      "sourceLabel": "Pexels 原始照片頁 ↗",
+      "license": "Pexels License",
+      "licenseVersion": null,
+      "licenseUrl": "https://www.pexels.com/license/",
+      "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1200,
+      "height": 800
+    }
+  },
+  "isis": {
+    "image": "/images/telescope/recommendations/isis-library-of-congress.jpg",
+    "imageAlt": "美國・美國國會圖書館（暫定）：國會圖書館內部的優雅建築",
+    "photoCredit": {
+      "title": "國會圖書館內部的優雅建築",
+      "author": "Quang Vuong",
+      "sourceUrl": "https://www.pexels.com/zh-tw/photo/36623370/",
+      "sourceLabel": "Pexels 原始照片頁 ↗",
+      "license": "Pexels License",
+      "licenseVersion": null,
+      "licenseUrl": "https://www.pexels.com/license/",
+      "modifications": "使用 Pexels 官方 1200px 等比例壓縮 JPEG（auto=compress、cs=tinysrgb、fit=max）；未指定裁切，本站未拉伸、調色或再次轉檔。網頁以 object-fit: cover 置中等比例填滿圖框，超出部分僅於顯示時裁切；本地圖檔未變更。",
+      "verifiedAt": "2026-11-21",
+      "width": 1200,
+      "height": 800
+    }
+  }
+}

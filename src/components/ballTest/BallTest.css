@@ -29,12 +29,26 @@
 .ball-group-progress-track button span { display:block; width:3px; height:100%; min-height:8px; border-radius:4px; background:rgba(52,70,90,.18); transition:width var(--ball-duration) var(--ball-ease),background-color var(--ball-duration) var(--ball-ease); }
 .ball-group-progress-track button[aria-current=step] span { width:5px; background:var(--ball-teal); }
 .ball-group-progress-track button:hover span,.ball-group-progress-track button:focus-visible span { width:6px; background:var(--ball-pink); }
-.ball-cover-window { position: relative; flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 8px; }
-.ball-test .ball-cover { padding: 0; width: 100%; flex-shrink: 0; border-radius: 24px; overflow: hidden; position: relative; }
+.ball-cover-window { position: relative; flex: 1; min-height: 0; overflow: clip; overflow-clip-margin: 8px; display: flex; flex-direction: column; gap: 8px; }
+.ball-test .ball-cover { padding: 0; width: 100%; flex-shrink: 0; border-radius: 24px; overflow: hidden; position: relative; translate:0 0; transition:translate 180ms cubic-bezier(.22,.75,.25,1); }
 .ball-cover.is-selected { outline: 3px solid var(--ball-teal); outline-offset: -3px; }
 .ball-cover-image { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Translate is independent of Framer Motion's layout transform. The inset ring
+   leaves sizing intact; clip margin and stacking keep the lift unobstructed. */
+.ball-cover-image,.ball-cover-placeholder { transition:filter 180ms ease-out; }
+.ball-cover::after { content:""; position:absolute; inset:0; z-index:2; border:3px solid var(--ball-pink); border-radius:inherit; opacity:0; pointer-events:none; transition:opacity 180ms ease-out; }
+body .ball-test .ball-cover:is(:hover,:focus-visible) { translate:0 -4px; z-index:2; }
+body .ball-test .ball-cover:focus-visible { outline:none; }
+.ball-cover:is(:hover,:focus-visible)::after { opacity:1; }
+.ball-cover:is(:hover,:focus-visible) :is(.ball-cover-image,.ball-cover-placeholder) { filter:brightness(1.12); }
+body .ball-test .ball-cover.is-selected:is(:hover,:focus-visible) { translate:0 -2px; }
+.ball-cover.is-selected::after { inset:5px; border-width:2px; }
 body .ball-test .ball-cover.ball-cover--poster { border: 0; box-shadow: none; }
-.ball-cover-title { position: absolute; inset: 50% auto auto 50%; z-index: 1; transform: translate(-50%, -50%); color: var(--ball-ink); font: 400 clamp(20px, 2.4vw, 37px)/1.1 var(--display); font-style: italic; text-align: center; white-space: nowrap; -webkit-text-stroke: 1.5px #fff; paint-order: stroke fill; pointer-events: none; }
+.ball-test .ball-cover-overlay { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; padding: clamp(8px, 1.4vw, 20px); border-radius:inherit; pointer-events: none; }
+/* Header's --display resolves to Playfair Display. Keep it first, with the
+   site's local CJK font before system fallbacks for non-Latin titles. The
+   transparent positioning wrapper passes through the card's actual corners. */
+.ball-test .ball-cover-overlay strong { min-width: 0; max-width: 100%; padding:clamp(6px,.7vw,10px) clamp(11px,1.2vw,18px); border-radius:inherit; background:#fffdf9; color:var(--ball-ink); font: 400 clamp(13px, 1.7vw, 27px)/1.3 'Playfair Display', 'Chiron Sung', 'Noto Serif CJK JP', 'Yu Mincho', 'Hiragino Mincho ProN', Georgia, serif; letter-spacing:.015em; text-transform:none; text-align: center; white-space: normal; overflow-wrap: anywhere; text-wrap: balance; }
 body .ball-test .ball-cover.is-selected { outline: 3px solid var(--ball-teal); outline-offset: -3px; }
 .ball-cover-placeholder { height: 100%; width: 100%; position: relative; overflow: hidden; display: grid; place-items: center; padding: 14px; }
 .ball-cover-placeholder strong { z-index: 1; font: 400 clamp(20px, 2.2vw, 36px)/1.1 var(--display); text-align: center; }
@@ -126,12 +140,14 @@ body:has(.ball-test) .orientation-prompt { z-index: 10040; }
 .ball-portrait-float { position:absolute; inset:0; width:100%; height:100%; transform:rotate(calc(var(--pointer-x) * 1deg)); transform-origin:bottom center; }
 /* Both slots keep Tivbo's accepted idle motion; dialogue must not add a second rotation. */
 .ball-portrait-scene { display:block; width:100%; height:100%; overflow:visible; }
+.ball-portrait-component { position:absolute; inset:0; transform-origin:center bottom; }
+.ball-portrait-transition { transform-box:fill-box; transform-origin:center bottom; }
 .ball-portrait-pattern { opacity:.88; }
 .ball-portrait-status { position:absolute; left:10%; right:10%; top:50%; text-align:center; font:11px/1.6 var(--body); }
 .ball-test .ball-portrait-retry { pointer-events:auto; position:absolute; top:48%; left:10%; width:80%; font-size:11px; }
 .ball-character-dev { position:fixed; left:12px; bottom:12px; z-index:10050; max-width:340px; max-height:70dvh; overflow:auto; padding:8px 12px; background:#fffef8f5; border:1px solid #34465a66; font:12px/1.6 var(--sans); }
 .ball-character-dev summary { cursor:pointer; }
-.ball-character-dev fieldset { margin:8px 0; display:flex; gap:12px; border:1px solid #34465a33; }
+.ball-character-dev fieldset { margin:8px 0; display:flex; flex-wrap:wrap; gap:12px; border:1px solid #34465a33; }
 .ball-character-dev label { display:grid; gap:4px; }
 .ball-character-dev select { max-width:155px; padding:4px; }
 @media(max-height:680px) { .ball-portrait { top:15px; bottom:166px; } }
@@ -142,6 +158,11 @@ body .ball-test button.ball-dialogue { border-radius:24px; overflow:visible; gap
 .ball-dialogue .ball-speaker { line-height:1.15; }
 .ball-dialogue::after { content:""; position:absolute; left:15%; top:-11px; bottom:auto; width:20px; height:20px; transform:skewX(18deg) rotate(45deg); background:inherit; border-left:1px solid var(--edition-line, #34465a33); border-top:1px solid var(--edition-line, #34465a33); border-radius:4px 0 0 0; pointer-events:none; }
 .ball-dialogue[data-speaker=lar]::after { left:auto; right:15%; transform:skewX(-18deg) rotate(45deg); }
+.ball-dialogue[data-speaker=lar] { --ball-dialogue-accent:var(--ball-mint); border-color:var(--ball-dialogue-accent); }
+.ball-dialogue[data-speaker=lar]:hover { background:var(--ball-panel); }
+.ball-dialogue[data-speaker=lar] .ball-speaker { align-self:flex-end; background:var(--ball-dialogue-accent); color:var(--ball-ink); text-align:right; }
+.ball-dialogue[data-speaker=lar] .ball-dialogue-next { color:var(--ball-dialogue-accent); }
+.ball-dialogue[data-speaker=lar]::after { border-color:var(--ball-dialogue-accent); }
 @media(max-height:620px) { .ball-dialogue::after { width:14px; height:14px; top:-8px; } }
 .ball-character-dev { max-width:min(340px, calc(100vw - 24px)); }
 
@@ -155,3 +176,12 @@ body .ball-cover-song-copy strong { padding-left:0; font-size:clamp(14px,1.7vw,2
 .ball-cover-song-copy small { font-size:clamp(10px,1vw,13px); line-height:1.3; overflow-wrap:anywhere; }
 .ball-work-dialog--music .ball-work-scroll { grid-template-columns:minmax(0,1fr); height:min(65vh,580px); }
 @media(max-width:760px) { .ball-work-dialog--music .ball-work-scroll { padding:16px; } }
+
+/* Reuse PhotoCredit's native dialog without changing poster/card geometry. */
+.ball-work-art{position:relative}
+.ball-work-art>.research-photo-info{position:absolute;right:8px;bottom:8px;z-index:1;display:grid;place-items:center;width:23px;height:23px;margin:0;padding:0;border:1px solid #34465A55;border-radius:50%;background:#FFFEF8E8;color:#34465A;font:17px/1 Georgia,serif;cursor:pointer;box-shadow:0 1px 4px #34465A16}
+.ball-work-art>.research-photo-info:hover{background:#fffef8}
+.ball-poster-copyright{font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+.ball-poster-copyright a{color:inherit;text-underline-offset:3px}
+.ball-poster-rights{margin-top:20px;font-size:12px;line-height:1.7}
+.ball-poster-rights summary{cursor:pointer}

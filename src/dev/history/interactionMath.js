@@ -1,4 +1,7 @@
 export const clamp = (value, lo, hi) => Math.max(lo, Math.min(hi, value))
+export function gestureTravel(dx, dy) {
+  return Math.abs(dx) > Math.abs(dy) ? dx : dy
+}
 export function spring(state, destination, dt, stiffness, damping, epsilon = .001) {
   const count = Math.max(1, Math.ceil(dt * 120)), step = dt / count
   for (let i = 0; i < count; i++) {

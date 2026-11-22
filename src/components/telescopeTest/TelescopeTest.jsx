@@ -3,6 +3,7 @@ import { TelescopeMap } from '../TelescopePage'
 import useFloatingGeometry from '../globeTest/useFloatingGeometry'
 import { enablePageTextPersistence } from '../../dev/textEditorStore'
 import Text from './Text'
+import RecommendationPhoto from './RecommendationPhoto'
 import YutaLive2D from './YutaLive2D'
 import { useLargeFrameTools, useTelescopeSquarePlacement, useLargeFrameDots, useCoordinateClearance } from './telescopePlacement'
 import { ANIMATION, COLLECTION_KEY, COLORS } from './data'
@@ -14,10 +15,8 @@ import { HOME_SWATCH_COLORS } from './homeSwatchColors'
 import useYutaDialogue from './dialogue/useYutaDialogue'
 import './TelescopeTest.css'
 
-function RecommendationCard({ place, selected, canVisit, onVisit, onOpenCharacter }) {
+export function RecommendationCard({ place, selected, canVisit, onVisit, onOpenCharacter }) {
   const [avatarAvailable, setAvatarAvailable] = useState(Boolean(place.avatarSrc))
-  const [loadedPhotoPath, setLoadedPhotoPath] = useState('')
-  const photoLoaded = loadedPhotoPath === place.photoPath
   const profile = findCharacterProfile(place.characterName)
   const Avatar = profile ? 'button' : 'div'
 
@@ -49,10 +48,7 @@ function RecommendationCard({ place, selected, canVisit, onVisit, onOpenCharacte
       <div><dt>參觀資訊</dt><dd>{place.visitInfo}</dd></div>
       <div><dt>座標</dt><dd>{place.latitude.toFixed(4)}°, {place.longitude.toFixed(4)}°{place.coordinateNote ? ` · ${place.coordinateNote}` : ' · WGS84'}</dd></div>
     </dl>
-    <div className="tt-recommendation-photo" aria-label={`${place.locationName}照片展示區`} data-photo-loaded={photoLoaded}>
-      {!photoLoaded && <><span aria-hidden="true">✦</span><p>地點照片預留區</p></>}
-      {place.photoPath && <img src={place.photoPath} alt={place.locationName} aria-hidden={!photoLoaded} loading="lazy" onLoad={() => setLoadedPhotoPath(place.photoPath)} onError={() => setLoadedPhotoPath('')} />}
-    </div>
+    <RecommendationPhoto place={place}/>
     <div className="tt-recommendation-actions">
       <button type="button" className="tt-recommendation-visit-button" disabled={!canVisit} onClick={() => onVisit(place)}>
         {selected ? '正在觀測' : '前往觀測'}

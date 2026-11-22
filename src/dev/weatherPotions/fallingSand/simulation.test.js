@@ -2,8 +2,9 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { MATERIAL as M, POTIONS, RULES, WORLD } from './config.js'
 import { createWorld, measureWorld, setInput, snapshotWorld, stepWorld, stopInput } from './simulation.js'
-import { change } from './materials.js'
+import { change, updateMaterials } from './materials.js'
 import { pickWorld } from './terrain.js'
+import { climate } from './weather.js'
 const run=(world,seconds)=>{for(let i=0;i<Math.ceil(seconds*RULES.fps)&&!world.ending;i++)stepWorld(world);return world}
 const pour=(world,type,seconds,point,strength=1)=>{setInput(world,type,point,strength);run(world,seconds);stopInput(world);return world}
 const waterMass=w=>[M.WATER,M.SNOW,M.ICE,M.STEAM,M.CLOUD].reduce((sum,kind)=>sum+w.counts[kind],0)
@@ -18,7 +19,7 @@ function valid(w) {
   assert.deepEqual(counts,w.counts)
   assert.equal([...counts].reduce((a,b)=>a+b),w.columns*w.rows)
   assert.ok(w.temperature>=-35&&w.temperature<=65)
-  for(const key of ['moisture','ice','snow','desert','erosion','damage','lostLand','flood'])assert.ok(w.metrics[key]>=0&&w.metrics[key]<=1,key)
+  for(const key of ['moisture','ice','snow','desert','erosion','damage','floodedLand','permanentLandLoss','flood'])assert.ok(w.metrics[key]>=0&&w.metrics[key]<=1,key)
 }
 function empty() {
   const w=createWorld({columns:32,rows:32})
@@ -27,6 +28,39 @@ function empty() {
   return w
 }
 function put(w,x,y,kind,temperature=18) {const i=y*w.columns+x;change(w,i,kind);w.temperatureGrid[i]=temperature;w.origin[i]=kind===M.ROCK?2:0;return i}
+
+test('flooded land recovers after water drains; permanent land loss is cumulative and ignores sand cover',()=>{
+  const w=createWorld({columns:48,rows:40}),x=[...w.dryColumns].findIndex(Boolean)
+  const surface=w.initialSurface[x]
+  for(let y=surface-3;y<surface;y++)put(w,x,y,M.WATER)
+  measureWorld(w)
+  assert.ok(w.metrics.floodedLand>0)
+  assert.equal(w.metrics.permanentLandLoss,0)
+
+  for(let y=surface-3;y<surface;y++)change(w,y*w.columns+x,M.AIR)
+  measureWorld(w)
+  assert.equal(w.metrics.floodedLand,0)
+  assert.equal(w.metrics.permanentLandLoss,0)
+
+  for(let y=surface;y<surface+8;y++)change(w,y*w.columns+x,M.AIR)
+  measureWorld(w)
+  assert.ok(w.metrics.permanentLandLoss>0)
+  const permanent=w.metrics.permanentLandLoss
+  for(let y=surface-1;y<surface+2;y++)put(w,x,y,M.SAND)
+  measureWorld(w)
+  assert.equal(w.metrics.permanentLandLoss,permanent,'new sand must not restore the original land-loss metric')
+  valid(w)
+})
+
+test('natural rainfall can temporarily flood low land without misreporting broad terrain loss',()=>{
+  const w=createWorld()
+  run(w,45)
+  assert.ok(w.naturalRain>0)
+  assert.ok(w.metrics.floodedLand>0)
+  assert.ok(w.metrics.permanentLandLoss<.1)
+  assert.equal(w.metrics.erosion,0)
+  valid(w)
+})
 
 test('water really falls, spreads across a basin and cannot tunnel through a wall',()=>{
   const w=empty();for(let x=0;x<32;x++)put(w,x,28,M.ROCK)
@@ -61,6 +95,38 @@ test('lava contacts water: neither is painted over; water becomes rising steam a
   run(w,.4)
   assert.equal(w.material[16*32+10],M.AIR);assert.ok(w.material.slice(0,16*32).some(v=>v===M.STEAM || v===M.CLOUD));valid(w)
 })
+test('lava heats nearby materials without contact and triggers their existing reactions',()=>{
+  const w=empty(),lava=put(w,15,15,M.LAVA,520)
+  put(w,14,15,M.ROCK);put(w,12,15,M.ROCK);put(w,13,16,M.ROCK)
+  put(w,14,16,M.ROCK);put(w,12,16,M.ROCK)
+  const water=put(w,13,15,M.WATER)
+  put(w,15,13,M.ROCK);const soil=put(w,15,12,M.SOIL);put(w,15,11,M.ROCK)
+  const snow=put(w,15,18,M.SNOW);put(w,15,19,M.ROCK)
+  put(w,14,18,M.ROCK);put(w,16,18,M.ROCK);put(w,14,19,M.ROCK);put(w,16,19,M.ROCK)
+  const root=put(w,16,17,M.SOIL);put(w,16,18,M.ROCK)
+  const plant=put(w,16,16,M.PLANT)
+  const distant=put(w,25,15,M.ROCK)
+  w.plantRoot[plant]=root+1;w.plantParent[plant]=root+1;w.plantDepth[plant]=1
+  const initialSoilMoisture=w.moisture[soil]
+  for(let tick=1;tick<=1;tick++) {
+    w.tick=tick;w.updated[lava]=tick;updateMaterials(w)
+  }
+  const warmedWater=w.material.indexOf(M.WATER)
+  assert.ok(w.lavaHeat[water]>0)
+  assert.ok(w.lavaHeat[snow]>0)
+  assert.ok(w.temperatureGrid[warmedWater]>18)
+  assert.ok(w.temperatureGrid[soil]>18)
+  assert.ok(w.temperatureGrid[plant]>18)
+  assert.equal(w.lavaHeat[distant],0,'heat should be limited to the configured radius')
+  for(let tick=2;tick<=600;tick++) {
+    w.tick=tick;w.updated[lava]=tick;updateMaterials(w)
+  }
+  assert.ok(w.evaporated>0,'nearby water should evaporate')
+  assert.ok(w.melted>0,'nearby snow should melt')
+  assert.ok(w.moisture[soil]<initialSoilMoisture,'nearby soil should dry')
+  assert.ok(w.plantsWilted>0,'nearby plants should wilt from heat')
+  assert.equal(w.material[lava],M.LAVA,'the heat source remains in place')
+})
 test('lava injection follows pointer and moves along terrain before cooling',()=>{
   const w=createWorld();pour(w,'lava',6,{x:165,y:116})
   assert.ok(w.lavaAdded>0 && w.steamCreated>0 && w.basaltCreated>0)
@@ -88,6 +154,11 @@ test('clouds shade sun, wind advects actual cells and wet storms move the sea',(
 test('rain then sun reveals a rainbow; the dedicated bottle also works',()=>{
   const w=createWorld();pour(w,'rain',5);pour(w,'sun',7);assert.ok(w.rainbow>.05)
   const magic=pour(createWorld(),'rainbow',4);assert.ok(magic.rainbow>.5)
+  const dry=createWorld();dry.light=80;dry.rainbow=.5;climate(dry,1/RULES.fps)
+  assert.ok(dry.rainbow<.5,'a rainbow fades without recent rain')
+  const cloudy=createWorld();cloudy.rainMemory=.5;cloudy.cloudiness=.9;cloudy.light=80
+  climate(cloudy,1/RULES.fps)
+  assert.equal(cloudy.rainbow,0,'dense cloud cover masks the natural rainbow')
 })
 test('all nine stop their input immediately, while existing matter continues moving',()=>{
   for(const p of POTIONS) {
@@ -106,11 +177,17 @@ test('five endings emerge from full-size actual simulations, freeze and reset',(
   for(const [p,expected]of [['rain','noah'],['cold','ice'],['sun','sahara']]){
     const w=createWorld();setInput(w,p,undefined,1);run(w,160)
     assert.equal(w.ending,expected);assert.ok(w.time>=RULES.graceSeconds)
+    if(expected==='noah') {
+      assert.ok(w.metrics.floodedLand>.62)
+      assert.ok(w.metrics.flood>.23)
+      assert.ok(w.metrics.permanentLandLoss<.62)
+    }
     const before=JSON.stringify(snapshotWorld(w)),grid=w.material.slice();setInput(w,'rain');run(w,3)
     assert.equal(JSON.stringify(snapshotWorld(w)),before);assert.deepEqual(w.material,grid);valid(w);results.push(expected)
   }
   const sea=pour(createWorld(),'rain',30);const rain=sea.rainAdded;run(sea,180)
-  assert.equal(sea.ending,'atlantis');assert.equal(sea.rainAdded,rain);assert.ok(sea.metrics.erosion>.025);valid(sea);results.push(sea.ending)
+  assert.equal(sea.ending,'atlantis');assert.equal(sea.rainAdded,rain);assert.ok(sea.metrics.erosion>.025)
+  assert.ok(sea.metrics.permanentLandLoss>.18);valid(sea);results.push(sea.ending)
   const broken=createWorld()
   for(let phase=0;phase<8&&!broken.ending;phase++){
     const p=phase%2?'cold':'sun';setInput(broken,p,undefined,1)

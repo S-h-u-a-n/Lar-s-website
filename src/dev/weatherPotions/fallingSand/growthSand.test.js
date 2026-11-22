@@ -47,6 +47,71 @@ test('sand sinks through water, water is conserved and wet grains are transporte
   assert.ok(w.material.slice(22*48,24*48).includes(M.SAND))
   assert.ok(w.sandWaterMoves>0);valid(w)
 })
+test('water follows a downhill channel and wet sand is transported downslope',()=>{
+  const waterWorld=empty()
+  for(let y=20;y<40;y++)put(waterWorld,19,y,M.ROCK)
+  for(let y=22;y<40;y++)put(waterWorld,20,y,M.ROCK)
+  for(let y=26;y<40;y++)put(waterWorld,21,y,M.ROCK)
+  put(waterWorld,20,21,M.WATER);waterWorld.wind=0
+  run(waterWorld,1)
+  assert.ok([...waterWorld.material].some((kind,i)=>kind===M.WATER&&i%48>20&&Math.floor(i/48)>=21))
+
+  const sandWorld=empty()
+  for(let y=20;y<40;y++)put(sandWorld,19,y,M.ROCK)
+  for(let y=22;y<40;y++)put(sandWorld,20,y,M.ROCK)
+  for(let y=26;y<40;y++)put(sandWorld,21,y,M.ROCK)
+  const sand=put(sandWorld,20,21,M.SAND)
+  put(sandWorld,20,20,M.WATER);sandWorld.moisture[sand]=.5
+  run(sandWorld,3)
+  assert.ok(sandWorld.sandWaterMoves>0)
+  assert.notEqual(sandWorld.material[sand],M.SAND)
+  valid(waterWorld);valid(sandWorld)
+})
+test('recent rain can weather exposed rock on a slope without global flooding',()=>{
+  const w=empty()
+  put(w,19,20,M.ROCK);put(w,19,21,M.ROCK);put(w,19,22,M.ROCK)
+  put(w,21,21,M.ROCK);put(w,21,22,M.ROCK);put(w,20,22,M.ROCK)
+  const target=put(w,20,20,M.ROCK)
+  put(w,20,21,M.WATER)
+  w.origin[target]=2;w.initialSeaRow=30;w.metrics.flood=0;w.rainMemory=.5
+  for(let tick=1;tick<=5000&&w.eroded===0;tick++) {
+    w.tick=tick;updateMaterials(w)
+  }
+  assert.ok(w.eroded>0,'runoff should gradually erode exposed original rock')
+  valid(w)
+
+  const dry=empty(),dryTarget=put(dry,20,20,M.ROCK)
+  dry.origin[dryTarget]=2;dry.initialSeaRow=30;dry.rainMemory=0
+  for(let tick=1;tick<=300;tick++) {
+    dry.tick=tick;updateMaterials(dry)
+  }
+  assert.equal(dry.exposure[dryTarget],0)
+  assert.equal(dry.eroded,0)
+  valid(dry)
+
+  const meltwater=empty()
+  put(meltwater,19,20,M.ROCK);put(meltwater,19,21,M.ROCK);put(meltwater,19,22,M.ROCK)
+  put(meltwater,21,21,M.ROCK);put(meltwater,21,22,M.ROCK);put(meltwater,20,22,M.ROCK)
+  const meltTarget=put(meltwater,20,20,M.ROCK),snow=put(meltwater,20,21,M.SNOW,30)
+  meltwater.temperature=30;meltwater.origin[meltTarget]=2;meltwater.origin[snow]=4
+  meltwater.initialSeaRow=30;meltwater.metrics.flood=0;meltwater.rainMemory=0
+  for(let tick=1;tick<=5000&&meltwater.eroded===0;tick++) {
+    meltwater.tick=tick;updateMaterials(meltwater)
+  }
+  assert.ok(meltwater.melted>0)
+  assert.ok(meltwater.eroded>0,'snowmelt-derived water should erode exposed rock after rain memory fades')
+  valid(meltwater)
+})
+test('wind gradually dries exposed soil while sheltered soil retains moisture',()=>{
+  const windy=ground(empty()),calm=ground(empty())
+  const windyRoot=24*windy.columns+20,calmRoot=24*calm.columns+20
+  windy.moisture[windyRoot]=calm.moisture[calmRoot]=.6
+  assert.ok(seedPlant(windy,20,3));assert.ok(seedPlant(calm,20,3))
+  windy.wind=1
+  run(windy,30);run(calm,30)
+  assert.ok(windy.moisture[windyRoot]<calm.moisture[calmRoot]-.05)
+  valid(windy);valid(calm)
+})
 test('dry exposed sand is windborne; cold preserves sand; sustained lava contact sinters only locally',()=>{
   const windy=ground(empty());for(let x=10;x<30;x++){const i=put(windy,x,23,M.SAND);windy.moisture[i]=0}
   windy.wind=1;run(windy,3);assert.ok(windy.sandWindMoves>0)

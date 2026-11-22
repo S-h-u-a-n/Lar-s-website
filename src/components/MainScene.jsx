@@ -7,8 +7,10 @@ import { TOOL_REACTION } from '../edition/config'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import ModelMaterialEditor from '../dev/ModelMaterialEditor'
 import { setModelEditorViewport } from '../dev/ModelTransformEditor'
+import { prepareModelTransformDraft } from '../dev/modelTransformDraft'
 import './MainScene.css'
 import { createCosmosBillboard } from './cosmosBillboard'
+import { measureHorizontalFraming, applyHorizontalFraming } from './bigTest/modelFraming'
 import { createBigInteractionRegistry } from './bigInteractionRegistry'
 import { BIG_HOVER_ICON_ASSETS } from './bigHoverIcons'
 import PortalBackButton from './PortalBackButton'
@@ -311,7 +313,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
     host.dataset.status = 'loading'
 
     const canvas = document.createElement('canvas')
-    canvas.style.cssText = `position:absolute;inset:0;z-index:70;display:block;width:100%;height:100%;filter:brightness(${BIG_RENDER_COLOR.brightness}) saturate(${BIG_RENDER_COLOR.saturation})`
+    canvas.style.cssText = `position:absolute;inset:0;z-index:70;display:block;visibility:hidden;width:100%;height:100%;filter:brightness(${BIG_RENDER_COLOR.brightness}) saturate(${BIG_RENDER_COLOR.saturation})`
     host.appendChild(canvas)
     const hoverIcon = document.createElement('div')
     hoverIcon.className = 'big-hover-icon'
@@ -369,6 +371,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
     let pointerIsDown = false
 
     let modelRoot
+    let transformDraft = null
     let interactionRegistry
     let magglassObjects = new WeakSet()
     let miniCosmos
@@ -385,7 +388,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
     }
     const readiness = createResourceGate({
       abort: () => { loadController.abort(); manager.abort() }, onError: reportFailure, pauseOnHidden: true,
-      onReady: () => { controls.enabled = true; canvas.style.pointerEvents = 'auto'; host.dataset.status = 'ready'; setResourceStatus('ready') },
+      onReady: () => { canvas.style.visibility = 'visible'; controls.enabled = true; canvas.style.pointerEvents = 'auto'; host.dataset.status = 'ready'; setResourceStatus('ready') },
     })
     manager.onError = url => readiness.fail(new Error(`Required model dependency failed: ${url}`))
     const contextLost = event => {
@@ -412,10 +415,17 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
     const updateMotionPreference=()=>{reducedMotion=motionPreference.matches}
     motionPreference.addEventListener('change',updateMotionPreference)
 
+    let renderWidth = 0, renderHeight = 0
+    let horizontalFraming = 0
+
     const resize = () => {
       const width = viewportAspect && !fitViewport ? Math.min(host.clientWidth, host.clientHeight * viewportAspect) : host.clientWidth
       const height = viewportAspect && !fitViewport ? width / viewportAspect : host.clientHeight
       if (!width || !height) return
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO)
+      const sizeChanged = width !== renderWidth || height !== renderHeight
+      const pixelRatioChanged = pixelRatio !== renderer.getPixelRatio()
+      if (!sizeChanged && !pixelRatioChanged) return
       if (viewportAspect && !fitViewport) {
         canvas.style.inset = 'auto'
         canvas.style.left = '50%'
@@ -428,9 +438,12 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
       if (fitViewport) {
         camera.fov = fitViewport(width, height, viewportAspect).fov
       }
-      if (presentation) camera.setViewOffset(width,height,-width*(width>1050?.075:.025),0,width,height)
       camera.updateProjectionMatrix()
+      if (pixelRatioChanged) renderer.setPixelRatio(pixelRatio)
       renderer.setSize(width, height, false)
+      renderWidth = width
+      renderHeight = height
+      applyHorizontalFraming(camera, width, height, horizontalFraming)
     }
 
     const updatePointer = event => {
@@ -779,6 +792,14 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
 
     const render = now => {
       if (disposed || failed) return
+      // Loading/compiling must never paint a partially prepared model. Measure
+      // again before drawing: layout or DPR may have changed while GLB/GPU work
+      // was pending, without its ResizeObserver callback having run yet.
+      if (readiness.pending) resize()
+      if (!readyToPresent || !host.clientWidth || !host.clientHeight) {
+        frame = requestAnimationFrame(render)
+        return
+      }
       const delta=previousTime?Math.min((now-previousTime)/1000,.1):0
       elapsed += delta
       previousTime = now
@@ -821,7 +842,32 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
       }
       updateCosmosBillboard?.(camera)
       try {
+        if (readiness.pending) {
+          // The reset view must match the first presented viewport, including
+          // any resize that occurred during asynchronous shader compilation.
+          initialView = {
+            ...initialView,
+            cameraPosition: camera.position.clone(),
+            target: controls.target.clone(),
+          }
+        }
         renderer.render(scene, camera)
+        if (import.meta.env.DEV && readiness.pending) {
+          const hostRect = host.getBoundingClientRect()
+          const canvasRect = canvas.getBoundingClientRect()
+          const artboardRect = host.querySelector('.big-test-artboard')?.getBoundingClientRect() ?? hostRect
+          const centerNdc = measureHorizontalFraming(modelRoot, camera) * camera.projectionMatrix.elements[0] - camera.projectionMatrix.elements[8]
+          const projectedCenterX = canvasRect.left + (centerNdc + 1) * canvasRect.width / 2
+          console.info('[Big framing] First complete frame (geometry, not alpha-pixel bounds)', {
+            host: hostRect.toJSON(), canvas: canvasRect.toJSON(), artboard: artboardRect.toJSON(),
+            projectedCenterX,
+            canvasCenterX: canvasRect.left + canvasRect.width / 2,
+            artboardCenterX: artboardRect.left + artboardRect.width / 2,
+            errorToArtboardPx: projectedCenterX - (artboardRect.left + artboardRect.width / 2),
+            orbitTarget: controls.target.toArray(),
+            savedTransformEntries: Object.keys(transformDraft?.saved ?? {}).length,
+          })
+        }
         // GPU programs and the complete model must exist before the first
         // rendered frame is allowed to release the existing curtain.
         if (readyToPresent && readiness.pending) readiness.complete()
@@ -834,6 +880,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
 
     const observer = new ResizeObserver(resize)
     observer.observe(host)
+    window.addEventListener('resize', resize)
     resize()
     canvas.addEventListener('pointermove', handlePointerMove)
     canvas.addEventListener('pointerdown', handlePointerDown)
@@ -862,9 +909,12 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
         magglassRoot?.traverse(object => magglassObjects.add(object))
 
         const bounds = new THREE.Box3().setFromObject(modelRoot)
-        const center = bounds.getCenter(new THREE.Vector3())
         const size = bounds.getSize(new THREE.Vector3())
         const radius = size.length() / 2
+        // Local editor drafts used to arrive in a child effect AFTER framing.
+        // Restore them first, preserving the existing distance/scale formula.
+        if (import.meta.env.DEV) transformDraft = prepareModelTransformDraft(modelRoot, 'big-test', 'Big.glb')
+        const center = new THREE.Box3().setFromObject(modelRoot).getCenter(new THREE.Vector3())
         const distance = (radius / Math.tan(THREE.MathUtils.degToRad((fitViewport ? 38 : camera.fov) / 2))) * 1.08
         const viewDirection = new THREE.Vector3(1, 0.68, 1.35).normalize()
 
@@ -876,17 +926,9 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
         controls.minDistance = Math.max(radius * 0.55, 0.1)
         controls.maxDistance = radius * 5
         controls.update()
-        initialView = {
-          cameraPosition: camera.position.clone(),
-          target: controls.target.clone(),
-          minDistance: controls.minDistance,
-          maxDistance: controls.maxDistance,
-          near: camera.near,
-          far: camera.far,
-        }
         softenCrystalballGlass(modelRoot)
         applyModelMaterialPreset(modelRoot, MODEL_MATERIAL_PRESETS['Big.glb'])
-        if (import.meta.env.DEV) { setModelEditorViewport(modelRoot, { camera, scene, canvas, orbit: controls, render: () => renderer.render(scene, camera) }); setEditorModel(modelRoot) }
+        if (import.meta.env.DEV) { setModelEditorViewport(modelRoot, { camera, scene, canvas, orbit: controls, render: () => { if (!disposed && !failed && !readiness.pending) renderer.render(scene, camera) } }); setEditorModel(modelRoot) }
         if (ENABLE_MINI_COSMOS) {
           miniCosmos = createMiniCosmos()
           const miniCosmosAnchor = modelRoot.getObjectByName('MiniCosmosAnchor')
@@ -895,6 +937,19 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
         }
         scene.add(modelRoot)
         scene.updateMatrixWorld(true)
+        updateCosmosBillboard = createCosmosBillboard(modelRoot)
+        updateCosmosBillboard?.(camera)
+        scene.updateMatrixWorld(true)
+        horizontalFraming = measureHorizontalFraming(modelRoot, camera)
+        if (renderWidth && renderHeight) applyHorizontalFraming(camera, renderWidth, renderHeight, horizontalFraming)
+        initialView = {
+          cameraPosition: camera.position.clone(),
+          target: controls.target.clone(),
+          minDistance: controls.minDistance,
+          maxDistance: controls.maxDistance,
+          near: camera.near,
+          far: camera.far,
+        }
         interactionRegistry.entries.filter(entry=>TOOL_REACTION.ids.includes(entry.id)).forEach(entry=>{
           entry.matchedRoots.forEach(root=>{
             const bounds=new THREE.Box3().setFromObject(root)
@@ -904,7 +959,6 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
           })
         })
         scene.updateMatrixWorld(true)
-        updateCosmosBillboard = createCosmosBillboard(modelRoot)
         await renderer.compileAsync(scene, camera)
         if (!disposed && readiness.pending) readyToPresent = true
       } catch (error) { if (!disposed) readiness.fail(error) }
@@ -918,6 +972,7 @@ function MainScene({ onResourceStatus, onBack, onPortalSelect, onBigObjectSelect
       canvas.removeEventListener('webglcontextlost', contextLost)
       cancelAnimationFrame(frame)
       observer.disconnect()
+      window.removeEventListener('resize', resize)
       canvas.removeEventListener('pointermove', handlePointerMove)
       canvas.removeEventListener('pointerdown', handlePointerDown)
       canvas.removeEventListener('pointerup', handlePointerUp)

@@ -1,0 +1,49 @@
+{
+  "pageId": "human-comic",
+  "revision": "2026-11-22-human-comic-text-v3",
+  "registered": {
+    "human-comic-dialogue-1": {
+      "text": "目前地球上關於人文的資料，\n都是由不同領域的同學分別整理，\n再交給拉爾進行統整。",
+      "x": 0,
+      "y": 0,
+      "width": 324.5,
+      "maxWidth": null,
+      "height": 480,
+      "maxHeight": null,
+      "fontSize": 26,
+      "fontFamily": "var(--sans)",
+      "fontWeight": 600,
+      "lineHeight": 1.2,
+      "letterSpacing": 0,
+      "textAlign": "left",
+      "writingMode": "vertical-rl",
+      "rotation": 0,
+      "zIndex": 1,
+      "opacity": 1,
+      "color": "#1a497a",
+      "coordinateSpace": "dialogue-group"
+    },
+    "human-comic-dialogue-2": {
+      "text": "只不過，\n這項工作實在太無聊了！\n拉爾經常整理到一半就開始摸魚...",
+      "x": 0,
+      "y": 0,
+      "width": 332.3,
+      "maxWidth": null,
+      "height": 458.9,
+      "maxHeight": null,
+      "fontSize": 27,
+      "fontFamily": "var(--sans)",
+      "fontWeight": 600,
+      "lineHeight": 1.2,
+      "letterSpacing": 0,
+      "textAlign": "left",
+      "writingMode": "vertical-rl",
+      "rotation": 0,
+      "zIndex": 1,
+      "opacity": 1,
+      "color": "#1a497a",
+      "coordinateSpace": "dialogue-group"
+    }
+  },
+  "draft": []
+}
